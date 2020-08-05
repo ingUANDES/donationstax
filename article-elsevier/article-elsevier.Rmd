@@ -1,0 +1,63 @@
+---
+title: More flexibility reduces social donations
+author:
+  - name: Sebastián Cea-Echenique
+    email: sebastian.cea@pucv.cl
+    affiliation: School of Industrial Engineering, Pontificia Universidad Católica de Valparaíso
+    footnote: 1
+  - name: Claudia Toledo
+    email: claudia@example.com
+    affiliation: School of Industrial Engineering, Pontificia Universidad Católica de Valparaíso
+#   - name: Cat Memes
+#     email: cat@example.com
+#     affiliation: Another University
+#     footnote: 2
+#   - name: Derek Zoolander
+#     email: derek@example.com
+#     affiliation: Some Institute of Technology
+#     footnote: 2
+# address:
+#   - code: Some Institute of Technology
+#     address: Department, Street, City, State, Zip
+#   - code: Another University
+#     address: Department, Street, City, State, Zip
+footnote:
+  - code: 1
+    text: "Corresponding Author"
+  # - code: 2
+    # text: "Equal contribution"
+abstract: |
+  We exploit a change in tax donations' law to evaluate a change to more flexibility.
+
+journal: "Economics Letters or Journal of Public Economics"
+date: "`r Sys.Date()`"
+bibliography: mybibfile.bib
+#linenumbers: true
+#numbersections: true
+csl: elsevier-harvard.csl
+output: rticles::elsevier_article
+---
+
+<!-- _Text based on elsarticle sample manuscript, see [http://www.elsevier.com/author-schemas/latex-instructions#elsarticle](http://www.elsevier.com/author-schemas/latex-instructions#elsarticle)_ -->
+
+
+Introduction
+==========================
+
+#### Motivation and legal background
+
+Law XX introduced a framework to foster social donations. Several changes to that law were made...
+
+#### Insertion in the Literature
+
+The relation between taxes and social donations has been studied in the recent literature by ...
+
+
+
+Empirical strategy
+============
+
+We use a differences in differences approach in a panel structure of the data.
+
+References {#references .unnumbered}
+==========

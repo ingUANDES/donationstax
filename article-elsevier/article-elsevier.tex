@@ -1,0 +1,111 @@
+\documentclass[]{elsarticle} %review=doublespace preprint=single 5p=2 column
+%%% Begin My package additions %%%%%%%%%%%%%%%%%%%
+\usepackage[hyphens]{url}
+
+  \journal{Economics Letters or Journal of Public Economics} % Sets Journal name
+
+
+\usepackage{lineno} % add
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\usepackage{graphicx}
+\usepackage{booktabs} % book-quality tables
+%%%%%%%%%%%%%%%% end my additions to header
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \usepackage{fontspec}
+  \ifxetex
+    \usepackage{xltxtra,xunicode}
+  \fi
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+\fi
+% use microtype if available
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+\bibliographystyle{elsarticle-harv}
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+              unicode=false, % unicode breaks when used with xetex
+              xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            pdfauthor={},
+            pdftitle={More flexibility reduces social donations},
+            colorlinks=false,
+            urlcolor=blue,
+            linkcolor=magenta,
+            pdfborder={0 0 0}}
+\urlstyle{same}  % don't use monospace font for urls
+
+\setcounter{secnumdepth}{0}
+% Pandoc toggle for numbering sections (defaults to be off)
+\setcounter{secnumdepth}{0}
+
+
+% Pandoc header
+
+
+
+\begin{document}
+\begin{frontmatter}
+
+  \title{More flexibility reduces social donations}
+    \author[School of Industrial Engineering, Pontificia Universidad Católica de
+Valparaíso]{Sebastián Cea-Echenique\corref{1}}
+   \ead{sebastian.cea@pucv.cl} 
+    \author[School of Industrial Engineering, Pontificia Universidad Católica de
+Valparaíso]{Claudia Toledo}
+   \ead{claudia@example.com} 
+        \cortext[1]{Corresponding Author}
+  
+  \begin{abstract}
+  We exploit a change in tax donations' law to evaluate a change to more
+  flexibility.
+  \end{abstract}
+  
+ \end{frontmatter}
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+\hypertarget{motivation-and-legal-background}{%
+\paragraph{Motivation and legal
+background}\label{motivation-and-legal-background}}
+
+Law XX introduced a framework to foster social donations. Several
+changes to that law were made\ldots{}
+
+\hypertarget{insertion-in-the-literature}{%
+\paragraph{Insertion in the
+Literature}\label{insertion-in-the-literature}}
+
+The relation between taxes and social donations has been studied in the
+recent literature by \ldots{}
+
+\hypertarget{empirical-strategy}{%
+\section{Empirical strategy}\label{empirical-strategy}}
+
+We use a differences in differences approach in a panel structure of the
+data.
+
+\hypertarget{references}{%
+\section*{References}\label{references}}
+\addcontentsline{toc}{section}{References}
+
+
+\end{document}
+
+
