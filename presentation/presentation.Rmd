@@ -1,0 +1,152 @@
+---
+title: "Tax flexibility"
+author: "Cea, Toledo"
+date: "1/8/2020"
+output:
+  slidy_presentation: default
+  ioslides_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::include_graphics
+#http://sociedadcivil.ministeriodesarrollosocial.gob.cl/calculo-beneficio-tributario/
+```
+
+## Variables creadas 
+
+Según lo acordado en la última reunión se definen las siguientes variables:
+
+| Variable 	| Tipo 	| Definición 	|
+|:-:	|:-:	|:-:	|
+| Limite.donacion 	| Dicotómica (factor) 	| 1 si la suma de las donaciones del donante en aquel año es mayor a 1000 UTM, 0 eoc 	|
+| Ley.20900 	| Dicotómica (factor) 	| 1 si la fecha de la donación es mayor a 2012-02-08, fecha de inicio de vigencia de la ley 20.900, 0 eoc 	|
+| Orden.donacion 	| Entera (integer) 	| Toma valor según la posición ordinal de la donación en el año de aquel donante 	|
+| Monto_acum_donante 	| Numérica (double) 	| Monto acumulado hasta la presente donación por el donante en el año (incluyendo la actual) 	|
+| Monto_acum_donatario 	| Numérica (double) 	| Monto acumulado hasta la presente donación por el donatario en el año (incluyendo la actual) 	|
+| Contribuyente_1ra 	| Dicotómica (factor) 	| 1 si el contribuyente es de primera categoría, 0 eoc 	|
+
+Para generar las variables se ejecuta el siguiente código sobre aquellas donaciones contenidas en el periodo de analisis ("2011-01-01" y "2016-04-13"), en donde se conozca el RUT del donante
+
+```{r echo=TRUE, eval=FALSE}
+#cargar BD
+load("~/SxC-ETL/Donaciones/DonacionesFM/modelo articulo/Donaciones_final_20julio.Rdata")
+datos.modelo$ID<-seq(1,nrow(datos.modelo))
+datos.modelo$Limite.donacion<-NA
+datos.modelo$Ley.20900<-NA
+datos.modelo$Orden.donacion<-NA
+datos.modelo$Mondo_acum_donante<-NA
+datos.modelo$Mondo_acum_donatario<-NA
+datos.modelo$Contribuyente_1ra<-NA
+
+library(lubridate)
+fecha_limite=ymd("2012-02-08") #fecha ley 20900
+for(j in 1:nrow(datos.modelo)){ #
+  print(j)
+  donante<-as.data.frame(matrix(ncol=19))
+  donatario<-as.data.frame(matrix(ncol=19))
+  
+  donante<-datos.modelo.final[datos.modelo.final$RUT==datos.modelo.final[j,9],] #selección de df solo con las donaciones del donante
+  donatario<-datos.modelo.final[datos.modelo.final$DONATARIO==datos.modelo.final[j,3],] #selección de df solo con donaciones a donatario
+ 
+  #Limite_donacion
+  #suma de las donaciones del año mayor a 1000
+  #extraer año de la donación 
+  año.don<-year(datos.modelo.final[j,7])
+  donante$año<-year(donante$FECHA)
+  datos.modelo.final[j,14]<-ifelse(sum(subset(donante,año==año.don)$monto.total_UTM,na.rm = TRUE)>1000 ,1,0) #si el monto total es mayor a 1000 entonces 1
+  #ley 20900
+  datos.modelo.final[j,15]<-ifelse(datos.modelo.final[j,7]>=fecha_limite,1,0) #si la fecha de la donación es dentro del periodo de la ley entonces 1
+  #orden donacion 
+  donante<-subset(donante,año==año.don)
+  donante<-donante[order(donante$FECHA),]
+  rownames(donante)<-NULL
+  datos.modelo.final[j,16]<- which(donante$ID == datos.modelo.final[j,13]) #lugar/posición de la donación
+  #monto acumulado del donante
+  datos.modelo.final[j,17]<-sum(donante[1:datos.modelo.final[j,16],]$monto.total_UTM,na.rm = TRUE)
+  #monto donacion donatario
+  donatario$año<-year(donatario$FECHA)
+  donatario<-subset(donatario,año==año.don)
+  donatario<-donatario[order(donatario$FECHA),]
+  rownames(donatario)<-NULL
+  orden.don<- which(donatario$ID == datos.modelo.final[j,13])
+  #monto acumulado del donante
+  datos.modelo.final[j,18]<-sum(donatario[1:orden.don,]$monto.total_UTM,na.rm = TRUE)
+  #contribuyente promera categoria
+  datos.modelo.final[j,19]<-ifelse(datos.modelo.final[j,9]>49000000,1,0) #1 si es de primera categoria 
+}
+
+
+```
+
+Se actualiza el tipo de variable 
+
+```{r echo=TRUE, eval=FALSE}
+#cambiar tipo de variables 
+datos.modelo.final$Limite.donacion<-as.factor(datos.modelo.final$Limite.donacion)
+datos.modelo.final$Ley.20900<-as.factor(datos.modelo.final$Ley.20900)
+datos.modelo.final$Orden.donacion<-as.integer(datos.modelo.final$Orden.donacion)
+datos.modelo.final$Mondo_acum_donante<-as.double(datos.modelo.final$Mondo_acum_donante)
+datos.modelo.final$Mondo_acum_donatario<-as.double(datos.modelo.final$Mondo_acum_donatario)
+datos.modelo.final$Contribuyente_1ra<-as.factor(datos.modelo.final$Contribuyente_1ra)
+```
+
+## Resumen de variables
+
+```{r , echo = FALSE, results = 'asis',message=FALSE,warning = FALSE}
+library(summarytools)
+st_css()
+load("~/SxC-ETL/Donaciones/DonacionesFM/modelo articulo/Donaciones_final_0108_ver2.Rdata")
+#ordenar columnas
+datos.modelo.final = datos.modelo.final [ , c(1,2,3,4,5,6,7,9,10,11,12,13,8,14,15,16,17,18,19)]
+
+print(dfSummary(datos.modelo.final[,13:19], plain.ascii = FALSE, style = "grid", 
+          graph.magnif = 0.75, valid.col = FALSE, tmp.img.dir = "/tmp"), method = 'render',na.col=FALSE)
+
+
+```
+## Resumen de variables 2
+
+```{r , echo = FALSE, results = 'asis',message=FALSE,warning = FALSE}
+library(summarytools)
+st_css()
+load("~/SxC-ETL/Donaciones/DonacionesFM/modelo articulo/Donaciones_final_0108_ver2.Rdata")
+datos.modelo.final = datos.modelo.final [ , c(1,2,3,4,5,6,7,9,10,11,12,13,8,14,15,16,17,18,19)]
+descr(datos.modelo.final[,13:19], style = 'rmarkdown')
+print(freq(datos.modelo.final$Limite.donacion), method = 'render')
+print(freq(datos.modelo.final$Ley.20900), method = 'render')
+print(freq(datos.modelo.final$Contribuyente_1ra), method = 'render')
+
+
+```
+
+
+## Modelo de regresión de panel
+
+```{r , echo = TRUE,message=FALSE,warning = FALSE,eval=FALSE}
+load("~/SxC-ETL/Donaciones/DonacionesFM/modelo articulo/Donaciones_final_0108_ver2.Rdata")
+library(panelr)
+library(lubridate)
+datos.modelo.final$año<-year(datos.modelo.final$FECHA)
+datos.seleccion<-subset(datos.modelo.final,select =c("monto.total_UTM","RUT.DONANTE","año","Limite.donacion"
+                                                     ,"Ley.20900","Orden.donacion"          
+                                                     ,"Mondo_acum_donante","Mondo_acum_donatario",
+                                                     "Contribuyente_1ra"))
+regresion <- panel_data(datos.seleccion, id = RUT.DONANTE, wave = año)
+regresion
+#dv ~ varying_variables | invariant_variables | cross_level_interactions/random effects
+model <- wbm(monto.total_UTM ~ Limite.donacion+Orden.donacion+Mondo_acum_donante+Mondo_acum_donatario |
+               Ley.20900 + Contribuyente_1ra | 
+               ( año| RUT.DONANTE), data = regresion)
+summary(model)
+
+save(model,file="modeloPR0208.Rdata")
+
+```
+
+```{r echo=TRUE}
+
+load("~/SxC-ETL/Donaciones/DonacionesFM/modelo articulo/modeloPR0208.Rdata")
+summary(model)
+
+```
