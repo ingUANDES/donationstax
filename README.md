@@ -8,6 +8,7 @@ reduces social donations*, the main files are:
 
   - [article-elsevier.Rmd](article-elsevier/article-elsevier.Rmd):
     generates the manuscript
+      - [ETL.R]() prepares the data used in the article
       - [mybibfile.bib](article-elsevier/mybibfile.bib): contains the
         database of references
   - [presentation.Rmd](presentation/presentation.Rmd): reproduces a
