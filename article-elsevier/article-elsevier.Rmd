@@ -5,8 +5,8 @@ author:
     email: sebastian.cea@pucv.cl
     affiliation: School of Industrial Engineering, Pontificia Universidad Católica de Valparaíso
     footnote: 1
-  - name: Claudia Toledo
-    email: claudia@example.com
+  - name: Claudia Toledo-Aguirre
+    email: claudia@pucv.cl
     affiliation: School of Industrial Engineering, Pontificia Universidad Católica de Valparaíso
 #   - name: Cat Memes
 #     email: cat@example.com
@@ -46,18 +46,120 @@ Introduction
 
 #### Motivation and legal background
 
-Law XX introduced a framework to foster social donations. Several changes to that law were made...
+In Chile donations with social purposes are ruled by the Law 19.885, that establishes a framework to foster social donations, this law has had three major change since his publication in 2003 on the years 2009, 2011 y 2012. These changes are mainly related with how the donors can access to the tax benefits. The benefits are deductions of income by two ways, the first one a discount as tax credit and the second discounted as an expense necessary to make the donation.
+
+The law 19.885 concerning social donations in Chile in his first version on 2003, establishes a tributary benefit of 50\% of the donation as credit discount and the other 50\% consider as spending to make the donation. To receive this benefit the donor must donate a minimum of the 33\% of the donation to the Mixed Fund (MF<!--footnote -->). In this version of the law the limit of the donation was 4.5\% of the taxable liquid income and benefit was equally independent of the amount of the donation.
+
+This law was in force since 2006 to 2010 when it was modified by the law 20.316. The mayor changes was the elimination of the obligatory of the donation to the MF to receive the tributary benefit. As there is no longer need to donate to the MF to perceive a economic benefit but, if some percentage of the donation is made to the MF then the donor have a greater economic benefit. And the other change was the possibility from natural people of donate. 
+
+In this law, 20.316, the donors perceive the tributary benefit in one or more of this ways:
+
+1. If the donation is less that 1000 UTM (UTM<!--footnote -->) the benefit is 50\% as tributary credit and 50\% as spending. In the case that the donor is a firm, it must donate at as least two different charitable institutions and the donation for each one has to be less than 700 UTM.
+
+2.	To the donations greater or equal to 1000 UTM, if at least 33\% is donated to the MF the benefit is 50\% as credit and 50\% as spending, otherwise the benefit is 35\% credit and the rest can be discounted as spending.
+
+3. If the donor is a firm and already donated 1000 UTM (first option) he can donate others 1000 UTM to projects to treat addictions to drugs and alcohol having a total of 2000 UTM as donation. The benefit and conditions for this extra 1000 UTM is the same as the first point.
+
+4. To donations greater that 1000 UTM made by firms to projects to treat addictions to drugs and alcohol and with a donation of at least 25\% to the MF, has a benefit of 50\% of credit and 50\% of spending. If the donation to the MF is less than 25\% then the benefit is just 40\% credit and 60\% spending.
+
+<!--preguntar por figuras -->
+
+Lately, the law 20.316 on 2011 was modified by the law 20.565 changing administrative details related to the procedures to register the donations that were maid, nevertheless the law 20.900 on 2012 again changes the benefits around the amount of 1000 UTM. Again we can identified four main points to resume the economic benefits of the donations:
+
+1. If the donation is less than 1000 UTM then the benefit is 50\% of credit and 50\% of spending.
+
+2.	If the donation is greater than 1000 UTM and of the amount above 1000 UTM at least 33\% of the donation goes to the MF, then the benefit is of 50\% as credit and 50\% spending. If the donation to the MF is less thanof 33\% then the benefit of the part above de 1000 UTM are for 35\% credit and 65\% spending.
+
+3.	If the donor makes the first point, he can donate an extra 1000 UTM to projects or programs of prevention or rehabilitation of alcohol or drugs in which case the benefit is 50\% credit and 50\% spending.
+
+4.	For the part of the donation above 1000 UTM, when at least 25\% has been donated to de MF the benefit is 50\% credit and 50\% spending, if the donation to the MF is less than 25\%, then the credit for the amount above 1000 UTM is 40\%, the rest spending.
+
+Finally, the last modification is on April 14 2016, the second version of the law 20.900 modify articles 8 and 9 related to the limitations of donate to politics groups.
+
+A resume of the period of each law is in Table ~\ref{table: Table 1}
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+Law & Period of validity \\
+\hline
+19.885 & 2006 to 2009-dec-31 \\  \hline
+20.316 & 2010-jan-01 to 2010-dec-01 \\ \hline
+20.565 & 2011-jan-01 to 2012-feb-07 \\ \hline
+20.900(1) & 2012-feb-08 to 2016-apr-13\\ \hline
+20.900(2) & 2016-apr-14  \\ \hline
+
+\end{tabular}
+\caption{Modifications to Law 19.885}
+\label{tabla: Table 1}
+\end{center}
+\end{table}
+
 
 #### Insertion in the Literature
 
-The relation between taxes and social donations has been studied in the recent literature by ...
+The investigation in this area has been focus mainly in the relationship between the tax deductibility and charitable donations, as an example, Peloza \& Steel (2005) consider tax deductibility as a price for charitable donations, using meta-analysis techniques they estimate the elasticity of charitable giving for the US in four decades. 
 
+In this same path, Zampelli \& Yen (2016) Investigate the effect of reducing the tax deductibility in the levels of charitable donations, finding that the elimination of the deduction would reduce the donation in 35%
 
+Almunia, Guceri, Lockwood \& Scharf (2020) estimates the effects of tax incentives on charitable contributions in the UK in 0.3 (considering intensive and extensive margin tax price elasticities) finding that intensive margin price elasticity increases in magnitude with income, while the opposite happens for the extensive-margin elasticity.
+
+Duquette (2019) finds that the behavior of the giving’s mounts through the time are consistent with the changes in the limit of deductibility of the donor adjusted gross income in the US, specifically this two have a positive and significative relation considering or not parameters by cause, by years or both together.
+
+But, the changes in Chile don’t necessary match exactly with these cases, there is a limit of deduction but his changes through time are minors compared to others. The mayor changes are related to the monetary limit of donation that determinate the income deductibility.
 
 Empirical strategy
 ============
 
 We use a differences in differences approach in a panel structure of the data.
+
+#### Data information 
+
+The data used for this investigation is public from the records of The Ministry of Social Development, at the time that this paper is developed there are records from 2009 to 2018 in pdf format with a total of xx observations.
+
+\begin{table}[]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{ll}
+\hline
+\multicolumn{1}{c}{\textbf{Atributes}} & \multicolumn{1}{c}{\textbf{Description}}                \\ \hline
+Name of the project                    & Name of the project where de donation is made           \\
+Name of the institution or donator     & Institucional name or donator who receive the donation to a specific project     \\
+Name of de donor                       & Name of the donor, it can be a natural person or a firm \\
+RUT                                    & Unique Roll Tributary of each donor                     \\
+Donation to the Mixed Fund             & Amount of the total donation made that goes for the mixed fund (in chilean peso) \\
+Donation to the institution or donator & Amount of the total donation made that goes for the donator (in chilean peso)    \\
+Total donation                         & Sum of the donation made to the MF and to the institution (in chilean peso)      \\
+Date                                   & Date of the donation                                    \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+
+Each file contains one observation per donation registering different attributes of each donation, more information in Table XX. Nevertheless for the investigation we use only data from the period between xxx-xxx as we are going to look for the change of the law 20.565 to 20.900, this contain approximate XX valid observations (footnote que es una observación valida, que tiene los datos de fecha y rut de donatario) 
+
+#### Exploratory analysis
+
+As you can see in Figure XX it is plot the donations in time, each vertical line indicates the validity of a law (table XX), we can see that in period xx-xx there is an increase of the donation (number) and a change of the mount of the donation. Beside the changes of law related to the benefit of the donation there are also others changes that affect the records, one is the inclusion of the digital certificate that ease the process of donation for possibles donor, making it more easy to receive the donation, this was implemented by some of the greater foundations in the country by 2013-2014. other import at change was in the same year related to the obligatorily of inform the minister the donations that was made to each institution, by that, the number of donation registered is more larger in 2014 than in years before. 
+
+#### Pannel data regression
+
+We want to study the effect on donations of the change of law of 20.565 to 20.900, the main change is that for the law 20.900 is no longer necessary to donor to at least two different institution an amount minor to 700 UTM (in Section XX number XX) making more easy to receive the economy incentive for donation, in order to that, is it expected that the donations raise (in number) but we don't now for sure what happens with the amount of the donations 
+
+The model that we create have the next variables 
+
+<!-- tabla con variables the modelo -->
+
+and follow the next pannel structure
+
+<!-- ecuación del modelo -->
+
+the result are the following 
+
+<!--tabla con los resultados de panel -->
+
+As we can see...
+
 
 References {#references .unnumbered}
 ==========
