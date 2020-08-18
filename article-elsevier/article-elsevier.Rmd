@@ -203,7 +203,8 @@ ggplot(Donaciones_total, aes(x = Fecha , y = monto_FM_UTM)) +
   # Add labels
   labs(x = "Date", y = "Donation to Mixed Found")+
   ylim(0,2500)+
-  annotate("text", x = as.Date("2009-08-11"), y = 2000, label = "Law 19885")+
+  xlim(as.Date("2008-11-30"),as.Date("2019-01-01"))+
+  annotate("text", x = as.Date("2009-03-11"), y = 2000, label = "Law 19885")+
   annotate("text", x = as.Date("2010-01-01"), y = 1850, label = "Law 20316")+
   annotate("text", x = as.Date("2011-01-01"), y = 2000, label = "Law 20565")+
   annotate("text", x = as.Date("2012-02-08"), y = 1850, label = "Law 20900_1")+
@@ -253,6 +254,10 @@ tabla.ley[3,4]<-median(subset(Donaciones_total,Donaciones_total$Ley=="Law 20565"
 tabla.ley[4,4]<-median(subset(Donaciones_total,Donaciones_total$Ley=="Law 20900_1")$monto_institucion_UTM,na.rm = TRUE)
 tabla.ley[5,4]<-median(subset(Donaciones_total,Donaciones_total$Ley=="Law 20900_2")$monto_institucion_UTM,na.rm = TRUE)
 
+tabla.ley$`Median total donation`<-round(tabla.ley$`Median total donation`,2)
+tabla.ley$`Median institution donation`<-round(tabla.ley$`Median institution donation`,2)
+tabla.ley$`Median Mixed Found donation`<-round(tabla.ley$`Median Mixed Found donation`,2)
+
 tabla.ley[1,5]<-median(subset(Donaciones_total,Donaciones_total$Ley=="Law 19885")$monto_FM_UTM,na.rm = TRUE)
 tabla.ley[2,5]<-median(subset(Donaciones_total,Donaciones_total$Ley=="Law 20316")$monto_FM_UTM,na.rm = TRUE)
 tabla.ley[3,5]<-median(subset(Donaciones_total,Donaciones_total$Ley=="Law 20565")$monto_FM_UTM,na.rm = TRUE)
@@ -274,7 +279,7 @@ tabla.ley[4,7]<-nrow(table(subset(Donaciones_total,Donaciones_total$Ley=="Law 20
 tabla.ley[5,7]<-nrow(table(subset(Donaciones_total,Donaciones_total$Ley=="Law 20900_2")$DONATARIO))
 
 kable(tabla.ley) %>%
-  kable_styling(bootstrap_options = "striped")
+  kable_styling(bootstrap_options = "striped", position = "center",font_size = 8)
 
 ```
 
@@ -284,17 +289,13 @@ kable(tabla.ley) %>%
 
 We want to study the effect on donations of the change of law of 20.565 to 20.900, the main change is that for the law 20.900 is no longer necessary to donor to at least two different institution an amount minor to 700 UTM (in Section XX number XX) making more easy to receive the economy incentive for donation, in order to that, is it expected that the donations raise (in number) but we don't now for sure what happens with the amount of the donations 
 
-The model that we create have the next variables 
+We use a pannel data regression (\ref{eq:1}) in order to study the effect of the change of law on the donations, and follow the next pannel structure
+
+$$\  AI_{i,t}=AMF_{i,t}+AAMF_{i,t}+DL_{i,t}+OD_{i,t}+AAD_{i,t}+AADo_{i,t}+CL_{i}+TD_{i}+DC_{i}+\alpha_{i}+\beta_{t} $$
+Where $\ AI_{i,t}$ is the amount of the donation to the institution/foundation of the donor $\ i$ in the year $\ t$, $\ AMF_{i,t}$ is the amount of the donation to the Mixed Found of the donor $\ i$ in the year $\ t$, $\ AAMF_{i,t}$ is the accumulated amount donated to the Mixed Found until that donation (included) of the donor $\ i$ in the year $\ t$, $\ DL_{i,t}$ is a binary variables that take $\ 1$ if the donor $\ i$ in the year $\ t$ has donor more than 1000 UTM, and 0 otherwise, $\ OD_{i,t}$ is and ordinal variable and take the value of the position in the year of the donation of the donor $\ i$ in the year $\ t$, $\ AAD_{i,t}$ is the total accumulated amount (to Mixed Found and to Institutions) of the donor $\ i$ in the year $\ t$ until that donation (included), $\ AADo_{i,t}$ is the accumulated amount of the donee $\ i$ in the year $\ t$ until that donation (included), $\ CL_{i}$ is a binary variable that take value $\ 1$ if the donation is made in the period of validity of the Law 20900, $\ TD_{i}$ is a binary variable that take value $\ 1$ if the donor is a firm and $\ DC_{i}$ is a binary variable that take value $\ 1$ if the donation is made in the period of validity of the digital certification, finally $\ \alpha _{i}$ and $\ \beta _{t}$ control effects by donor and by time
 
 
-
-<!-- tabla con variables the modelo -->
-
-and follow the next pannel structure
-
-<!-- ecuación del modelo -->
-
-the result are the following 
+The result are the following 
 
 <!--tabla con los resultados de panel -->
 
