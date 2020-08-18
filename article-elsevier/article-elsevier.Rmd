@@ -136,17 +136,157 @@ Date                                   & Date of the donation                   
 \end{table}
 
 
-Each file contains one observation per donation registering different attributes of each donation, more information in Table XX. Nevertheless for the investigation we use only data from the period between xxx-xxx as we are going to look for the change of the law 20.565 to 20.900, this contain approximate XX valid observations (footnote que es una observación valida, que tiene los datos de fecha y rut de donatario) 
+Each file contains one observation per donation registering different attributes of each donation, more information in Table XX. Nevertheless for the investigation we use only data from the period between xxx-xxx as we are going to look the effects of the change of the law 20.565 to 20.900, this contain approximate XX valid observations (footnote que es una observación valida, que tiene los datos de fecha y rut de donatario) 
 
 #### Exploratory analysis
 
-As you can see in Figure XX it is plot the donations in time, each vertical line indicates the validity of a law (table XX), we can see that in period xx-xx there is an increase of the donation (number) and a change of the mount of the donation. Beside the changes of law related to the benefit of the donation there are also others changes that affect the records, one is the inclusion of the digital certificate that ease the process of donation for possibles donor, making it more easy to receive the donation, this was implemented by some of the greater foundations in the country by 2013-2014. other import at change was in the same year related to the obligatorily of inform the minister the donations that was made to each institution, by that, the number of donation registered is more larger in 2014 than in years before. 
+As you can see in Figure XX it is plot the donations in time, each vertical line indicates the validity of a law (table XX), we can see that in period xx-xx there is an increase of the donation (number) and a change of the amount of the donation. Beside the changes of law related to the benefit of the donation there are also others changes that affect the records, one is the inclusion of the digital certificate that ease the process of donation for possibles donors, making it more easy to receive the benefits of the donation, this was implemented by some of the greater foundations in the country by 2013-2014. Other important change in the same year was related to the obligatorily of inform to the minister the donations that was made to each institution, by that, the number of donation registered is more larger in 2014 than in years before.
+
+In Table XX there is a descriptive analysis of the donations in each period
+
+```{r, echo = FALSE,message=FALSE,warning = FALSE}
+#cargar base de datos 
+load("~/workspace/donationstax/Donaciones_total_graficos.Rdata")
+library(ggplot2)
+library(lubridate)
+library(stringr)
+
+#grafico con donaciones y cambio de leyes
+ggplot(Donaciones_total, aes(x = Fecha , y = monto_total_UTM)) +
+  # Make points small and semi-transparent since there are lots of them
+  geom_point(size = 0.5, alpha = 0.5) + 
+  # Add vertical line
+  #geom_hline(yintercept=1000, linetype="dashed", color = "red") +
+  geom_vline(xintercept=as.numeric(as.Date("2010-01-01")), linetype="dashed", color = "red") +
+  geom_vline(xintercept=as.numeric(as.Date("2011-01-01")), linetype="dashed", color = "red") +
+  geom_vline(xintercept=as.numeric(as.Date("2012-02-08")), linetype="dashed", color = "red") +
+  geom_vline(xintercept=as.numeric(as.Date("2016-04-14")), linetype="dashed", color = "red") +
+  # Add labels
+  labs(x = "Date", y = "Total donation")+
+  ylim(0,20000)+
+  annotate("text", x = as.Date("2009-08-11"), y = 19000, label = "Law 19885")+
+  annotate("text", x = as.Date("2010-01-01"), y = 17000, label = "Law 20316")+
+  annotate("text", x = as.Date("2011-01-01"), y = 19000, label = "Law 20565")+
+  annotate("text", x = as.Date("2012-02-08"), y = 17000, label = "Law 20900_1")+
+  annotate("text", x = as.Date("2016-04-14"), y = 19000, label = "Law 20900_2")+
+  ggtitle("Donations: Total amount over time")
+
+ggplot(Donaciones_total, aes(x = Fecha , y = monto_institucion_UTM)) +
+  # Make points small and semi-transparent since there are lots of them
+  geom_point(size = 0.5, alpha = 0.5) + 
+  # Add vertical line
+  #geom_hline(yintercept=1000, linetype="dashed", color = "red") +
+  geom_vline(xintercept=as.numeric(as.Date("2010-01-01")), linetype="dashed", color = "red") +
+  geom_vline(xintercept=as.numeric(as.Date("2011-01-01")), linetype="dashed", color = "red") +
+  geom_vline(xintercept=as.numeric(as.Date("2012-02-08")), linetype="dashed", color = "red") +
+  geom_vline(xintercept=as.numeric(as.Date("2016-04-14")), linetype="dashed", color = "red") +
+  # Add labels
+  labs(x = "Date", y = "Donation to institution")+
+  ylim(0,20000)+
+  annotate("text", x = as.Date("2009-08-11"), y = 19000, label = "Law 19885")+
+  annotate("text", x = as.Date("2010-01-01"), y = 17000, label = "Law 20316")+
+  annotate("text", x = as.Date("2011-01-01"), y = 19000, label = "Law 20565")+
+  annotate("text", x = as.Date("2012-02-08"), y = 17000, label = "Law 20900_1")+
+  annotate("text", x = as.Date("2016-04-14"), y = 19000, label = "Law 20900_2")+
+  ggtitle("Donations: Institution amount over time")
+
+
+ggplot(Donaciones_total, aes(x = Fecha , y = monto_FM_UTM)) +
+  # Make points small and semi-transparent since there are lots of them
+  geom_point(size = 0.5, alpha = 0.5) + 
+  # Add vertical line
+  #geom_hline(yintercept=1000, linetype="dashed", color = "red") +
+  geom_vline(xintercept=as.numeric(as.Date("2010-01-01")), linetype="dashed", color = "red") +
+  geom_vline(xintercept=as.numeric(as.Date("2011-01-01")), linetype="dashed", color = "red") +
+  geom_vline(xintercept=as.numeric(as.Date("2012-02-08")), linetype="dashed", color = "red") +
+  geom_vline(xintercept=as.numeric(as.Date("2016-04-14")), linetype="dashed", color = "red") +
+  # Add labels
+  labs(x = "Date", y = "Donation to Mixed Found")+
+  ylim(0,2500)+
+  annotate("text", x = as.Date("2009-08-11"), y = 2000, label = "Law 19885")+
+  annotate("text", x = as.Date("2010-01-01"), y = 1850, label = "Law 20316")+
+  annotate("text", x = as.Date("2011-01-01"), y = 2000, label = "Law 20565")+
+  annotate("text", x = as.Date("2012-02-08"), y = 1850, label = "Law 20900_1")+
+  annotate("text", x = as.Date("2016-04-14"), y = 2000, label = "Law 20900_2")+
+  ggtitle("Donations: Mixed Found amount over time")
+
+
+```
+
+```{r, echo = FALSE,message=FALSE,warning = FALSE, results='asis'}
+#load()
+
+load("~/workspace/donationstax/Donaciones_total_graficos.Rdata")
+
+library(knitr)
+library(kableExtra)
+library(dplyr)
+
+Donaciones_total$Ley<-NA
+Donaciones_total$Ley<-ifelse(Donaciones_total$Fecha<"2010-01-01","Law 19885",NA)
+Donaciones_total$Ley<-ifelse(Donaciones_total$Fecha>="2010-01-01" & Donaciones_total$Fecha<"2010-12-31","Law 20316",Donaciones_total$Ley)
+Donaciones_total$Ley<-ifelse(Donaciones_total$Fecha>="2011-01-01" & Donaciones_total$Fecha<"2012-02-07","Law 20565",Donaciones_total$Ley)
+Donaciones_total$Ley<-ifelse(Donaciones_total$Fecha>="2012-02-08" & Donaciones_total$Fecha<"2016-04-13","Law 20900_1",Donaciones_total$Ley)
+Donaciones_total$Ley<-ifelse(Donaciones_total$Fecha>="2016-04-14" & Donaciones_total$Fecha<"2018-12-31","Law 20900_2",Donaciones_total$Ley)
+
+#tabla de donaciones por periodo de ley 
+tabla.ley<-data.frame(matrix(nrow=5,ncol = 7))
+colnames(tabla.ley)<-c("Law","Observations","Median total donation","Median institution donation","Median Mixed Found donation","Number of donors","Number of donee")
+tabla.ley$Law<-c("Law 19885","Law 20316","Law 20565","Law 20900_1","Law 20900_2")
+
+#cantidad de observaciones 
+tabla.ley[1,2]<-nrow(subset(Donaciones_total,Donaciones_total$Ley=="Law 19885"))
+tabla.ley[2,2]<-nrow(subset(Donaciones_total,Donaciones_total$Ley=="Law 20316"))
+tabla.ley[3,2]<-nrow(subset(Donaciones_total,Donaciones_total$Ley=="Law 20565"))
+tabla.ley[4,2]<-nrow(subset(Donaciones_total,Donaciones_total$Ley=="Law 20900_1"))
+tabla.ley[5,2]<-nrow(subset(Donaciones_total,Donaciones_total$Ley=="Law 20900_2"))
+#mediana de monto total, institucion y utm 
+tabla.ley[1,3]<-median(subset(Donaciones_total,Donaciones_total$Ley=="Law 19885")$monto_total_UTM,na.rm = TRUE)
+tabla.ley[2,3]<-median(subset(Donaciones_total,Donaciones_total$Ley=="Law 20316")$monto_total_UTM,na.rm = TRUE)
+tabla.ley[3,3]<-median(subset(Donaciones_total,Donaciones_total$Ley=="Law 20565")$monto_total_UTM,na.rm = TRUE)
+tabla.ley[4,3]<-median(subset(Donaciones_total,Donaciones_total$Ley=="Law 20900_1")$monto_total_UTM,na.rm = TRUE)
+tabla.ley[5,3]<-median(subset(Donaciones_total,Donaciones_total$Ley=="Law 20900_2")$monto_total_UTM,na.rm = TRUE)
+
+tabla.ley[1,4]<-median(subset(Donaciones_total,Donaciones_total$Ley=="Law 19885")$monto_institucion_UTM,na.rm = TRUE)
+tabla.ley[2,4]<-median(subset(Donaciones_total,Donaciones_total$Ley=="Law 20316")$monto_institucion_UTM,na.rm = TRUE)
+tabla.ley[3,4]<-median(subset(Donaciones_total,Donaciones_total$Ley=="Law 20565")$monto_institucion_UTM,na.rm = TRUE)
+tabla.ley[4,4]<-median(subset(Donaciones_total,Donaciones_total$Ley=="Law 20900_1")$monto_institucion_UTM,na.rm = TRUE)
+tabla.ley[5,4]<-median(subset(Donaciones_total,Donaciones_total$Ley=="Law 20900_2")$monto_institucion_UTM,na.rm = TRUE)
+
+tabla.ley[1,5]<-median(subset(Donaciones_total,Donaciones_total$Ley=="Law 19885")$monto_FM_UTM,na.rm = TRUE)
+tabla.ley[2,5]<-median(subset(Donaciones_total,Donaciones_total$Ley=="Law 20316")$monto_FM_UTM,na.rm = TRUE)
+tabla.ley[3,5]<-median(subset(Donaciones_total,Donaciones_total$Ley=="Law 20565")$monto_FM_UTM,na.rm = TRUE)
+tabla.ley[4,5]<-median(subset(Donaciones_total,Donaciones_total$Ley=="Law 20900_1")$monto_FM_UTM,na.rm = TRUE)
+tabla.ley[5,5]<-median(subset(Donaciones_total,Donaciones_total$Ley=="Law 20900_2")$monto_FM_UTM,na.rm = TRUE)
+
+#cantidad de donantes distintos
+tabla.ley[1,6]<-nrow(table(subset(Donaciones_total,Donaciones_total$Ley=="Law 19885")$RUT))
+tabla.ley[2,6]<-nrow(table(subset(Donaciones_total,Donaciones_total$Ley=="Law 20316")$RUT))
+tabla.ley[3,6]<-nrow(table(subset(Donaciones_total,Donaciones_total$Ley=="Law 20565")$RUT))
+tabla.ley[4,6]<-nrow(table(subset(Donaciones_total,Donaciones_total$Ley=="Law 20900_1")$RUT))
+tabla.ley[5,6]<-nrow(table(subset(Donaciones_total,Donaciones_total$Ley=="Law 20900_2")$RUT))
+
+#cantidad de donatarios distintos
+tabla.ley[1,7]<-nrow(table(subset(Donaciones_total,Donaciones_total$Ley=="Law 19885")$DONATARIO))
+tabla.ley[2,7]<-nrow(table(subset(Donaciones_total,Donaciones_total$Ley=="Law 20316")$DONATARIO))
+tabla.ley[3,7]<-nrow(table(subset(Donaciones_total,Donaciones_total$Ley=="Law 20565")$DONATARIO))
+tabla.ley[4,7]<-nrow(table(subset(Donaciones_total,Donaciones_total$Ley=="Law 20900_1")$DONATARIO))
+tabla.ley[5,7]<-nrow(table(subset(Donaciones_total,Donaciones_total$Ley=="Law 20900_2")$DONATARIO))
+
+kable(tabla.ley) %>%
+  kable_styling(bootstrap_options = "striped")
+
+```
+
+
 
 #### Pannel data regression
 
 We want to study the effect on donations of the change of law of 20.565 to 20.900, the main change is that for the law 20.900 is no longer necessary to donor to at least two different institution an amount minor to 700 UTM (in Section XX number XX) making more easy to receive the economy incentive for donation, in order to that, is it expected that the donations raise (in number) but we don't now for sure what happens with the amount of the donations 
 
 The model that we create have the next variables 
+
+
 
 <!-- tabla con variables the modelo -->
 
