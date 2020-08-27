@@ -5,20 +5,21 @@
 ScriptsPath_ETL.consolidacion<-paste("/home/",usuario,"/workspace/SxC_ETL/Donaciones/DonacionesFM/Consolidacion/",sep="")
 load(paste(ScriptsPath_ETL.consolidacion,"Donaciones_total_compilado_070820.Rdata",sep=""))
 
+Donaciones_total<-df2
 #conservar solo donaciones con rut 
-Donaciones_total<-Donaciones_total[!is.na(Donaciones_total$RUT),] #1.415.469
+Donaciones_total<-Donaciones_total[!is.na(Donaciones_total$RUT),] #1.540.636
 
 library(readxl)
 valorUTM <- read_excel("~/workspace/donationstax/valorUTM.xlsx")
 colnames(valorUTM)<-c("Año","Mes","UTM")
 
 sum(is.na(Donaciones_total$Año))#12 observaciones sin año
-sum(is.na(Donaciones_total$Mes))#19 observaciones sin mes
+sum(is.na(Donaciones_total$Mes))#20 observaciones sin mes
 
 #se quitan donaciones sin año
-Donaciones_total<-Donaciones_total[!is.na(Donaciones_total$Año),] #1.415.457
-sum(is.na(Donaciones_total$Mes))#7 observaciones sin mes
-#para aquellas donaciones con Mes=NA se imputa por Mes=01
+Donaciones_total<-Donaciones_total[!is.na(Donaciones_total$Año),] #1.540.624
+sum(is.na(Donaciones_total$Mes))#8 observaciones sin mes
+#para aquellas donaciones con Mes=NA se imputa por Mes=01,son de año 2014 y 2015, no influyen en cambio ley
 Donaciones_total$Mes<-ifelse(is.na(Donaciones_total$Mes),"01",Donaciones_total$Mes)
 
 Donaciones_total$Año<-as.numeric(Donaciones_total$Año)
@@ -29,7 +30,7 @@ valorUTM$Mes<-as.numeric(valorUTM$Mes)
 #Monto en pesos corrientes a UTM
 Donaciones_total<-merge(Donaciones_total,valorUTM,by=c("Año","Mes"),all.x = TRUE)
 sum(is.na(Donaciones_total$UTM)) #43 observaciones con año 2020
-Donaciones_total<-Donaciones_total[!is.na(Donaciones_total$UTM),] #1.415.414
+Donaciones_total<-Donaciones_total[!is.na(Donaciones_total$UTM),] #1.540.581
 
 Donaciones_total$MONTO.FONDO.MIXTO<-as.numeric(Donaciones_total$MONTO.FONDO.MIXTO)
 Donaciones_total$MONTO.INSTITUCIÓN<-as.numeric(Donaciones_total$MONTO.INSTITUCIÓN)
@@ -54,10 +55,12 @@ Donaciones_total[which(is.na(Donaciones_total$Fecha)),17]<-dmy("30-11-2015")
 #extraer datos pertenecientes a la viegencia de la leyes 20.565 y 20.900 (1)
 #("2011-01-01" y "2016-04-13")
 
-Donaciones_total<-subset(Donaciones_total,Fecha>="2011-01-01" & Fecha<="2016-04-13") #1.392.873
+save(Donaciones_total,file="Donaciones_total_graficos.Rdata")
+
+Donaciones_total.seleccion<-subset(Donaciones_total,Fecha>="2011-01-01" & Fecha<="2016-04-13") #1.517.981
 
 #seleccion de variables
-datos.modelo<-subset(Donaciones_total,select = c(RUT,DONATARIO,Fecha,monto_FM_UTM,monto_total_UTM,monto_institucion_UTM))
+datos.modelo<-subset(Donaciones_total.seleccion,select = c(RUT,DONATARIO,Fecha,monto_FM_UTM,monto_total_UTM,monto_institucion_UTM))
 
 #### Generacion de variables ####
 datos.modelo$ID<-seq(1,nrow(datos.modelo))
@@ -77,6 +80,10 @@ fecha_limite=ymd("2012-02-08") #fecha ley 20900
 # Reglamento marzo 2014 https://www.bcn.cl/leychile/navegar?idNorma=1060093
 # http://www.lasegunda.com/Noticias/Impreso/2013/02/819781/hogar-de-cristo-y-sii-firman-convenio-que-podria-duplicar-aportes-de-socios
 fecha_cert.digital=ymd("2014-03-07") #fecha puesta en marcha certificado digital 
+
+save(datos.modelo,file = "datos_modelo_140820.Rdata")
+
+
 
 for(j in  1:nrow(datos.modelo)){ #
   print(j)
@@ -119,19 +126,113 @@ for(j in  1:nrow(datos.modelo)){ #
   #es dentro del periodo de vigencia del cert digital entonces 1
 }
 
+#unir distintas BD generadas 
+#5 BD generadas en MacBook Claudia
+load("~/workspace/donationstax/iteraciones/Datosmodelo1_750000_200820.Rdata")
+#5 BD generadas en servidor 
+load("~/workspace/donationstax/iteraciones/modelo1.Rdata")
+datos.modelo.comp<-rbind(datos.modelo.comp,datos.modelo[750001:900000,])
+load("~/workspace/donationstax/iteraciones/modelo2.Rdata")
+datos.modelo.comp<-rbind(datos.modelo.comp,datos.modelo[900001:1050000,])
+load("~/workspace/donationstax/iteraciones/modelo3.Rdata")
+datos.modelo.comp<-rbind(datos.modelo.comp,datos.modelo[1050001:1200000,])
+load("~/workspace/donationstax/iteraciones/modelo4.Rdata")
+datos.modelo.comp<-rbind(datos.modelo.comp,datos.modelo[1200001:1350000,])
+load("~/workspace/donationstax/iteraciones/modelo5.Rdata")
+datos.modelo.comp<-rbind(datos.modelo.comp,datos.modelo[1350001:1517981,])
+datos.modelo<-datos.modelo.comp
+
 #cambiar tipo de variables 
 datos.modelo$Limite.donacion<-as.factor(datos.modelo$Limite.donacion)
 datos.modelo$Ley.20900<-as.factor(datos.modelo$Ley.20900)
-datos.modelo$Orden.donacion<-as.integer(datos.modelo$Orden.donacion)
-datos.modelo$Monto_acum_donante<-as.double(datos.modelo$Monto_acum_donante)
-datos.modelo$Monto_acum_donatario<-as.double(datos.modelo$Monto_acum_donatario)
-datos.modelo$Monto_acum_FM<-as.double(datos.modelo$Monto_acum_FM)
 datos.modelo$Contribuyente_1ra<-as.factor(datos.modelo$Contribuyente_1ra)
 datos.modelo$Cert_digital<-as.factor(datos.modelo$Cert_digital)
 
 #se genera BD
-load("~/workspace/donationstax/Datos_Modelo_120820.Rdata")
+save(datos.modelo,file = "Datos_modelo_final_200820_compilacion.Rdata")
+
+load("~/workspace/donationstax/iteraciones/Datos_modelo_final_200820_compilacion.Rdata")
+a=which(is.na(datos.modelo$Contribuyente_1ra))
+datos.modelo$RUT<-str_replace_all(datos.modelo$RUT,"[\\s]+", " ")
+summary(datos.modelo)
+
+for (i in a) {
+  print(i)
+  rut<-as.numeric(substr(datos.modelo[i,1],1,nchar(datos.modelo[i,1])-1))
+  datos.modelo[i,14]<-ifelse(rut>49000000,1,0) #1 si es de primera categoria 
+}
+
+a=which(is.na(datos.modelo$Contribuyente_1ra)) #quedan donantes con rut erroneo tipo 9900kksjkd00-0
+datos.modelo$RUT_err<-NA
+for (i in a) {
+  print(i)
+  rut<-as.numeric(substr(datos.modelo[i,1],1,nchar(datos.modelo[i,1])-1))
+  datos.modelo[i,16]<-ifelse(is.na(rut),"quitar","correcto") #1 si es de primera categoria 
+}
+datos.modelo$RUT_err<-ifelse(is.na(datos.modelo$RUT_err),"correcto","quitar")
+
+datos.modelo.final<-datos.modelo[datos.modelo$RUT_err!="quitar",] #de 1517981 a  1517839
+datos.modelo.final<-datos.modelo.final[,1:15]
+
+#quitar observaciones que no tienen ningun monto 
+#quitar<-subset(datos.modelo.final,is.na(datos.modelo.final$monto_FM_UTM) & is.na(datos.modelo.final$monto_total_UTM) & is.na(datos.modelo.final$monto_institucion_UTM))
+
+datos.modelo.final<-datos.modelo.final[!is.na(datos.modelo.final$monto_institucion_UTM),] #de 1517839 a 1517769
+
+sum(is.na(datos.modelo.final$monto_FM_UTM)) #1407223
+
+datos.modelo.final$monto_FM_UTM<-ifelse(is.na(datos.modelo.final$monto_FM_UTM),0,datos.modelo.final$monto_FM_UTM)
+sum(is.na(datos.modelo.final$monto_FM_UTM)) #0
+sum(is.na(datos.modelo.final$monto_institucion_UTM)) #0
+
+a=which(is.na(datos.modelo.final$monto_total_UTM))
+for (i in a) {
+  datos.modelo.final[i,5]<-datos.modelo.final[i,4]+datos.modelo.final[i,6]
+}
 
 summary(datos.modelo.final)
+datos.modelo.final <- na.omit(datos.modelo.final) #de 1517769 a 1517769
 
+#### GENERAR PANEL DE DATOS ####
+
+library(panelr)
+library(lubridate)
+
+datos.modelo.final$año<-NA
+datos.modelo.final$año<-year(datos.modelo.final$Fecha)
+sum(is.na(datos.modelo.final$año))
+
+datos.seleccion<-subset(datos.modelo.final,select =c("RUT","monto_FM_UTM","monto_institucion_UTM",
+                                                     "Limite.donacion","Ley.20900","Orden.donacion","Monto_acum_donante",
+                                                     "Monto_acum_donatario" ,"Monto_acum_FM","Contribuyente_1ra",
+                                                     "Cert_digital","año"))
+datos.seleccion$RUT<-as.factor(datos.seleccion$RUT)
+str(datos.seleccion)
+summary(datos.seleccion)
+#save(datos.seleccion,file="Datos_seleccion_modelo.Rdata")
+
+regresion <- panel_data(datos.seleccion, id = RUT, wave = año)
+
+#dv ~           varying_variables | 
+#               invariant_variables |
+#                 cross_level_interactions/random effects
+
+model <- wbm(monto_institucion_UTM ~ monto_FM_UTM+Monto_acum_FM+Limite.donacion+Orden.donacion+Monto_acum_donante+Monto_acum_donatario |
+               Ley.20900 + Contribuyente_1ra + Cert_digital | 
+               ( año | RUT), data = regresion)
+#boundary (singular) fit: see ?isSingular https://rdrr.io/cran/lme4/man/isSingular.html
+#https://stats.stackexchange.com/questions/378939/dealing-with-singular-fit-in-mixed-models/379068
+
+saveRDS(model, "model.RDS")
+#save(model,file="modeloPR200820.Rdata")
+summary(model)
+
+
+library(summarytools)
+st_css()
+
+print(dfSummary(datos.seleccion, plain.ascii = FALSE, style = "grid", 
+                graph.magnif = 0.75, valid.col = FALSE, tmp.img.dir = "/tmp"), method = 'render',na.col=FALSE)
+
+descr(datos.seleccion)
 
