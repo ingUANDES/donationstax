@@ -6,7 +6,7 @@ author:
     affiliation: School of Industrial Engineering, Pontificia Universidad Católica de Valparaíso
     footnote: 1
   - name: Claudia Toledo-Aguirre
-    email: claudia@pucv.cl
+    email: claudia.toledo@pucv.cl
     affiliation: School of Industrial Engineering, Pontificia Universidad Católica de Valparaíso
 #   - name: Cat Memes
 #     email: cat@example.com
@@ -32,6 +32,26 @@ abstract: |
 journal: "Economics Letters or Journal of Public Economics"
 date: "`r Sys.Date()`"
 bibliography: mybibfile.bib
+header-includes:
+   - \usepackage{physics}
+   - \usepackage{amsmath}
+   - \usepackage{tikz}
+   - \usepackage{mathdots}
+   - \usepackage{yhmath}
+   - \usepackage{cancel}
+   - \usepackage{color}
+   - \usepackage{siunitx}
+   - \usepackage{array}
+   - \usepackage{multirow}
+   - \usepackage{amssymb}
+   - \usepackage{gensymb}
+   - \usepackage{tabularx}
+   - \usepackage{booktabs}
+   - \usetikzlibrary{fadings}
+   - \usetikzlibrary{patterns}
+   - \usetikzlibrary{shadows.blur}
+   - \usetikzlibrary{shapes}
+
 #linenumbers: true
 #numbersections: true
 csl: elsevier-harvard.csl
@@ -40,6 +60,24 @@ output: rticles::elsevier_article
 
 <!-- _Text based on elsarticle sample manuscript, see [http://www.elsevier.com/author-schemas/latex-instructions#elsarticle](http://www.elsevier.com/author-schemas/latex-instructions#elsarticle)_ -->
 
+```{r setup, include=FALSE,echo = FALSE,message=FALSE,warning = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::include_graphics
+library(lubridate)
+library(stringr)
+library(dplyr)
+library(ggplot2)
+library(knitr)
+library(kableExtra)
+library(summarytools)
+library(panelr)
+
+load("~/workspace/donationstax/Donaciones_total_graficos.Rdata")
+load("~/workspace/donationstax/iteraciones/Datos_seleccion_modelo.Rdata")
+knitr::opts_chunk$set(fig.width=5, fig.height=5) 
+
+
+```
 
 Introduction
 ==========================
@@ -48,35 +86,277 @@ Introduction
 
 In Chile donations with social purposes are ruled by the Law 19.885, that establishes a framework to foster social donations, this law has had three major change since his publication in 2003 on the years 2009, 2011 y 2012. These changes are mainly related with how the donors can access to the tax benefits. The benefits are deductions of income by two ways, the first one a discount as tax credit and the second discounted as an expense necessary to make the donation.
 
-The law 19.885 concerning social donations in Chile in his first version on 2003, establishes a tributary benefit of 50\% of the donation as credit discount and the other 50\% consider as spending to make the donation. To receive this benefit the donor must donate a minimum of the 33\% of the donation to the Mixed Fund (MF<!--footnote -->). In this version of the law the limit of the donation was 4.5\% of the taxable liquid income and benefit was equally independent of the amount of the donation.
+The law 19.885 (Fig (\ref{fig:law 19885})) concerning social donations in Chile in his first version on 2003, establishes a tributary benefit of 50\% of the donation as credit discount and the other 50\% consider as spending to make the donation. To receive this benefit the donor must donate a minimum of the 33\% of the donation to the Mixed Fund (MF^[It is a Fund created by the Law on Donations with Social Purposes to support initiatives that civil society organizations present and that directly benefit people in poverty and / or people with disabilities. The Fund's resources come from donations from companies and individuals. Fund resources must be distributed through public tenders. Ministry of social development and family]). In this version of the law the limit of the donation was 4.5\% of the taxable liquid income and benefit was equally independent of the amount of the donation.
+
+\tikzset{every picture/.style={line width=0.75pt}} 
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+\centering
+\label{fig:law 19885}
+\draw  [draw opacity=0][fill={rgb, 255:red, 194; green, 195; blue, 196 }  ,fill opacity=0.56 ] (81.23,63.8) .. controls (81.23,62.25) and (82.48,61) .. (84.03,61) -- (252.7,61) .. controls (254.25,61) and (255.5,62.25) .. (255.5,63.8) -- (255.5,72.2) .. controls (255.5,73.75) and (254.25,75) .. (252.7,75) -- (84.03,75) .. controls (82.48,75) and (81.23,73.75) .. (81.23,72.2) -- cycle ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 61; green, 151; blue, 237 }  ,fill opacity=0.38 ] (81.5,49.28) .. controls (81.5,47.8) and (82.7,46.6) .. (84.18,46.6) -- (164.82,46.6) .. controls (166.3,46.6) and (167.5,47.8) .. (167.5,49.28) -- (167.5,57.32) .. controls (167.5,58.8) and (166.3,60) .. (164.82,60) -- (84.18,60) .. controls (82.7,60) and (81.5,58.8) .. (81.5,57.32) -- cycle ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 242; green, 152; blue, 65 }  ,fill opacity=0.38 ] (167.5,49.28) .. controls (167.5,47.69) and (168.79,46.4) .. (170.38,46.4) -- (250.25,46.4) .. controls (251.84,46.4) and (253.13,47.69) .. (253.13,49.28) -- (253.13,57.92) .. controls (253.13,59.51) and (251.84,60.8) .. (250.25,60.8) -- (170.38,60.8) .. controls (168.79,60.8) and (167.5,59.51) .. (167.5,57.92) -- cycle ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 184; green, 233; blue, 134 }  ,fill opacity=0.38 ] (81.23,78.8) .. controls (81.23,76.84) and (82.82,75.25) .. (84.78,75.25) -- (128.95,75.25) .. controls (130.91,75.25) and (132.5,76.84) .. (132.5,78.8) -- (132.5,89.45) .. controls (132.5,91.41) and (130.91,93) .. (128.95,93) -- (84.78,93) .. controls (82.82,93) and (81.23,91.41) .. (81.23,89.45) -- cycle ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]  [dash pattern={on 1.69pt off 2.76pt}]  (255.19,37.21) -- (255.31,84.39) ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]  [dash pattern={on 1.69pt off 2.76pt}]  (132.49,63.5) -- (132.51,94.1) ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]  [dash pattern={on 1.69pt off 2.76pt}]  (131.95,93) -- (162.37,93.74) ;
+\draw [shift={(166.37,93.83)}, rotate = 181.39] [fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=1 ][line width=0.08]  [draw opacity=0] (13.4,-6.43) -- (0,0) -- (13.4,6.44) -- (8.9,0) -- cycle    ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][fill={rgb, 255:red, 241; green, 20; blue, 20 }  ,fill opacity=1 ]   (81.5,61) -- (252.25,60.8) ;
+\draw [shift={(255.25,60.8)}, rotate = 539.9300000000001] [fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=1 ][line width=0.08]  [draw opacity=0] (10.72,-5.15) -- (0,0) -- (10.72,5.15) -- (7.12,0) -- cycle    ;
+
+\draw (51.67,59.33) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 0 U.T.M.}}};
+\draw (125,53.5) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 50\% Credit}}};
+\draw (210.31,52.6) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 50\% Expense}}};
+\draw (260.67,27.83) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 100 \%}}};
+\draw (106.87,83.48) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 33\% MF}}};
+\end{tikzpicture}
 
 This law was in force since 2006 to 2010 when it was modified by the law 20.316. The mayor changes was the elimination of the obligatory of the donation to the MF to receive the tributary benefit. As there is no longer need to donate to the MF to perceive a economic benefit but, if some percentage of the donation is made to the MF then the donor have a greater economic benefit. And the other change was the possibility from natural people of donate. 
 
 In this law, 20.316, the donors perceive the tributary benefit in one or more of this ways:
 
-1. If the donation is less that 1000 UTM (UTM<!--footnote -->) the benefit is 50\% as tributary credit and 50\% as spending. In the case that the donor is a firm, it must donate at as least two different charitable institutions and the donation for each one has to be less than 700 UTM.
+1. If the donation is less that 1000 UTM^[Monthly Tax Unit ("Unidad Tributaria Mensual" in spanish): Unit defined in Chile that corresponds to an amount of money expressed in pesos and determined by law, which is permanently updated by the Consumer Price Index and is used as a tax measure. SII, Basic Tax Accounting Dictionary] the benefit is 50\% as tributary credit and 50\% as spending. In the case that the donor is a firm, it must donate at as least two different charitable institutions and the donation for each one has to be less than 700 UTM.
+
+\tikzset{every picture/.style={line width=0.75pt}}
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+\draw  [draw opacity=0][fill={rgb, 255:red, 155; green, 155; blue, 155 }  ,fill opacity=0.33 ] (66.61,55.57) .. controls (66.61,54.26) and (67.67,53.2) .. (68.98,53.2) -- (238.74,53.2) .. controls (240.05,53.2) and (241.11,54.26) .. (241.11,55.57) -- (241.11,62.68) .. controls (241.11,63.98) and (240.05,65.04) .. (238.74,65.04) -- (68.98,65.04) .. controls (67.67,65.04) and (66.61,63.98) .. (66.61,62.68) -- cycle ;
+\draw   (238.5,66.84) .. controls (190.77,71.51) and (162.13,76.18) .. (152.58,80.84) .. controls (143.04,76.18) and (114.4,71.51) .. (66.67,66.84) ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 245; green, 166; blue, 35 }  ,fill opacity=0.33 ] (152.92,41.68) .. controls (152.92,40.09) and (154.21,38.8) .. (155.8,38.8) -- (237.74,38.8) .. controls (239.33,38.8) and (240.62,40.09) .. (240.62,41.68) -- (240.62,50.32) .. controls (240.62,51.91) and (239.33,53.2) .. (237.74,53.2) -- (155.8,53.2) .. controls (154.21,53.2) and (152.92,51.91) .. (152.92,50.32) -- cycle ;
+%Straight Lines [id:da16254432206470004] 
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]  [dash pattern={on 1.69pt off 2.76pt}]  (242.5,31.84) -- (242.5,75.84) ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 61; green, 151; blue, 237 }  ,fill opacity=0.38 ] (66.92,42.28) .. controls (66.92,40.8) and (68.12,39.6) .. (69.6,39.6) -- (150.24,39.6) .. controls (151.72,39.6) and (152.92,40.8) .. (152.92,42.28) -- (152.92,50.32) .. controls (152.92,51.8) and (151.72,53) .. (150.24,53) -- (69.6,53) .. controls (68.12,53) and (66.92,51.8) .. (66.92,50.32) -- cycle ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][fill={rgb, 255:red, 241; green, 20; blue, 20 }  ,fill opacity=1 ]   (67.03,53.3) -- (239.5,51.87) ;
+\draw [shift={(242.5,51.84)}, rotate = 539.52] [fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=1 ][line width=0.08]  [draw opacity=0] (10.72,-5.15) -- (0,0) -- (10.72,5.15) -- (7.12,0) -- cycle    ;
+
+\draw (44,16) node   [align=left] {{\fontfamily{ptm}\selectfont Case 1.}};
+\draw (37.33,51) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 0 U.T.M.}}};
+\draw (279.33,49) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 1000 U.T.M.}}};
+\draw (156.33,101) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small Sets of donation to at least 2 differents institutions }}\\{\fontfamily{ptm}\selectfont {\small with each donation below 700 UTM}}};
+\draw (109.92,46.3) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 50\% Credit}}};
+\draw (196.77,44) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 50\% Expense}}};
+\draw (247.33,21) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 100 \%}}};
+\\*
+\end{tikzpicture}
+
 
 2.	To the donations greater or equal to 1000 UTM, if at least 33\% is donated to the MF the benefit is 50\% as credit and 50\% as spending, otherwise the benefit is 35\% credit and the rest can be discounted as spending.
 
+\tikzset{every picture/.style={line width=0.75pt}}
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+\draw  [draw opacity=0][fill={rgb, 255:red, 184; green, 233; blue, 134 }  ,fill opacity=0.33 ] (61.8,68.97) .. controls (61.8,67.33) and (63.13,66) .. (64.77,66) -- (113.53,66) .. controls (115.17,66) and (116.5,67.33) .. (116.5,68.97) -- (116.5,77.88) .. controls (116.5,79.51) and (115.17,80.84) .. (113.53,80.84) -- (64.77,80.84) .. controls (63.13,80.84) and (61.8,79.51) .. (61.8,77.88) -- cycle ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 155; green, 155; blue, 155 }  ,fill opacity=0.33 ] (62.2,55.73) .. controls (62.2,54.31) and (63.35,53.16) .. (64.77,53.16) -- (231.64,53.16) .. controls (233.06,53.16) and (234.21,54.31) .. (234.21,55.73) -- (234.21,63.43) .. controls (234.21,64.85) and (233.06,66) .. (231.64,66) -- (64.77,66) .. controls (63.35,66) and (62.2,64.85) .. (62.2,63.43) -- cycle ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 245; green, 166; blue, 35 }  ,fill opacity=0.33 ] (147.92,41.28) .. controls (147.92,39.61) and (149.27,38.26) .. (150.94,38.26) -- (230.99,38.26) .. controls (232.66,38.26) and (234.01,39.61) .. (234.01,41.28) -- (234.01,50.33) .. controls (234.01,51.99) and (232.66,53.34) .. (230.99,53.34) -- (150.94,53.34) .. controls (149.27,53.34) and (147.92,51.99) .. (147.92,50.33) -- cycle ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]  [dash pattern={on 1.69pt off 2.76pt}]  (235.42,33.26) -- (235.5,72.84) ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]  [dash pattern={on 1.69pt off 2.76pt}]  (116.42,53.39) -- (116.58,84.55) ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]  [dash pattern={on 1.69pt off 2.76pt}]  (115.53,83.84) -- (141.14,84.23) ;
+\draw [shift={(145.14,84.29)}, rotate = 180.87] [fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=1 ][line width=0.08]  [draw opacity=0] (13.4,-6.43) -- (0,0) -- (13.4,6.44) -- (8.9,0) -- cycle    ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 184; green, 233; blue, 134 }  ,fill opacity=0.33 ] (60.8,139.97) .. controls (60.8,138.33) and (62.13,137) .. (63.77,137) -- (112.53,137) .. controls (114.17,137) and (115.5,138.33) .. (115.5,139.97) -- (115.5,148.88) .. controls (115.5,150.51) and (114.17,151.84) .. (112.53,151.84) -- (63.77,151.84) .. controls (62.13,151.84) and (60.8,150.51) .. (60.8,148.88) -- cycle ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 155; green, 155; blue, 155 }  ,fill opacity=0.33 ] (60.46,127.37) .. controls (60.46,125.97) and (61.59,124.84) .. (62.99,124.84) -- (232.23,124.84) .. controls (233.62,124.84) and (234.75,125.97) .. (234.75,127.37) -- (234.75,134.95) .. controls (234.75,136.34) and (233.62,137.47) .. (232.23,137.47) -- (62.99,137.47) .. controls (61.59,137.47) and (60.46,136.34) .. (60.46,134.95) -- cycle ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]  [dash pattern={on 1.69pt off 2.76pt}]  (235.42,108.26) -- (235.58,139.43) ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]  [dash pattern={on 1.69pt off 2.76pt}]  (115.42,124.39) -- (115.58,155.55) ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]  [dash pattern={on 1.69pt off 2.76pt}]  (114.73,157.38) -- (85.33,156.9) ;
+\draw [shift={(81.33,156.83)}, rotate = 360.94] [fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=1 ][line width=0.08]  [draw opacity=0] (13.4,-6.43) -- (0,0) -- (13.4,6.44) -- (8.9,0) -- cycle    ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 61; green, 151; blue, 237 }  ,fill opacity=0.38 ] (61.92,42.28) .. controls (61.92,40.8) and (63.12,39.6) .. (64.6,39.6) -- (145.24,39.6) .. controls (146.72,39.6) and (147.92,40.8) .. (147.92,42.28) -- (147.92,50.32) .. controls (147.92,51.8) and (146.72,53) .. (145.24,53) -- (64.6,53) .. controls (63.12,53) and (61.92,51.8) .. (61.92,50.32) -- cycle ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 61; green, 151; blue, 237 }  ,fill opacity=0.38 ] (61.21,112.62) .. controls (61.21,111.07) and (62.47,109.82) .. (64.02,109.82) -- (127.69,109.82) .. controls (129.24,109.82) and (130.5,111.07) .. (130.5,112.62) -- (130.5,121.04) .. controls (130.5,122.59) and (129.24,123.84) .. (127.69,123.84) -- (64.02,123.84) .. controls (62.47,123.84) and (61.21,122.59) .. (61.21,121.04) -- cycle ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 245; green, 166; blue, 35 }  ,fill opacity=0.33 ] (130.5,112.55) .. controls (130.5,110.85) and (131.88,109.47) .. (133.57,109.47) -- (230.23,109.47) .. controls (231.92,109.47) and (233.3,110.85) .. (233.3,112.55) -- (233.3,121.77) .. controls (233.3,123.47) and (231.92,124.84) .. (230.23,124.84) -- (133.57,124.84) .. controls (131.88,124.84) and (130.5,123.47) .. (130.5,121.77) -- cycle ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][fill={rgb, 255:red, 241; green, 20; blue, 20 }  ,fill opacity=1 ]   (61.03,124.3) -- (232.5,123.85) ;
+\draw [shift={(235.5,123.84)}, rotate = 539.85] [fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=1 ][line width=0.08]  [draw opacity=0] (10.72,-5.15) -- (0,0) -- (10.72,5.15) -- (7.12,0) -- cycle    ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][fill={rgb, 255:red, 241; green, 20; blue, 20 }  ,fill opacity=1 ]   (62.03,53.3) -- (233.5,52.85) ;
+\draw [shift={(236.5,52.84)}, rotate = 539.85] [fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=1 ][line width=0.08]  [draw opacity=0] (10.72,-5.15) -- (0,0) -- (10.72,5.15) -- (7.12,0) -- cycle    ;
+\draw (104.92,47.3) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 50\% Credit}}};
+\draw (190.96,45.8) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 50\% Expense}}};
+\draw (240.33,25) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 100 \%}}};
+\draw (89.22,73) node  [font=\small] [align=left] {{\small {\fontfamily{ptm}\selectfont 33\% MF}}};
+\draw (279.33,123) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small > 1000 U.T.M.}}};
+\draw (96.21,116.52) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 35\% Credit}}};
+\draw (179.26,116.01) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 75\% Expense}}};
+\draw (239.33,102) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 100 \%}}};
+\draw (87.22,144) node  [font=\small] [align=left] {{\small {\fontfamily{ptm}\selectfont 33\% MF}}};
+\draw (277.33,52) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small  > 1000 U.T.M.}}};
+\draw (35.33,53) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 0 U.T.M.}}};
+\draw (33,125) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 0 U.T.M.}}};
+\draw (43,18) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont Case 2.}};
+\end{tikzpicture}
+
 3. If the donor is a firm and already donated 1000 UTM (first option) he can donate others 1000 UTM to projects to treat addictions to drugs and alcohol having a total of 2000 UTM as donation. The benefit and conditions for this extra 1000 UTM is the same as the first point.
+
+\tikzset{every picture/.style={line width=0.75pt}} 
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][fill={rgb, 255:red, 241; green, 20; blue, 20 }  ,fill opacity=1 ]   (79.03,69.3) -- (233.5,68.85) ;
+\draw [shift={(236.5,68.84)}, rotate = 539.8299999999999] [fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=1 ][line width=0.08]  [draw opacity=0] (10.72,-5.15) -- (0,0) -- (10.72,5.15) -- (7.12,0) -- cycle    ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 155; green, 155; blue, 155 }  ,fill opacity=0.33 ] (79,71.57) .. controls (79,70.15) and (80.15,69) .. (81.57,69) -- (230.93,69) .. controls (232.35,69) and (233.5,70.15) .. (233.5,71.57) -- (233.5,79.28) .. controls (233.5,80.69) and (232.35,81.84) .. (230.93,81.84) -- (81.57,81.84) .. controls (80.15,81.84) and (79,80.69) .. (79,79.28) -- cycle ;
+\draw   (232.5,85) .. controls (189.77,88.95) and (164.13,92.9) .. (155.58,96.84) .. controls (147.04,92.9) and (121.4,88.95) .. (78.67,85) ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=0.33 ] (78.88,57.3) .. controls (78.88,55.57) and (80.29,54.17) .. (82.02,54.17) -- (155.36,54.17) .. controls (157.1,54.17) and (158.5,55.57) .. (158.5,57.3) -- (158.5,66.71) .. controls (158.5,68.44) and (157.1,69.84) .. (155.36,69.84) -- (82.02,69.84) .. controls (80.29,69.84) and (78.88,68.44) .. (78.88,66.71) -- cycle ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 245; green, 166; blue, 35 }  ,fill opacity=0.33 ] (157.65,57.3) .. controls (157.65,55.72) and (158.92,54.45) .. (160.5,54.45) -- (230.99,54.45) .. controls (232.57,54.45) and (233.85,55.72) .. (233.85,57.3) -- (233.85,65.86) .. controls (233.85,67.43) and (232.57,68.71) .. (230.99,68.71) -- (160.5,68.71) .. controls (158.92,68.71) and (157.65,67.43) .. (157.65,65.86) -- cycle ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]  [dash pattern={on 1.69pt off 2.76pt}]  (236.42,53.26) -- (236.58,84.43) ;
+\draw (44.33,66) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 1000 U.T.M.}}};
+\draw (280.33,68) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 2000 U.T.M..}}};
+\draw (118.69,62.01) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 50\% Credit}}};
+\draw (195.75,60.58) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 50\% Expense}}};
+\draw (241.33,43) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 100 \%}}};
+\draw (52,30) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont Case 3.}};
+\draw (169.33,113) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small Sets of donation to at least 2 differents institutions }}\\{\fontfamily{ptm}\selectfont {\small (differents from Case 1.) with each donation below 700 UTM}}};
+
+
+\end{tikzpicture}
 
 4. To donations greater that 1000 UTM made by firms to projects to treat addictions to drugs and alcohol and with a donation of at least 25\% to the MF, has a benefit of 50\% of credit and 50\% of spending. If the donation to the MF is less than 25\% then the benefit is just 40\% credit and 60\% spending.
 
-<!--preguntar por figuras -->
+\tikzset{every picture/.style={line width=0.75pt}} 
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+\draw  [draw opacity=0][fill={rgb, 255:red, 184; green, 233; blue, 134 }  ,fill opacity=0.33 ] (53.8,70.37) .. controls (53.8,68.51) and (55.31,67) .. (57.17,67) -- (95.13,67) .. controls (96.99,67) and (98.5,68.51) .. (98.5,70.37) -- (98.5,80.47) .. controls (98.5,82.34) and (96.99,83.84) .. (95.13,83.84) -- (57.17,83.84) .. controls (55.31,83.84) and (53.8,82.34) .. (53.8,80.47) -- cycle ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 155; green, 155; blue, 155 }  ,fill opacity=0.33 ] (54,57.77) .. controls (54,56.24) and (55.24,55) .. (56.77,55) -- (208.73,55) .. controls (210.26,55) and (211.5,56.24) .. (211.5,57.77) -- (211.5,66.08) .. controls (211.5,67.6) and (210.26,68.84) .. (208.73,68.84) -- (56.77,68.84) .. controls (55.24,68.84) and (54,67.6) .. (54,66.08) -- cycle ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 245; green, 166; blue, 35 }  ,fill opacity=0.33 ] (133.08,41.86) .. controls (133.08,40.21) and (134.42,38.86) .. (136.08,38.86) -- (209.33,38.86) .. controls (210.99,38.86) and (212.33,40.21) .. (212.33,41.86) -- (212.33,50.86) .. controls (212.33,52.52) and (210.99,53.86) .. (209.33,53.86) -- (136.08,53.86) .. controls (134.42,53.86) and (133.08,52.52) .. (133.08,50.86) -- cycle ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]  [dash pattern={on 1.69pt off 2.76pt}]  (212.42,36.26) -- (212.5,72.84) ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]  [dash pattern={on 1.69pt off 2.76pt}]  (98.42,54.79) -- (98.58,85.95) ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]  [dash pattern={on 1.69pt off 2.76pt}]  (97.13,84.84) -- (122.74,85.23) ;
+\draw [shift={(126.74,85.29)}, rotate = 180.87] [fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=1 ][line width=0.08]  [draw opacity=0] (13.4,-6.43) -- (0,0) -- (13.4,6.44) -- (8.9,0) -- cycle    ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 155; green, 155; blue, 155 }  ,fill opacity=0.33 ] (60.96,128.37) .. controls (60.96,126.97) and (62.09,125.84) .. (63.48,125.84) -- (207.64,125.84) .. controls (209.03,125.84) and (210.16,126.97) .. (210.16,128.37) -- (210.16,135.95) .. controls (210.16,137.34) and (209.03,138.47) .. (207.64,138.47) -- (63.48,138.47) .. controls (62.09,138.47) and (60.96,137.34) .. (60.96,135.95) -- cycle ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=0.33 ] (59.88,111.44) .. controls (59.88,109.46) and (61.5,107.84) .. (63.48,107.84) -- (118.9,107.84) .. controls (120.89,107.84) and (122.5,109.46) .. (122.5,111.44) -- (122.5,122.24) .. controls (122.5,124.23) and (120.89,125.84) .. (118.9,125.84) -- (63.48,125.84) .. controls (61.5,125.84) and (59.88,124.23) .. (59.88,122.24) -- cycle ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 245; green, 166; blue, 35 }  ,fill opacity=0.33 ] (122.5,112.04) .. controls (122.5,110.28) and (123.93,108.84) .. (125.7,108.84) -- (206.3,108.84) .. controls (208.07,108.84) and (209.5,110.28) .. (209.5,112.04) -- (209.5,121.64) .. controls (209.5,123.41) and (208.07,124.84) .. (206.3,124.84) -- (125.7,124.84) .. controls (123.93,124.84) and (122.5,123.41) .. (122.5,121.64) -- cycle ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]  [dash pattern={on 1.69pt off 2.76pt}]  (208.42,107.26) -- (208.5,143.84) ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]  [dash pattern={on 1.69pt off 2.76pt}]  (105.56,127.22) -- (105.73,158.38) ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]  [dash pattern={on 1.69pt off 2.76pt}]  (105.73,158.38) -- (76.33,157.9) ;
+\draw [shift={(72.33,157.83)}, rotate = 360.94] [fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=1 ][line width=0.08]  [draw opacity=0] (13.4,-6.43) -- (0,0) -- (13.4,6.44) -- (8.9,0) -- cycle    ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=0.33 ] (53.46,41.46) .. controls (53.46,39.73) and (54.87,38.32) .. (56.6,38.32) -- (129.95,38.32) .. controls (131.68,38.32) and (133.08,39.73) .. (133.08,41.46) -- (133.08,50.86) .. controls (133.08,52.6) and (131.68,54) .. (129.95,54) -- (56.6,54) .. controls (54.87,54) and (53.46,52.6) .. (53.46,50.86) -- cycle ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 184; green, 233; blue, 134 }  ,fill opacity=0.33 ] (60.52,141.59) .. controls (60.52,139.72) and (62.03,138.22) .. (63.89,138.22) -- (101.86,138.22) .. controls (103.72,138.22) and (105.22,139.72) .. (105.22,141.59) -- (105.22,151.69) .. controls (105.22,153.55) and (103.72,155.06) .. (101.86,155.06) -- (63.89,155.06) .. controls (62.03,155.06) and (60.52,153.55) .. (60.52,151.69) -- cycle ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][fill={rgb, 255:red, 241; green, 20; blue, 20 }  ,fill opacity=1 ]   (61.03,125.3) -- (205.5,124.85) ;
+\draw [shift={(208.5,124.84)}, rotate = 539.8199999999999] [fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=1 ][line width=0.08]  [draw opacity=0] (10.72,-5.15) -- (0,0) -- (10.72,5.15) -- (7.12,0) -- cycle    ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][fill={rgb, 255:red, 241; green, 20; blue, 20 }  ,fill opacity=1 ]   (54.03,54.3) -- (209.5,53.85) ;
+\draw [shift={(212.5,53.84)}, rotate = 539.8399999999999] [fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=1 ][line width=0.08]  [draw opacity=0] (10.72,-5.15) -- (0,0) -- (10.72,5.15) -- (7.12,0) -- cycle    ;
+\draw (29.33,52) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 0 U.T.M.}}};
+\draw (92.07,45.41) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 50\% Credit}}};
+\draw (172.71,44.36) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 50\% Expense}}};
+\draw (217.33,29) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 100 \%}}};
+\draw (76.15,75.42) node  [font=\small] [align=left] {{\small {\fontfamily{ptm}\selectfont 25\% FM}}};
+\draw (31.5,123) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 0 U.T.M.}}};
+\draw (255.33,123) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small > 1000 U.T.M.}}};
+\draw (91.19,116.84) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 40\% Credit}}};
+\draw (166,116.84) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 60\% Expense}}};
+\draw (211.33,98) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 100 \%}}};
+\draw (47,17) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont Case 4.}};
+\draw (82.87,146.64) node  [font=\small] [align=left] {{\small {\fontfamily{ptm}\selectfont 25\% FM}}};
+\draw (257.33,54) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small > 1000 U.T.M.}}};
+\end{tikzpicture}
 
 Lately, the law 20.316 on 2011 was modified by the law 20.565 changing administrative details related to the procedures to register the donations that were maid, nevertheless the law 20.900 on 2012 again changes the benefits around the amount of 1000 UTM. Again we can identified four main points to resume the economic benefits of the donations:
 
 1. If the donation is less than 1000 UTM then the benefit is 50\% of credit and 50\% of spending.
 
+\tikzset{every picture/.style={line width=0.75pt}} 
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+\draw  [draw opacity=0][fill={rgb, 255:red, 155; green, 155; blue, 155 }  ,fill opacity=0.33 ] (66.4,62.6) .. controls (66.4,61.16) and (67.56,60) .. (69,60) -- (219.3,60) .. controls (220.74,60) and (221.9,61.16) .. (221.9,62.6) -- (221.9,70.4) .. controls (221.9,71.84) and (220.74,73) .. (219.3,73) -- (69,73) .. controls (67.56,73) and (66.4,71.84) .. (66.4,70.4) -- cycle ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 245; green, 166; blue, 35 }  ,fill opacity=0.33 ] (145.08,47.69) .. controls (145.08,46.12) and (146.35,44.86) .. (147.91,44.86) -- (218.37,44.86) .. controls (219.93,44.86) and (221.19,46.12) .. (221.19,47.69) -- (221.19,56.17) .. controls (221.19,57.73) and (219.93,59) .. (218.37,59) -- (147.91,59) .. controls (146.35,59) and (145.08,57.73) .. (145.08,56.17) -- cycle ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]  [dash pattern={on 1.69pt off 2.76pt}]  (219.5,37) -- (220.5,83) ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=0.33 ] (65.46,47.46) .. controls (65.46,45.73) and (66.87,44.32) .. (68.6,44.32) -- (141.95,44.32) .. controls (143.68,44.32) and (145.08,45.73) .. (145.08,47.46) -- (145.08,56.86) .. controls (145.08,58.6) and (143.68,60) .. (141.95,60) -- (68.6,60) .. controls (66.87,60) and (65.46,58.6) .. (65.46,56.86) -- cycle ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][fill={rgb, 255:red, 241; green, 20; blue, 20 }  ,fill opacity=1 ]   (66.03,60.3) -- (217.3,59.03) ;
+\draw [shift={(220.3,59)}, rotate = 539.52] [fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=1 ][line width=0.08]  [draw opacity=0] (10.72,-5.15) -- (0,0) -- (10.72,5.15) -- (7.12,0) -- cycle    ;
+\draw (40.33,58) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 0 U.T.M.}}};
+\draw (257.33,58) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 1000 U.T.M.}}};
+\draw (105.27,52.16) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 50\% Credit}}};
+\draw (183.14,51.93) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 50\% Expense}}};
+\draw (225.33,25) node   [align=left] {{\fontfamily{ptm}\selectfont {\small 100 \%}}};
+\draw (40,24) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont Case 1.}};
+\end{tikzpicture}
+
+
 2.	If the donation is greater than 1000 UTM and of the amount above 1000 UTM at least 33\% of the donation goes to the MF, then the benefit is of 50\% as credit and 50\% spending. If the donation to the MF is less thanof 33\% then the benefit of the part above de 1000 UTM are for 35\% credit and 65\% spending.
+
+\tikzset{every picture/.style={line width=0.75pt}}
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+\draw  [draw opacity=0][fill={rgb, 255:red, 184; green, 233; blue, 134 }  ,fill opacity=0.33 ] (161.63,63.92) .. controls (161.63,62.45) and (162.83,61.26) .. (164.3,61.26) -- (204.25,61.26) .. controls (205.72,61.26) and (206.92,62.45) .. (206.92,63.92) -- (206.92,71.92) .. controls (206.92,73.4) and (205.72,74.59) .. (204.25,74.59) -- (164.3,74.59) .. controls (162.83,74.59) and (161.63,73.4) .. (161.63,71.92) -- cycle ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 155; green, 155; blue, 155 }  ,fill opacity=0.33 ] (7,64.32) .. controls (7,63) and (8.07,61.92) .. (9.4,61.92) -- (158.1,61.92) .. controls (159.43,61.92) and (160.5,63) .. (160.5,64.32) -- (160.5,71.52) .. controls (160.5,72.85) and (159.43,73.92) .. (158.1,73.92) -- (9.4,73.92) .. controls (8.07,73.92) and (7,72.85) .. (7,71.52) -- cycle ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=0.33 ] (6.88,51.19) .. controls (6.88,49.57) and (8.2,48.26) .. (9.82,48.26) -- (80.57,48.26) .. controls (82.19,48.26) and (83.5,49.57) .. (83.5,51.19) -- (83.5,59.99) .. controls (83.5,61.61) and (82.19,62.92) .. (80.57,62.92) -- (9.82,62.92) .. controls (8.2,62.92) and (6.88,61.61) .. (6.88,59.99) -- cycle ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]  [dash pattern={on 1.69pt off 2.76pt}]  (316.38,36.73) -- (315.85,83.91) ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 245; green, 166; blue, 35 }  ,fill opacity=0.33 ] (83.5,51.52) .. controls (83.5,50.09) and (84.66,48.92) .. (86.1,48.92) -- (157.9,48.92) .. controls (159.34,48.92) and (160.5,50.09) .. (160.5,51.52) -- (160.5,59.32) .. controls (160.5,60.76) and (159.34,61.92) .. (157.9,61.92) -- (86.1,61.92) .. controls (84.66,61.92) and (83.5,60.76) .. (83.5,59.32) -- cycle ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]    (162,37.49) -- (162,91.16)(159,37.49) -- (159,91.16) ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]  [dash pattern={on 1.69pt off 2.76pt}]  (206.5,87.92) -- (207.33,61.26) ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=0.33 ] (161.5,49.52) .. controls (161.5,47.9) and (162.81,46.59) .. (164.43,46.59) -- (235.18,46.59) .. controls (236.8,46.59) and (238.12,47.9) .. (238.12,49.52) -- (238.12,58.32) .. controls (238.12,59.94) and (236.8,61.26) .. (235.18,61.26) -- (164.43,61.26) .. controls (162.81,61.26) and (161.5,59.94) .. (161.5,58.32) -- cycle ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 245; green, 166; blue, 35 }  ,fill opacity=0.33 ] (238.12,49.72) .. controls (238.12,48.18) and (239.37,46.92) .. (240.92,46.92) -- (312.32,46.92) .. controls (313.86,46.92) and (315.12,48.18) .. (315.12,49.72) -- (315.12,58.12) .. controls (315.12,59.67) and (313.86,60.92) .. (312.32,60.92) -- (240.92,60.92) .. controls (239.37,60.92) and (238.12,59.67) .. (238.12,58.12) -- cycle ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][fill={rgb, 255:red, 241; green, 20; blue, 20 }  ,fill opacity=1 ]   (7.03,62.22) -- (313.12,60.34) ;
+\draw [shift={(316.12,60.32)}, rotate = 539.65] [fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=1 ][line width=0.08]  [draw opacity=0] (10.72,-5.15) -- (0,0) -- (10.72,5.15) -- (7.12,0) -- cycle    ;
+\draw (32,18.92) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small Case 2.}}};
+\draw (45.19,55.59) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 50\% Credit}}};
+\draw (122,54.42) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 50\% Expense}}};
+\draw (319.33,27.92) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 100 \%}}};
+\draw (184.27,67.92) node  [font=\footnotesize] [align=left] {{\small {\fontfamily{ptm}\selectfont 33\% FM}}};
+\draw (164.33,28.92) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 1000 U.T.M.}}};
+\draw (30.33,84.92) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 0 U.T.M.}}};
+\draw (276.62,53.92) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 50\% Expense}}};
+\draw (199.81,53.92) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 50\% Credit}}};
+\end{tikzpicture}
 
 3.	If the donor makes the first point, he can donate an extra 1000 UTM to projects or programs of prevention or rehabilitation of alcohol or drugs in which case the benefit is 50\% credit and 50\% spending.
 
+\tikzset{every picture/.style={line width=0.75pt}} 
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+\draw  [draw opacity=0][fill={rgb, 255:red, 155; green, 155; blue, 155 }  ,fill opacity=0.33 ] (74.99,47.8) .. controls (74.99,46.25) and (76.24,45) .. (77.79,45) -- (217.39,45) .. controls (218.93,45) and (220.19,46.25) .. (220.19,47.8) -- (220.19,56.2) .. controls (220.19,57.75) and (218.93,59) .. (217.39,59) -- (77.79,59) .. controls (76.24,59) and (74.99,57.75) .. (74.99,56.2) -- cycle ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=0.33 ] (74.7,32.2) .. controls (74.7,30.43) and (76.14,29) .. (77.9,29) -- (137.3,29) .. controls (139.07,29) and (140.5,30.43) .. (140.5,32.2) -- (140.5,41.8) .. controls (140.5,43.57) and (139.07,45) .. (137.3,45) -- (77.9,45) .. controls (76.14,45) and (74.7,43.57) .. (74.7,41.8) -- cycle ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 245; green, 166; blue, 35 }  ,fill opacity=0.33 ] (140.5,32.55) .. controls (140.5,30.83) and (141.89,29.43) .. (143.61,29.43) -- (218.39,29.43) .. controls (220.11,29.43) and (221.5,30.83) .. (221.5,32.55) -- (221.5,41.89) .. controls (221.5,43.61) and (220.11,45) .. (218.39,45) -- (143.61,45) .. controls (141.89,45) and (140.5,43.61) .. (140.5,41.89) -- cycle ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]  [dash pattern={on 1.69pt off 2.76pt}]  (222.5,25) -- (222.58,64.38) ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][fill={rgb, 255:red, 241; green, 20; blue, 20 }  ,fill opacity=1 ]   (75.03,45.3) -- (219.5,45.79) ;
+\draw [shift={(222.5,45.8)}, rotate = 180.19] [fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=1 ][line width=0.08]  [draw opacity=0] (10.72,-5.15) -- (0,0) -- (10.72,5.15) -- (7.12,0) -- cycle    ;
+\draw (42.33,43) node   [align=left] {{\fontfamily{ptm}\selectfont {\small 1000 U.T.M.}}};
+\draw (224.33,71) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 2000 U.T.M.}}};
+\draw (107.6,37) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 50\% Credit}}};
+\draw (181,37.22) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 50\% Expense}}};
+\draw (226.33,19) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 100 \%}}};
+\draw (27,14) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small Case 3.}}};
+\end{tikzpicture}
+
 4.	For the part of the donation above 1000 UTM, when at least 25\% has been donated to de MF the benefit is 50\% credit and 50\% spending, if the donation to the MF is less than 25\%, then the credit for the amount above 1000 UTM is 40\%, the rest spending.
+
+\tikzset{every picture/.style={line width=0.75pt}} 
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+\draw  [draw opacity=0][fill={rgb, 255:red, 184; green, 233; blue, 134 }  ,fill opacity=0.33 ] (167.63,171) .. controls (167.63,169.53) and (168.83,168.33) .. (170.3,168.33) -- (210.25,168.33) .. controls (211.72,168.33) and (212.92,169.53) .. (212.92,171) -- (212.92,179) .. controls (212.92,180.47) and (211.72,181.67) .. (210.25,181.67) -- (170.3,181.67) .. controls (168.83,181.67) and (167.63,180.47) .. (167.63,179) -- cycle ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 155; green, 155; blue, 155 }  ,fill opacity=0.33 ] (13,171.4) .. controls (13,170.07) and (14.07,169) .. (15.4,169) -- (164.1,169) .. controls (165.43,169) and (166.5,170.07) .. (166.5,171.4) -- (166.5,178.6) .. controls (166.5,179.93) and (165.43,181) .. (164.1,181) -- (15.4,181) .. controls (14.07,181) and (13,179.93) .. (13,178.6) -- cycle ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=0.33 ] (12.88,158.27) .. controls (12.88,156.65) and (14.2,155.33) .. (15.82,155.33) -- (86.57,155.33) .. controls (88.19,155.33) and (89.5,156.65) .. (89.5,158.27) -- (89.5,167.07) .. controls (89.5,168.69) and (88.19,170) .. (86.57,170) -- (15.82,170) .. controls (14.2,170) and (12.88,168.69) .. (12.88,167.07) -- cycle ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]  [dash pattern={on 1.69pt off 2.76pt}]  (322.38,143.81) -- (321.85,190.99) ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 245; green, 166; blue, 35 }  ,fill opacity=0.33 ] (89.5,158.6) .. controls (89.5,157.16) and (90.66,156) .. (92.1,156) -- (163.9,156) .. controls (165.34,156) and (166.5,157.16) .. (166.5,158.6) -- (166.5,166.4) .. controls (166.5,167.84) and (165.34,169) .. (163.9,169) -- (92.1,169) .. controls (90.66,169) and (89.5,167.84) .. (89.5,166.4) -- cycle ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]    (168,144.57) -- (168,198.23)(165,144.57) -- (165,198.23) ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]  [dash pattern={on 1.69pt off 2.76pt}]  (212.5,195) -- (188.5,195.86) ;
+\draw [shift={(184.5,196)}, rotate = 357.95] [fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=1 ][line width=0.08]  [draw opacity=0] (13.4,-6.43) -- (0,0) -- (13.4,6.44) -- (8.9,0) -- cycle    ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]  [dash pattern={on 1.69pt off 2.76pt}]  (212.5,195) -- (213.33,168.33) ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=0.33 ] (167.5,156.73) .. controls (167.5,155.04) and (168.87,153.67) .. (170.57,153.67) -- (223.43,153.67) .. controls (225.13,153.67) and (226.5,155.04) .. (226.5,156.73) -- (226.5,165.93) .. controls (226.5,167.63) and (225.13,169) .. (223.43,169) -- (170.57,169) .. controls (168.87,169) and (167.5,167.63) .. (167.5,165.93) -- cycle ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 245; green, 166; blue, 35 }  ,fill opacity=0.33 ] (226.5,156) .. controls (226.5,154.34) and (227.84,153) .. (229.5,153) -- (318.12,153) .. controls (319.77,153) and (321.12,154.34) .. (321.12,156) -- (321.12,165) .. controls (321.12,166.66) and (319.77,168) .. (318.12,168) -- (229.5,168) .. controls (227.84,168) and (226.5,166.66) .. (226.5,165) -- cycle ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 184; green, 233; blue, 134 }  ,fill opacity=0.33 ] (166.63,75.87) .. controls (166.63,74.47) and (167.77,73.33) .. (169.17,73.33) -- (201.97,73.33) .. controls (203.37,73.33) and (204.5,74.47) .. (204.5,75.87) -- (204.5,83.47) .. controls (204.5,84.87) and (203.37,86) .. (201.97,86) -- (169.17,86) .. controls (167.77,86) and (166.63,84.87) .. (166.63,83.47) -- cycle ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 155; green, 155; blue, 155 }  ,fill opacity=0.33 ] (12,76.4) .. controls (12,75.07) and (13.07,74) .. (14.4,74) -- (163.1,74) .. controls (164.43,74) and (165.5,75.07) .. (165.5,76.4) -- (165.5,83.6) .. controls (165.5,84.93) and (164.43,86) .. (163.1,86) -- (14.4,86) .. controls (13.07,86) and (12,84.93) .. (12,83.6) -- cycle ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=0.33 ] (11.88,63.27) .. controls (11.88,61.65) and (13.2,60.33) .. (14.82,60.33) -- (85.57,60.33) .. controls (87.19,60.33) and (88.5,61.65) .. (88.5,63.27) -- (88.5,72.07) .. controls (88.5,73.69) and (87.19,75) .. (85.57,75) -- (14.82,75) .. controls (13.2,75) and (11.88,73.69) .. (11.88,72.07) -- cycle ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]  [dash pattern={on 1.69pt off 2.76pt}]  (321.38,48.81) -- (320.85,95.99) ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 245; green, 166; blue, 35 }  ,fill opacity=0.33 ] (88.5,63.6) .. controls (88.5,62.16) and (89.66,61) .. (91.1,61) -- (162.9,61) .. controls (164.34,61) and (165.5,62.16) .. (165.5,63.6) -- (165.5,71.4) .. controls (165.5,72.84) and (164.34,74) .. (162.9,74) -- (91.1,74) .. controls (89.66,74) and (88.5,72.84) .. (88.5,71.4) -- cycle ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]    (167,49.57) -- (167,103.23)(164,49.57) -- (164,103.23) ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]  [dash pattern={on 1.69pt off 2.76pt}]  (207.5,95) -- (237.5,95) ;
+\draw [shift={(241.5,95)}, rotate = 180] [fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=1 ][line width=0.08]  [draw opacity=0] (13.4,-6.43) -- (0,0) -- (13.4,6.44) -- (8.9,0) -- cycle    ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]  [dash pattern={on 1.69pt off 2.76pt}]  (207.5,95) -- (207.92,72.13) ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=0.33 ] (166.5,61.6) .. controls (166.5,59.98) and (167.81,58.67) .. (169.43,58.67) -- (240.18,58.67) .. controls (241.8,58.67) and (243.12,59.98) .. (243.12,61.6) -- (243.12,70.4) .. controls (243.12,72.02) and (241.8,73.33) .. (240.18,73.33) -- (169.43,73.33) .. controls (167.81,73.33) and (166.5,72.02) .. (166.5,70.4) -- cycle ;
+\draw  [draw opacity=0][fill={rgb, 255:red, 245; green, 166; blue, 35 }  ,fill opacity=0.33 ] (243.12,61) .. controls (243.12,59.34) and (244.46,58) .. (246.12,58) -- (317.12,58) .. controls (318.77,58) and (320.12,59.34) .. (320.12,61) -- (320.12,70) .. controls (320.12,71.66) and (318.77,73) .. (317.12,73) -- (246.12,73) .. controls (244.46,73) and (243.12,71.66) .. (243.12,70) -- cycle ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][fill={rgb, 255:red, 241; green, 20; blue, 20 }  ,fill opacity=1 ]   (13.03,169.3) -- (319.12,167.42) ;
+\draw [shift={(322.12,167.4)}, rotate = 539.65] [fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=1 ][line width=0.08]  [draw opacity=0] (10.72,-5.15) -- (0,0) -- (10.72,5.15) -- (7.12,0) -- cycle    ;
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][fill={rgb, 255:red, 241; green, 20; blue, 20 }  ,fill opacity=1 ]   (12.03,74.3) -- (318.12,72.42) ;
+\draw [shift={(321.12,72.4)}, rotate = 539.65] [fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=1 ][line width=0.08]  [draw opacity=0] (10.72,-5.15) -- (0,0) -- (10.72,5.15) -- (7.12,0) -- cycle    ;
+\draw (27,19) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small Case 4.}}};
+\draw (51.19,162.67) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 50\% Credit}}};
+\draw (128,161.5) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 50\% Expense}}};
+\draw (325.33,135) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 100 \%}}};
+\draw (190.27,175) node  [font=\footnotesize] [align=left] {{\small {\fontfamily{ptm}\selectfont 25\% FM}}};
+\draw (170.33,136) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 1000 U.T.M.}}};
+\draw (32.33,200) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 0 U.T.M.}}};
+\draw (273.81,160.5) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 60\% Expense}}};
+\draw (197,161.33) node  [font=\footnotesize] [align=left] {{\fontfamily{ptm}\selectfont {\small 40\% Credit}}};
+\draw (50.19,67.67) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 50\% Credit}}};
+\draw (127,66.5) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 50\% Expense}}};
+\draw (324.33,40) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 100 \%}}};
+\draw (188.57,79.67) node  [font=\footnotesize] [align=left] {{\small {\fontfamily{ptm}\selectfont 25\% FM}}};
+\draw (36.33,100) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 0 U.T.M.}}};
+\draw (281.62,63.5) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 50\% Expense}}};
+\draw (204.81,66) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 50\% Credit}}};
+\draw (168.33,38) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 1000 U.T.M.}}};
+\end{tikzpicture}
+
 
 Finally, the last modification is on April 14 2016, the second version of the law 20.900 modify articles 8 and 9 related to the limitations of donate to politics groups.
 
-A resume of the period of each law is in Table ~\ref{table: Table 1}
+A resume of the period of each law is in Table ~\ref{tabla: Table 1}
 
 \begin{table}[htbp]
 \begin{center}
@@ -107,7 +387,7 @@ Almunia, Guceri, Lockwood \& Scharf (2020) estimates the effects of tax incentiv
 
 Duquette (2019) finds that the behavior of the giving’s mounts through the time are consistent with the changes in the limit of deductibility of the donor adjusted gross income in the US, specifically this two have a positive and significative relation considering or not parameters by cause, by years or both together.
 
-But, the changes in Chile don’t necessary match exactly with these cases, there is a limit of deduction but his changes through time are minors compared to others. The mayor changes are related to the monetary limit of donation that determinate the income deductibility.
+But, the changes in Chile don’t necessary match exactly with these cases, there is a limit of deduction but his changes through time are minors compared to others and the data available between periods is not enough. The mayor changes are related to the monetary limit of donation that determinate the income deductibility.
 
 Empirical strategy
 ============
@@ -116,7 +396,7 @@ We use a differences in differences approach in a panel structure of the data.
 
 #### Data information 
 
-The data used for this investigation is public from the records of The Ministry of Social Development, at the time that this paper is developed there are records from 2009 to 2018 in pdf format with a total of xx observations.
+The data used for this investigation is public from the records of The Ministry of Social Development, at the time that this paper is developed there are records from 2009 to 2016 in pdf format with a total of 1.549.354 observations.
 
 \begin{table}[]
 \resizebox{\textwidth}{!}{%
@@ -124,7 +404,7 @@ The data used for this investigation is public from the records of The Ministry 
 \hline
 \multicolumn{1}{c}{\textbf{Atributes}} & \multicolumn{1}{c}{\textbf{Description}}                \\ \hline
 Name of the project                    & Name of the project where de donation is made           \\
-Name of the institution or donator     & Institucional name or donator who receive the donation to a specific project     \\
+Name of the institution or donator     & Institutional name or donator who receive the donation to a specific project     \\
 Name of de donor                       & Name of the donor, it can be a natural person or a firm \\
 RUT                                    & Unique Roll Tributary of each donor                     \\
 Donation to the Mixed Fund             & Amount of the total donation made that goes for the mixed fund (in chilean peso) \\
@@ -133,24 +413,21 @@ Total donation                         & Sum of the donation made to the MF and 
 Date                                   & Date of the donation                                    \\ \hline
 \end{tabular}%
 }
+\caption{Attributes of data}
+\label{tabla: Table 2}
 \end{table}
 
-
-Each file contains one observation per donation registering different attributes of each donation, more information in Table XX. Nevertheless for the investigation we use only data from the period between xxx-xxx as we are going to look the effects of the change of the law 20.565 to 20.900, this contain approximate XX valid observations (footnote que es una observación valida, que tiene los datos de fecha y rut de donatario) 
+Each file contains one observation per donation registering different attributes of each donation, more information in Table ~\ref{tabla: Table 2}. Nevertheless for the investigation we use only data from the period between january 2011 and april 2016 as we are going to look the effects of the change of the law 20.565 to 20.900, this contain approximate 1.517.769 valid observations^[We considered that a valid observation contain all information of each attribute, doesn't have unknown values] 
 
 #### Exploratory analysis
 
-As you can see in Figure XX it is plot the donations in time, each vertical line indicates the validity of a law (table XX), we can see that in period xx-xx there is an increase of the donation (number) and a change of the amount of the donation. Beside the changes of law related to the benefit of the donation there are also others changes that affect the records, one is the inclusion of the digital certificate that ease the process of donation for possibles donors, making it more easy to receive the benefits of the donation, this was implemented by some of the greater foundations in the country by 2013-2014. Other important change in the same year was related to the obligatorily of inform to the minister the donations that was made to each institution, by that, the number of donation registered is more larger in 2014 than in years before.
+As you can see in Figure \@ref(fig:graficos_donaciones_1), Figure \@ref(fig:graficos_donaciones_2) and Figure \@ref(fig:graficos_donaciones_3) it is plot the donations in time of total amount of the donation, amount donated to the institution and the amount donated to the Mixed Found, each vertical line indicates the validity of a law (Table ~\ref{tabla: Table 1}), we can see that in period xx-xx there is an increase of the donation (number) and a change of the amount of the donation. 
 
-In Table XX there is a descriptive analysis of the donations in each period
+Beside the changes of law related to the benefit of the donation, there are also others changes that affect the records. One is the inclusion of the digital certificate that ease the process of donation for possibles donors, making it more easy to receive the benefits of the donation, this was implemented by some of the greater foundations in the country by 2013-2014. Other important change in the same year was related to the obligatorily of inform to the minister the donations that was made to each institution, by that, the number of donation registered is more larger in 2014 than in years before.
 
-```{r, echo = FALSE,message=FALSE,warning = FALSE}
-#cargar base de datos 
-load("~/workspace/donationstax/Donaciones_total_graficos.Rdata")
-library(ggplot2)
-library(lubridate)
-library(stringr)
+In Table \@ref(fig:tabla_resumen) there is a descriptive analysis of the donations in each period
 
+```{r graficos_donaciones_1, echo = FALSE,message=FALSE,warning = FALSE, fig.align="center",dev='png',dpi=200}
 #grafico con donaciones y cambio de leyes
 ggplot(Donaciones_total, aes(x = Fecha , y = monto_total_UTM)) +
   # Make points small and semi-transparent since there are lots of them
@@ -164,12 +441,17 @@ ggplot(Donaciones_total, aes(x = Fecha , y = monto_total_UTM)) +
   # Add labels
   labs(x = "Date", y = "Total donation")+
   ylim(0,20000)+
-  annotate("text", x = as.Date("2009-08-11"), y = 19000, label = "Law 19885")+
-  annotate("text", x = as.Date("2010-01-01"), y = 17000, label = "Law 20316")+
-  annotate("text", x = as.Date("2011-01-01"), y = 19000, label = "Law 20565")+
-  annotate("text", x = as.Date("2012-02-08"), y = 17000, label = "Law 20900_1")+
+  xlim(as.Date("2008-01-01"),as.Date("2018-12-31"))+
+  annotate("text", x = as.Date("2008-09-11"), y = 19500, label = "Law 19885")+
+  annotate("text", x = as.Date("2010-01-01"), y = 18000, label = "Law 20316")+
+  annotate("text", x = as.Date("2011-01-01"), y = 20000, label = "Law 20565")+
+  annotate("text", x = as.Date("2012-04-08"), y = 16000, label = "Law 20900_1")+
   annotate("text", x = as.Date("2016-04-14"), y = 19000, label = "Law 20900_2")+
   ggtitle("Donations: Total amount over time")
+
+```
+
+```{r graficos_donaciones_2, echo = FALSE,message=FALSE,warning = FALSE, fig.align="center",dev='png',dpi=200}
 
 ggplot(Donaciones_total, aes(x = Fecha , y = monto_institucion_UTM)) +
   # Make points small and semi-transparent since there are lots of them
@@ -183,14 +465,18 @@ ggplot(Donaciones_total, aes(x = Fecha , y = monto_institucion_UTM)) +
   # Add labels
   labs(x = "Date", y = "Donation to institution")+
   ylim(0,20000)+
-  annotate("text", x = as.Date("2009-08-11"), y = 19000, label = "Law 19885")+
-  annotate("text", x = as.Date("2010-01-01"), y = 17000, label = "Law 20316")+
-  annotate("text", x = as.Date("2011-01-01"), y = 19000, label = "Law 20565")+
-  annotate("text", x = as.Date("2012-02-08"), y = 17000, label = "Law 20900_1")+
+  xlim(as.Date("2008-01-01"),as.Date("2018-12-31"))+
+  annotate("text", x = as.Date("2008-09-11"), y = 19500, label = "Law 19885")+
+  annotate("text", x = as.Date("2010-01-01"), y = 18000, label = "Law 20316")+
+  annotate("text", x = as.Date("2011-01-01"), y = 20000, label = "Law 20565")+
+  annotate("text", x = as.Date("2012-04-08"), y = 16000, label = "Law 20900_1")+
   annotate("text", x = as.Date("2016-04-14"), y = 19000, label = "Law 20900_2")+
   ggtitle("Donations: Institution amount over time")
 
+```
 
+
+```{r graficos_donaciones_3, echo = FALSE,message=FALSE,warning = FALSE, fig.align="center",dev='png',dpi=200}
 ggplot(Donaciones_total, aes(x = Fecha , y = monto_FM_UTM)) +
   # Make points small and semi-transparent since there are lots of them
   geom_point(size = 0.5, alpha = 0.5) + 
@@ -203,25 +489,17 @@ ggplot(Donaciones_total, aes(x = Fecha , y = monto_FM_UTM)) +
   # Add labels
   labs(x = "Date", y = "Donation to Mixed Found")+
   ylim(0,2500)+
-  xlim(as.Date("2008-11-30"),as.Date("2019-01-01"))+
-  annotate("text", x = as.Date("2009-03-11"), y = 2000, label = "Law 19885")+
-  annotate("text", x = as.Date("2010-01-01"), y = 1850, label = "Law 20316")+
-  annotate("text", x = as.Date("2011-01-01"), y = 2000, label = "Law 20565")+
-  annotate("text", x = as.Date("2012-02-08"), y = 1850, label = "Law 20900_1")+
+  xlim(as.Date("2008-01-01"),as.Date("2018-12-31"))+
+  annotate("text", x = as.Date("2008-09-11"), y = 2500, label = "Law 19885")+
+  annotate("text", x = as.Date("2009-11-01"), y = 2000, label = "Law 20316")+
+  annotate("text", x = as.Date("2011-01-01"), y = 2200, label = "Law 20565")+
+  annotate("text", x = as.Date("2012-04-08"), y = 1850, label = "Law 20900_1")+
   annotate("text", x = as.Date("2016-04-14"), y = 2000, label = "Law 20900_2")+
   ggtitle("Donations: Mixed Found amount over time")
 
-
 ```
 
-```{r, echo = FALSE,message=FALSE,warning = FALSE, results='asis'}
-#load()
-
-load("~/workspace/donationstax/Donaciones_total_graficos.Rdata")
-
-library(knitr)
-library(kableExtra)
-library(dplyr)
+```{r tabla_resumen, echo = FALSE,message=FALSE,warning = FALSE, results='asis',fig.align="center"}
 
 Donaciones_total$Ley<-NA
 Donaciones_total$Ley<-ifelse(Donaciones_total$Fecha<"2010-01-01","Law 19885",NA)
@@ -279,28 +557,49 @@ tabla.ley[4,7]<-nrow(table(subset(Donaciones_total,Donaciones_total$Ley=="Law 20
 tabla.ley[5,7]<-nrow(table(subset(Donaciones_total,Donaciones_total$Ley=="Law 20900_2")$DONATARIO))
 
 kable(tabla.ley) %>%
-  kable_styling(bootstrap_options = "striped", position = "center",font_size = 8)
+  kable_styling(latex_options = c("striped", "scale_down"))
+  #kable_styling(bootstrap_options = "striped", position = "center",font_size = 6)
 
 ```
-
-
 
 #### Pannel data regression
 
 We want to study the effect on donations of the change of law of 20.565 to 20.900, the main change is that for the law 20.900 is no longer necessary to donor to at least two different institution an amount minor to 700 UTM (in Section XX number XX) making more easy to receive the economy incentive for donation, in order to that, is it expected that the donations raise (in number) but we don't now for sure what happens with the amount of the donations 
 
-We use a pannel data regression (\ref{eq:1}) in order to study the effect of the change of law on the donations, and follow the next pannel structure
+We use a pannel data regression in order to study the effect of the change of law on the donations, and follow the next pannel structure
 
 $$\  AI_{i,t}=AMF_{i,t}+AAMF_{i,t}+DL_{i,t}+OD_{i,t}+AAD_{i,t}+AADo_{i,t}+CL_{i}+TD_{i}+DC_{i}+\alpha_{i}+\beta_{t} $$
 Where $\ AI_{i,t}$ is the amount of the donation to the institution/foundation of the donor $\ i$ in the year $\ t$, $\ AMF_{i,t}$ is the amount of the donation to the Mixed Found of the donor $\ i$ in the year $\ t$, $\ AAMF_{i,t}$ is the accumulated amount donated to the Mixed Found until that donation (included) of the donor $\ i$ in the year $\ t$, $\ DL_{i,t}$ is a binary variables that take $\ 1$ if the donor $\ i$ in the year $\ t$ has donor more than 1000 UTM, and 0 otherwise, $\ OD_{i,t}$ is and ordinal variable and take the value of the position in the year of the donation of the donor $\ i$ in the year $\ t$, $\ AAD_{i,t}$ is the total accumulated amount (to Mixed Found and to Institutions) of the donor $\ i$ in the year $\ t$ until that donation (included), $\ AADo_{i,t}$ is the accumulated amount of the donee $\ i$ in the year $\ t$ until that donation (included), $\ CL_{i}$ is a binary variable that take value $\ 1$ if the donation is made in the period of validity of the Law 20900, $\ TD_{i}$ is a binary variable that take value $\ 1$ if the donor is a firm and $\ DC_{i}$ is a binary variable that take value $\ 1$ if the donation is made in the period of validity of the digital certification, finally $\ \alpha _{i}$ and $\ \beta _{t}$ control effects by donor and by time
 
+In Table \@ref(fig:chunk-resumen_variables) there is a resume per variable of the main descriptive characteristics
 
-The result are the following 
+```{r resumen_variables, results='asis',echo = FALSE,message=FALSE,warning = FALSE,fig.align="center"}
+datos<-datos.seleccion
+colnames(datos)<-c("Donor ID","Amounto to MF (AMF)","Amount to institution (AI)","Donation Limit (DL)","Law 20900 (CL)",
+                   "Orden Donation (OD)","Accumulated Amount of Donor (AAD)","Accumulated Amount of Donee (AADo)",
+                   "Accumulated Amount to MF (AAMF)","Type Donor (TD)","Digital Certificate (DC)","Year")
 
-<!--tabla con los resultados de panel -->
+descr(datos)
+```
+
+The result of the pannel regression are the following 
+
+```{r resultados_modelo, echo = FALSE,message=FALSE,warning = FALSE,fig.align="center", eval=FALSE}
+model <- readRDS("~/workspace/donationstax/iteraciones/model.RDS")
+library(sjPlot)
+library(sjmisc)
+library(sjlabelled)
+tab_model(model)
+
+#https://tex.stackexchange.com/questions/62492/what-is-the-correct-way-to-center-a-tikzpicture
+#https://cran.r-project.org/web/packages/sjPlot/vignettes/tab_model_estimates.html
+
+#print(summary(model))
+```
+
+
 
 As we can see...
-
 
 References {#references .unnumbered}
 ==========
