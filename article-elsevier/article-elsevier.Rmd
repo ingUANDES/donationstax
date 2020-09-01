@@ -1,5 +1,5 @@
 ---
-title: More flexibility reduces social donations
+title: Flexibility reduces social donations
 author:
   - name: Sebastián Cea-Echenique
     email: sebastian.cea@pucv.cl
@@ -72,8 +72,8 @@ library(kableExtra)
 library(summarytools)
 library(panelr)
 
-load("~/workspace/donationstax/Donaciones_total_graficos.Rdata")
-load("~/workspace/donationstax/iteraciones/Datos_seleccion_modelo.Rdata")
+load("~/workspace/donationstax/data_local/Donaciones_total_graficos.Rdata")
+load("~/workspace/donationstax/data_local/Datos_seleccion_modelo.Rdata")
 knitr::opts_chunk$set(fig.width=5, fig.height=5) 
 
 
@@ -86,8 +86,10 @@ Introduction
 
 In Chile donations with social purposes are ruled by the Law 19.885, that establishes a framework to foster social donations, this law has had three major change since his publication in 2003 on the years 2009, 2011 y 2012. These changes are mainly related with how the donors can access to the tax benefits. The benefits are deductions of income by two ways, the first one a discount as tax credit and the second discounted as an expense necessary to make the donation.
 
-The law 19.885 (Fig (\ref{fig:law 19885})) concerning social donations in Chile in his first version on 2003, establishes a tributary benefit of 50\% of the donation as credit discount and the other 50\% consider as spending to make the donation. To receive this benefit the donor must donate a minimum of the 33\% of the donation to the Mixed Fund (MF^[It is a Fund created by the Law on Donations with Social Purposes to support initiatives that civil society organizations present and that directly benefit people in poverty and / or people with disabilities. The Fund's resources come from donations from companies and individuals. Fund resources must be distributed through public tenders. Ministry of social development and family]). In this version of the law the limit of the donation was 4.5\% of the taxable liquid income and benefit was equally independent of the amount of the donation.
+The law 19.885 (Fig (\ref{fig:law19885})) concerning social donations in Chile in his first version on 2003, establishes a tax benefit equivalent to 50\% of the donation amount as tax credit and the other 50\% consider as spending to make the donation. To receive this benefit the donor must donate a minimum of the 33\% of the donation to the Mixed Fund (MF^[It is a Fund created by the Law on Donations with Social Purposes to support initiatives that civil society organizations present and that directly benefit people in poverty and / or people with disabilities. The Fund's resources come from donations from companies and individuals. Fund resources must be distributed through public tenders. Ministry of social development and family]). In this version of the law the limit of the donation was 4.5\% of the taxable liquid income and benefit was equally independent of the amount of the donation.
 
+\begin{figure}[h]
+\label{fig:law19885}
 \tikzset{every picture/.style={line width=0.75pt}} 
 \begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
 \centering
@@ -109,6 +111,8 @@ The law 19.885 (Fig (\ref{fig:law 19885})) concerning social donations in Chile 
 \draw (260.67,27.83) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 100 \%}}};
 \draw (106.87,83.48) node  [font=\small] [align=left] {{\fontfamily{ptm}\selectfont {\small 33\% MF}}};
 \end{tikzpicture}
+\caption{19.885 law}
+\end{figure}
 
 This law was in force since 2006 to 2010 when it was modified by the law 20.316. The mayor changes was the elimination of the obligatory of the donation to the MF to receive the tributary benefit. As there is no longer need to donate to the MF to perceive a economic benefit but, if some percentage of the donation is made to the MF then the donor have a greater economic benefit. And the other change was the possibility from natural people of donate. 
 
