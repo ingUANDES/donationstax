@@ -431,7 +431,7 @@ Beside the changes of law related to the benefit of the donation, there are also
 
 In Table \@ref(fig:tabla_resumen) there is a descriptive analysis of the donations in each period
 
-```{r graficos_donaciones_1, echo = FALSE,message=FALSE,warning = FALSE, fig.align="center", out.width="40%"}
+```{r graficos_donaciones_1, echo = FALSE,message=FALSE,warning = FALSE, fig.align="center", dev='png',dpi=200, out.width="70%"}
 #grafico con donaciones y cambio de leyes
 ggplot(Donaciones_total, aes(x = Fecha , y = monto_total_UTM)) +
   # Make points small and semi-transparent since there are lots of them
@@ -455,7 +455,7 @@ ggplot(Donaciones_total, aes(x = Fecha , y = monto_total_UTM)) +
 
 ```
 
-```{r graficos_donaciones_2, echo = FALSE,message=FALSE,warning = FALSE, fig.align="center", out.width="40%"}
+```{r graficos_donaciones_2, echo=FALSE, fig.align="center", message=FALSE, warning=FALSE, dev='png', dpi=200, out.width="70%"}
 
 ggplot(Donaciones_total, aes(x = Fecha , y = monto_institucion_UTM)) +
   # Make points small and semi-transparent since there are lots of them
@@ -480,7 +480,7 @@ ggplot(Donaciones_total, aes(x = Fecha , y = monto_institucion_UTM)) +
 ```
 
 
-```{r graficos_donaciones_3, echo=FALSE, fig.align="center", message=FALSE, warning=FALSE, out.width="20%"}
+```{r graficos_donaciones_3, echo=FALSE, fig.align="center", message=FALSE, warning=FALSE, dev='png', dpi=200, out.width="70%"}
 ggplot(Donaciones_total, aes(x = Fecha , y = monto_FM_UTM)) +
   # Make points small and semi-transparent since there are lots of them
   geom_point(size = 0.5, alpha = 0.5) + 
