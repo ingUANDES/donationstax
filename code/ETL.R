@@ -30,8 +30,8 @@ d2020 = read_excel("data_local/d2020.xlsx",
                    # Sheet name
                    sheet = "Donaciones 2020", col_types = c("numeric", 
                                                             "date", "text", "text", "text", "text", 
-                                                            "text", "text", "text", "text", "text", 
-                                                            "text", "text"), skip = 1)
+                                                            "text", "text", "text", "numeric", "numeric", 
+                                                            "numeric", "text"), skip = 1)
 # In order to avoid downloading each time it is possible to save a backup as follows
 # save(d2020,file="data_local/d2020.RData")
 # load("data_local/d2020.RData")
@@ -54,3 +54,12 @@ linker <- build_linker(d2020, variable_description = var_desc, variable_type = v
 ##                   prompt_varopts = FALSE)
 ## Error in FUN(X[[i]], ...) : 
 ## only defined on a data frame with all numeric variables
+
+# Standarization of variables
+## Institution names
+### 2020: Looks good!
+institutionName<-unique(d2020 %>% select(institutionName))
+## Project names
+projectName<-unique(d2020 %>% select(projectName,institutionName))
+names(projectName)<-c("nameOLD","institution")
+projectName$name<-NA

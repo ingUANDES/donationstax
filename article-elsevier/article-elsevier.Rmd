@@ -566,11 +566,11 @@ kable(tabla.ley) %>%
 
 ```
 
-#### Pannel data regression
+#### Panel data regression
 
-We want to study the effect on donations of the change of law of 20.565 to 20.900, the main change is that for the law 20.900 is no longer necessary to donor to at least two different institution an amount minor to 700 UTM (in Section XX number XX) making more easy to receive the economy incentive for donation, in order to that, is it expected that the donations raise (in number) but we don't now for sure what happens with the amount of the donations 
+We want to study the effect on donations of the change of law of 20.565 to 20.900, the main change is that for the law 20.900 is no longer necessary to donor to at least two different institution an amount minor to 700 UTM (in Section XX number XX) making more easy to receive the economy incentive for donation, in order to that, is it expected that the donations raise (in number) but we don't now for sure what happens with the amount of the donation. 
 
-We use a pannel data regression in order to study the effect of the change of law on the donations, and follow the next pannel structure
+We use a panel data regression in order to study the effect of the change of law on the donations, and follow the next pannel structure:
 
 $$\  AI_{i,t}=AMF_{i,t}+AAMF_{i,t}+DL_{i,t}+OD_{i,t}+AAD_{i,t}+AADo_{i,t}+CL_{i}+TD_{i}+DC_{i}+\alpha_{i}+\beta_{t} $$
 Where $\ AI_{i,t}$ is the amount of the donation to the institution/foundation of the donor $\ i$ in the year $\ t$, $\ AMF_{i,t}$ is the amount of the donation to the Mixed Found of the donor $\ i$ in the year $\ t$, $\ AAMF_{i,t}$ is the accumulated amount donated to the Mixed Found until that donation (included) of the donor $\ i$ in the year $\ t$, $\ DL_{i,t}$ is a binary variables that take $\ 1$ if the donor $\ i$ in the year $\ t$ has donor more than 1000 UTM, and 0 otherwise, $\ OD_{i,t}$ is and ordinal variable and take the value of the position in the year of the donation of the donor $\ i$ in the year $\ t$, $\ AAD_{i,t}$ is the total accumulated amount (to Mixed Found and to Institutions) of the donor $\ i$ in the year $\ t$ until that donation (included), $\ AADo_{i,t}$ is the accumulated amount of the donee $\ i$ in the year $\ t$ until that donation (included), $\ CL_{i}$ is a binary variable that take value $\ 1$ if the donation is made in the period of validity of the Law 20900, $\ TD_{i}$ is a binary variable that take value $\ 1$ if the donor is a firm and $\ DC_{i}$ is a binary variable that take value $\ 1$ if the donation is made in the period of validity of the digital certification, finally $\ \alpha _{i}$ and $\ \beta _{t}$ control effects by donor and by time
