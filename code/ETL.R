@@ -7,6 +7,13 @@ library(httr)
 # library(devtools)
 # install_github("dmrodz/dataMeta")
 library(dataMeta)
+# Project data already consolidated
+library(readr)
+# Origen
+## datasocial.ministeriodesarrollosocial.gob.cl/donaciones/proyectos/3
+projectsInfo <- read_delim("data_local/Donaciones_23112021161303.csv", 
+                                        delim = ";", escape_double = FALSE, trim_ws = TRUE, 
+                                        skip = 5)
 # XLS files path
 urls <- c("http://sociedadcivil.ministeriodesarrollosocial.gob.cl/wp-content/uploads/2021/03/Donaciones_2010.xlsx",
           "http://sociedadcivil.ministeriodesarrollosocial.gob.cl/wp-content/uploads/2021/03/Donaciones_2011.xlsx",
