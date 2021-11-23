@@ -19,7 +19,7 @@ urls <- c("http://sociedadcivil.ministeriodesarrollosocial.gob.cl/wp-content/upl
           "http://sociedadcivil.ministeriodesarrollosocial.gob.cl/wp-content/uploads/2021/03/Donaciones_2018.xlsx",
           "http://sociedadcivil.ministeriodesarrollosocial.gob.cl/wp-content/uploads/2021/03/Donaciones_2019.xlsx",
           "http://sociedadcivil.ministeriodesarrollosocial.gob.cl/wp-content/uploads/2021/09/Donaciones_2020.xlsx")
-for (year in 2010:2019) {
+for (year in 2010:2020) {
   # Temporary option
   # GET(url1, write_disk(tf <- tempfile(fileext = ".xlsx")))
   GET(urls[year-2009], write_disk(paste("data_local/d",year,".xlsx",sep="")))
