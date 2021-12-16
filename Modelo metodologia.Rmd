@@ -1,9 +1,9 @@
 ---
 title: "R Notebook"
-output : html_notebook
+output : html_notebook 
 ---
 
-Libreria
+Libreria 
 ```{r}
 library(tidyverse)
 library(readxl)
@@ -16,6 +16,7 @@ library(readr)
 library(lubridate)
 ```
 
+Data 
 
 ```{r}
 
@@ -41,7 +42,7 @@ names(df20) <- c("Institution", "Project", "Donation")
 var_type20 <- c(0,0,0)
 # Build Data Dictionary
 linker20 <- build_linker(df20, variable_description = var_df20, variable_type = var_type20)
-
+### HAcemos eso para definir los variable si persona tienne pregunta.
 
 
 var_Social <- names(dfSocial)
@@ -120,4 +121,29 @@ df_merge <- merge( dfSocial_U, df20_U, by=c("Project_U", "Institution_U"), all.x
 
 ```
 
-Que hacer con el dictionario
+```{r}
+dfSocial_UBis <- dfSocial
+df20_UBis <- df20
+
+```
+
+Merging los dos base de datos : Ni NA : Hacer al mano
+```{r}
+df_mergeBis <- merge( dfSocial_UBis, df20_UBis, by=c("Project_U", "Institution_U"), all.x = T, all.y = T)
+
+```
+vigilar los errores, especialmente cuando hay NA, cambiar sur las bases antes del merg
+Ex institution CC : CC(Pichilemu, O'Higgins)
+```{r}
+
+dfSocial_UBis$Project_U[dfSocial_UBis$Project_U=="PROJECT2REGION"]<-"PROJECT2"
+dfSocial_UBis$Project_U[dfSocial_UBis$Project_U=="PROJECTCUATRO"]<-"PROJECT4"
+
+df20_UBis$Institution_U[df20_UBis$Institution_U=="CC(PICHILEMU,O'HIGGINS)"]<-"CC"
+
+df_mergeBis <- merge( dfSocial_UBis, df20_UBis, by=c("Project_U", "Institution_U"), all.x = T, all.y = T)
+
+
+
+```
+Falta ano
