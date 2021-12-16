@@ -1,0 +1,123 @@
+---
+title: "R Notebook"
+output : html_notebook
+---
+
+Libreria
+```{r}
+library(tidyverse)
+library(readxl)
+library(httr)
+# Required to install dataMeta latest version
+# library(devtools)
+# install_github("dmrodz/dataMeta")
+library(dataMeta)
+library(readr)
+library(lubridate)
+```
+
+
+```{r}
+
+df20 <- data.frame(institución20=c("AA", "aA", "Bb", " BB20", "CC(Pichilemu, O'Higgins)"),
+                 proyecto=c('Project 1', 'ProjEct 2', "Project3", "projectoo 3", "pRoject4"),
+                 donación=c(4, 7, 7, 8, 12))
+
+dfSocial <- data.frame(InstitutionSocial=c("aa", "aa.", "bb", "cc "),
+                 projectSocial=c("project1", "project2 region", "project3", "projectcuatro"),
+                 donationSocial=c(4, 7, 15, 12))
+
+```
+Rename english + dictionario para merging U & original despues
+
+```{r}
+var_df20 <- names(df20)
+
+
+names(df20) <- c("Institution", "Project", "Donation")
+
+
+# Mark variables to describe their levels in detail
+var_type20 <- c(0,0,0)
+# Build Data Dictionary
+linker20 <- build_linker(df20, variable_description = var_df20, variable_type = var_type20)
+
+
+
+var_Social <- names(dfSocial)
+
+names(dfSocial) <- c("Institution", "Project", "Donation")
+
+# Mark variables to describe their levels in detail
+var_typeSocial<- c(0,0,0)
+# Build Data Dictionary
+linkerSocial <- build_linker(dfSocial, variable_description = var_Social, variable_type = var_typeSocial)
+
+```
+
+Clean Data
+_U = Unique 
+
+```{r}
+
+df20$Institution_U <- toupper(df20$Institution)
+df20$Project_U <- toupper(df20$Project)
+df20[] <- lapply(df20, gsub, pattern = " ", replacement = "", fixed = TRUE) # no podemos hacer eso en verdad
+
+levels(as.factor(df20$Institution_U)) # DosBB -> Hacer al mano
+df20$Institution_U[df20$Institution_U=="BB20"]<-"BB"
+
+
+levels(as.factor(df20$Project_U)) # hay dos proyectos 4 necesito de hacer al mano
+df20$Project_U[df20$Project_U=="PROJECTOO3"]<-"PROJECT3"
+
+
+
+
+
+dfSocial$Institution_U <- toupper(dfSocial$Institution)
+dfSocial$Project_U <- toupper(dfSocial$Project)
+dfSocial[] <- lapply(dfSocial, gsub, pattern = " ", replacement = "", fixed = TRUE)
+
+levels(as.factor(dfSocial$Institution_U)) # DosBB -> Hacer al mano
+dfSocial$Institution_U[dfSocial$Institution_U=="AA."]<-"AA"
+
+### preguntar formula
+
+levels(as.factor(dfSocial$Project_U)) # hay dos proyectos 4 necesito de hacer al mano
+dfSocial$Project_U[dfSocial$Project_U=="projetcuatro"]<-"Project 4"
+
+
+
+```
+Quieremos solo un unico proyecto en el ejemplo no cambia nada
+```{r}
+dfSocial_U <- unique(dfSocial %>% select(Institution_U, Project_U, Donation))
+df20_U <- unique(df20 %>% select(Institution_U, Project_U, Donation))
+
+```
+
+Merging los dos base de datos : Ni NA : Hacer al mano
+```{r}
+df_merge <- merge( dfSocial_U, df20_U, by=c("Project_U", "Institution_U"), all.x = T, all.y = T)
+
+```
+vigilar los errores, especialmente cuando hay NA, cambiar sur las bases antes del merg
+Ex institution CC : CC(Pichilemu, O'Higgins)
+```{r}
+
+dfSocial_U$Project_U[dfSocial_U$Project_U=="PROJECT2REGION"]<-"PROJECT2"
+dfSocial_U$Project_U[dfSocial_U$Project_U=="PROJECTCUATRO"]<-"PROJECT4"
+
+df20_U$Institution_U[df20_U$Institution_U=="CC(PICHILEMU,O'HIGGINS)"]<-"CC"
+
+
+
+
+# nuevo merg
+df_merge <- merge( dfSocial_U, df20_U, by=c("Project_U", "Institution_U"), all.x = T, all.y = T)
+
+
+```
+
+Que hacer con el dictionario
