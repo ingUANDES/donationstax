@@ -21,13 +21,26 @@ d_2010_2014 <- map_df(
 
 d_2010_2014 <- d_2010_2014 %>%
   mutate(
-    fecha = case_when(
+    fecha2 = case_when(
       nchar(fecha) == 5 ~ as.character(as.Date(as.numeric(fecha), origin = "1900-12-30")),
       nchar(fecha) == 10 ~ paste(str_sub(fecha, 7, 10), str_sub(fecha, 4, 5), str_sub(fecha, 1, 2), sep = "-")
     )
   )
 
 d_2010_2014 <- d_2010_2014 %>%
-  mutate(fecha = as_date(fecha))
+  mutate(
+    fecha2 = ifelse(fecha == "31-11-2011", "2011-11-30", fecha2),
+    fecha2 = ifelse(fecha == "31/09/2011", "2011-09-30", fecha2),
+    fecha2 = ifelse(fecha == "31/11/2011", "2011-11-30", fecha2),
+    fecha2 = ifelse(fecha == "Nov. 2012", "2012-11-30", fecha2),
+    fecha2 = ifelse(fecha == "Dic. 2012", "2012-12-31", fecha2),
+    fecha2 = ifelse(fecha == "2301-2013", "2013-01-23", fecha2)
+  )
 
-use_data(d_2010_2014)
+d_2010_2014 <- d_2010_2014 %>%
+  mutate(fecha2 = as_date(fecha2))
+
+d_2010_2014 %>%
+  filter(is.na(fecha2))
+
+use_data(d_2010_2014, overwrite = T)
