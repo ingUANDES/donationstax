@@ -5,6 +5,8 @@ library(readxl)
 
 # Origen
 ## datasocial.ministeriodesarrollosocial.gob.cl/donaciones/proyectos/3
+
+# TODO: PARA EL DICCIONARIO, MATCH NO PERFECTO
 projectsInfo <- read_delim("data_local/Donaciones_26112021105453.csv",
   delim = ";", escape_double = FALSE,
   col_types = cols(`FECHA APROBACIÓN` = col_date(format = "%d/%m/%Y")),
@@ -85,6 +87,9 @@ linker <- build_linker(d2020, variable_description = var_desc, variable_type = v
 # Standarization of variables
 ## Institution names
 ### 2020: Looks good!
+
+# REVISAR ESTO: DICCIONARIO INSTITUCION-PROYECTO
+
 institutionName <- d2020 %>%
   select(institutionName) %>%
   distinct()
@@ -92,7 +97,7 @@ institutionName <- d2020 %>%
 ## Project names
 projectName <- d2020 %>%
   select(projectName, institutionName) %>%
-  distinct()
+  distinct() # TODO: DICCIONARIO
 
 names(projectName) <- c("nameOLD", "institution")
 

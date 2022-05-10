@@ -2,6 +2,11 @@
 
 #### Montos en UTM ####
 #cargar BD
+
+# TODO: CARGAR INPUTS EN GOOGLE DRIVE
+
+# TODO: CRUCE CON SINIM GEOREFERENCIADO
+
 ScriptsPath_ETL.consolidacion<-paste("/home/",usuario,"/workspace/SxC_ETL/Donaciones/DonacionesFM/Consolidacion/",sep="")
 load(paste(ScriptsPath_ETL.consolidacion,"Donaciones_total_compilado_070820.Rdata",sep=""))
 
@@ -10,6 +15,9 @@ Donaciones_total<-df2
 Donaciones_total<-Donaciones_total[!is.na(Donaciones_total$RUT),] #1.540.636
 
 library(readxl)
+
+# TODO: TRABAJAR TODO EN UTM
+
 valorUTM <- read_excel("~/workspace/donationstax/valorUTM.xlsx")
 colnames(valorUTM)<-c("Año","Mes","UTM")
 
@@ -125,6 +133,9 @@ for(j in  1:nrow(datos.modelo)){ #
   datos.modelo[j,15]<-ifelse(datos.modelo[j,3]>=fecha_cert.digital,1,0) #si la fecha de la donación 
   #es dentro del periodo de vigencia del cert digital entonces 1
 }
+
+
+# TODO: ESTO USABA TABULA, EL XLSS GENERA LO MISMO
 
 #unir distintas BD generadas 
 #5 BD generadas en MacBook Claudia
