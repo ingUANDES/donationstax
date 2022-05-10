@@ -1,0 +1,17 @@
+Package: donationstaxrpkg
+Title: Datos de Donaciones
+Version: 0.0.0.9000
+Authors@R: 
+    person("Mauricio", "Vargas", role = c("aut", "cre"), email = "mavargas11@uc.cl",
+           comment = c(ORCID = "0000-0003-1017-7574"))
+Description: What the package does (one paragraph).
+License: CC0
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+Depends: 
+    R (>= 2.10)
+LazyData: true
