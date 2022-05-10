@@ -2,6 +2,7 @@
 try(dir.create("data_local"))
 library(tidyverse)
 library(readxl)
+library(dataMeta)
 
 # Origen
 ## datasocial.ministeriodesarrollosocial.gob.cl/donaciones/proyectos/3
@@ -79,8 +80,8 @@ var_type <- c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1)
 linker <- build_linker(d2020, variable_description = var_desc, variable_type = var_type)
 
 ## The following does not work
-## dict <- build_dict(d2020, linker = linker, option_description = NULL,
-##                   prompt_varopts = FALSE)
+# dict <- build_dict(d2020, linker = linker, option_description = NULL,
+#                   prompt_varopts = FALSE)
 ## Error in FUN(X[[i]], ...) :
 ## only defined on a data frame with all numeric variables
 
