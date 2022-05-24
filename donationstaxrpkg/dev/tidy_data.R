@@ -9,7 +9,7 @@ library(janitor)
 finp <- sprintf("~/github/donationstax/data_local/d%s.xlsx", 2010:2020)
 
 d_2010_2014 <- map_df(
-  finp[1:4],
+  finp[1:5],
   function(x) {
     message(x)
     read_excel(x,
@@ -35,6 +35,19 @@ d_2010_2014 <- d_2010_2014 %>%
     fecha2 = ifelse(fecha == "Nov. 2012", "2012-11-30", fecha2),
     fecha2 = ifelse(fecha == "Dic. 2012", "2012-12-31", fecha2),
     fecha2 = ifelse(fecha == "2301-2013", "2013-01-23", fecha2)
+  )
+
+d_2010_2014 <- d_2010_2014 %>%
+  mutate(
+    fecha2 = case_when(
+      ano == 2014 & nchar(fecha) == 10 ~ paste(str_sub(fecha, 1, 4), str_sub(fecha, 6, 7), str_sub(fecha, 9, 10), sep = "-"),
+      TRUE ~ fecha2
+    )
+  )
+
+d_2010_2014 <- d_2010_2014 %>%
+  mutate(
+    fecha2 = ifelse(fecha == "1109-2014", "2014-11-09", fecha2)
   )
 
 d_2010_2014 <- d_2010_2014 %>%
