@@ -18,6 +18,7 @@ d15 <- read_excel("~/github/donationstax/data_local/d2015.xlsx",
                          "numeric", "numeric")) %>%
   clean_names() %>%
   select(donante, rut_donante = rut) %>%
+  mutate_if(is.character, function(x) str_replace_all(x, "\\s+", " ")) %>%
   mutate(rut_donante = str_remove_all(rut_donante, "\\.|-")) %>%
   mutate(
     rut2_donante = rut10_rutnum(rut_rut10(rut_donante)),
@@ -37,6 +38,7 @@ d16 <- read_excel("~/github/donationstax/data_local/d2016.xlsx",
                                 "numeric", "numeric")) %>%
   clean_names() %>%
   select(donante, rut_donante = rut) %>%
+  mutate_if(is.character, function(x) str_replace_all(x, "\\s+", " ")) %>%
   mutate(rut_donante = str_remove_all(rut_donante, "\\.|-")) %>%
   mutate(
     rut2_donante = rut10_rutnum(rut_rut10(rut_donante)),
@@ -57,6 +59,7 @@ d17 <- read_excel("~/github/donationstax/data_local/d2017.xlsx",
                                 "numeric")) %>%
   clean_names() %>%
   select(donante, rut_donante = rut) %>%
+  mutate_if(is.character, function(x) str_replace_all(x, "\\s+", " ")) %>%
   mutate(rut_donante = str_remove_all(rut_donante, "\\.|-")) %>%
   mutate(
     rut2_donante = rut10_rutnum(rut_rut10(rut_donante)),
@@ -76,6 +79,7 @@ d20 <- read_excel("~/github/donationstax/data_local/d2020.xlsx",
                                 "text", "text", "text", "text", "text")) %>%
   clean_names() %>%
   select(donante, rut_donante = rut) %>%
+  mutate_if(is.character, function(x) str_replace_all(x, "\\s+", " ")) %>%
   mutate(rut_donante = str_remove_all(rut_donante, "\\.|-")) %>%
   mutate(
     rut2_donante = rut10_rutnum(rut_rut10(rut_donante)),
@@ -102,6 +106,17 @@ rm(d15,d16,d17,d20)
 
 # https://www.sii.cl/sobre_el_sii/nominapersonasjuridicas.html
 
+url <- "https://www.sii.cl//estadisticas/nominas/PUB_EMPRESAS_PJ_2010a2014.zip"
+zip <- "dev/PUB_EMPRESAS_PJ_2010a2014.zip"
+
+if (!file.exists(zip)) {
+  try(download.file(url, zip, method = "wget"))
+}
+
+if (!file.exists("dev/PUB_EMPRESAS_PJ_2010a2014.txt")) {
+  unzip(zip, exdir = "dev")
+}
+
 url <- "https://www.sii.cl//estadisticas/nominas/PUB_EMPRESAS_PJ_2015a2019.zip"
 zip <- "dev/PUB_EMPRESAS_PJ_2015a2019.zip"
 
@@ -124,19 +139,34 @@ if (!file.exists("dev/PUB_EMPRESAS_PJ_2020.txt")) {
   unzip(zip, exdir = "dev")
 }
 
-sii <- data.table::fread("dev/PUB_EMPRESAS_PJ_2015a2019.txt", sep = "\t") %>%
+sii <- data.table::fread("dev/PUB_EMPRESAS_PJ_2010a2014.txt", sep = "\t") %>%
   clean_names() %>%
   as_tibble() %>%
   select(rut, dv, razon_social = raz_n_social) %>%
+  mutate_if(is.character, function(x) str_replace_all(x, "\\s+", " ")) %>%
   distinct(rut, .keep_all = T) %>%
+  bind_rows(
+    data.table::fread("dev/PUB_EMPRESAS_PJ_2015a2019.txt", sep = "\t") %>%
+      clean_names() %>%
+      as_tibble() %>%
+      select(rut, dv, razon_social = raz_n_social) %>%
+      mutate_if(is.character, function(x) str_replace_all(x, "\\s+", " ")) %>%
+      distinct(rut, .keep_all = T)
+  ) %>%
   bind_rows(
     data.table::fread("dev/PUB_EMPRESAS_PJ_2020.txt", sep = "\t") %>%
       clean_names() %>%
       as_tibble() %>%
       select(rut, dv, razon_social = raz_n_social) %>%
+      mutate_if(is.character, function(x) str_replace_all(x, "\\s+", " ")) %>%
       distinct(rut, .keep_all = T)
   ) %>%
-  distinct(rut, .keep_all = T)
+  distinct(rut, .keep_all = T) %>%
+  mutate(
+    razon_social = str_to_upper(str_trim(
+      ifelse(razon_social == "", NA, razon_social)))
+  ) %>%
+  drop_na()
 
 # ruts ok, dv esta bien
 # sii %>%
