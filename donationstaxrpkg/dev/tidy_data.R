@@ -5,6 +5,7 @@ library(lubridate)
 library(stringr)
 library(glue)
 library(janitor)
+library(readr)
 
 finp <- sprintf("~/github/donationstax/data_local/d%s.xlsx", 2010:2020)
 
@@ -53,7 +54,45 @@ d_2010_2014 <- d_2010_2014 %>%
 d_2010_2014 <- d_2010_2014 %>%
   mutate(fecha2 = as_date(fecha2))
 
+d_2010_2014 <- d_2010_2014 %>%
+  select(-fecha) %>%
+  rename(fecha = fecha2) %>%
+  select(ano, fecha, everything())
+
 d_2010_2014 %>%
-  filter(is.na(fecha2))
+  filter(is.na(fecha))
+
+d_2010_2014 %>%
+  select(nombre_del_proyecto) %>%
+  distinct() %>%
+  write_csv("dev/nombre_proyecto_hasta_2014.csv")
+
+d_2010_2014 %>%
+  select(donatario) %>%
+  distinct() %>%
+  write_csv("dev/donatario_hasta_2014.csv")
+
+d_2010_2014 %>%
+  select(donante) %>%
+  distinct() %>%
+  write_csv("dev/donante_hasta_2014.csv")
+
+# armoniza nombre proyecto ----
+
+nombre_proyecto_hasta_2014 <- read_excel("dev/nombre_proyecto_hasta_2014.xlsx")
+
+donatario_hasta_2014 <- read_excel("dev/donatario_hasta_2014.xlsx")
+
+d_2010_2014 <- d_2010_2014 %>%
+  left_join(nombre_proyecto_hasta_2014) %>%
+  mutate(
+    nombre_proyeccion_correccion2 = str_to_title(str_trim(nombre_proyecto_correccion1))
+  )
+
+d_2010_2014 <- d_2010_2014 %>%
+  left_join(donatario_hasta_2014) %>%
+  mutate(
+    donatario_correccion2 = str_to_title(str_trim(donatario_correccion1))
+  )
 
 use_data(d_2010_2014, overwrite = T)

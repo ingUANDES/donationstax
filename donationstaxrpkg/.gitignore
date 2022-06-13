@@ -1,1 +1,5 @@
 .Rproj.user
+dev/*.csv
+dev/*.zip
+dev/*.xlsx
+dev/*.rda
