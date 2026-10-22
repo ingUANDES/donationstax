@@ -34,9 +34,9 @@ Estado: Propuesta. La tolerancia de 1e-12 y la división en tres niveles son del
 
 ### D-06
 
-**Canal de trabajo.** Los issues están deshabilitados en el repositorio: al intentar crear uno, GitHub respondió «410 Issues has been disabled in this repository» (2026-10-22). Por eso no existen las etiquetas `dueño:claude-science` ni `propuesta`, y el protocolo «toma el primer issue» no puede ejecutarse. Mientras no cambie, el backlog son los ítems P-nn de [BLUEPRINT.md](BLUEPRINT.md#pendientes), tomados en el orden que fije una persona.
+**Canal de trabajo.** Los issues estuvieron deshabilitados: el 2026-10-22 crear uno respondió «410 Issues has been disabled in this repository». Después se habilitaron: a las 13:06 UTC del mismo día se creó con éxito el [issue 3](https://github.com/ingUANDES/donationstax/issues/3), y esa creación hizo que GitHub creara la etiqueta `propuesta` (color por defecto, sin descripción). Ese mismo día no existían `dueño:claude-science` ni `bloqueado` (`prioridad:*`, sin comprobar), así que el protocolo «toma el primer issue con `dueño:claude-science`» no puede ejecutarse hasta que una persona cree las etiquetas y asigne. Mientras tanto, el backlog son los ítems P-nn de [BLUEPRINT.md](BLUEPRINT.md#pendientes), tomados en el orden que fije una persona.
 
-Estado: Abierta. Opciones: habilitar issues (y crear las etiquetas del protocolo) o mantener el backlog en BLUEPRINT.
+Estado: Abierta. Opciones: pasar el backlog a issues (con las etiquetas del protocolo) y que BLUEPRINT los enlace, o mantenerlo en BLUEPRINT.
 
 ### D-07
 
