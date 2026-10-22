@@ -32,6 +32,19 @@ PAUSA = 1.0  # segundos entre consultas: BCN responde 429 si se le pide más rá
 
 
 def descargar(id_norma, fecha):
+    """XML de la versión vigente en `fecha`. BCN devuelve la página de la aplicación en lugar del XML
+    para algunas fechas sueltas (p. ej. 2006-03-20 en la Ley sobre Impuesto a la Renta); en ese caso
+    se usa el día siguiente, hasta tres días."""
+    for dias in range(4):
+        f = (dt.date.fromisoformat(fecha) + dt.timedelta(days=dias)).isoformat()
+        try:
+            return _descargar(id_norma, f)
+        except ValueError:
+            continue
+    raise RuntimeError(f"{fecha}: BCN no devolvió XML ni en los tres días siguientes")
+
+
+def _descargar(id_norma, fecha):
     clave = (id_norma, fecha)
     if clave in _cache:
         return _cache[clave]
@@ -45,6 +58,8 @@ def descargar(id_norma, fecha):
                 raise ValueError("la respuesta no es XML")
             _cache[clave] = datos
             return datos
+        except ValueError:
+            raise
         except Exception as e:  # reintenta con espera creciente; ante 429 espera más
             if intento == 7:
                 raise RuntimeError(f"{fecha}: {e}") from e
