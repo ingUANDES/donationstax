@@ -1,0 +1,619 @@
+# Fuente: https://www.bcn.cl/leychile/consulta/obtxml?opt=7&idNorma=6368&idVersion=2005-06-16
+# Descargado: 2026-10-22 (BCN, LeyChile, XML obtxml opt=7)
+# fechaVersion del XML: 2005-06-16 | publicación: 1974-12-31 | promulgación: 1974-12-27 | vigente en idVersion: 2005-06-16
+# Huella (sha256 de las estructuras incluidas): 307f1c28065294caafdc0a522521c2e502145d4250cbb15b3cebabdbc4c82bab
+
+### Artículo idParte=8656046 fechaVersion=2001-09-28 derogado=no derogado
+ARTICULO 20°.- Establécese un impuesto de 17% que
+podrá ser imputado a los impuestos global complementario y
+adicional de acuerdo con las normas de los artículos 56,
+N° 3 y 63. Este impuesto se determinará, recaudará y
+pagará sobre:
+ 1.- La renta de los bienes raíces en conformidad a las
+normas siguientes:
+ a) Tratándose de contribuyentes que posean o exploten a
+cualquier título bienes raíces agrícolas se gravará la
+renta efectiva de dichos bienes, sin perjuicio de lo
+dispuesto en la letra b) de este número.
+ Del monto del impuesto de esta categoría podrá
+rebajarse el impuesto territorial pagado por el período al
+cual corresponde la declaración de renta. Sólo tendrá
+derecho a esta rebaja el propietario o usufructurario. Si el
+monto de la rebaja contemplada en este inciso excediera del
+impuesto aplicable a las rentas de esta categoría, dicho
+excedente no podrá imputarse e otro impuesto ni solicitarse
+su devolución.
+ INCISO TERCERO DEROGADO La cantidad cuya deducción se
+autoriza en el inciso anterior se reajustará de acuerdo con
+el porcentaje de variación experimentado por el índice de
+precios al consumidor en el período comprendido entre el
+último día del mes anterior a la fecha de pago de la
+contribución y el último día del mes anterior al de
+cierre del ejercicio respectivo;
+ b) Los contribuyentes propietarios o usufructuarios de
+bienes raíces agrícolas, que no sean sociedades anónimas
+y que cumplan los requisitos que se indican más adelante,
+pagarán el impuesto de esta categoría sobre la base de la
+renta de dichos predios agrícolas, la que se presume de
+derecho es igual al 10% del avalúo fiscal de los predios.
+Cuando la explotación se haga a cualquier otro título se
+presume de derecho que la renta es igual al 4% del avalúo
+fiscal de dichos predios. Para los fines de estas
+presunciones se considerará como ejercicio agrícola el
+período anual que termina el 31 de diciembre.
+ Para acogerse al sistema de renta presunta las
+comunidades, cooperativas, sociedades de personas u otras
+personas jurídicas, deberán estar formadas exclusivamente
+por personas naturales.
+ El régimen tributario contemplado en esta letra no se
+aplicará a los contribuyentes que obtengan rentas de
+primera categoría por las cuales deban declarar impuestos
+sobre renta efectiva según contabilidad completa.
+ Sólo podrán acogerse al régimen de presunción de
+renta contemplado en esta letra los contribuyentes
+propietarios o usufructuarios de predios agrícolas o que a
+cualquier título los exploten, cuyas ventas netas anuales
+no excedan en su conjunto de 8.000 unidades tributarias
+mensuales. Para la determinación de las ventas no se
+considerarán las enajenaciones ocasionales de bienes
+muebles o inmuebles que formen parte del activo inmovilizado
+del contribuyente. Para este efecto, las ventas de cada mes
+deberán expresarse en unidades tributarias mensuales de
+acuerdo con el valor de ésta en el período respectivo.
+ El contribuyente que quede obligado a declarar sus
+rentas efectivas según contabilidad completa, lo estará a
+contar del 1° de enero del año siguiente a aquél en que
+se cumplan los requisitos señalados y no podrá volver al
+régimen de renta presunta. Exceptúase el caso en que el
+contribuyente no haya estado afecto al impuesto de primera
+categoría por su actividad agrícola por cinco ejercicios
+consecutivos o más, caso en el cual deberá estarse a las
+reglas generales establecidas en esta letra para determinar
+si se aplica o no el régimen de renta presunta. Para los
+efectos de computar el plazo de cinco ejercicios se
+considerará que el contribuyente desarrolla actividades
+agrícolas cuando arrienda o cede en cualquier forma el goce
+de predios agrícolas cuya propiedad o usufructo conserva.
+ Para establecer si el contribuyente cumple el requisito
+del inciso cuarto de esta letra, deberá sumar a sus ventas
+el total de las ventas realizadas por las sociedades y, en
+su caso, comunidades con las que esté relacionado y que
+realicen actividades agrícolas. Si al efectuar la
+operación descrita el resultado obtenido excede el límite
+de ventas establecido en dicho inciso, tanto el
+contribuyente como las sociedades o comunidades relacionadas
+con él deberán determinar el impuesto de esta categoría
+en conformidad con lo dispuesto en la letra a) de este
+número.
+ Si una persona natural está relacionada con una o más
+comunidades o sociedades que sean a su vez propietarias o
+usufructuarias de predios agrícolas o que a cualquier
+título los exploten, para establecer si dichas comunidades
+o sociedades exceden el límite mencionado en el inciso
+cuarto de esta letra, deberá sumarse el total de las ventas
+anuales de las comunidades y sociedades relacionadas con la
+persona natural. Si al efectuar la operación descrita el
+resultado obtenido excede el límite establecido en el
+inciso cuarto, todas las sociedades o comunidades
+relacionadas con la persona deberán determinar el impuesto
+de esta categoría en conformidad con lo dispuesto en la
+letra a) de este número.
+ Las personas que tomen en arrendamiento, o que a otro
+título de mera tenencia exploten el todo o parte de predios
+agrícolas de contribuyentes que deban tributar en
+conformidad con lo dispuesto en la letra a) de este número,
+quedarán sujetas a ese mismo régimen.
+ Después de aplicar las normas de los incisos
+anteriores, los contribuyentes cuyas ventas anuales no
+excedan de 1000 unidades tributarias mensuales podrán
+continuar sujetos al régimen de renta presunta. Para
+determinar el límite de venta a que se refiere este inciso
+no se aplicarán las normas de los incisos sexto y séptimo
+de esta letra.
+ Sin perjuicio de lo dispuesto en los incisos anteriores,
+los contribuyentes podrán optar por pagar el impuesto de
+esta categoría en conformidad con la letra a) de este
+número. Una vez ejercida dicha opción no podrán
+reincorporarse el sistema de presunción de renta.
+ El ejercicio de la opción a que se refiere el inciso
+anterior deberá practicarse dentro de los dos primeros
+meses de cada año comercial, entendiéndose en consecuencia
+que las rentas obtenidas a contar de dicho año tributarán
+en conformidad con el régimen de renta efectiva.
+ Serán aplicables a los contribuyentes de esta letra las
+normas de los dos últimos incisos de la letra a) de este
+número.
+ Para los efectos de esta letra se entenderá que una
+persona está relacionada con una sociedad en los siguientes
+casos:
+ I) Si la sociedad es de personas y la persona, como
+socio, tiene facultades de administración o si participa en
+más del 10% de las utilidades, o si es dueña,
+usufructuaria o a cualquier otro título posee más del 10%
+del capital social o de las acciones. Lo dicho se aplicará
+también a los comuneros respecto de las comunidades en las
+que participen.
+ II) Si la sociedad es anónima y la persona es dueña,
+usufructuaria o a cualquier otro título tiene derecho a
+más del 10% de las acciones, de las utilidades o de los
+votos en la junta de accionistas.
+ III) Si la persona es partícipe en más de un 10% en un
+contrato de asociación u otro negocio de carácter
+fiduciario, en que la sociedad es gestora.
+ IV) Si la persona, de acuerdo con estas reglas, está
+relacionada con una sociedad y ésta a su vez lo está con
+otra, se entenderá que la persona también está
+relacionada con esta última y así sucesivamente.
+ El contribuyente que por efecto de las normas de
+relación quede obligado a declarar sus impuestos sobre
+renta efectiva deberá informar de ello, mediante carta
+certificada, a todos sus socios en comunidades o sociedades
+en las que se encuentre relacionado. Las sociedades que
+reciban dicha comunicación deberán, a su vez, informar con
+el mismo procedimiento a todos los contribuyentes que tengan
+una participación superior al 10% en ellas.
+ c) En el caso de personas que den en arrendamiento,
+subarriendamiento, usufructo u otra forma de cesión o uso
+temporal de bienes raíces agrícolas, se gravará la renta
+efectiva de dichos bienes, acreditada mediante el respectivo
+contrato.
+ Para estos efectos, se considerará como parte de la
+renta efectiva el valor de las mejoras útiles,
+contribuciones, beneficios y demás desembolsos convenidos
+en el respectivo contrato o posteriormente autorizados,
+siempre que no se encuentren sujetos a la condición de
+reintegro y queden a beneficio del arrendador,
+subarrendador, nudo propietario o cedente a cualquier
+título de bienes raíces agrícolas.
+ Serán aplicables a los contribuyentes de esta letra las
+normas de los dos últimos incisos de la letra a) de este
+número;
+ d) Se presume que la renta de los bienes raíces no
+agrícolas es igual al 7% de su avalúo fiscal, respecto del
+propietario o usufructuario. Sin embargo, podrá declararse
+la renta efectiva siempre que se demuestre mediante
+contabilidad fidedigna de acuerdo con las normas generales
+que dictará el Director. En todo caso, deberá declararse
+la renta efectiva de dichos bienes cuando ésta exceda del
+11% de su avalúo fiscal.
+ No se aplicará presunción alguna respecto de aquellos
+bienes raíces no agrícolas destinados al uso de su
+propietario o familia. Asimismo, no se aplicará presunción
+alguna por los bienes raíces destinados a casa habitación
+acogidos al decreto con fuerza de ley N° 2 de 1959, ni
+respecto de los inmuebles destinados al uso de su
+propietario y de su familia que se encuentren acogidos a las
+disposiciones de la ley N° 9.135.
+ Sin perjuicio de lo dispuesto en los incisos anteriores,
+tratándose de sociedades anónimas que posean o exploten a
+cualquier título bienes raíces no agrícolas, se gravará
+la renta efectiva de dichos bienes. Será aplicable en este
+caso lo dispuesto en los últimos dos incisos de la letra a)
+de este número.
+ e) Respecto de las personas que exploten bienes raíces
+no agrícolas, en una calidad distinta a la de propietario o
+usufructuario, se gravará la renta efectiva de dichos
+bienes;
+ f) No se presumirá renta alguna, respecto de los bienes
+raíces propios o partes de ellos destinados exclusivamente
+al giro de las actividades indicadas en los artículos 20°,
+N° 3°, 4° y 5°, y 42°, N° 2°; ni respecto de los
+bienes raíces propios de los contribuyentes de los
+artículos 22° y 42°, N° 1°, siempre que el monto total
+de los avalúos del conjunto de dichos inmuebles no exceda
+de 40 unidades tributarias anuales y siempre que dichos
+contribuyentes obtengan únicamente rentas referidas en los
+artículos 22°, 42°, N° 1, y 57, inciso primero.
+ Con todo, las empresas constructoras e inmobiliarias por
+los inmuebles que construyan o manden construir para su
+venta posterior, podrán imputar al impuesto de este
+párrafo el impuesto territorial pagado desde la fecha de la
+recepción definitiva de las obras de edificación,
+aplicándose las normas de los dos últimos incisos de la
+letra a) de este número.
+ Para los fines del presente número deberá considerarse
+el avalúo fiscal de los bienes raíces vigente al 1° de
+enero del año en que debe declararse el impuesto.
+ 2°. Las rentas de capitales mobiliarios consistentes en
+intereses, pensiones o cualesquiera otros productos
+derivados del dominio, posesión o tenencia a título
+precario de cualquiera clase de capitales mobiliarios, sea
+cual fuere su denominación, y que no estén expresamente
+exceptuados, incluyéndose las rentas que provengan de:
+ a) Bonos y debentures o títulos de crédito, sin
+perjuicio de lo que se disponga en convenios
+internacionales;
+ b) Créditos de cualquier clase, incluso los resultantes
+de operaciones de bolsas de comercio;
+ c) Los dividendos y demás beneficios derivados del
+dominio, posesión o tenencia a cualquier título de
+acciones de sociedades anónimas extranjeras, que no
+desarrollen actividades en el país, percibidos por personas
+domiciliadas o residentes en Chile;
+ d) Depósitos en dinero, ya sea a la vista o a plazo;
+ e) Cauciones en dinero, y
+ f) Contratos de renta vitalicia.
+ En las operaciones de créditos en dinero, se considerará
+interés el que se determine con arreglo a las normas del
+artículo 41 bis. No obstante las rentas de este número,
+percibidas o devengadas por contribuyentes que desarrollen
+actividades de los números 1°, 3°, 4° y 5° de este
+artículo, que demuestren sus rentas efectivas mediante un
+balance general, y siempre que la inversión generadora de
+dichas rentas forme parte del patrimonio de la empresa, se
+comprenderán en estos últimos números, respectivamente.
+ 3°.- Las rentas de la industria, del comercio, de la
+minería y de la explotación de riquezas del mar y demás
+actividades extractivas, compañías aéreas, de seguros, de
+los bancos, asociaciones de ahorro y préstamos, sociedades
+administradoras de fondos mutuos, sociedades de inversión o
+capitalización, de empresas financieras y otras de
+actividad análoga, constructora, periodísticas,
+publicitarias, de radiodifusión, televisión, procesamiento
+automático de datos y telecomunicaciones.
+ PARRAFO DEROGADO 4°.- Las rentas obtenidas por
+corredores, sean titulados o no, sin perjuicio de lo que al
+respecto dispone el N° 2° del artículo 42°,
+comisionistas con oficina establecida, martilleros, agentes
+de aduanas, embarcadores y otros que intervengan en el
+comercio marítimo, portuario y aduanero, y agentes de
+seguros que no sean personas naturales; colegios, academias
+e institutos de enseñanza particulares y otros
+establecimientos particulares de este género; clínicas,
+hospitales, laboratorios y otros establecimientos análogos
+particulares y empresas de diversión y esparcimiento.
+ 5°.- Todas las rentas, cualquiera que fuera su origen,
+naturaleza o denominación, cuya imposición no esté
+establecida expresamente en otra categoría ni se encuentren
+exentas.
+ 6°.- Los premios de lotería, pagarán el impuesto, de
+esta categoría con una tasa del 15% en calidad de impuesto
+único de esta ley. Este impuesto se aplicará también
+sobre los premios correspondientes a boletos no vendidos o
+no cobrados en el sorteo anterior.
+ INCISO DEROGADO
+
+### Artículo idParte=8656061 fechaVersion=2005-06-16 derogado=no derogado
+ARTICULO 31°.- La renta líquida de las personas
+referidas en el artículo anterior se determinará
+deduciendo de la renta bruta todos los gastos necesarios
+para producirla que no hayan sido rebajados en virtud del
+artículo 30°, pagados o adeudados, durante el ejercicio
+comercial correspondiente, siempre que se acrediten o
+justifiquen en forma fehaciente ante el Servicio. No se
+deducirán los gastos incurridos en la adquisición,
+mantención o explotación de bienes no destinados al giro
+del negocio o empresa, de los bienes de los cuales se
+aplique la presunción de derecho a que se refiere el inciso
+primero del artículo 21 y la letra f), del número 1°, del
+artículo 33, como tampoco en la adquisición y
+arrendamiento de automóviles, station wagons y similares,
+cuando no sea éste el giro habitual, y en combustible,
+lubricantes, reparaciones, seguros y, en general, todos los
+gastos para su mantención y funcionamiento. No obstante,
+procederá la deducción de estos gastos respecto de los
+vehículos señalados cuando el Director del Servicio de
+Impuestos Internos los califique previamente de necesarios,
+a su juicio exclusivo.
+ Sin perjuicio de lo indicado en el inciso precedente,
+los gastos incurridos en el extranjero se acreditarán con
+los correspondientes documentos emitidos en el exterior de
+conformidad a las disposiciones legales del país
+respectivo, siempre que conste en ellos, a lo menos, la
+individualización y domicilio del prestador del servicio o
+del vendedor de los bienes adquiridos según corresponda, la
+naturaleza u objeto de la operación y la fecha y monto de
+la misma. El contribuyente deberá presentar una traducción
+al castellano de tales documentos cuando así lo solicite el
+Servicio de Impuestos Internos. Aun en el caso que no exista
+el respectivo documento de respaldo, la Dirección Regional
+podrá aceptar la deducción del gasto si a su juicio éste
+es razonable y necesario para la operación del
+contribuyente, atendiendo a factores tales como la relación
+que exista entre las ventas, servicios, gastos o los
+ingresos brutos y el desembolso de que se trate de igual o
+similar naturaleza, de contribuyentes que desarrollen en
+Chile la misma actividad o una semejante.
+ Especialmente procederá la deducción de los siguientes
+gastos, en cuanto se relacionen con el giro del negocio:
+ 1°.- Los intereses pagados o devengados sobre las
+cantidades adeudadas, dentro del año a que se refiere el
+impuesto. No se aceptará la deducción de intereses y
+reajustes pagados o adeudados, respecto de créditos o
+préstamos empleados directa o indirectamente en la
+adquisición, mantención y/o explotación de bienes que no
+produzcan rentas gravadas en esta categoría.
+ 2°.- Los impuestos establecidos por leyes chilenas, en
+cuanto se relacionen con el giro de la empresa y siempre que
+no sean los de esta ley, con excepción del impuesto
+establecido en el artículo 64 bis en el ejercicio en que se
+devengue, ni de bienes raíces, a menos que en este último
+caso no proceda su utilización como crédito y que no
+constituyan contribuciones especiales de fomento o
+mejoramiento. No procederá esta rebaja en los casos en que
+el impuesto haya sido sustituido por una inversión en
+beneficio del contribuyente.
+ 3°.- Las pérdidas sufridas por el negocio o empresa
+durante el año comercial a que se refiere el impuesto,
+comprendiendo las que provengan de delitos contra la
+propiedad.
+ Podrán, asimismo, deducirse las pérdidas de ejercicios
+anteriores, siempre que concurran los requisitos del inciso
+precedente. Para estos efectos, las pérdidas del ejercicio
+deberán imputarse a las utilidades no retiradas o
+distribuidas, y a las obtenidas en el ejercicio siguiente a
+aquél en que se produzcan dichas pérdidas, y si las
+utilidades referidas no fuesen suficientes para absorberlas,
+la diferencia deberá imputarse al ejercicio inmediatamente
+siguiente y así sucesivamente. En el caso que las pérdidas
+absorban total o parcialmente las utilidades no retiradas o
+distribuidas, el impuesto de primera categoría pagado sobre
+dichas utilidades se considerará como pago provisional en
+aquella parte que proporcionalmente corresponda a la
+utilidad absorbida, y se la aplicarán las normas de
+reajustabilidad, imputación o devolución que señalan los
+artículos 93 a 97 de la presente ley.
+ Las pérdidas se determinarán aplicando a los
+resultados del balance las normas relativas a la
+determinación de la renta líquida imponible contenidas en
+este párrafo y su monto se reajustará, cuando deba
+imputarse a los años siguientes, de acuerdo con el
+porcentaje de variación experimentada por el índice de
+precios al consumidor en el período comprendido entre el
+último día del mes anterior al del cierre del ejercicio
+comercial en que se generaron las pérdidas y el último
+día del mes anterior al del cierre del ejercicio en que
+proceda su deducción.
+ Con todo, las sociedades con pérdidas que en el
+ejercicio hubieren sufrido cambio en la propiedad de los
+derechos sociales, acciones o del derecho a participación
+en sus utilidades, no podrán deducir las pérdidas
+generadas antes del cambio de propiedad de los ingresos
+percibidos o devengados con posterioridad a dicho cambio.
+Ello siempre que, además, con motivo del cambio señalado o
+en los doce meses anteriores o posteriores a él la sociedad
+haya cambiado de giro o ampliado el original a uno distinto,
+salvo que mantenga su giro principal, o bien al momento del
+cambio indicado en primer término, no cuente con bienes de
+capital u otros activos propios de su giro de una magnitud
+que permita el desarrollo de su actividad o de un valor
+proporcional al de adquisición de los derechos o acciones,
+o pase a obtener solamente ingresos por participación, sea
+como socio o accionista, en otras sociedades o por
+reinversión de utilidades. Para este efecto, se entenderá
+que se produce cambio de la propiedad en el ejercicio cuando
+los nuevos socios o accionistas adquieran o terminen de
+adquirir, directa o indirectamente, a través de sociedades
+relacionadas, a lo menos el 50% de los derechos sociales,
+acciones o participaciones. Lo dispuesto en este inciso no
+se aplicará cuando el cambio de propiedad se efectúe entre
+empresas relacionadas, en los términos que establece el
+artículo 100 de la ley N° 18.045.
+ 4°.- Los créditos incobrables castigados durante el
+año, siempre que hayan sido contabilizados oportunamente y
+se hayan agotado prudencialmente los medios de cobro.
+ Las provisiones y castigos de los créditos incluidos en
+la cartera vencida de los bancos e instituciones
+financieras, de acuerdo a las instrucciones que impartan en
+conjunto la Superintendencia de Bancos e Instituciones
+Financieras y el Servicio de Impuestos Internos.
+ Las instrucciones de carácter general que se impartan
+en virtud del inciso anterior, serán también aplicables a
+las remisiones de créditos riesgosos que efectúen los
+bancos y sociedades financieras a sus deudores, en la parte
+en que se encuentren afectos a provisiones constituídas
+conforme a la normativa sobre clasificación de la cartera
+de créditos establecida por la Superintendencia de Bancos e
+Instituciones financieras.
+ Las normas generales que se dicten deberán contener, a
+lo menos, las siguientes condiciones:
+ a) Que se trate de créditos clasificados en las dos
+últimas categorías de riesgo establecidas para la
+clasificación de cartera, y
+ b) Que el crédito de que se trata haya permanecido en
+alguna de las categorías indicadas a lo menos por el
+período de un año, desde que se haya pronunciado sobre
+ella la Superintendencia.
+ Lo dispuesto en este número se aplicará también a los
+créditos que una institución financiera haya adquirido de
+otra, siempre que se cumpla con las condiciones antedichas.
+ 5°.- Una cuota anual de depreciación por los bienes
+físicos del activo inmovilizado a contar de su utilización
+en la empresa, calculada sobre el valor neto de los bienes a
+la fecha del balance respectivo, una vez efectuada la
+revalorización obligatoria que dispone el artículo 41°.
+ El porcentaje o cuota correspondiente al período de
+depreciación dirá relación con los años de vida útil
+que mediante normas generales fije la Dirección y operará
+sobre el valor neto total del bien. No obstante, el
+contribuyente podrá aplicar una depreciación acelerada,
+entendiéndose por tal aquélla que resulte de fijar a los
+bienes físicos del activo inmovilizado adquiridos nuevos o
+internados, una vida útil equivalente a un tercio de la
+fijada por la Dirección o Dirección Regional. No podrán
+acogerse al régimen de depreciación acelerada los bienes
+nuevos o internados cuyo plazo de vida útil total fijada
+por la Dirección o Dirección Regional sea inferior a tres
+años. Los contribuyentes podrán en cualquiera oportunidad
+abandonar el régimen de depreciación acelerada, volviendo
+así definitivamente al régimen normal de depreciaciones a
+que se refiere este número.
+Al término del plazo de depreciación del bien, éste
+deberá registrarse en la contabilidad por un valor
+equivalente a un peso, valor que no quedará sometido a las
+normas del artículo 41°, y que deberá permanecer en los
+registros contables hasta la eliminación total del bien
+motivada por la venta, castigo, retiro u otra causa.
+Tratándose de bienes que se han hecho inservibles para la
+empresa antes del término del plazo de depreciación que se
+les haya asignado, podrá aumentarse al doble la
+depreciación correspondiente.
+ En todo caso, cuando se aplique el régimen de
+depreciación acelerada, sólo se considerará para los
+efectos de lo dispuesto en el artículo 14, la depreciación
+normal que corresponde al total de los años de vida útil
+del bien. La diferencia que resulte en el ejercicio
+respectivo entre la depreciación acelerada y la
+depreciación normal, sólo podrá deducirse como gasto para
+los efectos de primera categoría.
+ La Dirección Regional, en cada caso particular, a
+petición del contribuyente o del Comité de Inversiones
+Extranjeras, podrá modificar el régimen de depreciación
+de los bienes cuando los antecedentes así lo hagan
+aconsejable.
+ Para los efectos de esta ley no se admitirán
+depreciaciones por agotamiento de las sustancias naturales
+contenidas en la propiedad minera, sin perjuicio de lo
+dispuesto en el inciso primero del artículo 30.
+ 6°.- Sueldos, salarios y otras remuneraciones pagados o
+adeudados por la prestación de servicios personales,
+incluso las gratificaciones legales y contractuales, y
+asimismo, toda cantidad por concepto de gastos de
+representación. Las participaciones y gratificaciones
+voluntarias que se otorguen a empleados y obreros se
+aceptarán como gasto cuando se paguen o abonen en cuenta y
+siempre que ellas sean repartidas a cada empleado y obrero
+en proporción a los sueldos y salarios pagados durante el
+ejercicio, así como en relación a la antigüedad, cargas
+de familia u otras normas de carácter general y uniforme
+aplicables a todos los empleados o a todos los obreros de la
+empresa.
+ Tratándose de personas que por cualquiera circunstancia
+personal o por la importancia de su haber en la empresa,
+cualquiera sea la condición jurídica de ésta, hayan
+podido influir, a juicio de la Dirección Regional, en la
+fijación de sus remuneraciones, éstas sólo se aceptarán
+como gasto en la parte que, según el Servicio, sean
+razonablemente proporcionadas a la importancia de la
+empresa, a las rentas declaradas, a los servicios prestados
+y a la rentabilidad del capital, sin perjuicio de los
+impuestos que procedan respecto de quienes perciban tales
+pagos.
+ No obstante, se aceptará como gasto la remuneración
+del socio de sociedades de personas y socio gestor de
+sociedades en comandita por acciones, y las que se asigne el
+empresario individual, que efectiva y permanentemente
+trabajen en el negocio o empresa, hasta por el monto que
+hubiera estado afecto a cotizaciones previsionales
+obligatorias. En todo caso dichas remuneraciones se
+considerarán rentas del artículo 42, número 1.
+ Las remuneraciones por servicios prestados en el
+extranjero se aceptarán también como gastos, siempre que
+se acrediten con documentos fehacientes y sean a juicio de
+la Dirección Regional, por su monto y naturaleza,
+necesarias y convenientes para producir la renta en Chile.
+ 6º bis.- Las becas de estudio que se paguen a los hijos
+de los trabajadores de la empresa, siempre que ellas sean
+otorgadas con relación a las cargas de familia u otras
+normas de carácter general y uniforme aplicables a todos
+los trabajadores de la empresa. En todo caso, el monto de la
+beca por cada hijo, no podrá ser superior en el ejercicio
+hasta la cantidad equivalente a una y media unidad
+tributaria anual, salvo que el beneficio corresponda a una
+beca para estudiar en un establecimiento de educación
+superior y se pacte en un contrato o convenio colectivo de
+trabajo, caso en el cual este límite será de hasta un
+monto equivalente a cinco y media unidades tributarias
+anuales.
+ 7°.- Las donaciones efectuadas cuyo único fin sea la
+realización de programas de instrucción básica o media
+gratuitas, técnica, profesional o universitaria en el
+país, ya sean privados o fiscales, sólo en cuanto no
+excedan del 2% de la renta líquida imponible de la empresa
+o del 1,6°/°° del capital propio de la empresa al
+término del correspondiente ejercicio. Esta disposición no
+será aplicada a las empresas afectas a la ley N° 16.624.
+ Lo dispuesto en el inciso anterior se aplicará también
+a las donaciones que se hagan a los Cuerpos de Bomberos de
+la República, Fondo de Solidaridad Nacional, Fondo de
+Abastecimiento y Equipamiento Comunitario, Servicio Nacional
+de Menores y a los Comités Habitacionales Comunales.
+ Las donaciones a que se refiere este número no
+requerirán del trámite de la insinuación y estarán
+exentas de toda clase de impuestos.
+ 8°.- Los reajustes y diferencias de cambio provenientes
+de créditos o préstamos destinados al giro del negocio o
+empresa, incluso los originados en la adquisición de bienes
+del activo inmovilizado y realizable.
+ 9°.- Los gastos de organización y puesta en marcha,
+los cuales podrán ser amortizados hasta en un lapso de seis
+ejercicios comerciales consecutivos contados desde que se
+generaron dichos gastos o desde el año en que la empresa
+comience a generar ingresos de su actividad principal,
+cuando este hecho sea posterior a la fecha en que se
+originaron los gastos.
+ En el caso de empresas cuyo único giro según la
+escritura de constitución sea el de desarrollar determinada
+actividad por un tiempo inferior a 6 años no renovable o
+prorrogable, los gastos de organización y puesta en marcha
+se podrán amortizar en el número de años que abarque la
+existencia legal de la empresa.
+ 10°.- Los gastos incurridos en la promoción o
+colocación en el mercado de artículos nuevos fabricados o
+producidos por el contribuyente, pudiendo el contribuyente
+prorratearlos hasta en tres ejercicios comerciales
+consecutivos, contados desde que se generaron dichos gastos.
+ 11°.- Los gastos incurridos en la investigación
+científica y tecnológica en interés de la empresa aún
+cuando no sean necesarios para producir la renta bruta del
+ejercicio, pudiendo ser deducidos en el mismo ejercicio en
+que se pagaron o adeudaron o hasta en seis ejercicios
+comerciales consecutivos.
+ 12º.- Los pagos que se efectúen al exterior por los
+conceptos indicados en el inciso primero del artículo 59 de
+esta ley, hasta por un máximo de 4% de los ingresos por
+ventas o servicios, del giro, en el respectivo ejercicio.
+ El límite establecido en el inciso anterior no se
+aplicará cuando, en el ejercicio respectivo, entre el
+contribuyente y el beneficiario del pago no exista o no haya
+existido relación directa o indirecta en el capital,
+control o administración de uno u otro. Para que sea
+aplicable lo dispuesto en este inciso, dentro de los dos
+meses siguientes al del término del ejercicio respectivo,
+el contribuyente o su representante legal, deberá formular
+una declaración jurada en la que señale que en dicho
+ejercicio no ha existido la relación indicada. Esta
+declaración deberá conservarse con los antecedentes de la
+respectiva declaración anual de impuesto a la renta, para
+ser presentada al Servicio cuando éste lo requiera. El que
+maliciosamente suscriba una declaración jurada falsa será
+sancionado en conformidad con el artículo 97, número 4,
+del Código Tributario.
+ Tampoco se aplicará el límite establecido en el
+inciso primero de este número, si en el país de domicilio
+del beneficiario de la renta ésta se grava con impuestos a
+la renta con tasa igual o superior a 30%. El Servicio de
+Impuestos Internos, de oficio o a petición de parte,
+verificará los países que se encuentran en esta
+situación.
+ Para determinar si los montos pagados por los conceptos
+indicados en el inciso primero de este número se encuentran
+o no dentro del límite allí indicado, deberán sumarse en
+primer lugar todos los pagos que resulten de lo dispuesto en
+los incisos segundo y tercero. Los restantes pagos se
+sumarán a continuación de aquéllos.
+
+### Artículo idParte=8656086 fechaVersion=2001-09-28 derogado=no derogado
+ARTICULO 52°- Se aplicará, cobrará y pagará
+anualmente un impuesto global complementario sobre la renta
+imponible determinada en conformidad al párrafo 2 de este
+Título, de toda persona natural, residente o que tenga
+domicilio o residencia en el país, y de las personas o
+patrimonios a que se refieren los artículo 5°, 7° y 8°,
+con arreglo a las siguientes tasas:
+ Las rentas que no excedan de 13,5 unidades tributarias
+anuales, estarán exentas de este impuesto;
+ Sobre la parte que exceda de 13,5 y no sobrepase las 30
+unidades tributarias anuales, 5%;
+ Sobre la parte que exceda de 30 y no sobrepase las 50
+unidades tributarias anuales, 10%;
+ Sobre la parte que exceda de 50 y no sobrepase las 70
+unidades tributarias anuales, 15%;
+ Sobre la parte que exceda de 70 y no sobrepase las 90
+unidades tributarias anuales, 25%;
+ Sobre la parte que exceda de 90 y no sobrepase las 120
+unidades tributarias anuales, 32%;
+ Sobre la parte que exceda de 120 y no sobrepase las 150
+unidades tributarias anuales, 37%, y
+ Sobre la parte que exceda las 150 unidades tributarias
+anuales, 40%.
