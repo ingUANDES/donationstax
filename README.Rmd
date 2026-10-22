@@ -9,22 +9,22 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Estado
 
-Fase: inventario normativo hecho en lo central; la estimación no ha empezado. Actualizado el 2026-10-22.
+Fase: inventario normativo y perfil de los datos hechos en lo central; la estimación no ha empezado. Actualizado el 2026-10-22.
 
 | Etapa | Estado | Detalle |
 |---|---|---|
 | E0 Andamiaje | listo | [BLUEPRINT.md](BLUEPRINT.md), [DECISIONES.md](DECISIONES.md), `make verificar` |
 | E1 Inventario normativo | hecho en lo central; falta la tasa del impuesto a la renta | [P-01 · Inventario normativo](BLUEPRINT.md#p-01), [normativa/cambios.csv](normativa/cambios.csv) |
-| E2 Estructura de los datos | sin iniciar | [P-02 · Estructura de los datos](BLUEPRINT.md#p-02) |
+| E2 Estructura de los datos | perfil hecho; falta armonizar | [P-02 · Estructura de los datos](BLUEPRINT.md#p-02), [P-06](BLUEPRINT.md#p-06), [datos/esquema_por_anio.csv](datos/esquema_por_anio.csv) |
 | E3 a E5 | sin iniciar | [Etapas](BLUEPRINT.md#etapas) |
 
-Bloqueos y decisiones abiertas: los issues ya están habilitados pero faltan las etiquetas del protocolo ([D-06 · Canal de trabajo](DECISIONES.md#d-06)); el sentido del cambio de la Ley 20.316 quedó resuelto por la norma y espera aprobación ([D-07 · Sentido del cambio de la Ley 20.316](DECISIONES.md#d-07)), y hay una propuesta de límites del alcance por aprobar ([D-02 · Alcance](DECISIONES.md#d-02)).
+Bloqueos y decisiones abiertas: los issues ya están habilitados pero faltan las etiquetas del protocolo ([D-06 · Canal de trabajo](DECISIONES.md#d-06)); el sentido del cambio de la Ley 20.316 quedó resuelto por la norma y espera aprobación ([D-07 · Sentido del cambio de la Ley 20.316](DECISIONES.md#d-07)), hay una propuesta de límites del alcance por aprobar ([D-02 · Alcance](DECISIONES.md#d-02)) y otra de ventana empírica ([D-08 · Ventana empírica](DECISIONES.md#d-08)).
 
-Siguiente paso: [P-02 · Estructura de los datos](BLUEPRINT.md#p-02) y [P-03 · Corregir el origen de las fechas](BLUEPRINT.md#p-03) no dependen de nada pendiente; [P-04](BLUEPRINT.md#p-04) y [P-05](BLUEPRINT.md#p-05) esperan la tasa del impuesto a la renta y la aprobación de [D-02](DECISIONES.md#d-02).
+Siguiente paso: [P-06 · Armonizar las planillas](BLUEPRINT.md#p-06) y [P-03 · Corregir el origen de las fechas](BLUEPRINT.md#p-03) no dependen de nada pendiente; [P-04](BLUEPRINT.md#p-04) y [P-05](BLUEPRINT.md#p-05) esperan la tasa del impuesto a la renta y la aprobación de [D-02](DECISIONES.md#d-02).
 
 ## Cómo verificar
 
-`make verificar` (requiere Python 3 y R). Qué comprueba y qué no: [Verificación](BLUEPRINT.md#verificación).
+`make verificar` (requiere Python 3 y R). Qué comprueba y qué no: [Verificación](BLUEPRINT.md#verificación). `make verificar-datos` perfila las planillas del Ministerio en Python y en R (tarda varios minutos; pide las planillas en `data_local/` y `analisis/requirements.txt`).
 
 ## Structure of the repo
 
