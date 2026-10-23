@@ -39,9 +39,9 @@ Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-23 (no verif
 
 ### D-06
 
-**Canal de trabajo.** Los issues estuvieron deshabilitados (el 2026-10-22, crear uno respondió «410 Issues has been disabled in this repository») y después se habilitaron. El 2026-10-23 existen las etiquetas `dueño:claude-science`, `bloqueado` y `propuesta` (comprobado con la API de GitHub). Las pruebas de `prioridad:alta`, `prioridad:media`, `prioridad:baja`, `prioridad:alto`, `prioridad:1`, `prioridad:p1`, `prioridad:P1` y `prioridad:1-alta` no encontraron etiqueta, así que el nombre real de las etiquetas de prioridad está sin verificar. El protocolo «toma el primer issue con `dueño:claude-science`» puede ejecutarse; los issues con `propuesta` no se toman, y [BLUEPRINT.md](BLUEPRINT.md#pendientes) sigue describiendo cada pendiente.
+**Canal de trabajo.** Los issues estuvieron deshabilitados (el 2026-10-22, crear uno respondió «410 Issues has been disabled in this repository») y después se habilitaron. El 2026-10-23 existen las etiquetas `dueño:claude-science`, `bloqueado` y `propuesta` (comprobado con la API de GitHub). No existen `prioridad:alta`, `prioridad:media`, `prioridad:baja` ni `dueño:humano` (comprobado con la API de GitHub el 2026-10-23; las pruebas con otros nombres de prioridad tampoco encontraron etiqueta). El handoff del 2026-10-22 fija esos cuatro nombres (no verificable desde el repo): hay que crearlos. Mientras no existan las de prioridad, el orden lo fija la persona que asigna `dueño:claude-science`. El protocolo «toma el primer issue con `dueño:claude-science`» puede ejecutarse; los issues con `propuesta` no se toman, y [BLUEPRINT.md](BLUEPRINT.md#pendientes) sigue describiendo cada pendiente.
 
-Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-23 (no verificable desde el repo): «etiquetas creadas». Falta confirmar el nombre de las etiquetas de prioridad.
+Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-23 (no verificable desde el repo): «etiquetas creadas». Falta crear las etiquetas de prioridad y `dueño:humano`.
 
 ### D-07
 
@@ -79,4 +79,18 @@ Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-23 (no verif
 8. **Cobertura.** Se toma la disponible; no se imputan años ni filas ([D-08 · Ventana empírica](#d-08)).
 
 Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-23 (no verificable desde el repo): «D-10 […] se dan aprobados». Los umbrales de 99,9 % y 99 % son del investigador (inferencia) y se revisan con los datos.
+
+### D-11
+
+**Criterios de reproducibilidad.** Se toman como aplicables [The Turing Way](https://book.the-turing-way.org/reproducible-research/compendia) y la [política de datos y código de la Econometric Society](https://mail.econometricsociety.org/publications/es-data-editor-website/data-and-code-availability-policy). Enlaces tomados del handoff del 2026-10-22; no leí ninguna de las dos páginas, así que su contenido está sin verificar. Se concretan en cinco criterios:
+
+1. Un script maestro: `make verificar` y, para lo que necesita datos, `make verificar-datos` ([Makefile](Makefile)).
+2. Semilla fija en toda simulación, escrita en el script ([BLUEPRINT.md, Verificación](BLUEPRINT.md#verificación)).
+3. En el README: software y versiones usadas, hardware y tiempo de ejecución de `make verificar` y de `make verificar-datos`.
+4. Dependencias con versión fija: `analisis/requirements.txt` hoy no fija ninguna, y la versión de R y de `readxl` no está registrada.
+5. Carpeta de resultados: abierta. `salidas/` no se versiona porque se regenera; qué cifras se guardan y dónde se decide cuando exista el primer resultado de estimación.
+
+No se adopta la versión mínima de Python (3.12 o superior) del handoff: viene de un issue de otro repositorio que no pude leer. La versión se fija con la que corra `make verificar`.
+
+Estado: Propuesta. Origen: el handoff recoge una decisión del usuario del 2026-10-20, en otra conversación: «se toman como aplicables The Turing Way y la política de la Econometric Society» (no verificable desde el repo; el archivo no está en él). Los cinco criterios y la lectura del quinto son inferencia del investigador. Falta que una persona la apruebe.
 
