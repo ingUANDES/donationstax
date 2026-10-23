@@ -3,18 +3,18 @@ Donations’ tax in Chile
 
 ## Estado
 
-Fase: inventario normativo y perfil de los datos hechos; la estimación no ha empezado. Actualizado el 2026-10-22.
+Fase: inventario normativo y perfil de los datos hechos; la estimación no ha empezado. Actualizado el 2026-10-23.
 
 | Etapa | Estado | Detalle |
 |---|---|---|
 | E0 Andamiaje | listo | [BLUEPRINT.md](BLUEPRINT.md), [DECISIONES.md](DECISIONES.md), `make verificar` |
 | E1 Inventario normativo | hecho; faltan las tasas transitorias de 2011 y 2012 | [P-01 · Inventario normativo](BLUEPRINT.md#p-01), [normativa/cambios.csv](normativa/cambios.csv) |
-| E2 Estructura de los datos | perfil hecho; falta armonizar | [P-02 · Estructura de los datos](BLUEPRINT.md#p-02), [P-06](BLUEPRINT.md#p-06), [datos/esquema_por_anio.csv](datos/esquema_por_anio.csv) |
+| E2 Estructura de los datos | perfil hecho; faltan armonizar las planillas y perfilar los datos de la Ley 21.440 | [P-02 · Estructura de los datos](BLUEPRINT.md#p-02), [P-06](BLUEPRINT.md#p-06), [P-07](BLUEPRINT.md#p-07), [datos/esquema_por_anio.csv](datos/esquema_por_anio.csv) |
 | E3 a E5 | sin iniciar | [Etapas](BLUEPRINT.md#etapas) |
 
-Bloqueos y decisiones abiertas: los issues ya están habilitados pero faltan las etiquetas del protocolo ([D-06 · Canal de trabajo](DECISIONES.md#d-06)); el sentido del cambio de la Ley 20.316 quedó resuelto por la norma y espera aprobación ([D-07 · Sentido del cambio de la Ley 20.316](DECISIONES.md#d-07)), hay una propuesta de límites del alcance por aprobar ([D-02 · Alcance](DECISIONES.md#d-02)) y otra de ventana empírica ([D-08 · Ventana empírica](DECISIONES.md#d-08)).
+Decisiones aprobadas el 2026-10-23: [D-05](DECISIONES.md#d-05) (niveles de resultado) y [D-09](DECISIONES.md#d-09) (fuente y completitud de los datos). Por aprobar: [D-02 · Alcance](DECISIONES.md#d-02) (propuesta de límites), [D-07](DECISIONES.md#d-07) (cerrada por evidencia), [D-08 · Ventana empírica](DECISIONES.md#d-08) y [D-10 · Criterio para completar o excluir](DECISIONES.md#d-10). El canal de trabajo son los issues con las etiquetas del protocolo ([D-06 · Canal de trabajo](DECISIONES.md#d-06)); falta confirmar el nombre de las etiquetas de prioridad.
 
-Siguiente paso: [P-06 · Armonizar las planillas](BLUEPRINT.md#p-06) y [P-03 · Corregir el origen de las fechas](BLUEPRINT.md#p-03) no dependen de nada pendiente; [P-04](BLUEPRINT.md#p-04) y [P-05](BLUEPRINT.md#p-05) esperan la aprobación de [D-02](DECISIONES.md#d-02) y de [D-08](DECISIONES.md#d-08).
+Siguiente paso: [P-06 · Armonizar las planillas](BLUEPRINT.md#p-06) y [P-07 · Datos del régimen de la Ley 21.440](BLUEPRINT.md#p-07) no dependen de nada pendiente (P-07 necesita autorizados `donacionesley21440.gob.cl` y `cdn.hacienda.cl`); [P-04](BLUEPRINT.md#p-04) y [P-05](BLUEPRINT.md#p-05) esperan la aprobación de [D-02](DECISIONES.md#d-02) y [D-08](DECISIONES.md#d-08).
 
 ## Cómo verificar
 
@@ -57,3 +57,7 @@ Research workflow (added 2026-10-22):
     [datos/esquema_por_anio.csv](datos/esquema_por_anio.csv), contraste Python y R
     ([contraste_datos.py](analisis/contraste_datos.py)) y `make verificar-datos`
     ([PR 5](https://github.com/ingUANDES/donationstax/pull/5)).
+  - 2026-10-23: se aprueban D-05 y D-09, se plantea D-10 (criterio para completar o excluir), se
+    documentan los datos de la Ley 21.440 ([P-07](BLUEPRINT.md#p-07),
+    [instantánea de la fuente](datos/fuentes/ley21440_donaciones_2026-10-23.txt)) y se actualiza
+    [D-06](DECISIONES.md#d-06).

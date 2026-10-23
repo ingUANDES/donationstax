@@ -1,6 +1,6 @@
 # Decisiones
 
-Serie **D-nn**: decisiones del proyecto; este es el único archivo donde se define el prefijo D- y donde viven sus ítems. Estados: **Aprobada** (la aprobó una persona del equipo; se indica quién y dónde), **Propuesta** (la plantea el investigador y no rige hasta que una persona la apruebe) y **Abierta** (falta información). Claude Science no aprueba decisiones. Para citar un ítem desde otro archivo: `[D-03 · Python y R en paralelo](DECISIONES.md#d-03)`.
+Serie **D-nn**: decisiones del proyecto; este es el único archivo donde se define el prefijo D- y donde viven sus ítems. Estados: **Aprobada** (la aprobó una persona del equipo; se indica quién y dónde), **Propuesta** (la plantea el investigador y no rige hasta que una persona la apruebe), **Abierta** (falta información) y **Cerrada por evidencia** (la norma o los datos la resuelven y falta que una persona la dé por aprobada). Claude Science no aprueba decisiones. Para citar un ítem desde otro archivo: `[D-03 · Python y R en paralelo](DECISIONES.md#d-03)`.
 
 ### D-01
 
@@ -35,13 +35,13 @@ Estado: Aprobada. Usuario, sesión de Claude Code del 2026-10-22 (no verificable
 
 **Niveles de resultado.** *Borrador*: lo produce un script, sin contraste. *Contrastado*: Python y R coinciden dentro de la tolerancia. *Verificada*: contrastado, además el diseño recupera un efecto conocido en datos simulados con semilla fija y, si depende de una norma, la cita textual está comprobada por [verifica_citas.py](analisis/verifica_citas.py). Ningún resultado se llama «verificada» sin un script en `analisis/` que falle con `AssertionError` si no se cumple. Tolerancia para cálculos deterministas: 1e-12 (la usa [contraste.py](analisis/contraste.py)); para estimadores, se fija por estimador antes de correrlo y se registra aquí.
 
-Estado: Propuesta. La tolerancia de 1e-12 y la división en tres niveles son del investigador (inferencia); la regla del `AssertionError` viene de la instrucción inicial del usuario.
+Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-23 (no verificable desde el repo): «propuesta D-05 debe quedar aprobada». La tolerancia de 1e-12 y la división en tres niveles las planteó el investigador (inferencia); la regla del `AssertionError` viene de la instrucción inicial del usuario.
 
 ### D-06
 
-**Canal de trabajo.** Los issues estuvieron deshabilitados: el 2026-10-22 crear uno respondió «410 Issues has been disabled in this repository». Después se habilitaron: a las 13:06 UTC del mismo día se creó con éxito el [issue 3](https://github.com/ingUANDES/donationstax/issues/3), y esa creación hizo que GitHub creara la etiqueta `propuesta` (color por defecto, sin descripción). Ese mismo día no existían `dueño:claude-science` ni `bloqueado` (`prioridad:*`, sin comprobar), así que el protocolo «toma el primer issue con `dueño:claude-science`» no puede ejecutarse hasta que una persona cree las etiquetas y asigne. Mientras tanto, el backlog son los ítems P-nn de [BLUEPRINT.md](BLUEPRINT.md#pendientes), tomados en el orden que fije una persona.
+**Canal de trabajo.** Los issues estuvieron deshabilitados (el 2026-10-22, crear uno respondió «410 Issues has been disabled in this repository») y después se habilitaron. El 2026-10-23 existen las etiquetas `dueño:claude-science`, `bloqueado` y `propuesta` (comprobado con la API de GitHub). Las pruebas de `prioridad:alta`, `prioridad:media`, `prioridad:baja`, `prioridad:alto`, `prioridad:1`, `prioridad:p1`, `prioridad:P1` y `prioridad:1-alta` no encontraron etiqueta, así que el nombre real de las etiquetas de prioridad está sin verificar. El protocolo «toma el primer issue con `dueño:claude-science`» puede ejecutarse; los issues con `propuesta` no se toman, y [BLUEPRINT.md](BLUEPRINT.md#pendientes) sigue describiendo cada pendiente.
 
-Estado: Abierta. Opciones: pasar el backlog a issues (con las etiquetas del protocolo) y que BLUEPRINT los enlace, o mantenerlo en BLUEPRINT.
+Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-23 (no verificable desde el repo): «etiquetas creadas». Falta confirmar el nombre de las etiquetas de prioridad.
 
 ### D-07
 
@@ -55,5 +55,28 @@ Estado: Cerrada por evidencia; falta que una persona la dé por aprobada.
 
 **Ventana empírica.** Propuesta: probar los cambios con datos de 2012 a 2025 y no tratar como evaluables con las planillas actuales los cambios de 2009 a 2011; los datos anteriores a 2012 sirven solo de contexto descriptivo. Razón: la [tabla de evaluabilidad](BLUEPRINT.md#evaluabilidad-de-cada-cambio) y el [perfil de los datos](BLUEPRINT.md#p-02).
 
-Estado: Propuesta. Es inferencia del investigador; se revisa si el Ministerio entrega datos completos de 2008 a 2011.
+Estado: Propuesta. Es inferencia del investigador. El usuario indicó el 2026-10-23 que por ahora no hay más información para completar la cobertura ([D-09 · Fuente y completitud de los datos](#d-09)); se revisa si aparecen datos completos de 2008 a 2011.
+
+### D-09
+
+**Fuente y completitud de los datos.** Los archivos vigentes en la web del Ministerio son la mejor fuente disponible; se contrastan con versiones anteriores solo para ver cambios de cobertura. El usuario indica que el Ministerio los va actualizando y limpiando con el tiempo (nombres de personas con caracteres corruptos, `AÑO` incoherente con el archivo de origen, montos no numéricos), por lo que la cobertura y los valores del Fondo Mixto se toman como los disponibles. Los RUT que existen se pueden usar para completar los faltantes por similitud de nombre. Por ahora no hay más información para completar; en el futuro se evaluará completar con los datos de [viantirreau/donaciones](https://github.com/viantirreau/donaciones). Qué completar y qué excluir lo fija [D-10 · Criterio para completar o excluir](#d-10).
+
+Los datos del régimen de la Ley 21.440 están publicados en [donacionesley21440.gob.cl/donaciones](https://donacionesley21440.gob.cl/donaciones); su tarea es [P-07 · Datos del régimen de la Ley 21.440](BLUEPRINT.md#p-07).
+
+Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-23 (no verificable desde el repo): «los datos más recientes en la web son lo mejor que hay […] la cobertura y valores de fondo mixto se deben tomar como los que están disponibles».
+
+### D-10
+
+**Criterio para completar o excluir filas de las planillas de la Ley 19.885.** Lo plantea el investigador por delegación del usuario ([D-09](#d-09): «toma un criterio razonable para completar o excluir»). Cada regla se aplica con un contador por año (cuántas filas toca), se calcula en Python y en R y se contrasta; nada se borra en silencio.
+
+1. **Montos.** No se imputan. Si el monto total no es numérico pero los de Fondo Mixto e Institución sí lo son, el total se recupera como su suma solo en los años en que, en las filas válidas, el total coincide con esa suma en al menos el 99,9 % de los casos; si no, la fila se excluye del análisis y se cuenta.
+2. **Fondo Mixto.** Cuenta el monto cuando es numérico. Donde viene como «SI/NO» se usa como indicador, y el cumplimiento del 33 % se marca «no medible» (2019, 2021 y parte de 2018); no se imputa.
+3. **Fechas.** Manda la fecha de la donación cuando es válida y cae en el rango de los años publicados; si es texto, se interpreta con los formatos observados. Si es inválida o está fuera de rango, se usa `AÑO` como año y el mes queda desconocido, y la fila no entra en análisis por mes.
+4. **`AÑO` incoherente con el archivo.** El año de la donación es el de la fecha válida, no el del archivo ni el de la columna `AÑO`.
+5. **Duplicados exactos.** Se conservan con marca y se informa un análisis de sensibilidad que los excluye: sin identificador de donación no se puede saber si son errores o donaciones iguales el mismo día.
+6. **Nombres corruptos** (U+FFFD). La fila se conserva; al comparar nombres, esas posiciones valen como comodín.
+7. **RUT faltante.** Se completa con el RUT observado del mismo donante, primero por nombre normalizado idéntico y luego por similitud, con un umbral calibrado ocultando RUT conocidos y exigiendo al menos 99 % de precisión en esa prueba. Los RUT con dígito verificador inválido (Módulo 11) no se usan para completar. Lo que siga sin RUT se analiza por nombre normalizado y se marca como error de medición.
+8. **Cobertura.** Se toma la disponible; no se imputan años ni filas ([D-08 · Ventana empírica](#d-08)).
+
+Estado: Propuesta. Los umbrales de 99,9 % y 99 % son del investigador (inferencia) y se revisan con los datos.
 
