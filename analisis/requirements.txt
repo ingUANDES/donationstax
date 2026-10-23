@@ -1,1 +1,1 @@
-python-calamine
+python-calamine==0.9.0
