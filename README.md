@@ -20,7 +20,7 @@ Siguiente paso: el issue [#10 (P-07)](https://github.com/ingUANDES/donationstax/
 
 `make verificar` (requiere Python 3 y R). Qué comprueba y qué no: [Verificación](BLUEPRINT.md#verificación). `make verificar-datos` perfila las planillas del Ministerio en Python y en R (pide las planillas en `data_local/` y `pip install -r analisis/requirements.txt`; si `python3` no tiene `python-calamine`, `make verificar-datos PY=<ruta al python del entorno>`).
 
-Entorno con que se corrió el 2026-10-23 ([D-11 · Criterios de reproducibilidad](DECISIONES.md#d-11)): Python 3.13.16, python-calamine 0.9.0 (fijado en [requirements.txt](analisis/requirements.txt)) y R 4.3.3 con readxl 1.4.3, en un contenedor de Claude Code en la nube con 4 CPU, 15 GB de RAM y Linux 6.18. En ese equipo `make verificar` tarda 0,6 s; el tiempo de `make verificar-datos` está sin medir todavía. No se probaron otras versiones.
+Entorno con que se corrió el 2026-10-23 ([D-11 · Criterios de reproducibilidad](DECISIONES.md#d-11)): Python 3.13.16, python-calamine 0.9.0 (fijado en [requirements.txt](analisis/requirements.txt)) y R 4.3.3 con readxl 1.4.3, en un contenedor de Claude Code en la nube con 4 CPU, 15 GB de RAM y Linux 6.18. En ese equipo `make verificar` tarda 0,6 s y `make verificar-datos` 7 min 54 s (una sola medición, con las planillas ya descargadas y terminó con código 0). No se probaron otras versiones.
 
 ## Structure of the repo
 
@@ -71,5 +71,5 @@ Research workflow (added 2026-10-22):
     [D-11 · Criterios de reproducibilidad](DECISIONES.md#d-11) y se actualiza
     [D-06](DECISIONES.md#d-06) con las etiquetas que faltan.
   - 2026-10-23: se aprueban D-11 y D-12 (monto donado como variable de resultado); se fija
-    `python-calamine` en [requirements.txt](analisis/requirements.txt) y se registra el entorno
-    en [Cómo verificar](#cómo-verificar).
+    `python-calamine` en [requirements.txt](analisis/requirements.txt) y se registran el entorno
+    y los tiempos en [Cómo verificar](#cómo-verificar).
