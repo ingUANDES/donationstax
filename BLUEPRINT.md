@@ -51,6 +51,7 @@ Inferencia del investigador a partir de [cambios.csv](normativa/cambios.csv) y [
 | Ley 21.210, artículo 10 | 2020-03-01 | En principio sí; el RUT del donante falta en 2019 |
 | Ley 21.440 | 2022-07-01 | La salida del régimen de la Ley 19.885, sí. El régimen nuevo tiene datos publicados, pero sin donante ([P-07](#p-07)): la sustitución solo se mide agregada por donataria y fecha (inferencia) |
 | Ley 21.015 | por verificar | No: sus donaciones usan otro certificado y no dan crédito; los datos del Certificado N° 60 siguen pedidos en el [issue 6](https://github.com/ingUANDES/donationstax/issues/6) |
+| Ley 21.850 | por verificar; vigencia desde noviembre o diciembre de 2026, según fuentes que no son el texto de la ley | No, si rige desde 2026: queda fuera de la ventana (inferencia); fuentes y qué falta leer en el [issue 12](https://github.com/ingUANDES/donationstax/issues/12) |
 
 La ventana empírica es 2012 a 2025 ([D-08 · Ventana empírica](DECISIONES.md#d-08)).
 
