@@ -87,10 +87,23 @@ Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-23 (no verif
 1. Un script maestro: `make verificar` y, para lo que necesita datos, `make verificar-datos` ([Makefile](Makefile)).
 2. Semilla fija en toda simulación, escrita en el script ([BLUEPRINT.md, Verificación](BLUEPRINT.md#verificación)).
 3. En el README: software y versiones usadas, hardware y tiempo de ejecución de `make verificar` y de `make verificar-datos`.
-4. Dependencias con versión fija: `analisis/requirements.txt` hoy no fija ninguna, y la versión de R y de `readxl` no está registrada.
+4. Dependencias con versión fija en `analisis/requirements.txt`; la versión de R y de `readxl`, en el README.
 5. Carpeta de resultados: abierta. `salidas/` no se versiona porque se regenera; qué cifras se guardan y dónde se decide cuando exista el primer resultado de estimación.
 
 No se adopta la versión mínima de Python (3.12 o superior) del handoff: viene de un issue de otro repositorio que no pude leer. La versión se fija con la que corra `make verificar`.
 
-Estado: Propuesta. Origen: el handoff recoge una decisión del usuario del 2026-10-20, en otra conversación: «se toman como aplicables The Turing Way y la política de la Econometric Society» (no verificable desde el repo; el archivo no está en él). Los cinco criterios y la lectura del quinto son inferencia del investigador. Falta que una persona la apruebe.
+Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-23 (no verificable desde el repo): «D-11 aprobado». Origen: el handoff recoge una decisión del usuario del 2026-10-20, en otra conversación: «se toman como aplicables The Turing Way y la política de la Econometric Society» (no verificable desde el repo; el archivo no está en él). Los cinco criterios y la lectura del quinto son inferencia del investigador.
+
+### D-12
+
+**Variable de resultado: monto donado.** El monto donado es el monto total de cada donación: en las planillas de la Ley 19.885, la columna `MONTOTOTALDONACION` ([esquema_por_anio.csv](datos/esquema_por_anio.csv)), con el total recuperado y las filas excluidas según [D-10 · Criterio para completar o excluir](#d-10); en los datos de la Ley 21.440, su columna de valor ([P-07 · Datos del régimen de la Ley 21.440](BLUEPRINT.md#p-07)).
+
+Queda abierto:
+
+- La unidad: pesos nominales, como vienen en los archivos, o convertidos a UTM o a pesos reales. La serie de UTM o de IPC no está en el repo y no se inventa: se pide en un issue cuando algún diseño la necesite.
+- El nivel de agregación (donación, donante-año, donante-institución-año): lo fija cada diseño en [P-05 · Simulaciones de efecto conocido](BLUEPRINT.md#p-05).
+
+Limitación (inferencia): las planillas son de donaciones recibidas (así se titula la fuente en [D-04](#d-04)), así que no traen donantes que no donaron; el monto es condicional a donar y el efecto sobre la decisión de donar no se identifica solo con estos datos.
+
+Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-23 (no verificable desde el repo): «la variable resultado debería ser monto donado». Las columnas, los puntos abiertos y la limitación son del investigador (inferencia).
 

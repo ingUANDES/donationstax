@@ -1,6 +1,6 @@
 # Blueprint
 
-Pregunta de investigación: evaluar el impacto de los cambios regulatorios en las donaciones con fines sociales en Chile, con el alcance de [D-02 · Alcance](DECISIONES.md#d-02). Este archivo define el método y el backlog; el estado está en el [README](README.md#estado) y las decisiones en [DECISIONES.md](DECISIONES.md).
+Pregunta de investigación: evaluar el impacto de los cambios regulatorios en las donaciones con fines sociales en Chile, con el alcance de [D-02 · Alcance](DECISIONES.md#d-02) y el monto donado como variable de resultado ([D-12 · Variable de resultado](DECISIONES.md#d-12)). Este archivo define el método y el backlog; el estado está en el [README](README.md#estado) y las decisiones en [DECISIONES.md](DECISIONES.md).
 
 Serie **P-nn**: pendientes. Este es el único archivo donde se define el prefijo P- y donde viven sus ítems. Se toman en el orden que fije una persona ([D-06 · Canal de trabajo](DECISIONES.md#d-06)). Citar desde otro archivo: `[P-01 · Inventario normativo](BLUEPRINT.md#p-01)`.
 
@@ -130,7 +130,7 @@ Calcular P = 1 − c − τg para cada fila de [normativa/cambios.csv](normativa
 
 **Simulaciones de efecto conocido (E4).** Estado: pendiente.
 
-Antes de usar datos reales, un caso simulado por diseño, en Python y en R, con semilla fija y tolerancias fijadas antes de correr ([D-05](DECISIONES.md#d-05)):
+Antes de usar datos reales, un caso simulado por diseño, en Python y en R, con semilla fija, tolerancias fijadas antes de correr ([D-05](DECISIONES.md#d-05)) y el monto donado como resultado ([D-12 · Variable de resultado](DECISIONES.md#d-12)):
 
 - Bunching en un quiebre del conjunto presupuestario: elasticidad conocida, polinomio de orden 3 a 6, ventana de exclusión, error estándar por remuestreo; que recupere la masa en exceso y la elasticidad; sensibilidad al orden y a la ventana; incluir donantes que cumplen la condición del Fondo Mixto.
 - Estudio de eventos y diferencias en diferencias: efecto y tendencias paralelas conocidos; un caso con tratamiento definido por el nivel previo del resultado que muestre el sesgo.
