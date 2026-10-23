@@ -41,7 +41,7 @@ Son inferencias del investigador, no hallazgos. Cada una se convierte en un caso
 
 ## Evaluabilidad de cada cambio
 
-Inferencia del investigador a partir de [cambios.csv](normativa/cambios.csv) y [esquema_por_anio.csv](datos/esquema_por_anio.csv); la aprueba una persona, y cambia si cambian los datos.
+Inferencia del investigador a partir de [cambios.csv](normativa/cambios.csv) y [esquema_por_anio.csv](datos/esquema_por_anio.csv); el marco es la ventana de [D-08](DECISIONES.md#d-08) (aprobada) y cambia si cambian los datos.
 
 | Cambio | Fecha del tratamiento | ¿Evaluable con las planillas? |
 |---|---|---|
@@ -52,7 +52,7 @@ Inferencia del investigador a partir de [cambios.csv](normativa/cambios.csv) y [
 | Ley 21.440 | 2022-07-01 | La salida del régimen de la Ley 19.885, sí. El régimen nuevo tiene datos publicados, pero sin donante ([P-07](#p-07)): la sustitución solo se mide agregada por donataria y fecha (inferencia) |
 | Ley 21.015 | por verificar | No: sus donaciones usan otro certificado y no dan crédito; los datos del Certificado N° 60 siguen pedidos en el [issue 6](https://github.com/ingUANDES/donationstax/issues/6) |
 
-Con esto, la ventana empírica realista son 2012 a 2025 ([D-08 · Ventana empírica](DECISIONES.md#d-08)).
+La ventana empírica es 2012 a 2025 ([D-08 · Ventana empírica](DECISIONES.md#d-08)).
 
 ## Pendientes
 
@@ -121,7 +121,7 @@ Nota del 2026-10-22: las planillas actuales de 2010 a 2013 traen el mismo númer
 
 ### P-04
 
-**Precio fiscal por régimen (E3).** Estado: pendiente; depende de [P-01](#p-01).
+**Precio fiscal por régimen (E3).** Estado: pendiente; puede empezar, porque [P-01](#p-01) está hecho. La tasa de 2012 depende de las tasas transitorias de 2011 y 2012, que no se leyeron (sin verificar).
 
 Calcular P = 1 − c − τg para cada fila de [normativa/cambios.csv](normativa/cambios.csv) con las funciones de [precio_fiscal.py](analisis/precio_fiscal.py) y [precio_fiscal.R](analisis/precio_fiscal.R), con τ por año y por tipo de contribuyente en vez de una tasa fija. Determinar, con cita, si el crédito y el tope global del artículo 10 hacen que el precio marginal sea otro para quien llega al tope (inferencia; sin verificar contra la norma). Salida: signo y magnitud del cambio de precio de cada cambio regulatorio, comparados Python contra R.
 
