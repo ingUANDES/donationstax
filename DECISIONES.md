@@ -50,3 +50,10 @@ Estado: Abierta. Opciones: pasar el backlog a issues (con las etiquetas del prot
 Resolución por la norma (2026-10-22): el texto original de la Ley 19.885 vigente desde 2003-08-06 dice en el artículo 1 N° 2: «Para que proceda este beneficio, a lo menos el 33% de la donación que da derecho al mismo deberá efectuarse al fondo que establece el artículo 3º.» ([ley19885_v2003-08-06.txt](normativa/textos/ley19885_v2003-08-06.txt), BCN; fila correspondiente en [cambios.csv](normativa/cambios.csv)). Es decir, el aporte al Fondo era obligatorio para toda donación con beneficio, y la Ley 20.316 lo flexibilizó (a la fecha de la donación desde 2009-01-01, según su [artículo 2 transitorio](normativa/textos/ley20316_v2026-10-22.txt)). El artículo del repo describe el sentido correcto; el encargo inicial no.
 
 Estado: Cerrada por evidencia; falta que una persona la dé por aprobada.
+
+### D-08
+
+**Ventana empírica.** Propuesta: probar los cambios con datos de 2012 a 2025 y no tratar como evaluables con las planillas actuales los cambios de 2009 a 2011; los datos anteriores a 2012 sirven solo de contexto descriptivo. Razón: la [tabla de evaluabilidad](BLUEPRINT.md#evaluabilidad-de-cada-cambio) y el [perfil de los datos](BLUEPRINT.md#p-02).
+
+Estado: Propuesta. Es inferencia del investigador; se revisa si el Ministerio entrega datos completos de 2008 a 2011.
+

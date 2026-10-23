@@ -9,22 +9,22 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Estado
 
-Fase: inventario normativo hecho; la estimación no ha empezado. Actualizado el 2026-10-22.
+Fase: inventario normativo y perfil de los datos hechos; la estimación no ha empezado. Actualizado el 2026-10-22.
 
 | Etapa | Estado | Detalle |
 |---|---|---|
 | E0 Andamiaje | listo | [BLUEPRINT.md](BLUEPRINT.md), [DECISIONES.md](DECISIONES.md), `make verificar` |
 | E1 Inventario normativo | hecho; faltan las tasas transitorias de 2011 y 2012 | [P-01 · Inventario normativo](BLUEPRINT.md#p-01), [normativa/cambios.csv](normativa/cambios.csv) |
-| E2 Estructura de los datos | sin iniciar | [P-02 · Estructura de los datos](BLUEPRINT.md#p-02) |
+| E2 Estructura de los datos | perfil hecho; falta armonizar | [P-02 · Estructura de los datos](BLUEPRINT.md#p-02), [P-06](BLUEPRINT.md#p-06), [datos/esquema_por_anio.csv](datos/esquema_por_anio.csv) |
 | E3 a E5 | sin iniciar | [Etapas](BLUEPRINT.md#etapas) |
 
-Bloqueos y decisiones abiertas: los issues ya están habilitados pero faltan las etiquetas del protocolo ([D-06 · Canal de trabajo](DECISIONES.md#d-06)); el sentido del cambio de la Ley 20.316 quedó resuelto por la norma y espera aprobación ([D-07 · Sentido del cambio de la Ley 20.316](DECISIONES.md#d-07)), y hay una propuesta de límites del alcance por aprobar ([D-02 · Alcance](DECISIONES.md#d-02)).
+Bloqueos y decisiones abiertas: los issues ya están habilitados pero faltan las etiquetas del protocolo ([D-06 · Canal de trabajo](DECISIONES.md#d-06)); el sentido del cambio de la Ley 20.316 quedó resuelto por la norma y espera aprobación ([D-07 · Sentido del cambio de la Ley 20.316](DECISIONES.md#d-07)), hay una propuesta de límites del alcance por aprobar ([D-02 · Alcance](DECISIONES.md#d-02)) y otra de ventana empírica ([D-08 · Ventana empírica](DECISIONES.md#d-08)).
 
-Siguiente paso: [P-02 · Estructura de los datos](BLUEPRINT.md#p-02) y [P-03 · Corregir el origen de las fechas](BLUEPRINT.md#p-03) no dependen de nada pendiente; [P-04](BLUEPRINT.md#p-04) y [P-05](BLUEPRINT.md#p-05) esperan la aprobación de [D-02](DECISIONES.md#d-02).
+Siguiente paso: [P-06 · Armonizar las planillas](BLUEPRINT.md#p-06) y [P-03 · Corregir el origen de las fechas](BLUEPRINT.md#p-03) no dependen de nada pendiente; [P-04](BLUEPRINT.md#p-04) y [P-05](BLUEPRINT.md#p-05) esperan la aprobación de [D-02](DECISIONES.md#d-02) y de [D-08](DECISIONES.md#d-08).
 
 ## Cómo verificar
 
-`make verificar` (requiere Python 3 y R). Qué comprueba y qué no: [Verificación](BLUEPRINT.md#verificación).
+`make verificar` (requiere Python 3 y R). Qué comprueba y qué no: [Verificación](BLUEPRINT.md#verificación). `make verificar-datos` perfila las planillas del Ministerio en Python y en R (tarda varios minutos; pide las planillas en `data_local/` y `analisis/requirements.txt`).
 
 ## Structure of the repo
 
@@ -48,3 +48,4 @@ Research workflow (added 2026-10-22):
 - 2026-10-22: andamiaje de investigación (README con Estado, [BLUEPRINT.md](BLUEPRINT.md), [DECISIONES.md](DECISIONES.md), [Makefile](Makefile), [analisis/](analisis/), [normativa/cambios.csv](normativa/cambios.csv) con el esquema y sin filas).
 - 2026-10-22: [D-06 · Canal de trabajo](DECISIONES.md#d-06) actualizado: los issues se habilitaron ([issue 3](https://github.com/ingUANDES/donationstax/issues/3)).
 - 2026-10-22: P-01, inventario normativo: [normativa/cambios.csv](normativa/cambios.csv) (55 filas, 54 con cita literal comprobada), textos en [normativa/textos/](normativa/textos/) y [bcn_versiones.py](analisis/bcn_versiones.py) ([PR 4](https://github.com/ingUANDES/donationstax/pull/4)).
+- 2026-10-22: P-02, perfil de esquema de las planillas 2008-2025: [datos/esquema_por_anio.csv](datos/esquema_por_anio.csv), contraste Python y R ([contraste_datos.py](analisis/contraste_datos.py)) y `make verificar-datos` ([PR 5](https://github.com/ingUANDES/donationstax/pull/5)).
