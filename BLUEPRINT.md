@@ -43,18 +43,34 @@ Son inferencias del investigador, no hallazgos. Cada una se convierte en un caso
 
 ### P-01
 
-**Inventario normativo (E1).** Estado: pendiente. En la sesión del 2026-10-22 el entorno de Claude Code bloqueó `bcn.cl`, `sii.cl` y `midesof.gob.cl` (el proxy respondió 403 al `CONNECT`), de modo que nada normativo está leído todavía.
+**Inventario normativo (E1).** Estado: hecho el 2026-10-22, salvo lo de «Falta dentro de P-01».
 
-Hacer: para cada norma, descargar de BCN el texto vigente y las versiones históricas con su fecha de versión, guardarlos en `normativa/textos/` con encabezado (URL y fecha de descarga) y registrar cada cambio de parámetro en [normativa/cambios.csv](normativa/cambios.csv) con cita textual, artículo e inciso. Las columnas son las de `COLUMNAS` en [verifica_citas.py](analisis/verifica_citas.py). Distinguir ley, reglamento y circular o resolución del SII. Proponer los límites del alcance de [D-02](DECISIONES.md#d-02) para aprobación, y resolver [D-07 · Sentido del cambio de la Ley 20.316](DECISIONES.md#d-07).
+Producto: [normativa/cambios.csv](normativa/cambios.csv), una fila por cambio de parámetro con su cita literal, que [verifica_citas.py](analisis/verifica_citas.py) comprueba contra los textos de [normativa/textos/](normativa/textos/). Los textos de leyes salen de BCN con [bcn_versiones.py](analisis/bcn_versiones.py) y los de circulares, del SII. La descarga y la comprobación de citas son solo en Python: el contraste Python y R de [D-03 · Python y R en paralelo](DECISIONES.md#d-03) se aplica a resultados numéricos. La columna `efecto_precio` es el signo a priori frente al régimen inmediatamente anterior para un donante que no cambia su conducta; el cálculo está en [P-04](#p-04).
 
-Candidatos a revisar, de memoria del investigador (sin verificar; los números marcados «por confirmar» pueden estar mal): Ley 19.885 y sus modificaciones, Leyes 20.316, 20.565, 21.015 y 21.440 (la usan el encargo y el artículo), Ley 20.900 (la usa el [artículo, L246](https://github.com/ingUANDES/donationstax/blob/ed3eb2ec26b14897e6742e8e52aaf83d9b82d50c/article-elsevier/article-elsevier.Rmd#L246)), cambios de la tasa del Impuesto de Primera Categoría y de la escala del Impuesto Global Complementario (leyes por confirmar), tope global del artículo 10 de la Ley 19.885, y las Circulares del SII N° 71 (2010-11-12) y N° 49 (2012) que cita el encargo.
+Lo que la norma dice y cambia el diseño de [P-05](#p-05) (cada punto tiene su fila en cambios.csv; lo que va más allá de la fila es inferencia del investigador):
 
-Contradicciones a resolver (todas sin verificar contra la norma; el encargo es el texto pegado por el usuario el 2026-10-22, no verificable desde el repo):
+- **El tratamiento rige por la fecha de la donación, no por la de la ley.** El artículo 2 transitorio de la Ley 20.316 la hace regir para donaciones desde 2009, aunque BCN muestra el texto nuevo desde 2010; dos de sus numerales rigen desde 2010 y se ven en BCN desde 2011. El evento de la Ley 20.316 es 2009.
+- **La forma de la regla en 1.000 UTM cambió.** Entre la versión de 2010 y la de 2012 la tasa menor se aplicaba a la donación completa (un salto); desde 2012-02-08, solo a la parte que excede (un quiebre). Son dos diseños distintos de bunching; las planillas del Ministerio solo cubren con volumen el segundo ([P-02](#p-02)).
+- **La unidad del umbral cambió.** Hasta 2012-02-08 se sumaban las donaciones a cualquier institución; desde entonces, las hechas a una misma institución en el año (N° 9). La Circular N° 71 del SII dice que la relación con el Fondo se aprecia por institución. Inferencia: la variable de ejecución debe definirse por donante, institución y año, y contrastarse con el total por donante.
+- **Hubo una regla de dos instituciones y 700 UTM** entre 2010-01-01 y 2012-02-07, y los 25 % y 40 % para adicciones existen desde 2010; la Ley 20.565 los volvió marginales.
+- **El precio de donar también cambió por el impuesto, y desde 2017 no hay un solo τ.** Las filas de los artículos 20 y 52 de la Ley sobre Impuesto a la Renta dan la tasa de primera categoría y la escala del global complementario por versión; desde 2017 la tasa depende del régimen del artículo 14. Inferencia: [P-04](#p-04) debe trabajar con τ por tipo de donante y por régimen, y las planillas no traen el régimen ni el tramo del donante ([P-02](#p-02)), así que el precio solo se puede acotar con escenarios.
+- **Lo que no cambió en 2016:** la Ley 20.900 solo derogó el título de donaciones políticas.
+- **Dos regímenes paralelos desde 2018 y 2022.** Las donaciones de la medida alternativa de la Ley 21.015 no dan crédito, solo gasto necesario, y su vigencia sigue sin verificar. La Ley 21.440 permite deducir de la base, con topes en UTM y en porcentaje, fuera del límite global del artículo 10, y desde 2022-07-01.
 
-- Vigencias. Encargo: Ley 19.885 en agosto de 2003, Ley 20.316 en enero de 2010, Ley 20.565 en febrero de 2012, Ley 21.440 en julio de 2022. [Artículo, L369-L375](https://github.com/ingUANDES/donationstax/blob/ed3eb2ec26b14897e6742e8e52aaf83d9b82d50c/article-elsevier/article-elsevier.Rmd#L369-L375): «19.885 & 2006 to 2009-dec-31», «20.316 & 2010-jan-01 to 2010-dec-01», «20.565 & 2011-jan-01 to 2012-feb-07», «20.900(1) & 2012-feb-08 to 2016-apr-13». Inferencia: la «20.900(1)» desde 2012-02-08 podría ser la Ley 20.565 mal numerada; nada del repo lo confirma.
-- Regla de 700 UTM por institución y mínimo de dos instituciones para empresas: está en el [artículo, L121](https://github.com/ingUANDES/donationstax/blob/ed3eb2ec26b14897e6742e8e52aaf83d9b82d50c/article-elsevier/article-elsevier.Rmd#L121) y falta en el encargo.
-- Tasas de 25 % y 40 % para adicciones: el encargo las atribuye a la Ley 20.565; el artículo las describe bajo la Ley 20.316 ([L207](https://github.com/ingUANDES/donationstax/blob/ed3eb2ec26b14897e6742e8e52aaf83d9b82d50c/article-elsevier/article-elsevier.Rmd#L207)) y bajo la ley posterior ([L311](https://github.com/ingUANDES/donationstax/blob/ed3eb2ec26b14897e6742e8e52aaf83d9b82d50c/article-elsevier/article-elsevier.Rmd#L311)).
-- Las fuentes del encargo no respaldan sus afirmaciones: la fuente 1 es un documento cuyo nombre de archivo dice 2006 (no leído) y se cita para leyes de 2009 a 2022; varias referencias repiten la misma URL; hay afirmaciones con las nueve fuentes en bloque.
+Contradicciones del encargo y del artículo del repo, resueltas con la norma:
+
+- Sentido de la Ley 20.316: [D-07 · Sentido del cambio de la Ley 20.316](DECISIONES.md#d-07) (el artículo del repo acierta; el encargo no).
+- Vigencias: el encargo acierta en las fechas de las Leyes 19.885, 20.316 (entrada en vigencia), 20.565 y 21.440. La tabla del [artículo, L369-L375](https://github.com/ingUANDES/donationstax/blob/ed3eb2ec26b14897e6742e8e52aaf83d9b82d50c/article-elsevier/article-elsevier.Rmd#L369-L375) está mal en la Ley 19.885 (aparece «2006») y en la «Ley 20.900(1)»: la modificación del 2012-02-08 es la Ley 20.565 (el D.O. de esa fecha lo dice la [Circular N° 49](normativa/textos/circular_sii_49_2012.txt)).
+- La regla de dos instituciones y 700 UTM sí existió (el artículo acierta; el encargo la omitía) y los 25 % y 40 % no son de la Ley 20.565 (el encargo se equivoca).
+- El encargo dice que las donaciones de la Ley 21.015 «aplican el esquema vigente de la Ley 19.885»: no dan crédito.
+- Fuentes del encargo: no se revisaron una por una. La fuente 1 es un documento cuyo nombre de archivo dice 2006 y se cita para leyes de 2009 a 2022 (sigue sin leer), varias referencias repiten la misma URL y hay afirmaciones con las nueve fuentes en bloque.
+
+Falta dentro de P-01:
+
+- Tasas transitorias de 2011 y 2012. El texto del artículo 20 de la Ley sobre Impuesto a la Renta muestra una sola tasa hasta 2012-12-31, y las de esos años pueden estar en disposiciones transitorias de otras leyes: no se leyeron (sin verificar).
+- El texto de la Ley 20.565 en sí (se conoce por la versión consolidada de BCN y la Circular N° 49; no se encontró su `idNorma`), el reglamento (Decreto Supremo 77 de 2009) y las circulares del SII sobre la Ley 21.440.
+- Mecánica del crédito bajo los regímenes de 2017 en adelante (semi integrado y atribuido) y la fecha de publicación de los reglamentos de la Ley 21.015.
+- Los regímenes que el [artículo 10 de la Ley 19.885](normativa/textos/ley19885_v2024-08-24.txt) enumera y que [D-02](DECISIONES.md#d-02) deja fuera por ahora.
 
 ### P-02
 
