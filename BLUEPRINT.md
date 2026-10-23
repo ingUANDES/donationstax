@@ -9,7 +9,7 @@ Serie **P-nn**: pendientes. Este es el único archivo donde se define el prefijo
 | Etapa | Producto | Cómo se verifica | Backlog |
 |---|---|---|---|
 | E1 Inventario normativo | [normativa/cambios.csv](normativa/cambios.csv) y textos en `normativa/textos/` | [verifica_citas.py](analisis/verifica_citas.py) | [P-01](#p-01) |
-| E2 Estructura de los datos | [datos/esquema_por_anio.csv](datos/esquema_por_anio.csv) | esquema calculado en Python y en R, comparados ([contraste_datos.py](analisis/contraste_datos.py)) | [P-02](#p-02), [P-06](#p-06) |
+| E2 Estructura de los datos | [datos/esquema_por_anio.csv](datos/esquema_por_anio.csv) | esquema calculado en Python y en R, comparados ([contraste_datos.py](analisis/contraste_datos.py)) | [P-02](#p-02), [P-06](#p-06), [P-07](#p-07) |
 | E3 Precio fiscal por régimen | salidas de [precio_fiscal.py](analisis/precio_fiscal.py) y [precio_fiscal.R](analisis/precio_fiscal.R) | [contraste.py](analisis/contraste.py) | [P-04](#p-04) |
 | E4 Diseños de estimación por cambio | scripts en `analisis/`, Python y R | simulación con efecto conocido y contraste | [P-05](#p-05) |
 | E5 Resultados y manuscrito | tablas y texto del artículo | solo cifras con nivel «verificada» ([D-05](DECISIONES.md#d-05)) | sin abrir |
@@ -49,8 +49,8 @@ Inferencia del investigador a partir de [cambios.csv](normativa/cambios.csv) y [
 | Ley 20.565, de salto a quiebre | 2012-02-08 | El bunching posterior en el quiebre sí; el efecto del cambio no, porque el período previo (2011) tiene 656 filas |
 | Cambios de tasa del impuesto a la renta | por fecha (pendiente en [P-01](#p-01)) | Pendiente de P-01 |
 | Ley 21.210, artículo 10 | 2020-03-01 | En principio sí; el RUT del donante falta en 2019 |
-| Ley 21.440 | 2022-07-01 | Solo la salida del régimen de la Ley 19.885: las planillas no traen el régimen nuevo (faltan datos) |
-| Ley 21.015 | por verificar | No: sus donaciones usan otro certificado y no dan crédito |
+| Ley 21.440 | 2022-07-01 | La salida del régimen de la Ley 19.885, sí. El régimen nuevo tiene datos publicados, pero sin donante ([P-07](#p-07)): la sustitución solo se mide agregada por donataria y fecha (inferencia) |
+| Ley 21.015 | por verificar | No: sus donaciones usan otro certificado y no dan crédito; los datos del Certificado N° 60 siguen pedidos en el [issue 6](https://github.com/ingUANDES/donationstax/issues/6) |
 
 Con esto, la ventana empírica realista son 2012 a 2025 ([D-08 · Ventana empírica](DECISIONES.md#d-08)).
 
@@ -107,6 +107,8 @@ Lo que los datos muestran (las cifras están en esquema_por_anio.csv; lo marcado
 
 Consistencia con el extracto del repo: las filas por año de `donationstaxrpkg/data/d_2010_2014.rda` (2010: 42; 2011: 656; 2012: 35.586; 2013: 98.328; 2014: 1) coinciden con los archivos de 2010 a 2013 de hoy (salvo una fila de 2013 con monto no numérico); ese extracto no incluye las casi un millón de filas de 2014. Su `fecha2` sigue con el error de [P-03](#p-03).
 
+Estabilidad: entre 2026-10-22 y 2026-10-23 ninguno de los 18 archivos cambió (misma huella, URL y `Last-Modified`; comparación sin script en `analisis/`, no verificada). El usuario indica que el Ministerio los actualiza y limpia con el tiempo; la consecuencia está en [D-09 · Fuente y completitud de los datos](DECISIONES.md#d-09). Volver a correr [descargar_midesof.py](analisis/descargar_midesof.py) y comparar con [datos/descargas_midesof.csv](datos/descargas_midesof.csv) detecta los cambios.
+
 ### P-03
 
 **Corregir el origen de las fechas de Excel en `tidy_data.R`.** Estado: pendiente.
@@ -139,4 +141,21 @@ Cada riesgo de [Riesgos de identificación a testear](#riesgos-de-identificació
 
 **Armonizar las planillas (E2).** Estado: pendiente; sigue a [P-02](#p-02).
 
-Hacer: un diccionario de columnas para las cinco variantes de esquema, tipos y fechas únicos (serial, texto e ISO) y una tabla de reglas para lo que el perfil marca: las 7.163 filas de 2014 con monto no numérico, los duplicados exactos, las fechas fuera de rango, las filas con `AÑO` distinto del año de la fecha y los caracteres corruptos. La salida va a `data_local/` (los nombres de personas naturales no se suben); lo versionado son las reglas y los conteos, calculados en Python y en R y contrastados. Después, la identificación de donantes: por RUT donde existe y por nombre normalizado donde no, midiendo el error de unión (el encargo propone Módulo 11, Jaro-Winkler y agrupamiento; sin verificar que hagan falta).
+Hacer: aplicar [D-10 · Criterio para completar o excluir](DECISIONES.md#d-10) a las planillas de la Ley 19.885. Un diccionario de columnas para las cinco variantes de esquema, tipos y fechas únicos (serial, texto e ISO), y una tabla de reglas con el conteo por año de las filas que cada regla toca, entre ellas las 7.163 filas de 2014 con monto no numérico. La salida va a `data_local/` (los nombres de personas naturales no se suben); lo versionado son las reglas y los conteos, calculados en Python y en R y contrastados. Después, completar los RUT faltantes por similitud de nombre con los RUT que existen ([D-09](DECISIONES.md#d-09)), midiendo precisión y cobertura al ocultar RUT conocidos (el encargo propone Módulo 11, Jaro-Winkler y agrupamiento; sin verificar que hagan falta). Los datos de [viantirreau/donaciones](https://github.com/viantirreau/donaciones) quedan para más adelante.
+
+### P-07
+
+**Datos del régimen de la Ley 21.440 (E2).** Estado: pendiente. Responde al [issue 6](https://github.com/ingUANDES/donationstax/issues/6) en lo que toca a la Ley 21.440; el Certificado N° 60 de la Ley 21.015 sigue pedido allí.
+
+Fuente: [donacionesley21440.gob.cl/donaciones](https://donacionesley21440.gob.cl/donaciones), con [instantánea de texto, nombres y huellas de los archivos](datos/fuentes/ley21440_donaciones_2026-10-23.txt). Cada página por año redirige a un `.xlsx` en `cdn.hacienda.cl` con una URL firmada que vence a los pocos minutos: hay que pedir la página del año y seguir el redireccionamiento de inmediato. Ambos hosts deben estar autorizados.
+
+Lo siguiente es exploratorio, sin script en `analisis/` (no verificado), sobre los archivos del 2026-10-23:
+
+- **Columnas:** RUT de la donataria, donataria, valor y fecha, más «Nac/Ext.» en 2024 y 2025. **No hay donante ni su RUT.**
+- **Filas, de 2022 a 2025:** 414, 14.291, 428.151 y 533.650. El de 2025 dice «Información actualizada al 07.07.26»; los otros llevan «20.11.25» en el nombre.
+- **Duplicados exactos:** 6 % de las filas en 2022, 72 % en 2023, 97,5 % en 2024 y 95,6 % en 2025. Sin donante no se pueden distinguir donaciones iguales del mismo día de registros repetidos.
+- **Tamaño frente a la Ley 19.885:** la suma de valores de 2024 y 2025 del régimen nuevo supera a la de las planillas de la Ley 19.885 del mismo año (descriptivo, en pesos nominales; ver [esquema_por_anio.csv](datos/esquema_por_anio.csv)).
+- **Fechas anteriores al 2022-07-01:** 7 de las 414 filas de 2022, desde 2022-03-17, aunque los beneficios rigen desde 2022-07-01 según la [Ley 21.440](normativa/cambios.csv).
+- **Aviso de la propia página:** las cifras pueden variar por rectificaciones de las donatarias o por fiscalización, y la Subsecretaría de Hacienda no garantiza su exactitud.
+
+Hacer: un script de descarga que obtenga la URL firmada y la siga de inmediato, más un manifiesto con huellas; el perfil de esquema calculado en Python y en R y contrastado, como en [P-02](#p-02); y la comparación con las planillas de la Ley 19.885 por donataria (las planillas traen el RUT de la institución desde 2020) y por fecha, para medir la sustitución agregada. Dejar escrito qué no se puede medir: la sustitución por donante.

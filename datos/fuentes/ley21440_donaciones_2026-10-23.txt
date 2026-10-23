@@ -1,0 +1,22 @@
+# Fuente: https://donacionesley21440.gob.cl/donaciones
+# Descargado: 2026-10-23 (texto visible de la página; sin cambios de contenido)
+# Cada página por año responde con un redireccionamiento 302 a un archivo .xlsx en https://cdn.hacienda.cl/asset/ley21440/attachment/<huella>/<id>?_expiration=<época>&_hash=<firma>.
+# La URL va firmada y vence a los pocos minutos: hay que pedir la página del año y seguir el redireccionamiento de inmediato.
+
+Texto de la página:
+En cumplimiento de lo dispuesto por el numeral 2 del artículo 46 G del Título VIII Bis del D.L. N° 3.063 del año 1979, Ley de Rentas Municipales, se publica la nómina histórica de donaciones recibidas por las entidades inscritas en el registro público de donatarias.
+Se comunica a los usuarios que, todas las donaciones registradas, se obtienen a través de los reportes anuales presentados por las donatarias, en virtud de la obligación señalada en el artículo 46 H N° 2, del citado cuerpo legal.
+Además, las cifras informadas podrían variar producto de las rectificaciones efectuadas por las donatarias, o bien, a raíz de procesos de fiscalización de la Secretaría Técnica y/o Servicio de Impuestos Internos.
+Se deja expresa constancia que la Subsecretaría de Hacienda no asume responsabilidad alguna por la veracidad de datos informados, dado que ellos provienen de donaciones informadas directamente por las entidades registradas, por lo que no otorga respecto de aquello, garantía alguna en lo que se refiere a la exactitud, vigencia o integridad de ellas.
+
+Enlaces a las páginas por año:
+Donaciones 2025 | https://donacionesley21440.gob.cl/donaciones/donaciones-2025
+Donaciones 2024 | https://donacionesley21440.gob.cl/donaciones/donaciones-2024
+Donaciones 2023 | https://donacionesley21440.gob.cl/donaciones/donaciones-2023
+Donaciones 2022 | https://donacionesley21440.gob.cl/donaciones/donaciones-2022
+
+Archivos observados el 2026-10-23 (año | nombre original | tamaño | huella | fecha de modificación):
+2022 | Donaciones 2022 20.11.25.xlsx | 22054 bytes | sha256 def647bf735a2c0da1be89dc027d8e78c61936aab613f7364fcb90084d3d472b | Last-Modified Tue, 13 Oct 2026 14:51:59 GMT
+2023 | Donaciones 2023 20.11.25.xlsx | 308800 bytes | sha256 216553f7d09de315642211c9fbc12e6eafc18a83dfea43fca0c737d4e139d590 | Last-Modified Tue, 13 Oct 2026 14:50:49 GMT
+2024 | Donaciones 2024 20.11.25.xlsx | 7833855 bytes | sha256 07529e3b35bbf2a13c6740b59d5cb5fe11abadea2123b007f079326aa5d857fe | Last-Modified Tue, 13 Oct 2026 14:50:27 GMT
+2025 | Donaciones 2025 al 07.07.26 1.xlsx | 10764809 bytes | sha256 b73edabc361fa39b605410247ff9361d1aa38bc5a6d5533ec653716bcdf0cf4c | Last-Modified Tue, 13 Oct 2026 14:49:34 GMT
