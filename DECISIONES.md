@@ -39,9 +39,9 @@ Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-23 (no verif
 
 ### D-06
 
-**Canal de trabajo.** Los issues estuvieron deshabilitados (el 2026-10-22, crear uno respondió «410 Issues has been disabled in this repository») y después se habilitaron. El 2026-10-23 existen las etiquetas `dueño:claude-science`, `bloqueado` y `propuesta` (comprobado con la API de GitHub). No existen `prioridad:alta`, `prioridad:media`, `prioridad:baja` ni `dueño:humano` (comprobado con la API de GitHub el 2026-10-23; las pruebas con otros nombres de prioridad tampoco encontraron etiqueta). El handoff del 2026-10-22 fija esos cuatro nombres (no verificable desde el repo): hay que crearlos. Mientras no existan las de prioridad, el orden lo fija la persona que asigna `dueño:claude-science`. El protocolo «toma el primer issue con `dueño:claude-science`» puede ejecutarse; los issues con `propuesta` no se toman, y [BLUEPRINT.md](BLUEPRINT.md#pendientes) sigue describiendo cada pendiente.
+**Canal de trabajo.** Los issues estuvieron deshabilitados (el 2026-10-22, crear uno respondió «410 Issues has been disabled in this repository») y después se habilitaron. El 2026-10-24 existen las etiquetas `dueño:claude-science`, `dueño:humano`, `bloqueado`, `propuesta`, `prioridad:alta`, `prioridad:media` y `prioridad:baja` (comprobado con la API de GitHub). El handoff del 2026-10-22 fija `prioridad:alta`, `prioridad:media`, `prioridad:baja` y `dueño:humano` (no verificable desde el repo). También existen `prioridad:alto`, `prioridad:1` y `prioridad:p1`, que el protocolo no usa; una persona decide si se borran. Ningún issue abierto lleva todavía una etiqueta de prioridad, así que el orden lo fija la persona que asigna `dueño:claude-science`. El protocolo «toma el primer issue con `dueño:claude-science`» puede ejecutarse; los issues con `propuesta` no se toman, y [BLUEPRINT.md](BLUEPRINT.md#pendientes) sigue describiendo cada pendiente.
 
-Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-23 (no verificable desde el repo): «etiquetas creadas». Falta crear las etiquetas de prioridad y `dueño:humano`.
+Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-23 (no verificable desde el repo): «etiquetas creadas». Las de prioridad y `dueño:humano` se comprobaron el 2026-10-24; quién las creó y cuándo no lo sé.
 
 ### D-07
 
