@@ -53,7 +53,9 @@ reparar <- function(ruta) {
   copia <- file.path(tmp, "copia.xlsx")
   file.copy(ruta, copia)
   owd <- setwd(tmp); on.exit(setwd(owd))
-  zip(copia, "xl/sharedStrings.xml", flags = "-q")
+  # Algunas compilaciones de R (r-base 4.3.3 de conda-forge) dejan R_ZIPCMD definida y vacía.
+  zipcmd <- Sys.getenv("R_ZIPCMD"); if (!nzchar(zipcmd)) zipcmd <- "zip"
+  zip(copia, "xl/sharedStrings.xml", flags = "-q", zip = zipcmd)
   copia
 }
 
@@ -70,28 +72,45 @@ leer_hoja <- function(ruta, h) {
   m[, col[1]:col[length(col)], drop = FALSE]
 }
 
-perfil <- function(anio, ruta) {
+# Hoja, fila de encabezado (desde 1), filas recortadas y encabezado normalizado. También la usan
+# esquema_ley21440.R y cruce_donatarias.R.
+leer_tabla <- function(ruta, encabezado = "ANO") {
   ruta <- reparar(ruta)
-  hoja <- NULL
   for (h in excel_sheets(ruta)) {
     m <- leer_hoja(ruta, h)
     if (nrow(m) == 0) next
     for (i in seq_len(min(10, nrow(m)))) {
-      if (norm(m[i, 1]) == "ANO") { hoja <- h; fila_enc <- i; break }
+      if (norm(m[i, 1]) == encabezado) return(list(hoja = h, fila_enc = i, m = m, enc = norm(m[i, ])))
     }
-    if (!is.null(hoja)) break
   }
-  stopifnot(!is.null(hoja))
-  enc <- norm(m[fila_enc, ])
-  idx <- vapply(ROLES, function(p) { j <- which(grepl(p, enc))[1]; if (is.na(j)) 0L else j }, integer(1))
+  stop(ruta, ": ninguna hoja tiene un encabezado «", encabezado, "» en sus 10 primeras filas")
+}
+
+roles <- function(enc, patrones = ROLES) {
+  vapply(patrones, function(p) { j <- which(grepl(p, enc))[1]; if (is.na(j)) 0L else j }, integer(1))
+}
+
+# «sin_anio», «monto_no_num» o «datos» por fila del cuerpo (las filas vacías quedan NA).
+clase_fila <- function(cuerpo, idx) {
+  col <- function(r) if (idx[[r]] == 0) rep("", nrow(cuerpo)) else cuerpo[, idx[[r]]]
+  a <- a_num(col("anio")); mt <- a_num(col("mtotal"))
+  ifelse(rowSums(cuerpo != "") == 0, NA_character_,
+         ifelse(is.na(a) | a != floor(a), "sin_anio", ifelse(is.na(mt), "monto_no_num", "datos")))
+}
+
+perfil <- function(anio, ruta) {
+  tb <- leer_tabla(ruta)
+  hoja <- tb$hoja; fila_enc <- tb$fila_enc; m <- tb$m; enc <- tb$enc
+  idx <- roles(enc)
   cuerpo <- if (fila_enc < nrow(m)) m[(fila_enc + 1):nrow(m), , drop = FALSE] else m[0, , drop = FALSE]
   col <- function(r) if (idx[[r]] == 0) rep("", nrow(cuerpo)) else cuerpo[, idx[[r]]]
 
-  no_vacias <- rowSums(cuerpo != "") > 0
-  a <- a_num(col("anio")); mt <- a_num(col("mtotal"))
-  sin_anio <- no_vacias & (is.na(a) | a != floor(a))
-  anio_num_monto_no <- no_vacias & !sin_anio & is.na(mt)
-  datos <- no_vacias & !sin_anio & !is.na(mt)
+  clase <- clase_fila(cuerpo, idx)
+  a <- a_num(col("anio"))
+  no_vacias <- !is.na(clase)
+  sin_anio <- no_vacias & clase == "sin_anio"
+  anio_num_monto_no <- no_vacias & clase == "monto_no_num"
+  datos <- no_vacias & clase == "datos"
   cd <- cuerpo[datos, , drop = FALSE]
   ad <- as.integer(a[datos])
 
@@ -132,9 +151,12 @@ perfil <- function(anio, ruta) {
   )[, CAMPOS]
 }
 
-args <- commandArgs(trailingOnly = TRUE)
-carpeta <- args[1]; salida <- args[2]
-anios <- if (length(args) >= 3) as.integer(strsplit(args[3], ",")[[1]]) else
-  sort(as.integer(sub("\\.xlsx$", "", list.files(carpeta, pattern = "^[0-9]{4}\\.xlsx$"))))
-res <- do.call(rbind, lapply(anios, function(a) { message("perfil ", a); perfil(a, file.path(carpeta, paste0(a, ".xlsx"))) }))
-write.csv(res, salida, row.names = FALSE, quote = TRUE)
+# Solo al correrlo con Rscript; con source() (esquema_ley21440.R) quedan definidas las funciones.
+if (sys.nframe() == 0L) {
+  args <- commandArgs(trailingOnly = TRUE)
+  carpeta <- args[1]; salida <- args[2]
+  anios <- if (length(args) >= 3) as.integer(strsplit(args[3], ",")[[1]]) else
+    sort(as.integer(sub("\\.xlsx$", "", list.files(carpeta, pattern = "^[0-9]{4}\\.xlsx$"))))
+  res <- do.call(rbind, lapply(anios, function(a) { message("perfil ", a); perfil(a, file.path(carpeta, paste0(a, ".xlsx"))) }))
+  write.csv(res, salida, row.names = FALSE, quote = TRUE)
+}

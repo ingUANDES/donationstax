@@ -3,24 +3,28 @@ Donations’ tax in Chile
 
 ## Estado
 
-Fase: inventario normativo y perfil de los datos hechos; la estimación no ha empezado. Actualizado el 2026-10-23.
+Fase: inventario normativo y perfiles de los datos de las Leyes 19.885 y 21.440 hechos; la estimación no ha empezado. Actualizado el 2026-10-23.
 
 | Etapa | Estado | Detalle |
 |---|---|---|
 | E0 Andamiaje | listo | [BLUEPRINT.md](BLUEPRINT.md), [DECISIONES.md](DECISIONES.md), `make verificar` |
 | E1 Inventario normativo | hecho; faltan las tasas transitorias de 2011 y 2012 y la Ley 21.850 ([issue 12](https://github.com/ingUANDES/donationstax/issues/12)) | [P-01 · Inventario normativo](BLUEPRINT.md#p-01), [normativa/cambios.csv](normativa/cambios.csv) |
-| E2 Estructura de los datos | perfil hecho; faltan armonizar las planillas y perfilar los datos de la Ley 21.440 | [P-02 · Estructura de los datos](BLUEPRINT.md#p-02), [P-06](BLUEPRINT.md#p-06), [P-07](BLUEPRINT.md#p-07), [datos/esquema_por_anio.csv](datos/esquema_por_anio.csv) |
+| E2 Estructura de los datos | perfiles de la Ley 19.885 y de la Ley 21.440 y cruce por donataria hechos; falta armonizar las planillas | [P-02 · Estructura de los datos](BLUEPRINT.md#p-02), [P-06](BLUEPRINT.md#p-06), [P-07 · Datos del régimen de la Ley 21.440](BLUEPRINT.md#p-07), [datos/esquema_por_anio.csv](datos/esquema_por_anio.csv), [datos/esquema_ley21440_por_anio.csv](datos/esquema_ley21440_por_anio.csv), [datos/cruce_donatarias_por_anio.csv](datos/cruce_donatarias_por_anio.csv) |
 | E3 a E5 | sin iniciar | [Etapas](BLUEPRINT.md#etapas) |
 
 Las decisiones de D-01 a D-12 están aprobadas; la última tanda fue el 2026-10-23 ([D-11 · Criterios de reproducibilidad](DECISIONES.md#d-11) y [D-12 · Variable de resultado](DECISIONES.md#d-12): el monto donado). El canal de trabajo son los issues con las etiquetas del protocolo ([D-06 · Canal de trabajo](DECISIONES.md#d-06)); faltan por crear las etiquetas de prioridad y `dueño:humano`.
 
-Siguiente paso: el issue [#10 (P-07)](https://github.com/ingUANDES/donationstax/issues/10) ya tiene `dueño:claude-science`; el [#9 (P-06)](https://github.com/ingUANDES/donationstax/issues/9) y el [#12 (Ley 21.850)](https://github.com/ingUANDES/donationstax/issues/12) esperan que una persona se lo ponga. No dependen de nada pendiente (P-07 necesita autorizados `donacionesley21440.gob.cl` y `cdn.hacienda.cl`; el #12 puede necesitar `www.diariooficial.interior.gob.cl`). [P-04](BLUEPRINT.md#p-04) y [P-05](BLUEPRINT.md#p-05) pueden empezar; ninguna estimación sobre datos reales antes de que P-05 esté «verificada» ([D-05](DECISIONES.md#d-05)).
+Siguiente paso: el issue [#10 (P-07)](https://github.com/ingUANDES/donationstax/issues/10) queda resuelto en la rama `cs/10-datos-ley21440`, pendiente de revisión; el [#9 (P-06)](https://github.com/ingUANDES/donationstax/issues/9) y el [#12 (Ley 21.850)](https://github.com/ingUANDES/donationstax/issues/12) esperan que una persona les ponga `dueño:claude-science`. No dependen de nada pendiente (el #12 puede necesitar `www.diariooficial.interior.gob.cl`). [P-04](BLUEPRINT.md#p-04) y [P-05](BLUEPRINT.md#p-05) pueden empezar; ninguna estimación sobre datos reales antes de que P-05 esté «verificada» ([D-05](DECISIONES.md#d-05)).
 
 ## Cómo verificar
 
-`make verificar` (requiere Python 3 y R). Qué comprueba y qué no: [Verificación](BLUEPRINT.md#verificación). `make verificar-datos` perfila las planillas del Ministerio en Python y en R (pide las planillas en `data_local/` y `pip install -r analisis/requirements.txt`; si `python3` no tiene `python-calamine`, `make verificar-datos PY=<ruta al python del entorno>`).
+`make verificar` (requiere Python 3 y R). Qué comprueba y qué no: [Verificación](BLUEPRINT.md#verificación). `make verificar-datos` corre tres bloques, cada uno con su objetivo: `verificar-datos-19885` (planillas del Ministerio), `verificar-datos-21440` (nómina de la Ley 21.440) y `verificar-cruce` (cruce por RUT de donataria). Pide los archivos en `data_local/` (cómo bajarlos: comentarios del [Makefile](Makefile)) y `pip install -r analisis/requirements.txt`; si `python3` no tiene `python-calamine`, `make verificar-datos PY=<ruta al python del entorno>`.
 
-Entorno con que se corrió el 2026-10-23 ([D-11 · Criterios de reproducibilidad](DECISIONES.md#d-11)): Python 3.13.16, python-calamine 0.9.0 (fijado en [requirements.txt](analisis/requirements.txt)) y R 4.3.3 con readxl 1.4.3, en un contenedor de Claude Code en la nube con 4 CPU, 15 GB de RAM y Linux 6.18. En ese equipo `make verificar` tarda 0,6 s y `make verificar-datos` 7 min 54 s (una sola medición, con las planillas ya descargadas y terminó con código 0). No se probaron otras versiones.
+Entorno con que se corrió el 2026-10-23 ([D-11 · Criterios de reproducibilidad](DECISIONES.md#d-11)): Python 3.13.16, python-calamine 0.9.0 (fijado en [requirements.txt](analisis/requirements.txt)) y R 4.3.3 con readxl 1.4.3, en un contenedor de Claude Code en la nube con 4 CPU, 15 GB de RAM y Linux 6.18. En ese equipo `make verificar` tarda 0,6 s y `make verificar-datos` 7 min 54 s (una sola medición, con las planillas ya descargadas y terminó con código 0).
+
+Segunda corrida, el 2026-10-23, ya con la Ley 21.440 y el cruce ([issue 10](https://github.com/ingUANDES/donationstax/issues/10)): Python 3.13.17, python-calamine 0.9.0, y R 4.3.3 con readxl 1.4.3 de conda-forge, en un equipo con Linux 6.8.0, 16 GB de RAM y 8 CPU visibles. `make verificar` tardó 0,5 s y `make verificar-datos` 5 min 20 s, ambos con código 0 (una medición, con los archivos ya descargados). No se probaron otras versiones.
+
+Memoria: `readxl` carga la hoja entera aunque se le pidan pocas filas. Con las planillas de 2022, 2023 y 2025 de la Ley 19.885 (hojas de 513 a 593 MB de XML), el proceso de R más grande llegó a 8,5 GB; con unos 6 GB libres, R murió por falta de memoria (señal 9) en esos tres años. Inferencia: hacen falta unos 9 GB libres. En el R 4.3.3 de conda-forge, `R_ZIPCMD` viene vacía, y [esquema_datos.R](analisis/esquema_datos.R) usa `zip` en ese caso.
 
 ## Structure of the repo
 
@@ -73,3 +77,10 @@ Research workflow (added 2026-10-22):
   - 2026-10-23: se aprueban D-11 y D-12 (monto donado como variable de resultado); se fija
     `python-calamine` en [requirements.txt](analisis/requirements.txt) y se registran el entorno
     y los tiempos en [Cómo verificar](#cómo-verificar).
+  - 2026-10-23: P-07, datos de la Ley 21.440: descarga con manifiesto
+    ([descargar_ley21440.py](analisis/descargar_ley21440.py),
+    [descargas_ley21440.csv](datos/descargas_ley21440.csv)), perfil de esquema
+    ([esquema_ley21440_por_anio.csv](datos/esquema_ley21440_por_anio.csv)) y cruce por RUT con la
+    Ley 19.885 ([cruce_donatarias_por_anio.csv](datos/cruce_donatarias_por_anio.csv)), contrastados
+    en Python y R; `make verificar-datos` en tres bloques ([Makefile](Makefile)) y resultados en
+    [P-07](BLUEPRINT.md#p-07) ([issue 10](https://github.com/ingUANDES/donationstax/issues/10)).
