@@ -10,10 +10,11 @@ verificar:
 	$(PY) -I analisis/contraste.py salidas/precio_fiscal_py.csv salidas/precio_fiscal_R.csv analisis/fixtures/precio_fiscal_esperado.csv
 	$(PY) -I analisis/verifica_citas.py
 
-.PHONY: verificar-datos verificar-datos-19885 verificar-datos-21440 verificar-cruce verificar-armonizado
-# Corre los cuatro bloques de abajo. Tarda varios minutos y necesita los archivos ya descargados en
-# data_local/ (ignorado por git), python-calamine (analisis/requirements.txt) y el paquete readxl de R.
-verificar-datos: verificar-datos-19885 verificar-datos-21440 verificar-cruce verificar-armonizado
+.PHONY: verificar-datos verificar-datos-19885 verificar-datos-21440 verificar-cruce verificar-armonizado verificar-rut
+# Corre los cinco bloques de abajo, en orden. Tarda varios minutos y necesita los archivos ya descargados en
+# data_local/ (ignorado por git), los paquetes de analisis/requirements.txt y los paquetes readxl y
+# stringdist de R.
+verificar-datos: verificar-datos-19885 verificar-datos-21440 verificar-cruce verificar-armonizado verificar-rut
 
 # Planillas de la Ley 19.885 en data_local/midesof/ (python3 analisis/descargar_midesof.py data_local/midesof
 # datos/descargas_midesof.csv). Perfila el esquema de los 18 años en Python y en R, exige que coincidan y que el
@@ -58,3 +59,17 @@ verificar-armonizado:
 	cmp salidas/armonizacion_py.csv datos/armonizacion_por_anio.csv
 	cmp salidas/armonizacion_anios_py.csv datos/armonizacion_anios_donacion.csv
 	cmp salidas/diccionario_py.csv datos/diccionario_columnas.csv
+
+# Regla 7 de D-10 (P-06): completa el RUT del donante por nombre sobre las filas de verificar-armonizado,
+# calibrando con los RUT conocidos. Filas en data_local/rut/py/ y data_local/rut/r/; tablas contra datos/.
+verificar-rut:
+	mkdir -p salidas
+	$(PY) -I analisis/completar_rut.py data_local/armonizado/py data_local/rut/py salidas/rut_identico_py.csv salidas/rut_similitud_py.csv salidas/rut_por_anio_py.csv
+	LC_ALL=C.UTF-8 Rscript analisis/completar_rut.R data_local/armonizado/r data_local/rut/r salidas/rut_identico_R.csv salidas/rut_similitud_R.csv salidas/rut_por_anio_R.csv
+	$(PY) -I analisis/contraste_datos.py salidas/rut_identico_py.csv salidas/rut_identico_R.csv
+	$(PY) -I analisis/contraste_datos.py salidas/rut_similitud_py.csv salidas/rut_similitud_R.csv
+	$(PY) -I analisis/contraste_datos.py salidas/rut_por_anio_py.csv salidas/rut_por_anio_R.csv
+	$(PY) -I analisis/contraste_armonizado.py data_local/rut/py data_local/rut/r
+	cmp salidas/rut_identico_py.csv datos/rut_calibracion_identico.csv
+	cmp salidas/rut_similitud_py.csv datos/rut_calibracion_similitud.csv
+	cmp salidas/rut_por_anio_py.csv datos/rut_completado_por_anio.csv
