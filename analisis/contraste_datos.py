@@ -1,10 +1,12 @@
 """Contrasta los perfiles de esquema calculados en Python y en R.
 
 Sirve para los perfiles de las planillas de la Ley 19.885 (esquema_datos.py y .R), de la nómina de
-la Ley 21.440 (esquema_ley21440.py y .R) y para su cruce (cruce_donatarias.py y .R). Todas las columnas deben coincidir exactamente salvo las
+la Ley 21.440 (esquema_ley21440.py y .R), para su cruce (cruce_donatarias.py y .R) y para las tablas
+de la armonización (armonizar.py y .R). Las filas se emparejan por la primera columna. Todas las columnas deben coincidir exactamente salvo las
 sumas de montos (columnas cuyo nombre empieza por «suma_»), que se comparan con tolerancia relativa
 TOL_REL. Falla con AssertionError. Incluye una autoprueba: una alteración de un conteo o de una
-suma por encima de la tolerancia debe hacer fallar el contraste.
+suma por encima de la tolerancia debe hacer fallar el contraste (si la tabla no tiene
+conteos, se altera su última columna).
 
 Uso: python contraste_datos.py perfil_py.csv perfil_R.csv
 """
@@ -16,11 +18,12 @@ TOL_REL = 1e-9
 
 def leer(ruta):
     with open(ruta, newline="", encoding="utf-8") as f:
-        return {r["anio"]: r for r in csv.DictReader(f)}
+        lector = csv.DictReader(f)
+        return {r[lector.fieldnames[0]]: r for r in lector}
 
 
 def comparar(py, r):
-    assert py.keys() == r.keys(), f"años distintos: py={sorted(py)} R={sorted(r)}"
+    assert py.keys() == r.keys(), f"filas distintas: py={sorted(py)} R={sorted(r)}"
     for anio in py:
         assert py[anio].keys() == r[anio].keys(), f"{anio}: columnas distintas"
         for c, vp in py[anio].items():
@@ -34,9 +37,12 @@ def comparar(py, r):
 
 def autoprueba(py, r):
     anio = next(iter(r))
-    conteo = next(c for c in r[anio] if c.startswith("n_"))
-    suma = next(c for c in r[anio] if c.startswith("suma_"))
+    campos = list(r[anio])
+    conteo = next((c for c in campos if c.startswith("n_")), campos[-1])
+    suma = next((c for c in campos if c.startswith("suma_")), None)
     for campo, nuevo in ((conteo, "-1"), (suma, "1e30")):
+        if campo is None:
+            continue
         alterado = {a: dict(f) for a, f in r.items()}
         alterado[anio][campo] = nuevo
         try:
