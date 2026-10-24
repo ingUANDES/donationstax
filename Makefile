@@ -10,10 +10,10 @@ verificar:
 	$(PY) -I analisis/contraste.py salidas/precio_fiscal_py.csv salidas/precio_fiscal_R.csv analisis/fixtures/precio_fiscal_esperado.csv
 	$(PY) -I analisis/verifica_citas.py
 
-.PHONY: verificar-datos verificar-datos-19885 verificar-datos-21440 verificar-cruce
-# Corre los tres bloques de abajo. Tarda varios minutos y necesita los archivos ya descargados en
+.PHONY: verificar-datos verificar-datos-19885 verificar-datos-21440 verificar-cruce verificar-armonizado
+# Corre los cuatro bloques de abajo. Tarda varios minutos y necesita los archivos ya descargados en
 # data_local/ (ignorado por git), python-calamine (analisis/requirements.txt) y el paquete readxl de R.
-verificar-datos: verificar-datos-19885 verificar-datos-21440 verificar-cruce
+verificar-datos: verificar-datos-19885 verificar-datos-21440 verificar-cruce verificar-armonizado
 
 # Planillas de la Ley 19.885 en data_local/midesof/ (python3 analisis/descargar_midesof.py data_local/midesof
 # datos/descargas_midesof.csv). Perfila el esquema de los 18 años en Python y en R, exige que coincidan y que el
@@ -43,3 +43,18 @@ verificar-cruce:
 	LC_ALL=C.UTF-8 Rscript analisis/cruce_donatarias.R data_local/midesof data_local/ley21440 salidas/cruce_donatarias_R.csv
 	$(PY) -I analisis/contraste_datos.py salidas/cruce_donatarias_py.csv salidas/cruce_donatarias_R.csv
 	cmp salidas/cruce_donatarias_py.csv datos/cruce_donatarias_por_anio.csv
+
+# Armonización de las planillas de la Ley 19.885 según D-10 (P-06). Escribe una fila por fila de cada
+# planilla en data_local/armonizado/py/ y data_local/armonizado/r/ (trae nombres: no se versiona), exige
+# que Python y R coincidan en las tablas y celda por celda, y que las tablas sean las versionadas en datos/.
+verificar-armonizado:
+	mkdir -p salidas
+	$(PY) -I analisis/armonizar.py data_local/midesof data_local/armonizado/py salidas/armonizacion_py.csv salidas/armonizacion_anios_py.csv salidas/diccionario_py.csv
+	LC_ALL=C.UTF-8 Rscript analisis/armonizar.R data_local/midesof data_local/armonizado/r salidas/armonizacion_R.csv salidas/armonizacion_anios_R.csv salidas/diccionario_R.csv
+	$(PY) -I analisis/contraste_datos.py salidas/armonizacion_py.csv salidas/armonizacion_R.csv
+	$(PY) -I analisis/contraste_datos.py salidas/armonizacion_anios_py.csv salidas/armonizacion_anios_R.csv
+	$(PY) -I analisis/contraste_datos.py salidas/diccionario_py.csv salidas/diccionario_R.csv
+	$(PY) -I analisis/contraste_armonizado.py data_local/armonizado/py data_local/armonizado/r
+	cmp salidas/armonizacion_py.csv datos/armonizacion_por_anio.csv
+	cmp salidas/armonizacion_anios_py.csv datos/armonizacion_anios_donacion.csv
+	cmp salidas/diccionario_py.csv datos/diccionario_columnas.csv

@@ -9,7 +9,7 @@ Serie **P-nn**: pendientes. Este es el único archivo donde se define el prefijo
 | Etapa | Producto | Cómo se verifica | Backlog |
 |---|---|---|---|
 | E1 Inventario normativo | [normativa/cambios.csv](normativa/cambios.csv) y textos en `normativa/textos/` | [verifica_citas.py](analisis/verifica_citas.py) | [P-01](#p-01) |
-| E2 Estructura de los datos | [datos/esquema_por_anio.csv](datos/esquema_por_anio.csv), [datos/esquema_ley21440_por_anio.csv](datos/esquema_ley21440_por_anio.csv), [datos/cruce_donatarias_por_anio.csv](datos/cruce_donatarias_por_anio.csv) | esquema calculado en Python y en R, comparados ([contraste_datos.py](analisis/contraste_datos.py)) | [P-02](#p-02), [P-06](#p-06), [P-07](#p-07) |
+| E2 Estructura de los datos | [datos/esquema_por_anio.csv](datos/esquema_por_anio.csv), [datos/esquema_ley21440_por_anio.csv](datos/esquema_ley21440_por_anio.csv), [datos/cruce_donatarias_por_anio.csv](datos/cruce_donatarias_por_anio.csv), [datos/armonizacion_por_anio.csv](datos/armonizacion_por_anio.csv) | esquema calculado en Python y en R, comparados ([contraste_datos.py](analisis/contraste_datos.py)) | [P-02](#p-02), [P-06](#p-06), [P-07](#p-07) |
 | E3 Precio fiscal por régimen | salidas de [precio_fiscal.py](analisis/precio_fiscal.py) y [precio_fiscal.R](analisis/precio_fiscal.R) | [contraste.py](analisis/contraste.py) | [P-04](#p-04) |
 | E4 Diseños de estimación por cambio | scripts en `analisis/`, Python y R | simulación con efecto conocido y contraste | [P-05](#p-05) |
 | E5 Resultados y manuscrito | tablas y texto del artículo | solo cifras con nivel «verificada» ([D-05 · Niveles de resultado](DECISIONES.md#d-05)) | sin abrir |
@@ -92,7 +92,7 @@ Falta en este pendiente:
 
 **Estructura de los datos (E2).** Estado: perfil de esquema hecho el 2026-10-22, a nivel *contrastado* ([D-05 · Niveles de resultado](DECISIONES.md#d-05)): Python y R coinciden en los 18 años. Queda armonizar las planillas ([P-06](#p-06)).
 
-Producto: [datos/esquema_por_anio.csv](datos/esquema_por_anio.csv) (una fila por año, 2008 a 2025, con columnas, conteos por tipo de valor, rangos de fecha, sumas y duplicados), [datos/descargas_midesof.csv](datos/descargas_midesof.csv) (URL, tamaño, sha256 y `Last-Modified` de cada archivo, para detectar cambios) y la [instantánea de la página del Ministerio](datos/fuentes/midesof_pagina_2026-10-22.txt). Scripts: [descargar_midesof.py](analisis/descargar_midesof.py), y [esquema_datos.py](analisis/esquema_datos.py) y [esquema_datos.R](analisis/esquema_datos.R) con [contraste_datos.py](analisis/contraste_datos.py). `make verificar-datos` los corre (tarda varios minutos y necesita las planillas en `data_local/`). Las reglas de lectura comunes a los dos lenguajes están en la cabecera de esquema_datos.py; salieron del contraste: los espacios finales cuentan, las celdas solo con espacios son vacías, y las secuencias corruptas de los archivos de 2021 a 2025 pasan a U+FFFD porque `readxl` no puede abrir el de 2022 con ellas.
+Producto: [datos/esquema_por_anio.csv](datos/esquema_por_anio.csv) (una fila por año, 2008 a 2025, con columnas, conteos por tipo de valor, rangos de fecha, sumas y duplicados), [datos/descargas_midesof.csv](datos/descargas_midesof.csv) (URL, tamaño, sha256 y `Last-Modified` de cada archivo, para detectar cambios) y la [instantánea de la página del Ministerio](datos/fuentes/midesof_pagina_2026-10-22.txt). Scripts: [descargar_midesof.py](analisis/descargar_midesof.py), y [esquema_datos.py](analisis/esquema_datos.py) y [esquema_datos.R](analisis/esquema_datos.R) con [contraste_datos.py](analisis/contraste_datos.py). `make verificar-datos` los corre (tarda varios minutos y necesita las planillas en `data_local/`). Las reglas de lectura comunes a los dos lenguajes están en la cabecera de esquema_datos.py; salieron del contraste: los espacios finales cuentan, las celdas solo con espacios son vacías, y las secuencias corruptas de los archivos de 2021 a 2025 pasan a U+FFFD porque `readxl` no puede abrir el de 2022 con ellas. El contraste fila a fila de [P-06](#p-06) agregó dos: los fines de línea se normalizan a «\n» y el escape `_x000D_` se decodifica.
 
 Lo que los datos muestran (las cifras están en esquema_por_anio.csv; lo marcado como inferencia es del investigador):
 
@@ -140,9 +140,43 @@ Cada riesgo de [Riesgos de identificación a testear](#riesgos-de-identificació
 
 ### P-06
 
-**Armonizar las planillas (E2).** Estado: pendiente; sigue a [P-02](#p-02).
+**Armonizar las planillas (E2).** Estado: reglas 1 a 6 y 8 de [D-10 · Criterio para completar o excluir](DECISIONES.md#d-10) aplicadas el 2026-10-24, a nivel *contrastado* ([D-05 · Niveles de resultado](DECISIONES.md#d-05)): Python y R coinciden en las tablas y celda por celda en las 7.877.362 filas ([issue 9](https://github.com/ingUANDES/donationstax/issues/9)). Falta la regla 7, completar el RUT por nombre, que va en otro PR del mismo issue. Los casos que D-10 no cubre están en [D-13 · Casos que D-10 no cubre](DECISIONES.md#d-13), propuesta y sin aprobar.
 
-Hacer: aplicar [D-10 · Criterio para completar o excluir](DECISIONES.md#d-10) a las planillas de la Ley 19.885. Un diccionario de columnas para las cinco variantes de esquema, tipos y fechas únicos (serial, texto e ISO), y una tabla de reglas con el conteo por año de las filas que cada regla toca, entre ellas las 7.163 filas de 2014 con monto no numérico. La salida va a `data_local/` (los nombres de personas naturales no se suben); lo versionado son las reglas y los conteos, calculados en Python y en R y contrastados. Después, completar los RUT faltantes por similitud de nombre con los RUT que existen ([D-09 · Fuente y completitud de los datos](DECISIONES.md#d-09)), midiendo precisión y cobertura al ocultar RUT conocidos (el encargo propone Módulo 11, Jaro-Winkler y agrupamiento; sin verificar que hagan falta). Los datos de [viantirreau/donaciones](https://github.com/viantirreau/donaciones) quedan para más adelante.
+Producto: [armonizar.py](analisis/armonizar.py) y [armonizar.R](analisis/armonizar.R), con la regla exacta de cada caso en la cabecera del de Python. Salidas:
+
+- `data_local/armonizado/py/` y `data_local/armonizado/r/`: una fila por fila de cada planilla. Traen nombres, así que no se versionan.
+- [datos/armonizacion_por_anio.csv](datos/armonizacion_por_anio.csv): cuántas filas toca cada regla, por año del archivo (líneas 2 a 19: 2008 a 2025).
+- [datos/armonizacion_anios_donacion.csv](datos/armonizacion_anios_donacion.csv): filas y monto por año del archivo y año de la donación.
+- [datos/diccionario_columnas.csv](datos/diccionario_columnas.csv): encabezado original y normalizado, rol, tipo y variante de esquema de cada columna de cada año.
+
+[contraste_armonizado.py](analisis/contraste_armonizado.py) compara las filas y [contraste_datos.py](analisis/contraste_datos.py), las tablas; `make verificar-armonizado` corre todo y `make verificar-datos` lo incluye.
+
+El contraste fila a fila encontró dos diferencias entre lectores que el perfil de [P-02](#p-02) no veía, y las dos quedaron como reglas de lectura comunes en [esquema_datos.py](analisis/esquema_datos.py):
+
+- Los archivos traen CRLF literales dentro del texto. calamine los normaliza a «\n», como manda la sección 2.11 de XML 1.0, y readxl no; ahora esquema_datos.R los normaliza antes de leer.
+- El único escape `_xHHHH_` que no es mitad de par sustituto (`_x000D_`, una vez en 2024) lo decodifica calamine; la regla de P-02 que lo dejaba literal no se había puesto a prueba.
+
+Lo que muestran las planillas (cifras de armonizacion_por_anio.csv salvo que se diga otra cosa):
+
+- **Variantes de esquema:** las cinco de P-02. 1: 2008 a 2014, 2018 y 2019; 2: 2015 y 2016; 3: 2017; 4: 2020 a 2023; 5: 2024 y 2025 (diccionario_columnas.csv).
+- **Regla 1, montos:**
+  - En 2014 se recuperan 7.163 totales vacíos como Fondo Mixto (0) más Institución. Ese año, el total coincide con la suma en 955.091 de 955.093 filas válidas (línea 8).
+  - Se excluyen 11 filas por monto: 1 de 2013 (Institución vacía), 1 de 2020 (la fila de instrucciones de la plantilla) y 9 de 2024, con montos escritos como «$ 20,000,000» ([D-13](DECISIONES.md#d-13), punto 2).
+  - Con la fila de 2014 sin `AÑO` ni fecha, quedan excluidas 12 de las 7.877.362 filas.
+- **Regla 2, Fondo Mixto:** el 33 % no es medible en las filas con SI/NO (38.222 en 2018, 470.431 en 2019 y 438.604 en 2021), vacías (32.510 en 2014, entre otras) u «otro» (25 en 2015).
+- **Reglas 3 y 4, fechas:**
+  - 67.092 fechas de texto se interpretan.
+  - 1.791 no son interpretables, 6 no existen en el calendario (como «31-11-2011»), 4 caen fuera de 2008 a 2025 y 24 están vacías. En esas filas, el año sale de `AÑO` (1.824 en total).
+  - En 5.387 filas el año de la donación no es el del archivo. Las más son 4.518 filas de 2018 (4.515 con fecha en 2019), 460 de 2021 (452 con fecha en 2022 y 8 en 2020) y 340 de 2015 (armonizacion_anios_donacion.csv).
+  - Evidencia débil: 4.487 de las de 2018 son fechas de texto de febrero de 2019 de una sola donataria. No es una inversión día-mes (el 98,8 % tiene día mayor que 12), pero podrían ser fechas del certificado y no de la donación (inferencia; comprobación sin script).
+- **Regla 5, duplicados exactos:** se marcan y no se excluyen; sus conteos son los de [P-02](#p-02). La sensibilidad sin duplicados está en `suma_monto_total_sin_duplicados`. Las mayores proporciones del monto en filas duplicadas son 2,81 % en 2013, 1,72 % en 2018 y 1,52 % en 2022 (cocientes de dos columnas, calculados en Python y en R sin script en `analisis/`).
+- **Regla 6:** filas con U+FFFD en el donante: 53, 2.089, 487, 4 y 12, de 2021 a 2025.
+- **RUT del donante (insumo de la regla 7):**
+  - En 2022 los valores sin guion son el número del RUT sin dígito verificador. Solo 81.866 de 906.670 pasan Módulo 11 leídos como cuerpo + DV, el 9,0 %, cerca de 1/11, lo esperable por azar. En 2015 a 2017 pasa el 99,86 % o más (líneas 9 a 11 y 16).
+  - Comprobación sin script: en 72.974 de 74.342 donantes de 2022 que aparecen con el mismo nombre en 2023, el valor de 2022 es el cuerpo del RUT de 2023.
+  - Dígito verificador inválido: entre 1 (2022) y 798 (2016) filas por año. Mal formados: entre 0 y 204 (2023).
+
+Queda la regla 7: completar los RUT faltantes, primero por nombre normalizado idéntico y luego por similitud, con un umbral calibrado ocultando RUT conocidos ([D-09 · Fuente y completitud de los datos](DECISIONES.md#d-09)). Un pase exploratorio, sin script en `analisis/` (no verificado), dejando fuera un año con RUT a la vez, dio para el nombre idéntico con un solo RUT una precisión de entre 99,1 % y 99,98 %. La cobertura en los años sin RUT fue de 40 % en 2014 y de 91 % y 94 % en 2019 y 2018. Los datos de [viantirreau/donaciones](https://github.com/viantirreau/donaciones) quedan para más adelante.
 
 ### P-07
 

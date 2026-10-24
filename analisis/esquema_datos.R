@@ -35,8 +35,10 @@ a_num <- function(x) ifelse(grepl(NUM, x), suppressWarnings(as.numeric(x)), NA_r
 # readxl falla con las cadenas corruptas que traen los archivos de 2021 a 2025 (nombres con
 # acentos dañados): caracteres fuera del plano básico y escapes OOXML `_xHHHH_` de mitades de par
 # sustituto. Se lee una copia de sharedStrings.xml en la que ambos están sustituidos por U+FFFD
-# (la misma regla que aplica esquema_datos.py) y los demás escapes `_xHHHH_` se protegen con
-# `_x005F_` para que readxl los deje literales, como hace calamine.
+# (la misma regla que aplica esquema_datos.py). Los demás escapes `_xHHHH_` los decodifica readxl,
+# como calamine. Antes, los fines de línea literales del XML («\r\n» y «\r») pasan a «\n», como manda
+# la sección 2.11 de XML 1.0 y hace calamine; readxl no lo hace, y en 2024 un «_x000D_» seguido de
+# CRLF literal daría dos saltos de línea.
 reparar <- function(ruta) {
   tmp <- tempfile("xlsx_"); dir.create(tmp)
   unzip(ruta, files = "xl/sharedStrings.xml", exdir = tmp)
@@ -44,11 +46,11 @@ reparar <- function(ruta) {
   x <- rawToChar(readBin(f, "raw", file.size(f)))
   cuatro <- "[\\xf0-\\xf4][\\x80-\\xbf]{3}"
   sust <- "_x(D[89A-Fa-f][0-9A-Fa-f]{2})_"
-  esc <- "_x([0-9A-Fa-f]{4})_"
-  if (!grepl(cuatro, x, useBytes = TRUE, perl = TRUE) && !grepl(esc, x, useBytes = TRUE, perl = TRUE)) return(ruta)
+  if (!grepl(cuatro, x, useBytes = TRUE, perl = TRUE) && !grepl(sust, x, useBytes = TRUE, perl = TRUE) &&
+      !grepl("\r", x, fixed = TRUE, useBytes = TRUE)) return(ruta)
+  x <- gsub("\r", "\n", gsub("\r\n", "\n", x, fixed = TRUE, useBytes = TRUE), fixed = TRUE, useBytes = TRUE)
   x <- gsub(cuatro, "\xef\xbf\xbd", x, useBytes = TRUE, perl = TRUE)
   x <- gsub(sust, "\xef\xbf\xbd", x, useBytes = TRUE, perl = TRUE)
-  x <- gsub(esc, "_x005F_x\\1_", x, useBytes = TRUE, perl = TRUE)
   writeBin(charToRaw(x), f)
   copia <- file.path(tmp, "copia.xlsx")
   file.copy(ruta, copia)
@@ -65,6 +67,9 @@ leer_hoja <- function(ruta, h) {
   if (nrow(df) == 0 || ncol(df) == 0) return(matrix("", 0, 0))
   m <- as.matrix(df)
   m[is.na(m)] <- ""
+  # «\r» que quedan tras decodificar escapes `_x000D_`: pasan a «\n», como en esquema_datos.py.
+  cr <- grepl("\r", m, fixed = TRUE)
+  if (any(cr)) m[cr] <- gsub("\r", "\n", gsub("\r\n", "\n", m[cr], fixed = TRUE), fixed = TRUE)
   fil <- which(rowSums(m != "") > 0)
   if (length(fil) == 0) return(matrix("", 0, 0))
   m <- m[fil[1]:fil[length(fil)], , drop = FALSE]

@@ -16,9 +16,14 @@ Reglas comunes (idénticas en R):
 - Se sustituyen por U+FFFD los caracteres fuera del plano básico (U+10000 en adelante) y los
   escapes OOXML `_xHHHH_` que codifican una mitad de par sustituto (HHHH entre D800 y DFFF): en los
   archivos de 2021 a 2025 aparecen en nombres de personas (acentos corruptos) y hacen fallar a
-  readxl. Los demás escapes `_xHHHH_` se conservan literales. `n_celdas_con_u_fffd` cuenta las
+  readxl. Los demás escapes `_xHHHH_` se decodifican, como hacen calamine y readxl (en los archivos de
+  2008 a 2025 solo aparece `_x000D_`, una vez en 2024). `n_celdas_con_u_fffd` cuenta las
   celdas de datos que los contienen.
 - Las celdas de texto con solo espacios se tratan como vacías (readxl las descarta, calamine no).
+- Los fines de línea se normalizan a «\n»: «\r\n» y «\r» sueltos pasan a «\n». Los literales del XML
+  los normaliza calamine, como manda la sección 2.11 de XML 1.0 (los archivos traen CRLF dentro del
+  texto, por ejemplo en 2021); readxl no, y esquema_datos.R los normaliza antes de leer. Los «\r» que
+  salen de decodificar `_x000D_` se normalizan en cada celda, en los dos lenguajes.
 - Fila de datos: AÑO numérico entero y MONTO TOTAL DONACIÓN numérico.
 
 Uso: python esquema_datos.py <carpeta_xlsx> <salida.csv> [años separados por coma]
@@ -78,7 +83,7 @@ def canon(c):
     c = str(c)
     if not c.strip():
         return ""
-    return SUSTITUTO.sub("\ufffd", FUERA_PLANO.sub("\ufffd", c))
+    return SUSTITUTO.sub("\ufffd", FUERA_PLANO.sub("\ufffd", c)).replace("\r\n", "\n").replace("\r", "\n")
 
 
 def recortar(filas):
