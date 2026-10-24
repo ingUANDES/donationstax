@@ -9,7 +9,7 @@ Serie **P-nn**: pendientes. Este es el único archivo donde se define el prefijo
 | Etapa | Producto | Cómo se verifica | Backlog |
 |---|---|---|---|
 | E1 Inventario normativo | [normativa/cambios.csv](normativa/cambios.csv) y textos en `normativa/textos/` | [verifica_citas.py](analisis/verifica_citas.py) | [P-01](#p-01) |
-| E2 Estructura de los datos | [datos/esquema_por_anio.csv](datos/esquema_por_anio.csv), [datos/esquema_ley21440_por_anio.csv](datos/esquema_ley21440_por_anio.csv), [datos/cruce_donatarias_por_anio.csv](datos/cruce_donatarias_por_anio.csv), [datos/armonizacion_por_anio.csv](datos/armonizacion_por_anio.csv) | esquema calculado en Python y en R, comparados ([contraste_datos.py](analisis/contraste_datos.py)) | [P-02](#p-02), [P-06](#p-06), [P-07](#p-07) |
+| E2 Estructura de los datos | [datos/esquema_por_anio.csv](datos/esquema_por_anio.csv), [datos/esquema_ley21440_por_anio.csv](datos/esquema_ley21440_por_anio.csv), [datos/cruce_donatarias_por_anio.csv](datos/cruce_donatarias_por_anio.csv), [datos/armonizacion_por_anio.csv](datos/armonizacion_por_anio.csv), [datos/rut_completado_por_anio.csv](datos/rut_completado_por_anio.csv) | esquema calculado en Python y en R, comparados ([contraste_datos.py](analisis/contraste_datos.py)) | [P-02](#p-02), [P-06](#p-06), [P-07](#p-07) |
 | E3 Precio fiscal por régimen | salidas de [precio_fiscal.py](analisis/precio_fiscal.py) y [precio_fiscal.R](analisis/precio_fiscal.R) | [contraste.py](analisis/contraste.py) | [P-04](#p-04) |
 | E4 Diseños de estimación por cambio | scripts en `analisis/`, Python y R | simulación con efecto conocido y contraste | [P-05](#p-05) |
 | E5 Resultados y manuscrito | tablas y texto del artículo | solo cifras con nivel «verificada» ([D-05 · Niveles de resultado](DECISIONES.md#d-05)) | sin abrir |
@@ -140,7 +140,7 @@ Cada riesgo de [Riesgos de identificación a testear](#riesgos-de-identificació
 
 ### P-06
 
-**Armonizar las planillas (E2).** Estado: reglas 1 a 6 y 8 de [D-10 · Criterio para completar o excluir](DECISIONES.md#d-10) aplicadas el 2026-10-24, a nivel *contrastado* ([D-05 · Niveles de resultado](DECISIONES.md#d-05)): Python y R coinciden en las tablas y celda por celda en las 7.877.362 filas ([issue 9](https://github.com/ingUANDES/donationstax/issues/9)). Falta la regla 7, completar el RUT por nombre, que va en otro PR del mismo issue. Los casos que D-10 no cubre están en [D-13 · Casos que D-10 no cubre](DECISIONES.md#d-13), propuesta y sin aprobar.
+**Armonizar las planillas (E2).** Estado: hecho el 2026-10-24 ([issue 9](https://github.com/ingUANDES/donationstax/issues/9)), a nivel *contrastado* ([D-05 · Niveles de resultado](DECISIONES.md#d-05)). Python y R coinciden en las tablas y celda por celda en las 7.877.362 filas. Se aplicaron las ocho reglas de [D-10 · Criterio para completar o excluir](DECISIONES.md#d-10): la armonización (reglas 1 a 6 y 8) y la regla 7, completar el RUT por nombre. Los casos que D-10 no cubre están en [D-13 · Casos que D-10 no cubre](DECISIONES.md#d-13), propuesta y sin aprobar.
 
 Producto: [armonizar.py](analisis/armonizar.py) y [armonizar.R](analisis/armonizar.R), con la regla exacta de cada caso en la cabecera del de Python. Salidas:
 
@@ -176,7 +176,26 @@ Lo que muestran las planillas (cifras de armonizacion_por_anio.csv salvo que se 
   - Comprobación sin script: en 72.974 de 74.342 donantes de 2022 que aparecen con el mismo nombre en 2023, el valor de 2022 es el cuerpo del RUT de 2023.
   - Dígito verificador inválido: entre 1 (2022) y 798 (2016) filas por año. Mal formados: entre 0 y 204 (2023).
 
-Queda la regla 7: completar los RUT faltantes, primero por nombre normalizado idéntico y luego por similitud, con un umbral calibrado ocultando RUT conocidos ([D-09 · Fuente y completitud de los datos](DECISIONES.md#d-09)). Un pase exploratorio, sin script en `analisis/` (no verificado), dejando fuera un año con RUT a la vez, dio para el nombre idéntico con un solo RUT una precisión de entre 99,1 % y 99,98 %. La cobertura en los años sin RUT fue de 40 % en 2014 y de 91 % y 94 % en 2019 y 2018. Los datos de [viantirreau/donaciones](https://github.com/viantirreau/donaciones) quedan para más adelante.
+**Regla 7, completar el RUT** ([D-09 · Fuente y completitud de los datos](DECISIONES.md#d-09)). Scripts: [completar_rut.py](analisis/completar_rut.py) y [completar_rut.R](analisis/completar_rut.R), sobre las filas armonizadas de cada lenguaje; `make verificar-rut`.
+
+Salidas:
+
+- `data_local/rut/py/` y `data_local/rut/r/`: por fila, el nombre normalizado, de dónde sale el RUT, el RUT final y el identificador del donante. Lo que sigue sin RUT se identifica por su nombre y se marca como error de medición.
+- [datos/rut_calibracion_identico.csv](datos/rut_calibracion_identico.csv) y [datos/rut_calibracion_similitud.csv](datos/rut_calibracion_similitud.csv): la calibración, ocultando el RUT de un año a la vez.
+- [datos/rut_completado_por_anio.csv](datos/rut_completado_por_anio.csv): el resultado por año.
+
+Resultados:
+
+- **Nombre idéntico.** Ocultando cada año con RUT, el nombre normalizado idéntico con un solo RUT en los demás años acierta en el 99,14 % (2025) a 99,98 % (2017) de los nombres a los que asigna RUT. Cumple el 99 % de D-10 en los nueve años (columna `precision` de rut_calibracion_identico.csv).
+- **Similitud.** Ningún umbral de 0,80 a 0,99 llega al 99 %: el máximo es 98,04 % en 0,96 (1.753 de 1.788), y en 0,98 quedan 23 asignaciones con 82,6 % (rut_calibracion_similitud.csv, líneas 18 y 20). El paso por similitud no completa ningún RUT. Inferencia: un nombre parecido con otro RUT suele ser otra persona.
+- **Filas completadas por nombre idéntico** (rut_completado_por_anio.csv):
+  - 96,8 % de 2018, 95,0 % de 2019, 70,8 % de 2013, 67,6 % de 2012 y 43,6 % de 2014;
+  - en los años con RUT, solo unas decenas de filas, salvo 823 en 2016.
+  
+  Siguen sin RUT, como error de medición, 561.105 filas de 2014 (56,4 %), 28.695 de 2013, 23.384 de 2019, 15.662 de 2018 y 11.519 de 2012. Los porcentajes se calcularon en Python y en R, sin script en `analisis/`.
+- **Evidencia débil.** La precisión se mide por nombre distinto y no por fila ni por monto. En 2014 la mayoría de los donantes no aparece en ningún año con RUT (inferencia del pase exploratorio: ordenar las palabras del nombre no aumenta las coincidencias). Un donante de 2014 que tampoco aparece en los años con RUT solo se puede seguir por su nombre.
+
+Los datos de [viantirreau/donaciones](https://github.com/viantirreau/donaciones) quedan para más adelante.
 
 ### P-07
 
