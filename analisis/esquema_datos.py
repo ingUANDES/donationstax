@@ -102,35 +102,42 @@ def serial_a_fecha(s):
     return (ORIGEN + dt.timedelta(days=int(float(s)))).date()
 
 
-def perfil(anio, ruta):
+def tabla(ruta, encabezado="ANO"):
+    """Hoja, fila de encabezado (desde 0), filas recortadas, encabezado normalizado. También la usan
+    esquema_ley21440.py y cruce_donatarias.py."""
     wb = CalamineWorkbook.from_path(str(ruta))
-    hoja = fila_enc = None
     for nombre in wb.sheet_names:
         filas = recortar(wb.get_sheet_by_name(nombre).to_python(skip_empty_area=False))
         for i, f in enumerate(filas[:10]):
-            if norm(f[0]) == "ANO":
-                hoja, fila_enc, datos = nombre, i, filas
-                break
-        if hoja:
-            break
-    assert hoja, f"{ruta}: ninguna hoja tiene un encabezado «AÑO» en sus 10 primeras filas"
-    enc = [norm(c) for c in datos[fila_enc]]
-    idx = {r: next((j for j, h in enumerate(enc) if re.match(p, h)), None) for r, p in ROLES.items()}
+            if norm(f[0]) == encabezado:
+                return nombre, i, filas, [norm(c) for c in filas[i]]
+    raise AssertionError(f"{ruta}: ninguna hoja tiene un encabezado «{encabezado}» en sus 10 primeras filas")
+
+
+def roles(enc, patrones=ROLES):
+    return {r: next((j for j, h in enumerate(enc) if re.match(p, h)), None) for r, p in patrones.items()}
+
+
+def clase_fila(f, idx):
+    """«sin_anio», «monto_no_num» o «datos» (fila de datos: AÑO entero y MONTO TOTAL numérico)."""
+    a = num(f[idx["anio"]]) if idx["anio"] is not None else None
+    if a is None or a != int(a):
+        return "sin_anio"
+    return "monto_no_num" if num(f[idx["mtotal"]] if idx["mtotal"] is not None else "") is None else "datos"
+
+
+def perfil(anio, ruta):
+    hoja, fila_enc, datos, enc = tabla(ruta)
+    idx = roles(enc)
     cuerpo = datos[fila_enc + 1:]
 
     def col(f, r):
         return f[idx[r]] if idx[r] is not None else ""
 
     no_vacias = [f for f in cuerpo if any(f)]
-    filas_datos, anio_num_monto_no, sin_anio = [], 0, 0
-    for f in no_vacias:
-        a, m = num(col(f, "anio")), num(col(f, "mtotal"))
-        if a is None or a != int(a):
-            sin_anio += 1
-        elif m is None:
-            anio_num_monto_no += 1
-        else:
-            filas_datos.append(f)
+    clases = [clase_fila(f, idx) for f in no_vacias]
+    filas_datos = [f for f, c in zip(no_vacias, clases) if c == "datos"]
+    anio_num_monto_no, sin_anio = clases.count("monto_no_num"), clases.count("sin_anio")
 
     anios = Counter(int(float(col(f, "anio"))) for f in filas_datos)
     fm = Counter()
