@@ -12,7 +12,7 @@ Serie **P-nn**: pendientes. Este es el único archivo donde se define el prefijo
 | E2 Estructura de los datos | [datos/esquema_por_anio.csv](datos/esquema_por_anio.csv), [datos/esquema_ley21440_por_anio.csv](datos/esquema_ley21440_por_anio.csv), [datos/cruce_donatarias_por_anio.csv](datos/cruce_donatarias_por_anio.csv) | esquema calculado en Python y en R, comparados ([contraste_datos.py](analisis/contraste_datos.py)) | [P-02](#p-02), [P-06](#p-06), [P-07](#p-07) |
 | E3 Precio fiscal por régimen | salidas de [precio_fiscal.py](analisis/precio_fiscal.py) y [precio_fiscal.R](analisis/precio_fiscal.R) | [contraste.py](analisis/contraste.py) | [P-04](#p-04) |
 | E4 Diseños de estimación por cambio | scripts en `analisis/`, Python y R | simulación con efecto conocido y contraste | [P-05](#p-05) |
-| E5 Resultados y manuscrito | tablas y texto del artículo | solo cifras con nivel «verificada» ([D-05](DECISIONES.md#d-05)) | sin abrir |
+| E5 Resultados y manuscrito | tablas y texto del artículo | solo cifras con nivel «verificada» ([D-05 · Niveles de resultado](DECISIONES.md#d-05)) | sin abrir |
 
 ## Verificación
 
@@ -41,13 +41,13 @@ Son inferencias del investigador, no hallazgos. Cada una se convierte en un caso
 
 ## Evaluabilidad de cada cambio
 
-Inferencia del investigador a partir de [cambios.csv](normativa/cambios.csv) y [esquema_por_anio.csv](datos/esquema_por_anio.csv); el marco es la ventana de [D-08](DECISIONES.md#d-08) (aprobada) y cambia si cambian los datos.
+Inferencia del investigador a partir de [cambios.csv](normativa/cambios.csv) y [esquema_por_anio.csv](datos/esquema_por_anio.csv); el marco es la ventana de [D-08 · Ventana empírica](DECISIONES.md#d-08) (aprobada) y cambia si cambian los datos.
 
 | Cambio | Fecha del tratamiento | ¿Evaluable con las planillas? |
 |---|---|---|
 | Ley 20.316 | donaciones desde 2009 | No: 2008 y 2009 tienen 5 y 12 filas |
 | Ley 20.565, de salto a quiebre | 2012-02-08 | El bunching posterior en el quiebre sí; el efecto del cambio no, porque el período previo (2011) tiene 656 filas |
-| Cambios de tasa del impuesto a la renta | por fecha (pendiente en [P-01](#p-01)) | Pendiente de P-01 |
+| Cambios de tasa del impuesto a la renta | por fecha (pendiente en [P-01](#p-01)) | Pendiente de [P-01 · Inventario normativo](#p-01) |
 | Ley 21.210, artículo 10 | 2020-03-01 | En principio sí; el RUT del donante falta en 2019 |
 | Ley 21.440 | 2022-07-01 | La salida del régimen de la Ley 19.885, sí. El régimen nuevo tiene datos publicados, pero sin donante ([P-07](#p-07)): la sustitución solo se mide agregada por donataria y fecha, y solo en las 95 de 659 donatarias de 2022 a 2025 que están en ambos registros (inferencia) |
 | Ley 21.015 | por verificar | No: sus donaciones usan otro certificado y no dan crédito; los datos del Certificado N° 60 siguen pedidos en el [issue 6](https://github.com/ingUANDES/donationstax/issues/6) |
@@ -59,7 +59,7 @@ La ventana empírica es 2012 a 2025 ([D-08 · Ventana empírica](DECISIONES.md#d
 
 ### P-01
 
-**Inventario normativo (E1).** Estado: hecho el 2026-10-22, salvo lo de «Falta dentro de P-01».
+**Inventario normativo (E1).** Estado: hecho el 2026-10-22, salvo lo de «Falta en este pendiente».
 
 Producto: [normativa/cambios.csv](normativa/cambios.csv), una fila por cambio de parámetro con su cita literal, que [verifica_citas.py](analisis/verifica_citas.py) comprueba contra los textos de [normativa/textos/](normativa/textos/). Los textos de leyes salen de BCN con [bcn_versiones.py](analisis/bcn_versiones.py) y los de circulares, del SII. La descarga y la comprobación de citas son solo en Python: el contraste Python y R de [D-03 · Python y R en paralelo](DECISIONES.md#d-03) se aplica a resultados numéricos. La columna `efecto_precio` es el signo a priori frente al régimen inmediatamente anterior para un donante que no cambia su conducta; el cálculo está en [P-04](#p-04).
 
@@ -81,12 +81,12 @@ Contradicciones del encargo y del artículo del repo, resueltas con la norma:
 - El encargo dice que las donaciones de la Ley 21.015 «aplican el esquema vigente de la Ley 19.885»: no dan crédito.
 - Fuentes del encargo: no se revisaron una por una. La fuente 1 es un documento cuyo nombre de archivo dice 2006 y se cita para leyes de 2009 a 2022 (sigue sin leer), varias referencias repiten la misma URL y hay afirmaciones con las nueve fuentes en bloque.
 
-Falta dentro de P-01:
+Falta en este pendiente:
 
 - Tasas transitorias de 2011 y 2012. El texto del artículo 20 de la Ley sobre Impuesto a la Renta muestra una sola tasa hasta 2012-12-31, y las de esos años pueden estar en disposiciones transitorias de otras leyes: no se leyeron (sin verificar).
 - El texto de la Ley 20.565 en sí (se conoce por la versión consolidada de BCN y la Circular N° 49; no se encontró su `idNorma`), el reglamento (Decreto Supremo 77 de 2009) y las circulares del SII sobre la Ley 21.440.
 - Mecánica del crédito bajo los regímenes de 2017 en adelante (semi integrado y atribuido) y la fecha de publicación de los reglamentos de la Ley 21.015.
-- Los regímenes que el [artículo 10 de la Ley 19.885](normativa/textos/ley19885_v2024-08-24.txt) enumera y que [D-02](DECISIONES.md#d-02) deja fuera por ahora.
+- Los regímenes que el [artículo 10 de la Ley 19.885](normativa/textos/ley19885_v2024-08-24.txt) enumera y que [D-02 · Alcance](DECISIONES.md#d-02) deja fuera por ahora.
 
 ### P-02
 
@@ -130,7 +130,7 @@ Calcular P = 1 − c − τg para cada fila de [normativa/cambios.csv](normativa
 
 **Simulaciones de efecto conocido (E4).** Estado: pendiente.
 
-Antes de usar datos reales, un caso simulado por diseño, en Python y en R, con semilla fija, tolerancias fijadas antes de correr ([D-05](DECISIONES.md#d-05)) y el monto donado como resultado ([D-12 · Variable de resultado](DECISIONES.md#d-12)):
+Antes de usar datos reales, un caso simulado por diseño, en Python y en R, con semilla fija, tolerancias fijadas antes de correr ([D-05 · Niveles de resultado](DECISIONES.md#d-05)) y el monto donado como resultado ([D-12 · Variable de resultado](DECISIONES.md#d-12)):
 
 - Bunching en un quiebre del conjunto presupuestario: elasticidad conocida, polinomio de orden 3 a 6, ventana de exclusión, error estándar por remuestreo; que recupere la masa en exceso y la elasticidad; sensibilidad al orden y a la ventana; incluir donantes que cumplen la condición del Fondo Mixto.
 - Estudio de eventos y diferencias en diferencias: efecto y tendencias paralelas conocidos; un caso con tratamiento definido por el nivel previo del resultado que muestre el sesgo.
@@ -142,7 +142,7 @@ Cada riesgo de [Riesgos de identificación a testear](#riesgos-de-identificació
 
 **Armonizar las planillas (E2).** Estado: pendiente; sigue a [P-02](#p-02).
 
-Hacer: aplicar [D-10 · Criterio para completar o excluir](DECISIONES.md#d-10) a las planillas de la Ley 19.885. Un diccionario de columnas para las cinco variantes de esquema, tipos y fechas únicos (serial, texto e ISO), y una tabla de reglas con el conteo por año de las filas que cada regla toca, entre ellas las 7.163 filas de 2014 con monto no numérico. La salida va a `data_local/` (los nombres de personas naturales no se suben); lo versionado son las reglas y los conteos, calculados en Python y en R y contrastados. Después, completar los RUT faltantes por similitud de nombre con los RUT que existen ([D-09](DECISIONES.md#d-09)), midiendo precisión y cobertura al ocultar RUT conocidos (el encargo propone Módulo 11, Jaro-Winkler y agrupamiento; sin verificar que hagan falta). Los datos de [viantirreau/donaciones](https://github.com/viantirreau/donaciones) quedan para más adelante.
+Hacer: aplicar [D-10 · Criterio para completar o excluir](DECISIONES.md#d-10) a las planillas de la Ley 19.885. Un diccionario de columnas para las cinco variantes de esquema, tipos y fechas únicos (serial, texto e ISO), y una tabla de reglas con el conteo por año de las filas que cada regla toca, entre ellas las 7.163 filas de 2014 con monto no numérico. La salida va a `data_local/` (los nombres de personas naturales no se suben); lo versionado son las reglas y los conteos, calculados en Python y en R y contrastados. Después, completar los RUT faltantes por similitud de nombre con los RUT que existen ([D-09 · Fuente y completitud de los datos](DECISIONES.md#d-09)), midiendo precisión y cobertura al ocultar RUT conocidos (el encargo propone Módulo 11, Jaro-Winkler y agrupamiento; sin verificar que hagan falta). Los datos de [viantirreau/donaciones](https://github.com/viantirreau/donaciones) quedan para más adelante.
 
 ### P-07
 
@@ -177,6 +177,6 @@ Qué se puede medir con estos datos y qué no (inferencia del investigador a par
 
 - **Se puede:** el monto y el número de filas por donataria (RUT) y por día desde 2022 en el régimen de la Ley 21.440, y su comparación con las planillas de la Ley 19.885 por RUT de institución y por fecha. La sustitución entre regímenes solo se mide así, agregada por donataria y período, y solo en las donatarias que están en ambos registros: en 2022 a 2025 son 95 RUT, que concentran el 82,0 % del monto de la Ley 19.885 y el 32,2 % del de la Ley 21.440. Para el resto de las donatarias de la Ley 21.440 no hay contraparte en las planillas de 2022 a 2025.
 - **No se puede:** nada por donante (quién dona, si un mismo donante pasó de un régimen al otro, su tipo de contribuyente o su tramo); el número de donaciones, por los duplicados exactos; ni el beneficio tributario efectivamente usado.
-- Comparar montos entre regímenes para medir la sustitución es una estimación sobre datos reales: espera a que [P-05 · Simulaciones de efecto conocido](#p-05) esté «verificada» ([D-05](DECISIONES.md#d-05)).
+- Comparar montos entre regímenes para medir la sustitución es una estimación sobre datos reales: espera a que [P-05 · Simulaciones de efecto conocido](#p-05) esté «verificada» ([D-05 · Niveles de resultado](DECISIONES.md#d-05)).
 
 Queda: el diseño de la comparación de montos por donataria y período (en [P-05](#p-05)), y decidir si el año del cruce debe ser el de la fecha de cada donación ([D-10 · Criterio para completar o excluir](DECISIONES.md#d-10), regla 4) en vez del del archivo; eso depende de [P-06](#p-06).
