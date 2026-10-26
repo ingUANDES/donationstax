@@ -10,11 +10,11 @@ verificar:
 	$(PY) -I analisis/contraste.py salidas/precio_fiscal_py.csv salidas/precio_fiscal_R.csv analisis/fixtures/precio_fiscal_esperado.csv
 	$(PY) -I analisis/verifica_citas.py
 
-.PHONY: verificar-datos verificar-datos-19885 verificar-datos-21440 verificar-cruce verificar-armonizado verificar-rut
-# Corre los cinco bloques de abajo, en orden. Tarda varios minutos y necesita los archivos ya descargados en
+.PHONY: verificar-datos verificar-datos-19885 verificar-datos-21440 verificar-cruce verificar-armonizado verificar-anio verificar-rut
+# Corre los seis bloques de abajo, en orden. Tarda varios minutos y necesita los archivos ya descargados en
 # data_local/ (ignorado por git), los paquetes de analisis/requirements.txt y los paquetes readxl y
 # stringdist de R.
-verificar-datos: verificar-datos-19885 verificar-datos-21440 verificar-cruce verificar-armonizado verificar-rut
+verificar-datos: verificar-datos-19885 verificar-datos-21440 verificar-cruce verificar-armonizado verificar-anio verificar-rut
 
 # Planillas de la Ley 19.885 en data_local/midesof/ (python3 analisis/descargar_midesof.py data_local/midesof
 # datos/descargas_midesof.csv). Perfila el esquema de los 18 años en Python y en R, exige que coincidan y que el
@@ -59,6 +59,17 @@ verificar-armonizado:
 	cmp salidas/armonizacion_py.csv datos/armonizacion_por_anio.csv
 	cmp salidas/armonizacion_anios_py.csv datos/armonizacion_anios_donacion.csv
 	cmp salidas/diccionario_py.csv datos/diccionario_columnas.csv
+
+# Año de la donación (D-13, punto 1, y D-14): de dónde puede salir el año de cada fila y los conflictos
+# entre el año de la fecha y el del archivo, sobre las filas de verificar-armonizado; tablas contra datos/.
+verificar-anio:
+	mkdir -p salidas
+	$(PY) -I analisis/evalua_anio.py data_local/armonizado/py salidas/anio_por_anio_py.csv salidas/anio_conflictos_py.csv
+	LC_ALL=C.UTF-8 Rscript analisis/evalua_anio.R data_local/armonizado/r salidas/anio_por_anio_R.csv salidas/anio_conflictos_R.csv
+	$(PY) -I analisis/contraste_datos.py salidas/anio_por_anio_py.csv salidas/anio_por_anio_R.csv
+	$(PY) -I analisis/contraste_datos.py salidas/anio_conflictos_py.csv salidas/anio_conflictos_R.csv
+	cmp salidas/anio_por_anio_py.csv datos/anio_evaluacion_por_anio.csv
+	cmp salidas/anio_conflictos_py.csv datos/anio_conflictos.csv
 
 # Regla 7 de D-10 (P-06): completa el RUT del donante por nombre sobre las filas de verificar-armonizado,
 # calibrando con los RUT conocidos. Filas en data_local/rut/py/ y data_local/rut/r/; tablas contra datos/.
