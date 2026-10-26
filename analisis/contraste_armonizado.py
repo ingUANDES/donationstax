@@ -1,4 +1,4 @@
-"""Contrasta, fila por fila, las planillas armonizadas en Python y en R (armonizar.py y armonizar.R).
+"""Contrasta, fila por fila, las salidas por fila de Python y de R (armonizar.py y .R, completar_rut.py y .R).
 
 Exige los mismos años, el mismo encabezado y, en cada año, las mismas filas con los mismos valores.
 La comparación es exacta, como texto: los montos van con 17 cifras significativas en los dos
