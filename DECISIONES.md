@@ -109,9 +109,9 @@ Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-23 (no verif
 
 ### D-13
 
-**Casos que D-10 no cubre al armonizar las planillas de la Ley 19.885.** Los plantea el investigador al aplicar [D-10 · Criterio para completar o excluir](#d-10) en [P-06 · Armonizar las planillas](BLUEPRINT.md#p-06). La regla exacta de cada caso está en la cabecera de [armonizar.py](analisis/armonizar.py) (puntos 1 a 5) o de [completar_rut.py](analisis/completar_rut.py) (puntos 6 a 8), marcada «[i]», y sus conteos por año en [armonizacion_por_anio.csv](datos/armonizacion_por_anio.csv) y [rut_completado_por_anio.csv](datos/rut_completado_por_anio.csv).
+**Casos que el criterio para completar o excluir no cubre al armonizar las planillas de la Ley 19.885.** Los plantea el investigador al aplicar [D-10 · Criterio para completar o excluir](#d-10) en [P-06 · Armonizar las planillas](BLUEPRINT.md#p-06). La regla exacta de cada caso está en la cabecera de [armonizar.py](analisis/armonizar.py) (puntos 1 a 5) o de [completar_rut.py](analisis/completar_rut.py) (puntos 6 a 8), marcada «[i]», y sus conteos por año en [armonizacion_por_anio.csv](datos/armonizacion_por_anio.csv) y [rut_completado_por_anio.csv](datos/rut_completado_por_anio.csv).
 
-1. **Filas sin `AÑO`.** Se conservan si tienen fecha válida y se excluyen («sin_anio») si no tienen ni fecha válida ni `AÑO`: 1 fila de 2014.
+1. **Filas sin `AÑO` ni fecha válida.** Toman el año del archivo, con el mes desconocido: el año siempre se puede reconstruir (ver el Estado). Cambio del 2026-10-26: la propuesta original las excluía («sin_anio»). Es 1 fila de 2014, y [armonizar.py](analisis/armonizar.py) todavía la excluye, hasta el [issue 20](https://github.com/ingUANDES/donationstax/issues/20).
 2. **Detalles de la regla 1.** El total coincide con Fondo Mixto + Institución si la diferencia es de a lo más 1e-6. Un año sin filas con los tres montos numéricos no es apto para recuperar totales (2019 y 2021, donde el Fondo Mixto viene como SI/NO; no tienen totales no numéricos, así que no cambia nada). Los 9 montos de 2024 escritos como «$ 20,000,000» no se leen y su fila se excluye. Alternativa: leerlos quitando «$» y las comas.
 3. **Fondo Mixto vacío o con otro texto.** El 33 % tampoco es medible: 32.510 filas de 2014, por ejemplo.
 4. **Fechas.** Se interpretan los formatos que lista la cabecera de armonizar.py. Las fechas parciales (solo el mes, mes y año, día y mes, solo el año) y los años de 2 o 5 dígitos no se interpretan; esas filas toman el año de `AÑO` y el mes queda desconocido. Alternativa: usar el mes cuando el texto lo nombra. Las fechas válidas van del 2008-01-01 al 2025-12-31, y `AÑO` debe estar en el mismo rango.
@@ -124,6 +124,20 @@ Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-23 (no verif
    - se cuenta por nombre distinto;
    - el umbral es el menor de 0,80 a 0,99 con al menos 100 asignaciones y precisión de al menos 99 %.
 
-   Con estas reglas, ningún umbral cumple y el paso por similitud no completa ningún RUT ([P-06](BLUEPRINT.md#p-06)).
+   Con estas reglas, ningún umbral cumple y el paso por similitud no completa ningún RUT ([P-06 · Armonizar las planillas](BLUEPRINT.md#p-06)).
 
-Estado: Propuesta. La plantea el investigador el 2026-10-24 ([issue 9](https://github.com/ingUANDES/donationstax/issues/9)). No rige hasta que una persona la apruebe; mientras tanto, armonizar.py ya la aplica, y los conteos por año permiten revertir cada punto.
+Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-26 (no verificable desde el repo): «primero aprueba D-13 evaluando que dependiendo del archivo de origen el año siempre se puede reconstruir». Evaluación del investigador (comprobación sin script, ver [D-14 · Año de la donación cuando la fecha cae en otro año](#d-14)): el año del archivo está siempre disponible y la columna `AÑO` lo repite en las 1.824 filas sin fecha válida (100 %), así que ninguna fila necesita excluirse por falta de año. De ahí el cambio en el punto 1. Los otros siete puntos se aprueban como los planteó el investigador. [armonizar.py](analisis/armonizar.py) y [armonizar.R](analisis/armonizar.R) todavía excluyen la fila del punto 1; el ajuste está pedido en el [issue 20](https://github.com/ingUANDES/donationstax/issues/20).
+
+### D-14
+
+**Año de la donación cuando la fecha cae en un año distinto del archivo.** La regla 4 de [D-10 · Criterio para completar o excluir](#d-10), aprobada, fija que el año de la donación es el de la fecha válida y no el del archivo ni el de la columna `AÑO`. La evaluación del 2026-10-26 sobre las 7.877.362 filas armonizadas (comprobación sin script, sobre `data_local/armonizado/py/`, que no se versiona; el script la pide el [issue 20](https://github.com/ingUANDES/donationstax/issues/20)) muestra:
+
+- La columna `AÑO` coincide con el año del archivo en las 1.824 filas sin fecha válida (100 %) y en el 99,999 % de las 7.875.527 incluidas que sí la tienen.
+- La fecha cae en el mismo año del archivo en el 99,932 % de esas filas. En las 5.387 restantes, `AÑO` coincide con el año del archivo en 5.352 (99,4 %) y con el de la fecha en 35; en ninguna coincide con un tercer año.
+- De las 5.387, la mayoría tiene la fecha en el año siguiente al del archivo, y 4.439 de ellas en febrero. Inferencia: son fechas del certificado y no de la donación (sin verificar; el archivo no lo dice).
+
+Propuesta: el año de la donación es el del archivo, que siempre se puede reconstruir. La fecha da el mes solo si cae en ese año; si cae en otro, el mes queda desconocido y la fila se marca. El año de la fecha se conserva en una columna aparte para sensibilidad. Reemplazaría la regla 4 de [D-10 · Criterio para completar o excluir](#d-10) y la parte de la regla 3 que da prioridad a la fecha.
+
+Efecto: mueve 5.387 filas (0,07 %) entre años de donación. Entre las filas con fecha válida, 2018 tiene 482.043 con el año de la fecha y 486.497 con el del archivo; 2019, 474.445 y 469.930.
+
+Estado: Propuesta. La plantea el investigador el 2026-10-26, a partir de lo que dijo el usuario al aprobar [D-13 · Casos que el criterio para completar o excluir no cubre](#d-13). Cambia una regla aprobada, así que no rige hasta que una persona la apruebe; mientras tanto, armonizar.py aplica la regla 4 como está.

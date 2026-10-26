@@ -140,7 +140,7 @@ Cada riesgo de [Riesgos de identificación a testear](#riesgos-de-identificació
 
 ### P-06
 
-**Armonizar las planillas (E2).** Estado: hecho el 2026-10-24 ([issue 9](https://github.com/ingUANDES/donationstax/issues/9)), a nivel *contrastado* ([D-05 · Niveles de resultado](DECISIONES.md#d-05)). Python y R coinciden en las tablas y celda por celda en las 7.877.362 filas. Se aplicaron las ocho reglas de [D-10 · Criterio para completar o excluir](DECISIONES.md#d-10): la armonización (reglas 1 a 6 y 8) y la regla 7, completar el RUT por nombre. Los casos que D-10 no cubre están en [D-13 · Casos que D-10 no cubre](DECISIONES.md#d-13), propuesta y sin aprobar.
+**Armonizar las planillas (E2).** Estado: hecho el 2026-10-24 ([issue 9](https://github.com/ingUANDES/donationstax/issues/9)), a nivel *contrastado* ([D-05 · Niveles de resultado](DECISIONES.md#d-05)). Python y R coinciden en las tablas y celda por celda en las 7.877.362 filas. Se aplicaron las ocho reglas de [D-10 · Criterio para completar o excluir](DECISIONES.md#d-10): la armonización (reglas 1 a 6 y 8) y la regla 7, completar el RUT por nombre. Los casos que [D-10 · Criterio para completar o excluir](DECISIONES.md#d-10) no cubre están en [D-13 · Casos que el criterio para completar o excluir no cubre](DECISIONES.md#d-13), aprobada el 2026-10-26 con un cambio en el punto 1 que el script aún no aplica ([issue 20](https://github.com/ingUANDES/donationstax/issues/20)).
 
 Producto: [armonizar.py](analisis/armonizar.py) y [armonizar.R](analisis/armonizar.R), con la regla exacta de cada caso en la cabecera del de Python. Salidas:
 
@@ -154,14 +154,14 @@ Producto: [armonizar.py](analisis/armonizar.py) y [armonizar.R](analisis/armoniz
 El contraste fila a fila encontró dos diferencias entre lectores que el perfil de [P-02](#p-02) no veía, y las dos quedaron como reglas de lectura comunes en [esquema_datos.py](analisis/esquema_datos.py):
 
 - Los archivos traen CRLF literales dentro del texto. calamine los normaliza a «\n», como manda la sección 2.11 de XML 1.0, y readxl no; ahora esquema_datos.R los normaliza antes de leer.
-- El único escape `_xHHHH_` que no es mitad de par sustituto (`_x000D_`, una vez en 2024) lo decodifica calamine; la regla de P-02 que lo dejaba literal no se había puesto a prueba.
+- El único escape `_xHHHH_` que no es mitad de par sustituto (`_x000D_`, una vez en 2024) lo decodifica calamine; la regla de [P-02 · Estructura de los datos](#p-02) que lo dejaba literal no se había puesto a prueba.
 
 Lo que muestran las planillas (cifras de armonizacion_por_anio.csv salvo que se diga otra cosa):
 
-- **Variantes de esquema:** las cinco de P-02. 1: 2008 a 2014, 2018 y 2019; 2: 2015 y 2016; 3: 2017; 4: 2020 a 2023; 5: 2024 y 2025 (diccionario_columnas.csv).
+- **Variantes de esquema:** las cinco de [P-02 · Estructura de los datos](#p-02). 1: 2008 a 2014, 2018 y 2019; 2: 2015 y 2016; 3: 2017; 4: 2020 a 2023; 5: 2024 y 2025 (diccionario_columnas.csv).
 - **Regla 1, montos:**
   - En 2014 se recuperan 7.163 totales vacíos como Fondo Mixto (0) más Institución. Ese año, el total coincide con la suma en 955.091 de 955.093 filas válidas (línea 8).
-  - Se excluyen 11 filas por monto: 1 de 2013 (Institución vacía), 1 de 2020 (la fila de instrucciones de la plantilla) y 9 de 2024, con montos escritos como «$ 20,000,000» ([D-13](DECISIONES.md#d-13), punto 2).
+  - Se excluyen 11 filas por monto: 1 de 2013 (Institución vacía), 1 de 2020 (la fila de instrucciones de la plantilla) y 9 de 2024, con montos escritos como «$ 20,000,000» ([D-13 · Casos que el criterio para completar o excluir no cubre](DECISIONES.md#d-13), punto 2).
   - Con la fila de 2014 sin `AÑO` ni fecha, quedan excluidas 12 de las 7.877.362 filas.
 - **Regla 2, Fondo Mixto:** el 33 % no es medible en las filas con SI/NO (38.222 en 2018, 470.431 en 2019 y 438.604 en 2021), vacías (32.510 en 2014, entre otras) u «otro» (25 en 2015).
 - **Reglas 3 y 4, fechas:**
@@ -186,7 +186,7 @@ Salidas:
 
 Resultados:
 
-- **Nombre idéntico.** Ocultando cada año con RUT, el nombre normalizado idéntico con un solo RUT en los demás años acierta en el 99,14 % (2025) a 99,98 % (2017) de los nombres a los que asigna RUT. Cumple el 99 % de D-10 en los nueve años (columna `precision` de rut_calibracion_identico.csv).
+- **Nombre idéntico.** Ocultando cada año con RUT, el nombre normalizado idéntico con un solo RUT en los demás años acierta en el 99,14 % (2025) a 99,98 % (2017) de los nombres a los que asigna RUT. Cumple el 99 % de [D-10 · Criterio para completar o excluir](DECISIONES.md#d-10) en los nueve años (columna `precision` de rut_calibracion_identico.csv).
 - **Similitud.** Ningún umbral de 0,80 a 0,99 llega al 99 %: el máximo es 98,04 % en 0,96 (1.753 de 1.788), y en 0,98 quedan 23 asignaciones con 82,6 % (rut_calibracion_similitud.csv, líneas 18 y 20). El paso por similitud no completa ningún RUT. Inferencia: un nombre parecido con otro RUT suele ser otra persona.
 - **Filas completadas por nombre idéntico** (rut_completado_por_anio.csv):
   - 96,8 % de 2018, 95,0 % de 2019, 70,8 % de 2013, 67,6 % de 2012 y 43,6 % de 2014;
