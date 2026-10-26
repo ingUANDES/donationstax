@@ -28,7 +28,7 @@ VARIANTES <- character(0)
 
 CAMPOS_FILA <- c(
   "anio_archivo", "fila", "incluida", "motivo_exclusion", "anio_columna", "anio_donacion", "mes_donacion",
-  "fecha_donacion", "fecha_tipo", "anio_fuente", "monto_total", "monto_total_origen", "monto_institucion",
+  "fecha_donacion", "fecha_tipo", "anio_fecha", "fecha_otro_anio", "monto_total", "monto_total_origen", "monto_institucion",
   "monto_fm", "fm_tipo", "fm_si_no", "fm_33_medible", "duplicado_exacto", "donatario", "rut_institucion",
   "proyecto", "folio_proyecto", "folio_institucion", "region", "donante", "donante_con_fffd",
   "rut_donante", "rut_cuerpo", "rut_estado"
@@ -39,8 +39,8 @@ CAMPOS_CONTEO <- c(
   "n_total_cero", "n_total_negativo", "n_fm_monto", "n_fm_si_no", "n_fm_vacio", "n_fm_otro",
   "n_fecha_vacia", "n_fecha_serial", "n_fecha_texto_iso", "n_fecha_texto_dma", "n_fecha_texto_largo",
   "n_fecha_no_interpretable", "n_fecha_invalida", "n_fecha_fuera_de_rango", "n_fecha_valida",
-  "n_anio_desde_columna", "n_anio_columna_no_valido", "n_anio_donacion_distinto_archivo",
-  "n_anio_donacion_distinto_columna", "n_duplicados_exactos", "n_donante_con_fffd", "formato_rut_sin_guion",
+  "n_mes_desconocido", "n_fecha_otro_anio", "n_anio_columna_no_valido", "n_anio_columna_distinto_archivo",
+  "n_duplicados_exactos", "n_donante_con_fffd", "formato_rut_sin_guion",
   "n_rut_sin_guion", "n_rut_sin_guion_dv_ok", "n_rut_vacio", "n_rut_dv_valido", "n_rut_dv_invalido",
   "n_rut_sin_dv", "n_rut_mal_formado", "n_rut_sin_columna", "suma_monto_total",
   "suma_monto_total_sin_duplicados"
@@ -156,10 +156,11 @@ armonizar <- function(anio, ruta) {
   a_col <- a_num(col("anio"))
   a_ok <- !is.na(a_col) & a_col == floor(a_col) & a_col >= 2008 & a_col <= 2025
   con_fecha <- !is.na(fch$fecha)
-  anio_don <- ifelse(con_fecha, as.integer(format(fch$fecha, "%Y")), ifelse(a_ok, as.integer(a_col), NA_integer_))
-  mes <- ifelse(con_fecha, as.character(as.integer(format(fch$fecha, "%m"))), "")
-  fuente <- ifelse(con_fecha, "fecha", ifelse(a_ok, "columna_anio", ""))
-  motivo <- ifelse(is.na(total), "monto_no_recuperable", ifelse(fuente == "", "sin_anio", ""))
+  anio_f <- as.integer(format(fch$fecha, "%Y"))
+  otro_anio <- con_fecha & anio_f != anio
+  anio_don <- rep(anio, n)
+  mes <- ifelse(con_fecha & !otro_anio, as.character(as.integer(format(fch$fecha, "%m"))), "")
+  motivo <- ifelse(is.na(total), "monto_no_recuperable", "")
   dup <- if (n == 0) logical(0) else duplicated(do.call(paste, c(lapply(seq_len(ncol(cuerpo)), function(j) cuerpo[, j]), sep = "\x1f")))
   fv <- col("fm")
   fm_tipo <- ifelse(fv == "", "vacio", ifelse(!is.na(fm), "monto", ifelse(norm(fv) %in% c("SI", "NO"), "si_no", "otro")))
@@ -172,8 +173,9 @@ armonizar <- function(anio, ruta) {
 
   filas <- data.frame(
     anio_archivo = rep(anio, n), fila = fila, incluida = as.integer(motivo == ""), motivo_exclusion = motivo,
-    anio_columna = col("anio"), anio_donacion = ifelse(is.na(anio_don), "", as.character(anio_don)), mes_donacion = mes,
-    fecha_donacion = ifelse(con_fecha, format(fch$fecha, "%Y-%m-%d"), ""), fecha_tipo = fch$tipo, anio_fuente = fuente,
+    anio_columna = col("anio"), anio_donacion = as.character(anio_don), mes_donacion = mes,
+    fecha_donacion = ifelse(con_fecha, format(fch$fecha, "%Y-%m-%d"), ""), fecha_tipo = fch$tipo,
+    anio_fecha = ifelse(con_fecha, as.character(anio_f), ""), fecha_otro_anio = as.integer(otro_anio),
     monto_total = g17(total), monto_total_origen = origen, monto_institucion = g17(mi), monto_fm = g17(fm),
     fm_tipo = fm_tipo, fm_si_no = ifelse(fm_tipo == "si_no", norm(fv), ""), fm_33_medible = as.integer(fm_tipo == "monto"),
     duplicado_exacto = as.integer(dup), donatario = col("donatario"), rut_institucion = col("rut_institucion"),
@@ -196,9 +198,8 @@ armonizar <- function(anio, ruta) {
     n_fecha_texto_iso = cuenta(fch$tipo == "texto_iso"), n_fecha_texto_dma = cuenta(fch$tipo == "texto_dma"),
     n_fecha_texto_largo = cuenta(fch$tipo == "texto_largo"), n_fecha_no_interpretable = cuenta(fch$tipo == "no_interpretable"),
     n_fecha_invalida = cuenta(fch$tipo == "invalida"), n_fecha_fuera_de_rango = cuenta(fch$tipo == "fuera_de_rango"),
-    n_fecha_valida = cuenta(con_fecha), n_anio_desde_columna = cuenta(fuente == "columna_anio"),
-    n_anio_columna_no_valido = cuenta(!a_ok), n_anio_donacion_distinto_archivo = cuenta(!is.na(anio_don) & anio_don != anio),
-    n_anio_donacion_distinto_columna = cuenta(!is.na(anio_don) & a_ok & anio_don != a_col),
+    n_fecha_valida = cuenta(con_fecha), n_mes_desconocido = cuenta(mes == ""), n_fecha_otro_anio = cuenta(otro_anio),
+    n_anio_columna_no_valido = cuenta(!a_ok), n_anio_columna_distinto_archivo = cuenta(a_ok & a_col != anio),
     n_duplicados_exactos = cuenta(dup), n_donante_con_fffd = cuenta(fffd), formato_rut_sin_guion = fr$formato,
     n_rut_sin_guion = fr$n, n_rut_sin_guion_dv_ok = fr$ok, n_rut_vacio = cuenta(rut$estado == "vacio"),
     n_rut_dv_valido = cuenta(rut$estado == "dv_valido"), n_rut_dv_invalido = cuenta(rut$estado == "dv_invalido"),

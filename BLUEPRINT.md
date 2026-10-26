@@ -9,7 +9,7 @@ Serie **P-nn**: pendientes. Este es el único archivo donde se define el prefijo
 | Etapa | Producto | Cómo se verifica | Backlog |
 |---|---|---|---|
 | E1 Inventario normativo | [normativa/cambios.csv](normativa/cambios.csv) y textos en `normativa/textos/` | [verifica_citas.py](analisis/verifica_citas.py) | [P-01](#p-01) |
-| E2 Estructura de los datos | [datos/esquema_por_anio.csv](datos/esquema_por_anio.csv), [datos/esquema_ley21440_por_anio.csv](datos/esquema_ley21440_por_anio.csv), [datos/cruce_donatarias_por_anio.csv](datos/cruce_donatarias_por_anio.csv), [datos/armonizacion_por_anio.csv](datos/armonizacion_por_anio.csv), [datos/rut_completado_por_anio.csv](datos/rut_completado_por_anio.csv) | esquema calculado en Python y en R, comparados ([contraste_datos.py](analisis/contraste_datos.py)) | [P-02](#p-02), [P-06](#p-06), [P-07](#p-07) |
+| E2 Estructura de los datos | [datos/esquema_por_anio.csv](datos/esquema_por_anio.csv), [datos/esquema_ley21440_por_anio.csv](datos/esquema_ley21440_por_anio.csv), [datos/cruce_donatarias_por_anio.csv](datos/cruce_donatarias_por_anio.csv), [datos/armonizacion_por_anio.csv](datos/armonizacion_por_anio.csv), [datos/rut_completado_por_anio.csv](datos/rut_completado_por_anio.csv), [datos/anio_evaluacion_por_anio.csv](datos/anio_evaluacion_por_anio.csv) | esquema calculado en Python y en R, comparados ([contraste_datos.py](analisis/contraste_datos.py)) | [P-02](#p-02), [P-06](#p-06), [P-07](#p-07) |
 | E3 Precio fiscal por régimen | salidas de [precio_fiscal.py](analisis/precio_fiscal.py) y [precio_fiscal.R](analisis/precio_fiscal.R) | [contraste.py](analisis/contraste.py) | [P-04](#p-04) |
 | E4 Diseños de estimación por cambio | scripts en `analisis/`, Python y R | simulación con efecto conocido y contraste | [P-05](#p-05) |
 | E5 Resultados y manuscrito | tablas y texto del artículo | solo cifras con nivel «verificada» ([D-05 · Niveles de resultado](DECISIONES.md#d-05)) | sin abrir |
@@ -140,13 +140,14 @@ Cada riesgo de [Riesgos de identificación a testear](#riesgos-de-identificació
 
 ### P-06
 
-**Armonizar las planillas (E2).** Estado: hecho el 2026-10-24 ([issue 9](https://github.com/ingUANDES/donationstax/issues/9)), a nivel *contrastado* ([D-05 · Niveles de resultado](DECISIONES.md#d-05)). Python y R coinciden en las tablas y celda por celda en las 7.877.362 filas. Se aplicaron las ocho reglas de [D-10 · Criterio para completar o excluir](DECISIONES.md#d-10): la armonización (reglas 1 a 6 y 8) y la regla 7, completar el RUT por nombre. Los casos que [D-10 · Criterio para completar o excluir](DECISIONES.md#d-10) no cubre están en [D-13 · Casos que el criterio para completar o excluir no cubre](DECISIONES.md#d-13), aprobada el 2026-10-26 con un cambio en el punto 1 que el script aún no aplica ([issue 20](https://github.com/ingUANDES/donationstax/issues/20)).
+**Armonizar las planillas (E2).** Estado: hecho el 2026-10-24 ([issue 9](https://github.com/ingUANDES/donationstax/issues/9)), a nivel *contrastado* ([D-05 · Niveles de resultado](DECISIONES.md#d-05)). Python y R coinciden en las tablas y celda por celda en las 7.877.362 filas. Se aplicaron las ocho reglas de [D-10 · Criterio para completar o excluir](DECISIONES.md#d-10): la armonización (reglas 1 a 6 y 8) y la regla 7, completar el RUT por nombre. Los casos que [D-10 · Criterio para completar o excluir](DECISIONES.md#d-10) no cubre están en [D-13 · Casos que el criterio para completar o excluir no cubre](DECISIONES.md#d-13), aprobada el 2026-10-26 con un cambio en el punto 1. El año de la donación sigue [D-14 · Año de la donación cuando la fecha cae en otro año](DECISIONES.md#d-14); los scripts aplican las dos desde el [issue 20](https://github.com/ingUANDES/donationstax/issues/20).
 
 Producto: [armonizar.py](analisis/armonizar.py) y [armonizar.R](analisis/armonizar.R), con la regla exacta de cada caso en la cabecera del de Python. Salidas:
 
 - `data_local/armonizado/py/` y `data_local/armonizado/r/`: una fila por fila de cada planilla. Traen nombres, así que no se versionan.
 - [datos/armonizacion_por_anio.csv](datos/armonizacion_por_anio.csv): cuántas filas toca cada regla, por año del archivo (líneas 2 a 19: 2008 a 2025).
-- [datos/armonizacion_anios_donacion.csv](datos/armonizacion_anios_donacion.csv): filas y monto por año del archivo y año de la donación.
+- [datos/armonizacion_anios_donacion.csv](datos/armonizacion_anios_donacion.csv): filas y monto por año del archivo y año de la donación. Desde D-14 los dos años coinciden en todas las filas.
+- [datos/anio_evaluacion_por_anio.csv](datos/anio_evaluacion_por_anio.csv) y [datos/anio_conflictos.csv](datos/anio_conflictos.csv), de [evalua_anio.py](analisis/evalua_anio.py) y [evalua_anio.R](analisis/evalua_anio.R) (`make verificar-anio`). La primera dice de dónde puede salir el año (fecha, `AÑO` o archivo) y cuántas filas y qué monto le tocan a cada año con el año del archivo o con el de la fecha. La segunda trae las filas con fecha en otro año, por año del archivo, diferencia de años y mes.
 - [datos/diccionario_columnas.csv](datos/diccionario_columnas.csv): encabezado original y normalizado, rol, tipo y variante de esquema de cada columna de cada año.
 
 [contraste_armonizado.py](analisis/contraste_armonizado.py) compara las filas y [contraste_datos.py](analisis/contraste_datos.py), las tablas; `make verificar-armonizado` corre todo y `make verificar-datos` lo incluye.
@@ -162,12 +163,16 @@ Lo que muestran las planillas (cifras de armonizacion_por_anio.csv salvo que se 
 - **Regla 1, montos:**
   - En 2014 se recuperan 7.163 totales vacíos como Fondo Mixto (0) más Institución. Ese año, el total coincide con la suma en 955.091 de 955.093 filas válidas (línea 8).
   - Se excluyen 11 filas por monto: 1 de 2013 (Institución vacía), 1 de 2020 (la fila de instrucciones de la plantilla) y 9 de 2024, con montos escritos como «$ 20,000,000» ([D-13 · Casos que el criterio para completar o excluir no cubre](DECISIONES.md#d-13), punto 2).
-  - Con la fila de 2014 sin `AÑO` ni fecha, quedan excluidas 12 de las 7.877.362 filas.
+  - La fila de 2014 sin `AÑO` ni fecha se incluye con el año del archivo ([D-13](DECISIONES.md#d-13), punto 1), así que quedan excluidas 11 de las 7.877.362 filas.
 - **Regla 2, Fondo Mixto:** el 33 % no es medible en las filas con SI/NO (38.222 en 2018, 470.431 en 2019 y 438.604 en 2021), vacías (32.510 en 2014, entre otras) u «otro» (25 en 2015).
-- **Reglas 3 y 4, fechas:**
+- **Fechas y año de la donación (regla 3 y [D-14](DECISIONES.md#d-14)):**
   - 67.092 fechas de texto se interpretan.
-  - 1.791 no son interpretables, 6 no existen en el calendario (como «31-11-2011»), 4 caen fuera de 2008 a 2025 y 24 están vacías. En esas filas, el año sale de `AÑO` (1.824 en total).
-  - En 5.387 filas el año de la donación no es el del archivo. Las más son 4.518 filas de 2018 (4.515 con fecha en 2019), 460 de 2021 (452 con fecha en 2022 y 8 en 2020) y 340 de 2015 (armonizacion_anios_donacion.csv).
+  - 1.791 no son interpretables, 6 no existen en el calendario (como «31-11-2011»), 4 caen fuera de 2008 a 2025 y 24 están vacías. En esas filas el mes queda desconocido.
+  - El año de la donación es siempre el del archivo.
+  - 5.387 filas tienen la fecha válida en otro año: 4.518 de 2018, 460 de 2021, 340 de 2015, 65 de 2017 y 4 de 2012 a 2014 (columna `n_fecha_otro_anio`). Van marcadas, con el mes desconocido y el año de la fecha en `anio_fecha`.
+  - Entre esas 5.387, en 5.343 la fecha cae en el año siguiente, 4.439 de ellas en febrero. `AÑO` coincide con el archivo en 5.352 y con la fecha en 35 (anio_evaluacion_por_anio.csv, fila «total»; anio_conflictos.csv).
+  - Efecto de la regla en las filas con fecha válida: 2018 tiene 486.497 con el año del archivo y 482.043 con el de la fecha; 2019, 469.930 y 474.445 (anio_evaluacion_por_anio.csv, líneas 12 y 13). Las columnas `suma_monto_anio_archivo` y `suma_monto_anio_fecha` dan la sensibilidad del monto.
+  - Hay 8 filas con la fecha en el año del archivo y `AÑO` distinto: 5 con otro año y 3 sin `AÑO`. Por D-14 toman el año del archivo.
   - Evidencia débil: 4.487 de las de 2018 son fechas de texto de febrero de 2019 de una sola donataria. No es una inversión día-mes (el 98,8 % tiene día mayor que 12), pero podrían ser fechas del certificado y no de la donación (inferencia; comprobación sin script).
 - **Regla 5, duplicados exactos:** se marcan y no se excluyen; sus conteos son los de [P-02](#p-02). La sensibilidad sin duplicados está en `suma_monto_total_sin_duplicados`. Las mayores proporciones del monto en filas duplicadas son 2,81 % en 2013, 1,72 % en 2018 y 1,52 % en 2022 (cocientes de dos columnas, calculados en Python y en R sin script en `analisis/`).
 - **Regla 6:** filas con U+FFFD en el donante: 53, 2.089, 487, 4 y 12, de 2021 a 2025.

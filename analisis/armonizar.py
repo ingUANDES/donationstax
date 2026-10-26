@@ -27,9 +27,13 @@ Reglas (D-10; lo que D-10 no dice y se fija aquí es inferencia del investigador
   con el nombre completo del mes. Lo demás (solo el mes, mes y año, día y mes, solo el año, año de
   2 o 5 dígitos, «N/S») no se interpreta [i]. Una fecha interpretada es válida si existe en el
   calendario y cae entre DESDE y HASTA (los años publicados, 2008 a 2025 [i]).
-- Reglas 3 y 4, año de la donación: el de la fecha válida; si no hay, el de `AÑO` si es entero y está
-  entre 2008 y 2025 [i: mismo rango], con mes desconocido. Sin ninguno, la fila se excluye
-  («sin_anio») [i: D-10 no trata las filas sin `AÑO`].
+- Año y mes de la donación (D-14, que reemplaza la regla 4 de D-10 y la parte de la regla 3 que daba
+  prioridad a la fecha; D-13, punto 1): el año es siempre el del archivo de origen, también en las
+  filas sin `AÑO` ni fecha válida, que ya no se excluyen. La fecha válida da el mes solo si cae en el
+  año del archivo; si cae en otro año, el mes queda desconocido, la fila se marca
+  (`fecha_otro_anio`) y el año de la fecha queda en `anio_fecha` para sensibilidad. Sin fecha válida,
+  el mes queda desconocido. `AÑO` se considera válido si es entero y está entre 2008 y 2025; solo se
+  usa para contar si coincide con el archivo.
 - Regla 5, duplicados exactos: filas con todas sus celdas iguales a una anterior del mismo archivo;
   se marcan desde la segunda copia y no se excluyen.
 - Regla 6: se marca la fila cuyo donante tiene U+FFFD; no se excluye.
@@ -77,7 +81,7 @@ VARIANTES = {}  # columnas normalizadas -> número de variante, en orden de apar
 
 CAMPOS_FILA = [
     "anio_archivo", "fila", "incluida", "motivo_exclusion", "anio_columna", "anio_donacion", "mes_donacion",
-    "fecha_donacion", "fecha_tipo", "anio_fuente", "monto_total", "monto_total_origen", "monto_institucion",
+    "fecha_donacion", "fecha_tipo", "anio_fecha", "fecha_otro_anio", "monto_total", "monto_total_origen", "monto_institucion",
     "monto_fm", "fm_tipo", "fm_si_no", "fm_33_medible", "duplicado_exacto", "donatario", "rut_institucion",
     "proyecto", "folio_proyecto", "folio_institucion", "region", "donante", "donante_con_fffd",
     "rut_donante", "rut_cuerpo", "rut_estado",
@@ -88,8 +92,8 @@ CAMPOS_CONTEO = [
     "n_total_cero", "n_total_negativo", "n_fm_monto", "n_fm_si_no", "n_fm_vacio", "n_fm_otro",
     "n_fecha_vacia", "n_fecha_serial", "n_fecha_texto_iso", "n_fecha_texto_dma", "n_fecha_texto_largo",
     "n_fecha_no_interpretable", "n_fecha_invalida", "n_fecha_fuera_de_rango", "n_fecha_valida",
-    "n_anio_desde_columna", "n_anio_columna_no_valido", "n_anio_donacion_distinto_archivo",
-    "n_anio_donacion_distinto_columna", "n_duplicados_exactos", "n_donante_con_fffd", "formato_rut_sin_guion",
+    "n_mes_desconocido", "n_fecha_otro_anio", "n_anio_columna_no_valido", "n_anio_columna_distinto_archivo",
+    "n_duplicados_exactos", "n_donante_con_fffd", "formato_rut_sin_guion",
     "n_rut_sin_guion", "n_rut_sin_guion_dv_ok", "n_rut_vacio", "n_rut_dv_valido", "n_rut_dv_invalido",
     "n_rut_sin_dv", "n_rut_mal_formado", "n_rut_sin_columna", "suma_monto_total",
     "suma_monto_total_sin_duplicados",
@@ -209,14 +213,11 @@ def armonizar(anio, ruta):
             tipo_final = tipo
         a_col = e.num(col(f, "anio"))
         a_col_ok = a_col is not None and a_col == int(a_col) and DESDE.year <= a_col <= HASTA.year
-        if fecha is not None:
-            anio_don, mes, fuente = fecha.year, fecha.month, "fecha"
-        elif a_col_ok:
-            anio_don, mes, fuente = int(a_col), "", "columna_anio"
-        else:
-            anio_don, mes, fuente = "", "", ""
+        otro_anio = fecha is not None and fecha.year != anio
+        anio_don = anio
+        mes = fecha.month if fecha is not None and not otro_anio else ""
 
-        motivo = "monto_no_recuperable" if total is None else "sin_anio" if fuente == "" else ""
+        motivo = "monto_no_recuperable" if total is None else ""
         dup = tuple(f) in vistos
         vistos.add(tuple(f))
         fv = col(f, "fm")
@@ -228,7 +229,7 @@ def armonizar(anio, ruta):
             "anio_archivo": anio, "fila": fila, "incluida": int(motivo == ""), "motivo_exclusion": motivo,
             "anio_columna": col(f, "anio"), "anio_donacion": anio_don, "mes_donacion": mes,
             "fecha_donacion": fecha.isoformat() if fecha is not None else "", "fecha_tipo": tipo_final,
-            "anio_fuente": fuente, "monto_total": g17(total) if total is not None else "", "monto_total_origen": origen,
+            "anio_fecha": fecha.year if fecha is not None else "", "fecha_otro_anio": int(otro_anio), "monto_total": g17(total) if total is not None else "", "monto_total_origen": origen,
             "monto_institucion": g17(mi) if mi is not None else "", "monto_fm": g17(fm) if fm is not None else "",
             "fm_tipo": fm_tipo, "fm_si_no": e.norm(fv) if fm_tipo == "si_no" else "", "fm_33_medible": int(fm_tipo == "monto"),
             "duplicado_exacto": int(dup), "donatario": col(f, "donatario"), "rut_institucion": col(f, "rut_institucion"),
@@ -247,10 +248,10 @@ def armonizar(anio, ruta):
             c["neg"] += total < 0
         c["fecha_" + tipo_final] += 1
         c["fecha_valida"] += fecha is not None
-        c["desde_columna"] += fuente == "columna_anio"
+        c["mes_desconocido"] += mes == ""
+        c["otro_anio"] += otro_anio
         c["anio_col_no_valido"] += not a_col_ok
-        c["dist_archivo"] += anio_don != "" and anio_don != anio
-        c["dist_columna"] += anio_don != "" and a_col_ok and anio_don != int(a_col)
+        c["col_distinto_archivo"] += a_col_ok and int(a_col) != anio
         c["dup"] += dup
         c["fffd"] += con_fffd
         c["rut_" + rut_estado] += 1
@@ -267,8 +268,8 @@ def armonizar(anio, ruta):
         "n_fecha_texto_dma": c["fecha_texto_dma"], "n_fecha_texto_largo": c["fecha_texto_largo"],
         "n_fecha_no_interpretable": c["fecha_no_interpretable"], "n_fecha_invalida": c["fecha_invalida"],
         "n_fecha_fuera_de_rango": c["fecha_fuera_de_rango"], "n_fecha_valida": c["fecha_valida"],
-        "n_anio_desde_columna": c["desde_columna"], "n_anio_columna_no_valido": c["anio_col_no_valido"],
-        "n_anio_donacion_distinto_archivo": c["dist_archivo"], "n_anio_donacion_distinto_columna": c["dist_columna"],
+        "n_mes_desconocido": c["mes_desconocido"], "n_fecha_otro_anio": c["otro_anio"],
+        "n_anio_columna_no_valido": c["anio_col_no_valido"], "n_anio_columna_distinto_archivo": c["col_distinto_archivo"],
         "n_duplicados_exactos": c["dup"], "n_donante_con_fffd": c["fffd"], "formato_rut_sin_guion": formato,
         "n_rut_sin_guion": n_sin, "n_rut_sin_guion_dv_ok": n_sin_ok, "n_rut_vacio": c["rut_vacio"],
         "n_rut_dv_valido": c["rut_dv_valido"], "n_rut_dv_invalido": c["rut_dv_invalido"], "n_rut_sin_dv": c["rut_sin_dv"],
