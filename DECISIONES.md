@@ -107,3 +107,14 @@ Limitación (inferencia): las planillas son de donaciones recibidas (así se tit
 
 Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-23 (no verificable desde el repo): «la variable resultado debería ser monto donado». Las columnas, los puntos abiertos y la limitación son del investigador (inferencia).
 
+### D-13
+
+**Casos que D-10 no cubre al armonizar las planillas de la Ley 19.885.** Los plantea el investigador al aplicar [D-10 · Criterio para completar o excluir](#d-10) en [P-06 · Armonizar las planillas](BLUEPRINT.md#p-06). La regla exacta de cada caso está en la cabecera de [armonizar.py](analisis/armonizar.py), marcada «[i]», y sus conteos por año en [armonizacion_por_anio.csv](datos/armonizacion_por_anio.csv).
+
+1. **Filas sin `AÑO`.** Se conservan si tienen fecha válida y se excluyen («sin_anio») si no tienen ni fecha válida ni `AÑO`: 1 fila de 2014.
+2. **Detalles de la regla 1.** El total coincide con Fondo Mixto + Institución si la diferencia es de a lo más 1e-6. Un año sin filas con los tres montos numéricos no es apto para recuperar totales (2019 y 2021, donde el Fondo Mixto viene como SI/NO; no tienen totales no numéricos, así que no cambia nada). Los 9 montos de 2024 escritos como «$ 20,000,000» no se leen y su fila se excluye. Alternativa: leerlos quitando «$» y las comas.
+3. **Fondo Mixto vacío o con otro texto.** El 33 % tampoco es medible: 32.510 filas de 2014, por ejemplo.
+4. **Fechas.** Se interpretan los formatos que lista la cabecera de armonizar.py. Las fechas parciales (solo el mes, mes y año, día y mes, solo el año) y los años de 2 o 5 dígitos no se interpretan; esas filas toman el año de `AÑO` y el mes queda desconocido. Alternativa: usar el mes cuando el texto lo nombra. Las fechas válidas van del 2008-01-01 al 2025-12-31, y `AÑO` debe estar en el mismo rango.
+5. **RUT del donante.** El formato de los valores sin guion se decide por año con Módulo 11: en 2022 son el número sin dígito verificador; en los demás años, cuerpo + dígito verificador. Un valor de 9 dígitos o terminado en K se lee siempre como cuerpo + dígito verificador.
+
+Estado: Propuesta. La plantea el investigador el 2026-10-24 ([issue 9](https://github.com/ingUANDES/donationstax/issues/9)). No rige hasta que una persona la apruebe; mientras tanto, armonizar.py ya la aplica, y los conteos por año permiten revertir cada punto.
