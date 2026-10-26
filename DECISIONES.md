@@ -71,8 +71,8 @@ Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-23 (no verif
 
 1. **Montos.** No se imputan. Si el monto total no es numérico pero los de Fondo Mixto e Institución sí lo son, el total se recupera como su suma solo en los años en que, en las filas válidas, el total coincide con esa suma en al menos el 99,9 % de los casos; si no, la fila se excluye del análisis y se cuenta.
 2. **Fondo Mixto.** Cuenta el monto cuando es numérico. Donde viene como «SI/NO» se usa como indicador, y el cumplimiento del 33 % se marca «no medible» (2019, 2021 y parte de 2018); no se imputa.
-3. **Fechas.** Manda la fecha de la donación cuando es válida y cae en el rango de los años publicados; si es texto, se interpreta con los formatos observados. Si es inválida o está fuera de rango, se usa `AÑO` como año y el mes queda desconocido, y la fila no entra en análisis por mes.
-4. **`AÑO` incoherente con el archivo.** El año de la donación es el de la fecha válida, no el del archivo ni el de la columna `AÑO`.
+3. **Fechas.** Manda la fecha de la donación cuando es válida y cae en el rango de los años publicados; si es texto, se interpreta con los formatos observados. Si es inválida o está fuera de rango, se usa `AÑO` como año y el mes queda desconocido, y la fila no entra en análisis por mes. (Reemplazada en parte por [D-14 · Año de la donación cuando la fecha cae en otro año](#d-14): la fecha ya no manda sobre el año del archivo.)
+4. **`AÑO` incoherente con el archivo.** El año de la donación es el de la fecha válida, no el del archivo ni el de la columna `AÑO`. (Reemplazada por [D-14 · Año de la donación cuando la fecha cae en otro año](#d-14).)
 5. **Duplicados exactos.** Se conservan con marca y se informa un análisis de sensibilidad que los excluye: sin identificador de donación no se puede saber si son errores o donaciones iguales el mismo día.
 6. **Nombres corruptos** (U+FFFD). La fila se conserva; al comparar nombres, esas posiciones valen como comodín.
 7. **RUT faltante.** Se completa con el RUT observado del mismo donante, primero por nombre normalizado idéntico y luego por similitud, con un umbral calibrado ocultando RUT conocidos y exigiendo al menos 99 % de precisión en esa prueba. Los RUT con dígito verificador inválido (Módulo 11) no se usan para completar. Lo que siga sin RUT se analiza por nombre normalizado y se marca como error de medición.
@@ -136,8 +136,13 @@ Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-26 (no verif
 - La fecha cae en el mismo año del archivo en el 99,932 % de esas filas. En las 5.387 restantes, `AÑO` coincide con el año del archivo en 5.352 (99,4 %) y con el de la fecha en 35; en ninguna coincide con un tercer año.
 - De las 5.387, la mayoría tiene la fecha en el año siguiente al del archivo, y 4.439 de ellas en febrero. Inferencia: son fechas del certificado y no de la donación (sin verificar; el archivo no lo dice).
 
-Propuesta: el año de la donación es el del archivo, que siempre se puede reconstruir. La fecha da el mes solo si cae en ese año; si cae en otro, el mes queda desconocido y la fila se marca. El año de la fecha se conserva en una columna aparte para sensibilidad. Reemplazaría la regla 4 de [D-10 · Criterio para completar o excluir](#d-10) y la parte de la regla 3 que da prioridad a la fecha.
+Regla:
+
+- El año de la donación es el del archivo de origen, que siempre se puede reconstruir.
+- La fecha vale solo si hay información de fecha: una fecha válida da el mes cuando cae en el año del archivo. Sin información de fecha (vacía, no interpretable, inválida o fuera de rango), se usa la información del archivo de origen: su año, y el mes queda desconocido.
+- Si la fecha válida cae en otro año, el mes queda desconocido y la fila se marca. El año de la fecha se conserva en una columna aparte para sensibilidad: cambiar de criterio es cambiar de columna.
+- Reemplaza la regla 4 de [D-10 · Criterio para completar o excluir](#d-10) y la parte de la regla 3 que da prioridad a la fecha.
 
 Efecto: mueve 5.387 filas (0,07 %) entre años de donación. Entre las filas con fecha válida, 2018 tiene 482.043 con el año de la fecha y 486.497 con el del archivo; 2019, 474.445 y 469.930.
 
-Estado: Propuesta. La plantea el investigador el 2026-10-26, a partir de lo que dijo el usuario al aprobar [D-13 · Casos que el criterio para completar o excluir no cubre](#d-13). Cambia una regla aprobada, así que no rige hasta que una persona la apruebe; mientras tanto, armonizar.py aplica la regla 4 como está.
+Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-26 (no verificable desde el repo): «aceptar propuesta si complementar que la regla 4 del d-10 solo vale si hay info de fecha sino se usa la info del archivo de origen». La plantea el investigador a partir de lo que dijo el usuario al aprobar [D-13 · Casos que el criterio para completar o excluir no cubre](#d-13). Cómo la leo (inferencia): la propuesta rige tal cual, y el complemento fija lo que pasa sin fecha, que es usar el archivo. Si se quiso que la fecha siga mandando cuando cae en otro año, basta cambiar la columna del año, y por eso el año de la fecha se conserva. [armonizar.py](analisis/armonizar.py) y [armonizar.R](analisis/armonizar.R) siguen aplicando la regla 4 como estaba, hasta el [issue 20](https://github.com/ingUANDES/donationstax/issues/20).
