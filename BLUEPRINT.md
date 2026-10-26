@@ -10,13 +10,13 @@ Serie **P-nn**: pendientes. Este es el único archivo donde se define el prefijo
 |---|---|---|---|
 | E1 Inventario normativo | [normativa/cambios.csv](normativa/cambios.csv) y textos en `normativa/textos/` | [verifica_citas.py](analisis/verifica_citas.py) | [P-01](#p-01) |
 | E2 Estructura de los datos | [datos/esquema_por_anio.csv](datos/esquema_por_anio.csv), [datos/esquema_ley21440_por_anio.csv](datos/esquema_ley21440_por_anio.csv), [datos/cruce_donatarias_por_anio.csv](datos/cruce_donatarias_por_anio.csv), [datos/armonizacion_por_anio.csv](datos/armonizacion_por_anio.csv), [datos/rut_completado_por_anio.csv](datos/rut_completado_por_anio.csv), [datos/anio_evaluacion_por_anio.csv](datos/anio_evaluacion_por_anio.csv) | esquema calculado en Python y en R, comparados ([contraste_datos.py](analisis/contraste_datos.py)) | [P-02](#p-02), [P-06](#p-06), [P-07](#p-07) |
-| E3 Precio fiscal por régimen | salidas de [precio_fiscal.py](analisis/precio_fiscal.py) y [precio_fiscal.R](analisis/precio_fiscal.R) | [contraste.py](analisis/contraste.py) | [P-04](#p-04) |
+| E3 Precio fiscal por régimen | [normativa/precio_fiscal_por_caso.csv](normativa/precio_fiscal_por_caso.csv) y [normativa/precio_fiscal_por_cambio.csv](normativa/precio_fiscal_por_cambio.csv), de [precio_por_regimen.py](analisis/precio_por_regimen.py) y [precio_por_regimen.R](analisis/precio_por_regimen.R) | [contraste.py](analisis/contraste.py) contra valores calculados a mano | [P-04](#p-04) |
 | E4 Diseños de estimación por cambio | scripts en `analisis/`, Python y R | simulación con efecto conocido y contraste | [P-05](#p-05) |
 | E5 Resultados y manuscrito | tablas y texto del artículo | solo cifras con nivel «verificada» ([D-05 · Niveles de resultado](DECISIONES.md#d-05)) | sin abrir |
 
 ## Verificación
 
-El único punto de entrada es `make verificar` ([Makefile](Makefile)). Hoy comprueba que Python y R calculan el mismo precio fiscal sobre casos ficticios con valor esperado calculado a mano, que ambos contrastes fallan cuando se altera una salida, y que cada fila normativa marcada `verificada` cita el texto de la norma literalmente. Una fila ficticia no es evidencia sobre la norma: los casos de [analisis/fixtures/](analisis/fixtures/precio_fiscal_prueba.csv) solo prueban la implementación.
+El único punto de entrada es `make verificar` ([Makefile](Makefile)). Hoy comprueba que Python y R calculan el mismo precio fiscal sobre casos ficticios con valor esperado calculado a mano, que ambos contrastes fallan cuando se altera una salida, que cada fila normativa marcada `verificada` cita el texto de la norma literalmente, y que el precio fiscal por régimen y año de [P-04](#p-04) da lo mismo en Python, en R y en el cálculo a mano y coincide con la salida versionada. Una fila ficticia no es evidencia sobre la norma: los casos de [analisis/fixtures/](analisis/fixtures/precio_fiscal_prueba.csv) solo prueban la implementación.
 
 Reglas: niveles de resultado en [D-05 · Niveles de resultado](DECISIONES.md#d-05); semilla fija en toda simulación; antes de usar datos reales, el diseño se prueba con datos simulados de efecto conocido; ningún dato confidencial en el repositorio (los crudos van en `data_local/`, ignorado por git).
 
@@ -47,7 +47,7 @@ Inferencia del investigador a partir de [cambios.csv](normativa/cambios.csv) y [
 |---|---|---|
 | Ley 20.316 | donaciones desde 2009 | No: 2008 y 2009 tienen 5 y 12 filas |
 | Ley 20.565, de salto a quiebre | 2012-02-08 | El bunching posterior en el quiebre sí; el efecto del cambio no, porque el período previo (2011) tiene 656 filas |
-| Cambios de tasa del impuesto a la renta | por fecha (pendiente en [P-01](#p-01)) | Pendiente de [P-01 · Inventario normativo](#p-01) |
+| Cambios de tasa del impuesto a la renta | por año comercial ([P-04 · Precio fiscal por régimen](#p-04)) | No como cambio aislado (inferencia): la tasa cambia por año y es la misma para todos los donantes de un régimen, y las planillas no traen el régimen ni el tramo ([P-02](#p-02)); con efectos fijos de año no queda variación ([P-05](#p-05)) |
 | Ley 21.210, artículo 10 | 2020-03-01 | En principio sí; el RUT del donante falta en 2019 |
 | Ley 21.440 | 2022-07-01 | La salida del régimen de la Ley 19.885, sí. El régimen nuevo tiene datos publicados, pero sin donante ([P-07](#p-07)): la sustitución solo se mide agregada por donataria y fecha, y solo en las 95 de 659 donatarias de 2022 a 2025 que están en ambos registros (inferencia) |
 | Ley 21.015 | por verificar | No: sus donaciones usan otro certificado y no dan crédito; los datos del Certificado N° 60 siguen pedidos en el [issue 6](https://github.com/ingUANDES/donationstax/issues/6) |
@@ -83,9 +83,9 @@ Contradicciones del encargo y del artículo del repo, resueltas con la norma:
 
 Falta en este pendiente:
 
-- Tasas transitorias de 2011 y 2012. El texto del artículo 20 de la Ley sobre Impuesto a la Renta muestra una sola tasa hasta 2012-12-31, y las de esos años pueden estar en disposiciones transitorias de otras leyes: no se leyeron (sin verificar).
+- Tasas transitorias de 2011 y 2012: leídas en [P-04](#p-04); la de 2012 sigue sin verificar ([issue 29](https://github.com/ingUANDES/donationstax/issues/29)).
 - El texto de la Ley 20.565 en sí (se conoce por la versión consolidada de BCN y la Circular N° 49; no se encontró su `idNorma`), el reglamento (Decreto Supremo 77 de 2009) y las circulares del SII sobre la Ley 21.440.
-- Mecánica del crédito bajo los regímenes de 2017 en adelante (semi integrado y atribuido) y la fecha de publicación de los reglamentos de la Ley 21.015.
+- Mecánica del crédito bajo los regímenes de 2017 en adelante (semi integrado y atribuido; [issue 29](https://github.com/ingUANDES/donationstax/issues/29)) y la fecha de publicación de los reglamentos de la Ley 21.015.
 - Los regímenes que el [artículo 10 de la Ley 19.885](normativa/textos/ley19885_v2024-08-24.txt) enumera y que [D-02 · Alcance](DECISIONES.md#d-02) deja fuera por ahora.
 
 ### P-02
@@ -122,9 +122,46 @@ Nota del 2026-10-22: las planillas actuales de 2010 a 2013 traen el mismo númer
 
 ### P-04
 
-**Precio fiscal por régimen (E3).** Estado: pendiente; puede empezar, porque [P-01](#p-01) está hecho. La tasa de 2012 depende de las tasas transitorias de 2011 y 2012, que no se leyeron (sin verificar).
+**Precio fiscal por régimen (E3).** Estado: hecho el 2026-10-26 ([issue 21](https://github.com/ingUANDES/donationstax/issues/21)), a nivel *contrastado* ([D-05 · Niveles de resultado](DECISIONES.md#d-05)). Python, R y los valores calculados a mano coinciden en los 72 casos, y Python y R en las 52 comparaciones, con tolerancia 1e-12 (`make verificar`). Las lecturas que quedan sin verificar están en el [issue 29](https://github.com/ingUANDES/donationstax/issues/29).
 
-Calcular P = 1 − c − τg para cada fila de [normativa/cambios.csv](normativa/cambios.csv) con las funciones de [precio_fiscal.py](analisis/precio_fiscal.py) y [precio_fiscal.R](analisis/precio_fiscal.R), con τ por año y por tipo de contribuyente en vez de una tasa fija. Determinar, con cita, si el crédito y el tope global del artículo 10 hacen que el precio marginal sea otro para quien llega al tope (inferencia; sin verificar contra la norma). Salida: signo y magnitud del cambio de precio de cada cambio regulatorio, comparados Python contra R.
+Método. P = 1 − c − τg por peso donado: c es la fracción que se imputa como crédito, g la que se deduce de la base como gasto y τ la tasa marginal del impuesto que esa deducción reduce. Un caso es un régimen (ley, tramo, aporte al Fondo, límite) en un año comercial y para un tipo de contribuyente. El precio es por régimen y año, no por donante, porque las planillas no traen régimen ni tramo ([P-02](#p-02)). Cada c, g y τ sale de una fila verificada de [cambios.csv](normativa/cambios.csv), referida por norma, artículo y vigencia; los scripts no fijan parámetros. Que un caso no tenga beneficio (P = 1) es inferencia, y lo dice la nota del caso.
+
+Producto:
+
+- [normativa/precio_casos.csv](normativa/precio_casos.csv): los casos, con la fila de cambios.csv y la regla de cada c, g y τ (reglas en la cabecera de [precio_por_regimen.py](analisis/precio_por_regimen.py)). La columna `anio_tau` dice cómo se asignó τ al año comercial: «regla explícita» (una ley nombra el año comercial), «texto permanente» (el mismo texto rige con las dos lecturas del párrafo siguiente), «sin verificar», «contrafactual» o «no aplica».
+- [normativa/precio_comparaciones.csv](normativa/precio_comparaciones.csv): el par de casos (antes, después) con que se mide cada fila de cambios.csv.
+- [precio_por_regimen.py](analisis/precio_por_regimen.py) y [precio_por_regimen.R](analisis/precio_por_regimen.R), que usan [precio_fiscal.py](analisis/precio_fiscal.py) y [precio_fiscal.R](analisis/precio_fiscal.R). Salidas: [normativa/precio_fiscal_por_caso.csv](normativa/precio_fiscal_por_caso.csv) y [normativa/precio_fiscal_por_cambio.csv](normativa/precio_fiscal_por_cambio.csv). La segunda tiene una línea por comparación, con el signo calculado y si coincide con `efecto_precio`, y una por cada fila sin comparación. Valores a mano: [precio_casos_esperado.csv](analisis/fixtures/precio_casos_esperado.csv).
+
+Tasa por año comercial. La tasa que reduce una donación es la de las rentas del año comercial en que se hace. Cuando la ley no nombra el año, hay dos lecturas: el texto vigente durante ese año, o el vigente al declarar, por el [Código Tributario, art. 3 inc. 2](normativa/cambios.csv#L62): «los impuestos que deban pagarse a contar de esa fecha quedarán afectos a la nueva ley».
+
+- 2011: [Ley 20.455, art. 1 letra a)](normativa/cambios.csv#L57), «A 20% (veinte por ciento) para las rentas que se perciban o devenguen durante el año calendario 2011.»
+- 2012 (sin verificar): la letra b), 18,5 % ([L58](normativa/cambios.csv#L58)), fue derogada por la [Ley 20.630, art. 4 N° 1](normativa/cambios.csv#L59), y se usa el 20 % del texto vigente desde 2013-01-01 ([L47](normativa/cambios.csv#L47)). Lo apoyan el art. 3 del Código Tributario, la vigencia general de la [Ley 20.630, art. 8](normativa/cambios.csv#L60) («regirá a partir del día primero de enero de 2013») y el factor 1,081 de los pagos provisionales de 2012 ([L61](normativa/cambios.csv#L61)), que es 20/18,5 (inferencia). La regla especial del número 7), letra a), del artículo 1° no se pudo leer porque BCN corta ese artículo ([issue 28](https://github.com/ingUANDES/donationstax/issues/28)). Con 17 % el precio del tramo hasta 1.000 UTM sería 0,415 y no 0,40 ([normativa/precio_fiscal_por_caso.csv, L19-L20](normativa/precio_fiscal_por_caso.csv#L19-L20)).
+- 2014 a 2017: tasas por año comercial de la [Ley 20.780, art. cuarto transitorio](normativa/cambios.csv#L63) y, para la letra B del art. 14, su [inciso 2](normativa/cambios.csv#L64). Desde 2020, el texto nuevo del art. 20 rige «únicamente a partir del año comercial 2020» ([Ley 21.210, art. octavo transitorio](normativa/cambios.csv#L65)).
+- Pro Pyme: [Ley 21.256, art. 1](normativa/cambios.csv#L66) (2020 a 2024, texto modificado por la [Ley 21.578](normativa/cambios.csv#L67)) y [Ley 21.755, art. 25](normativa/cambios.csv#L68) (2025). Esta última exige una cotización de la Ley 21.735 al cierre del ejercicio, cuyo cumplimiento está sin verificar.
+- Global complementario ([L53 a L56](normativa/cambios.csv#L53-L56)): con las dos lecturas, 2016 queda sin verificar (tramo superior de 40 % o 35 %; precio 0,30 o 0,325: [normativa/precio_fiscal_por_caso.csv, L64-L65](normativa/precio_fiscal_por_caso.csv#L64-L65)).
+
+Signo y magnitud ([normativa/precio_fiscal_por_cambio.csv](normativa/precio_fiscal_por_cambio.csv)):
+
+- Los cambios de la Ley 19.885 mueven el precio mucho más que las tasas. En 2010, la Ley 20.316 baja de 1 a 0,415 el precio de quien da menos de 1.000 UTM sin aportar al Fondo ([L6](normativa/precio_fiscal_por_cambio.csv#L6)) y lo sube de 0,415 a 1 para quien da a una sola institución ([L7](normativa/precio_fiscal_por_cambio.csv#L7)). En 2012, la Ley 20.565 lo baja de 1 a 0,40 para ese donante y de 0,52 a 0,40 en el tramo hasta 1.000 UTM de quien supera el umbral sin Fondo ([L19-L20](normativa/precio_fiscal_por_cambio.csv#L19-L20)).
+- En la Ley 19.885 (g = 0,5), cada punto de tasa de primera categoría baja el precio en medio punto: 0,415 en 2010, 0,40 de 2011 a 2013, 0,365 en la letra B desde 2018 y en la letra A desde 2020 ([L51-L56](normativa/precio_fiscal_por_cambio.csv#L51-L56), [L64](normativa/precio_fiscal_por_cambio.csv#L64), [L70-L74](normativa/precio_fiscal_por_cambio.csv#L70-L74)). Las tasas Pro Pyme rebajadas lo suben: 0,45 con 10 % y 0,4375 con 12,5 %, frente a 0,375 con la tasa permanente ([L76-L79](normativa/precio_fiscal_por_cambio.csv#L76-L79)).
+- La Ley 21.440 deduce de la base (c = 0, g = 1). Para una empresa de la letra A en 2023 el precio es 0,73, el doble del 0,365 de la Ley 19.885 dentro de sus límites; sobre el límite del art. 10, que no se le aplica, baja de 1 a 0,73 ([L39-L40](normativa/precio_fiscal_por_cambio.csv#L39-L40)). Para una persona en el tramo superior es 0,60 ([normativa/precio_fiscal_por_caso.csv, L71](normativa/precio_fiscal_por_caso.csv#L71)).
+- Tres comparaciones dan un signo distinto del `efecto_precio` declarado, porque el cambio actúa fuera del margen medido: con el quiebre de 2012 el precio marginal sobre 1.000 UTM no cambia (0,52 y 0,48: [L22](normativa/precio_fiscal_por_cambio.csv#L22), [L26](normativa/precio_fiscal_por_cambio.csv#L26)); lo que baja es el tramo inferior. La escala de 2013 no toca el tramo superior de 40 % ([L61](normativa/precio_fiscal_por_cambio.csv#L61)).
+
+Crédito y límites en el margen. Para una empresa de la letra A en 2025 ([normativa/precio_fiscal_por_caso.csv, L49-L52](normativa/precio_fiscal_por_caso.csv#L49-L52)), la donación marginal cuesta:
+
+- 0,365 mientras el crédito del año no llega al tope;
+- 0,73 cuando llegó. El crédito no puede exceder 14.000 UTM al año ([art. 1 N° 12](normativa/cambios.csv#L13)), y «Aquella parte de las donaciones que no pueda ser utilizada como crédito, se considerará un gasto necesario para producir la renta» ([N° 14](normativa/cambios.csv#L14)). Si el N° 14 cubre también el crédito que excede el impuesto, el precio es el mismo (inferencia);
+- 1 sobre el límite global del 5 % de la renta líquida imponible ([art. 10 inc. 1](normativa/cambios.csv#L15)), que se aplica «ya sea que el beneficio tributario consista en un crédito contra el impuesto de Primera Categoría, o bien en la posibilidad de deducir como gasto la donación». Si el exceso es gasto rechazado, el precio pasa de 1 (sin verificar).
+
+El tope de crédito y el límite global son entonces quiebres que suben el precio marginal (inferencia). Los trabajadores del art. 43 N° 1 recuperan el exceso del crédito («si resultare un exceso, éste se devolverá»: [art. 1 bis inc. 2](normativa/cambios.csv#L71)), y su precio es 0,5 aunque el crédito supere el impuesto.
+
+Evidencia débil y alcance:
+
+- El precio es el de la empresa. No incluye cómo el crédito y el menor impuesto de primera categoría pasan a los impuestos finales del dueño, que desde 2017 dependen del régimen del art. 14 ([issue 29](https://github.com/ingUANDES/donationstax/issues/29)). Tampoco cubre el Pro Pyme transparente (art. 14 letra D N° 8) ni el art. 14 ter.
+- El caso con pérdida tributaria de 2020 es una cota: supone que la pérdida se usa después, a la misma tasa y sin descontar.
+- La vigencia de la Ley 21.015 sigue sin verificar ([L41](normativa/cambios.csv#L41)); su caso solo usa la tasa de 2025.
+- Las personas se calculan en el primer tramo y en el superior. A qué contribuyentes del global complementario se aplicaba el límite del art. 10 antes de 2020 está sin verificar ([L17](normativa/cambios.csv#L17), [L28](normativa/cambios.csv#L28)).
+- Las comparaciones de los programas de adicciones de 2010 son entre fines en un mismo año, no en el tiempo.
 
 ### P-05
 

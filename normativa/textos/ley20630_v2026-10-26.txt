@@ -1,0 +1,155 @@
+# Fuente: https://www.bcn.cl/leychile/consulta/obtxml?opt=7&idNorma=1043598&idVersion=2026-10-26
+# Descargado: 2026-10-26 (BCN, LeyChile, XML obtxml opt=7)
+# fechaVersion del XML: 2012-09-27 | publicación: 2012-09-27 | promulgación: 2012-09-24 | vigente en idVersion: 2026-10-26
+# Huella (sha256 de las estructuras incluidas): d2a9d42371555baf8d9c0572f238609e57665b04bc2cc33d3499cdae40d02398
+
+### Artículo idParte=9298664 fechaVersion=2012-09-27 derogado=no derogado
+"Artículo 1°.- Introdúcense en la Ley sobre Impuesto a la Renta, contenida en el artículo 1° del decreto ley N° 824, de 1974, las siguientes modificaciones:
+
+
+ 1) Modifícase el artículo 10, del siguiente modo:
+
+ a) Elimínase, a contar de la fecha de publicación de la presente ley en el Diario Oficial, la segunda parte del inciso segundo que comienza con la expresión "Asimismo" y termina con el punto aparte (.).
+
+ b) Incorpóranse, a contar de la fecha de publicación de la presente ley en el Diario Oficial, los siguientes incisos tercero, cuarto, quinto, sexto y séptimo: 
+
+ "Se encontrarán afectas al impuesto establecido en el artículo 58 número 3), las rentas obtenidas por un enajenante no residente ni domiciliado en el país, que provengan de la enajenación de derechos sociales, acciones, cuotas, bonos u otros títulos convertibles en acciones o derechos sociales, o de la enajenación de otros derechos representativos del capital de una persona jurídica constituida o residente en el extranjero, o de títulos o derechos de propiedad respecto de cualquier tipo de entidad o patrimonio, constituido, formado o residente en el extranjero, en los siguientes casos:
+
+ a) Cuando al menos un 20% del valor de mercado del total de las acciones, cuotas, títulos o derechos extranjeros que dicho enajenante posee, directa o indirectamente, en la sociedad o entidad extranjera, ya sea a la fecha de la enajenación o en cualquiera de los doce meses anteriores a esta, provenga de uno o más de los activos subyacentes indicados en los literales (i), (ii) y (iii) siguientes y en la proporción que corresponda a la participación indirecta que en ellos posee el enajenante extranjero. Para estos efectos, se atenderá al valor corriente en plaza de los referidos activos subyacentes chilenos o los que normalmente se cobren en convenciones de similar naturaleza considerando las circunstancias en que se realiza la operación, pudiendo el Servicio ejercer su facultad de tasación conforme a lo dispuesto en el artículo 64 del Código Tributario:
+
+ (i) Acciones, derechos, cuotas u otros títulos de participación en la propiedad, control o utilidades de una sociedad, fondo o entidad constituida en Chile;
+
+ (ii) Una agencia u otro tipo de establecimiento permanente en Chile de un contribuyente sin domicilio ni residencia en el país, considerándose para efectos tributarios que dicho establecimiento permanente es una empresa independiente de su matriz u oficina principal, y
+
+ (iii) Cualquier tipo de bien mueble o inmueble situado en Chile, o de títulos o derechos respecto de los mismos, cuyo titular o dueño sea una sociedad o entidad sin domicilio o residencia en Chile.
+
+ Además de cumplirse con el requisito establecido en esta letra, es necesario que la enajenación referida lo sea de, al menos, un 10% del total de las acciones, cuotas, títulos o derechos de la persona o entidad extranjera, considerando todas las enajenaciones, directas o indirectas, de dichas acciones, cuotas, títulos o derechos, efectuadas por el enajenante y otros miembros no residentes o domiciliados en Chile de su grupo empresarial, en los términos del artículo 96 de la ley N° 18.045, sobre Mercado de Valores, en un período de doce meses anteriores a la última de ellas.
+
+ b) Cuando a la fecha de la enajenación de las acciones, cuotas, títulos o derechos extranjeros o en cualquier momento durante los doce meses anteriores a ésta, el valor corriente en plaza de uno o más de los activos subyacentes descritos en los literales (i), (ii) y (iii) de la letra a) anterior, y en la proporción que corresponda a la participación indirecta que en ellos posea el enajenante extranjero, sea igual o superior a 210.000 unidades tributarias anuales determinadas según el valor de ésta a la fecha de la enajenación. Será también necesario en este caso que se transfiera al menos un 10% del total de las acciones, cuotas, títulos o derechos de la persona jurídica o entidad extranjera, considerando todas las enajenaciones efectuadas por el enajenante y otros miembros no residentes o domiciliados en Chile de su grupo empresarial, en los términos del artículo 96 de la ley N° 18.045, sobre Mercado de Valores, en un periodo de doce meses anteriores a la última de ellas.
+
+ c) Cuando las acciones, cuotas, títulos o derechos extranjeros enajenados, hayan sido emitidos por una sociedad o entidad domiciliada o constituida en uno de los países o jurisdicciones que figuren en la lista a que se refiere el número 2, del artículo 41 D. En este caso, bastará que cualquier porcentaje del valor de mercado del total de las acciones, cuotas, títulos o derechos extranjeros que dicho enajenante posea, directa o indirectamente, en la sociedad o entidad extranjera domiciliada o constituida en el país o jurisdicción listado, provenga de uno o más de los activos subyacentes indicados en los literales (i), (ii) y (iii) de la letra a) anterior y en la proporción que corresponda a la participación indirecta que en ellos posea el enajenante extranjero, salvo que el enajenante, su representante en Chile o el adquirente, si fuere el caso, acredite en forma fehaciente ante el Servicio, que: (A) en la sociedad o entidad extranjera cuyas acciones, cuotas, títulos o derechos se enajenan, no existe un socio, accionista, titular o beneficiario con residencia o domicilio en Chile con un 5% o más de participación o beneficio en el capital o en las utilidades de dicha sociedad o entidad extranjera y, que, además, (B) sus socios, accionistas, titulares o beneficiarios que controlan, directa o indirectamente, un 50% o más de su capital o utilidades, son residentes o domiciliados en un país o jurisdicción que no forme parte de la lista señalada en el número 2, del artículo 41 D, en cuyo caso la renta obtenida por el enajenante extranjero sólo se gravará en Chile si se cumple con lo dispuesto en las letras a) o b) precedentes.
+
+ En la aplicación de las letras anteriores, para determinar el valor de mercado de las acciones, cuotas, títulos o derechos de la persona o entidad extranjera, el Servicio podrá ejercer las facultades del artículo 41 E. 
+
+ Los valores anteriores cuando estén expresados en moneda extranjera, se considerarán según su equivalente en moneda nacional a la fecha de enajenación, considerando para tales efectos lo dispuesto en el número 1, de la letra D.-, del artículo 41 A. En la determinación del valor corriente en plaza de los activos subyacentes indirectamente adquiridos a que se refieren los literales (i) y (ii) de la letra a) anterior, se excluirán las inversiones que las empresas o entidades constituidas en Chile mantengan en el extranjero a la fecha de enajenación de los títulos, cuotas, derechos o acciones extranjeras, así como cualquier pasivo contraído para su adquisición y que se encuentre pendiente de pago a dicha fecha. Las inversiones referidas se considerarán igualmente según su valor corriente en plaza. El Servicio, mediante resolución, determinará las reglas aplicables para correlacionar pasivos e inversiones en la aplicación de la exclusión establecida en este inciso.
+
+ El impuesto que grave las rentas de los incisos anteriores, se determinará, declarará y pagará conforme a lo dispuesto en el artículo 58 número 3). 
+
+ Con todo, lo dispuesto en el inciso tercero anterior no se aplicará cuando las enajenaciones ocurridas en el exterior se hayan efectuado en el contexto de una reorganización del grupo empresarial, según éste se define en el artículo 96, de la ley Nº 18.045, sobre Mercado de Valores, siempre que en dichas operaciones no se haya generado renta o un mayor valor para el enajenante, renta o mayor valor determinado conforme a lo dispuesto en el artículo 58 número 3).".
+
+ 2) Modifícase el artículo 14, de la siguiente manera:
+
+ a) Reemplázase en el inciso segundo de la letra b), del número 1, de la letra A), la expresión "tercero" las dos veces que aparece, por "primero". 
+
+ b) Sustitúyese en el inciso tercero de la letra b), del número 1, de la letra A), la expresión "tercero" por "primero". 
+
+ c) Reemplázase en el inciso primero de la letra c) del número 1, de la letra A), la expresión "efectuadas de acuerdo a las normas del artículo 41, inciso penúltimo, de esta ley", por las siguientes palabras: "cuyo mayor valor esté gravado con los Impuesto de Primera Categoría y Global Complementario o Adicional, según corresponda".
+
+ d) Sustitúyese en el inciso segundo de la letra a) del número 3, de la letra A), la expresión "primero" por "segundo". 
+
+ 3) Modifícase el artículo 14 ter, de la siguiente forma:
+
+ a) Reemplázanse en la letra c), del número 3, las expresiones "al Impuesto", por "a los impuestos". 
+
+ b) Modifícase el inciso antepenúltimo, sustituyendo las expresiones "al Impuesto", por "a los impuestos"; y agrégase a continuación de la expresión "retire", la expresión "o distribuya".
+
+ 4) Modifícase el artículo 15, del siguiente modo: 
+
+ a) Elimínanse en el inciso primero, las siguientes expresiones: ",salvo que las operaciones generadoras de la renta abarquen más de un período como en los contratos de larga ejecución, ventas extraordinarias de pago diferido y remuneraciones anticipadas o postergadas por servicios prestados durante un largo espacio de tiempo".
+
+ b) Sustitúyense los incisos segundo, tercero, cuarto y quinto, por los siguientes: 
+
+ "Cuando con motivo de la fusión de sociedades, comprendiéndose dentro de este concepto la reunión del total de los derechos o acciones de una sociedad en manos de una misma persona, el valor de la inversión total realizada en derechos o acciones de la sociedad fusionada, resulte menor al valor total o proporcional, según corresponda, que tenga el capital propio de la sociedad absorbida, determinado de acuerdo al artículo 41 de esta ley, la diferencia que se produzca deberá, en primer término, distribuirse entre todos los activos no monetarios que se reciben con motivo de la fusión cuyo valor tributario sea superior al corriente en plaza. La distribución se efectuará en la proporción que represente el valor corriente en plaza de cada uno de dichos bienes sobre el total de ellos, disminuyé
+
+### Artículo idParte=9298665 fechaVersion=2012-09-27 derogado=no derogado
+Artículo 2°.- Introdúcense las siguientes modificaciones en el decreto ley N° 825, de 1974, sobre Impuesto a las Ventas y Servicios, a partir de la entrada en vigencia de la modificación introducida por el número 17) del artículo 1°, de esta ley, que modifica las escalas de tasas establecidas en los artículos 43 y 52 de la Ley sobre Impuesto a la Renta:
+
+ 1) Agrégase en el número 7, de la letra E del artículo 12, a continuación de la expresión "establecido en el artículo 59 de la misma ley", la siguiente: ", salvo que respecto de estos últimos se trate de servicios prestados en Chile y gocen de una exención de dicho impuesto por aplicación de las leyes o de los convenios para evitar la doble imposición en Chile".
+
+ 2) Suprímese en el artículo 37, la letra h).
+
+### Artículo idParte=9298666 fechaVersion=2012-09-27 derogado=no derogado
+Artículo 3°.- Introdúcense, a partir del 1 de enero de 2013, las siguientes modificaciones en el decreto ley Nº 3.475, de 1980, sobre Impuesto de Timbres y Estampillas:
+
+ 1) Modifícase el número 3), del artículo 1º, del siguiente modo: 
+
+ a) Sustitúyense en el inciso primero los porcentajes "0,05%" y "0,6%" por "0,033%" y "0,4%", respectivamente, y 
+
+ b) Sustitúyese en el inciso segundo, el porcentaje "0,25%" por "0,166%".
+
+ 2) Modifícase el número 2 del artículo 2º, del siguiente modo:
+
+ a) Reemplázase en el inciso primero, el porcentaje "0,25%", por "0,166%";
+
+ b) Reemplázase en el inciso segundo, el porcentaje "0,05%" por "0,033%", y
+
+ c) Reemplázase en el inciso tercero el porcentaje "0,6%" por "0,4%".
+
+ 3) Reemplázanse en el inciso segundo del artículo 3º, los porcentajes "0,05%" y "0,6%", por "0,033%" y "0,4%", respectivamente.
+
+### Artículo idParte=9298667 fechaVersion=2012-09-27 derogado=no derogado
+Artículo 4°.- Introdúcense en la ley N° 20.455, que modifica diversos cuerpos legales para obtener recursos destinados al financiamiento de la reconstrucción del país, las siguientes enmiendas:
+
+ 1) Derógase la letra b), del artículo 1°.
+
+ 2) Lo dispuesto en el artículo 1° transitorio, regirá en lo que corresponda, hasta el último día del mes anterior al mes en que la presente ley se haya publicado en el Diario Oficial, respecto de los ingresos brutos obtenidos hasta esa fecha.
+
+### Artículo idParte=9298668 fechaVersion=2012-09-27 derogado=no derogado
+Artículo 5°.- Amplíase, hasta un máximo de treinta y seis meses, en cuotas fijas o variables, el plazo que el inciso primero del artículo 192 del Código Tributario concede al Servicio de Tesorerías para otorgar facilidades para el pago de impuestos adeudados, sólo respecto de impuestos girados hasta el 30 de junio de 2012 y que se encuentren sujetos a cobranza administrativa o judicial. La facultad que se concede al Servicio de Tesorerías en este artículo, se podrá ejercer hasta 90 días después de publicada esta ley en el Diario Oficial o del primero de septiembre de 2012, si ello fuere anterior. La primera de las cuotas deberá ser enterada al momento de suscribirse el convenio, no pudiendo exceder su monto de la treintaiseisava parte del monto total adeudado, salvo que el deudor, en forma expresa, solicite pagar un monto mayor.
+
+### Artículo idParte=9298669 fechaVersion=2012-09-27 derogado=no derogado
+Artículo 6°.- Sustitúyese en el inciso primero, del artículo 4º, del decreto ley Nº 828, de 1974, que establece normas para el cultivo, elaboración, comercialización e impuestos que afectan al tabaco, el guarismo "0,0000675" y el porcentaje "62,3%", por "0,000128803" y "60,5%", respectivamente.
+
+### Artículo idParte=9298670 fechaVersion=2012-09-27 derogado=no derogado
+Artículo 7°.- Créase un Fondo Especial para la Educación, en adelante el "Fondo para la Educación", destinado a complementar el financiamiento de las obligaciones fiscales contenidas en la Partida del Ministerio de Educación de la Ley de Presupuestos del Sector Público. Serán usos preferentes de los recursos del Fondo para la Educación, los destinados a educación pre-escolar, subvención escolar preferencial y becas y créditos para educación superior.
+
+ El Fondo para la Educación se constituirá con uno o más aportes provenientes de liquidación de activos del Tesoro Público, incluido el Fondo de Estabilización Económica y Social, hasta completar cuatro mil millones de dólares de los Estados Unidos de Norteamérica (USD$ 4.000.000.000), los que deberán ser transferidos completamente, a más tardar, el 31 de diciembre del año 2013. También formará parte de este Fondo para la Educación, la rentabilidad que genere la inversión de los recursos del mismo. 
+
+ Los recursos del Fondo para la Educación podrán invertirse en los instrumentos, operaciones y contratos que establezca el Ministro de Hacienda mediante instrucciones, de acuerdo a lo dispuesto en el artículo 12 de la ley N° 20.128. Tratándose de operaciones que consten en contratos de derivados, tales como canjes o futuros, éstas no constituirán deuda pública para los efectos de la aplicación de las normas del Título IV del decreto ley N° 1.263, de 1975.
+
+ Mediante Reglamento dictado por el Ministerio de Hacienda dentro de los 120 días siguientes a la publicación de la presente ley en el Diario Oficial, se establecerán los mecanismos, procedimientos, límites y demás normas necesarias para la aplicación de los recursos del Fondo para la Educación, los que podrán ser utilizados a partir del año 2014.
+
+### Artículo idParte=9298671 fechaVersion=2012-09-27 derogado=no derogado
+Artículo 8°.- La presente ley, salvo en aquellas disposiciones que contengan una regla especial de vigencia, regirá a partir del día primero de enero de 2013.
+
+### Título idParte=9298672 fechaVersion=2012-09-27 derogado=no derogado
+Disposiciones transitorias
+
+### Artículo idParte=9298673 fechaVersion=2012-09-27 derogado=no derogado
+Artículo primero.- Sin perjuicio de las modificaciones introducidas en la Ley sobre Impuesto a la Renta, por el artículo 1° de esta ley, se aplicarán las siguientes reglas a las situaciones que a continuación se indican:
+
+ a) El crédito establecido en el artículo 55 ter incorporado a la Ley sobre Impuesto a la Renta por el número 21) del artículo 1° de la presente ley, regirá en el año tributario 2013 por un monto de 1,76 unidades de fomento en caso que se cumpla con los requisitos establecidos en dicha disposición. Además, el reglamento señalado en dicho artículo será dictado dentro de los 90 días siguientes a la fecha de publicación de la presente ley.
+
+ b) Los derechos en sociedades de personas adquiridos con anterioridad a la entrada en vigencia de esta ley que, con posterioridad a ella, enajenen los socios de sociedades de personas o accionistas de sociedades anónimas cerradas o accionistas de sociedades anónimas abiertas dueños del 10% o más de las acciones, a la empresa o sociedad respectiva o en las que tengan intereses, deberán disminuir del valor de costo de adquisición de tales derechos, los valores de aporte, adquisición o aumentos de capital que tengan su origen en rentas que no hayan pagado total o parcialmente los impuestos establecidos en la Ley sobre Impuesto a la Renta. Para estos efectos, los valores indicados deberán reajustarse de acuerdo a la variación del Índice de Precios al Consumidor entre el último día del mes anterior a la adquisición o aporte o aumento de capital, y el último día del mes anterior a la enajenación. 
+
+ c) La tasa del Impuesto de Primera Categoría en carácter de único establecido en el artículo 17 número 8) de la Ley sobre Impuesto a la Renta será de un 20% respecto de las rentas generadas a contar del 1 de septiembre del año anterior a la entrada en vigencia de la modificación introducida por el número 17) del artículo 1° de esta ley, que rebaja las escalas de tasas establecidas en los artículos 43 número 1 y 52 de la Ley sobre Impuesto a la Renta. Igual tasa se aplicará respecto del Impuesto de Primera Categoría que deba pagarse con motivo del término de giro del contribuyente que se haya producido a partir de la fecha de publicación de la presente ley o del primero de septiembre de 2012, si fuere anterior.
+
+ d) Para los efectos de determinar los pagos provisionales en conformidad a la letra a), del artículo 84 de la Ley sobre Impuesto a la Renta, sobre los ingresos brutos obtenidos a partir del mes de publicación de la presente ley en el Diario Oficial y hasta el 31 de marzo de 2013, el porcentaje aplicado sobre los ingresos brutos del mes de agosto de 2012, se ajustará multiplicándolo por el factor 1,081.
+
+ e) Para efectos de la retención provisional de impuesto establecida en el inciso segundo del artículo 74, N° 4, de la Ley sobre Impuesto a la Renta, la tasa del Impuesto de Primera Categoría será de 20% a contar de la vigencia del número 7), letra a), del artículo 1° de esta ley.
+
+### Artículo idParte=9298674 fechaVersion=2012-09-27 derogado=no derogado
+Artículo segundo.- Para la aplicación de la exención del artículo 24, N° 17, del decreto ley N° 3.475, de 1980, respecto de las operaciones de crédito de dinero efectuadas a contar de la vigencia del artículo 3° de la presente ley, destinadas a pagar préstamos anteriores a esa fecha, se considerará como tasa máxima un 0,4%. 
+
+ Para la aplicación de lo dispuesto en el artículo 2° bis del mismo decreto ley, la tasa máxima de impuesto a que se refiere el número 2) de dicho artículo, será la vigente a la fecha de inicio de la colocación de la primera emisión acogida a la línea.
+
+### Artículo idParte=9298675 fechaVersion=2012-09-27 derogado=no derogado
+Artículo tercero.- Concédese, en los términos y condiciones que establece este artículo, un reembolso de cargo fiscal a los propietarios de automóviles de alquiler que, al último día del mes en que esta ley sea publicada en el Diario Oficial, se encuentren inscritos en el Registro Nacional de Servicios de Transportes de Pasajeros a que se refieren los artículos 2° y siguientes del decreto supremo N° 212, de 1992, del Ministerio de Transportes y Telecomunicaciones, cualquiera sea la modalidad de éstos de conformidad al artículo 72, del citado decreto supremo. En caso que el propietario haya cedido el uso, a título oneroso, del automóvil de alquiler respectivo a uno o más choferes para que lo exploten comercialmente, circunstancias que deberán ser acreditadas fehacientemente con la documentación respectiva ante el Ministerio de Transportes y Telecomunicaciones, el reembolso aludido será pagadero exclusivamente a dichos choferes y no al propietario. Para establecer la forma en que el reembolso será distribuido en caso de existir más de un chofer respecto de un mismo automóvil, el Ministerio de Transportes y Telecomunicaciones dictará un reglamento, el que será suscrito por el Ministro de Hacienda. 
+
+ Igualmente, tendrán derecho al reembolso a que se refiere el inciso primero, los propietarios de vehículos del transporte remunerado de escolares que, a la misma fecha antes señalada, se encuentren inscritos en el Registro Nacional de Transporte Remunerado de Escolares a que se refiere el decreto supremo N° 38, de 2003, del Ministerio de Transportes y Telecomunicaciones. En caso que el propietario del vehículo de transporte remunerado, haya cedido el uso, a título oneroso, del mismo a uno o más choferes para que lo exploten comercialmente, circunstancias que deberán ser acreditadas fehacientemente con la documentación respectiva ante el Ministerio de Transportes y Telecomunicaciones, el reembolso aludido será pagadero exclusivamente a dichos choferes y no al propietario. Para establecer la forma en que el reembolso será distribuido en caso de existir más de un chofer respecto de un mismo automóvil, el Ministerio de Transportes y Telecomunicaciones dictará un reglamento, el que será suscrito por el Ministro de Hacienda.
+
+ Para los propietarios de automóviles de alquiler mencionados en el inciso primero, o los choferes, según sea el caso, el monto del reembolso será el equivalente a cuatro unidades tributarias mensuales a la fecha de pago por una sola vez y por cada automóvil de alquiler. En el caso de los empresarios de transporte remunerado de escolares, o los choferes, según sea el caso, el reembolso será de dos unidades tributarias mensuales por una sola vez y por cada automóvil de transporte remunerado de escolares. Dicho reembolso no será compensable ni retenible.
+
+ El reembolso se efectuará de conformidad a las reglas siguientes:
+
+ 1. Tratándose de los automóviles de alquiler, el reembolso será equivalente a cuatro unidades tributarias mensuales y se pagará dentro del mes siguiente al de publicación de la presente ley.
+
+ En el evento que, con posterioridad al primero de septiembre de 2012, se haya cancelado la inscripción del automóvil de alquiler en el registro a que alude el inciso primero de este artículo por aplicación de lo previsto en el artículo 73 bis del decreto supremo N° 212, de 1992, del Ministerio de Transportes y Telecomunicaciones, el reembolso se efectuará al propietario o chofer del vehículo, según corresponda, que ingresa al registro en reemplazo del que sale de éste, siempre que el nuevo vehículo se encuentre con inscripción vigente, de conformidad a lo definido en el reglamento a que se refiere el inciso segundo del presente artículo, al momento de solicitar el reembolso.
+
+ 2. En el caso de los vehículos del transporte remunerado de escolares, el reembolso será equivalente a dos unidades tributarias mensuales y se pagará dentro del mes siguiente al de publicación de la presente ley.
+
+ Para acceder al reembolso a que se refiere este artículo, los vehículos de alquiler deberán permanecer inscritos en el registro a que se refiere el inciso primero al momento de solicitar el reembolso. Por su parte, los propietarios de vehículos del transporte remunerado de escolares o sus choferes, según corresponda, deberán permanecer a igual fecha inscritos en el registro a que alude el inciso segundo de este artículo y, en todos los casos a que se refiere este inciso, haber obtenido, de conformidad a lo establecido en la ley N° 18.290, de Tránsito, el permiso de circulación correspondiente al año 2012.
+
+ Dentro de los sesenta días siguientes a la publicación de esta ley, el Ministro de Hacienda dictará un reglamento para la aplicación de este beneficio, en el que establecerá el procedimiento de pago del reembolso por parte del Servicio de Tesorerías. Este Servicio podrá pagarlo mediante cheque nominativo, vale vista bancario o depósito en la cuenta corriente, de ahorro, a plazo o a la vista que posea el beneficiario. Este reglamento establecerá, también, un cronograma de pagos y las condiciones y modo de acreditar los requisitos para impetrar el reembolso respectivo, los que podrán incluir, entre otros, la exhibición del permiso de circulación correspondiente al año 2012, el certificado de inscripción y anotaciones vigentes del Registro Nacional de Vehículos Motorizados y el certificado de revisión técnica y de emisión de gases vigentes.
+
+ El mayor gasto que represente la aplicación de este artículo, se financiará con cargo a la Partida Presupuestaria del Tesoro Público.".

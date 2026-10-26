@@ -1,0 +1,73 @@
+caso,anio_comercial,contribuyente,regimen,c,g,tau,precio,subsidio
+e2009_con_fondo,2009,primera_categoria,Ley 19.885 texto 2003; al menos 33 % al Fondo,0.5,0.5,0.17,0.415,0.585
+e2009_sin_fondo,2009,primera_categoria,Ley 19.885 texto 2003; menos de 33 % al Fondo,0.0,0.0,,1.0,0.0
+e2009_sobre_limite_4_5_rli,2009,primera_categoria,"Ley 19.885 texto 2003; donación sobre el 4,5 % de la RLI",0.0,0.0,,1.0,0.0
+e2010_hasta_1000,2010,primera_categoria,Ley 19.885 texto 2010; menos de 1.000 UTM a dos o más instituciones,0.5,0.5,0.17,0.415,0.585
+e2010_una_institucion,2010,primera_categoria,Ley 19.885 texto 2010; menos de 1.000 UTM a una sola institución,0.0,0.0,,1.0,0.0
+e2010_sobre_1000_con_fondo,2010,primera_categoria,Ley 19.885 texto 2010; 1.000 UTM o más con al menos 33 % al Fondo,0.5,0.5,0.17,0.415,0.585
+e2010_sobre_1000_sin_fondo,2010,primera_categoria,Ley 19.885 texto 2010; 1.000 UTM o más con menos de 33 % al Fondo (salto),0.35,0.65,0.17,0.5395,0.4605
+e2010_adicciones_hasta_2000,2010,primera_categoria,Ley 19.885 texto 2010; hasta 1.000 UTM adicionales a programas de adicciones,0.5,0.5,0.17,0.415,0.585
+e2010_adicciones_sin_fondo,2010,primera_categoria,Ley 19.885 texto 2010; adicciones con menos de 25 % al Fondo (salto),0.4,0.6,0.17,0.498,0.502
+e2010_entre_4_5_y_5_rli,2010,primera_categoria,"Ley 19.885 texto 2010; donación entre el 4,5 % y el 5 % de la RLI",0.5,0.5,0.17,0.415,0.585
+e2010_largo_plazo_rli_baja,2010,primera_categoria,Ley 19.885 texto 2010; donación irrevocable de largo plazo con cuotas sobre el 5 % de la RLI,0.0,1.0,0.17,0.83,0.17000000000000004
+e2011_hasta_1000,2011,primera_categoria,Ley 19.885 texto 2010; menos de 1.000 UTM a dos o más instituciones,0.5,0.5,0.2,0.4,0.6
+e2011_una_institucion,2011,primera_categoria,Ley 19.885 texto 2010; menos de 1.000 UTM a una sola institución,0.0,0.0,,1.0,0.0
+e2011_sobre_1000_con_fondo,2011,primera_categoria,Ley 19.885 texto 2010; 1.000 UTM o más con al menos 33 % al Fondo,0.5,0.5,0.2,0.4,0.6
+e2011_sobre_1000_sin_fondo,2011,primera_categoria,Ley 19.885 texto 2010; 1.000 UTM o más con menos de 33 % al Fondo (salto),0.35,0.65,0.2,0.52,0.48
+e2011_adicciones_con_fondo,2011,primera_categoria,Ley 19.885 texto 2010; adicciones con al menos 25 % al Fondo,0.5,0.5,0.2,0.4,0.6
+e2011_adicciones_sin_fondo,2011,primera_categoria,Ley 19.885 texto 2010; adicciones con menos de 25 % al Fondo (salto),0.4,0.6,0.2,0.48,0.52
+e2012_hasta_1000,2012,primera_categoria,Ley 19.885 texto 2012 (desde 2012-02-08); tramo hasta 1.000 UTM,0.5,0.5,0.2,0.4,0.6
+e2012_hasta_1000_tau_17,2012,primera_categoria,Ley 19.885 texto 2012; tramo hasta 1.000 UTM; tasa alternativa,0.5,0.5,0.17,0.415,0.585
+e2012_exceso_con_fondo,2012,primera_categoria,Ley 19.885 texto 2012; parte sobre 1.000 UTM con al menos 33 % al Fondo,0.5,0.5,0.2,0.4,0.6
+e2012_exceso_sin_fondo,2012,primera_categoria,Ley 19.885 texto 2012; parte sobre 1.000 UTM con menos de 33 % al Fondo (quiebre),0.35,0.65,0.2,0.52,0.48
+e2012_adicciones_exceso_con_fondo,2012,primera_categoria,"Ley 19.885 texto 2012; adicciones, parte sobre 1.000 UTM con al menos 25 % al Fondo",0.5,0.5,0.2,0.4,0.6
+e2012_adicciones_exceso_sin_fondo,2012,primera_categoria,"Ley 19.885 texto 2012; adicciones, parte sobre 1.000 UTM con menos de 25 % al Fondo (quiebre)",0.4,0.6,0.2,0.48,0.52
+e2013_hasta_1000,2013,primera_categoria,Ley 19.885 texto 2012; tramo hasta 1.000 UTM,0.5,0.5,0.2,0.4,0.6
+e2014_hasta_1000,2014,primera_categoria,Ley 19.885 texto 2012; tramo hasta 1.000 UTM,0.5,0.5,0.21,0.395,0.605
+e2015_hasta_1000,2015,primera_categoria,Ley 19.885 texto 2012; tramo hasta 1.000 UTM,0.5,0.5,0.225,0.3875,0.6125
+e2016_hasta_1000,2016,primera_categoria,Ley 19.885 texto 2012; tramo hasta 1.000 UTM,0.5,0.5,0.24,0.38,0.62
+e2017_14A_hasta_1000,2017,primera_categoria,art. 14 letra A (renta atribuida); tramo hasta 1.000 UTM,0.5,0.5,0.25,0.375,0.625
+e2017_14B_hasta_1000,2017,primera_categoria,art. 14 letra B (semiintegrado); tramo hasta 1.000 UTM,0.5,0.5,0.255,0.3725,0.6275
+e2018_14B_hasta_1000,2018,primera_categoria,art. 14 letra B (semiintegrado); tramo hasta 1.000 UTM,0.5,0.5,0.27,0.365,0.635
+e2019_14A_hasta_1000,2019,primera_categoria,art. 14 letra A (renta atribuida); tramo hasta 1.000 UTM,0.5,0.5,0.25,0.375,0.625
+e2019_14B_hasta_1000,2019,primera_categoria,art. 14 letra B (semiintegrado); tramo hasta 1.000 UTM,0.5,0.5,0.27,0.365,0.635
+e2019_perdida,2019,primera_categoria,Ley 19.885 texto 2012; empresa con pérdida tributaria,0.0,0.0,,1.0,0.0
+e2020_14A_hasta_1000,2020,primera_categoria,art. 14 letra A; tramo hasta 1.000 UTM,0.5,0.5,0.27,0.365,0.635
+e2020_pro_pyme_tasa_permanente,2020,primera_categoria,Pro Pyme art. 14 letra D con la tasa permanente; tramo hasta 1.000 UTM,0.5,0.5,0.25,0.375,0.625
+e2020_pro_pyme,2020,primera_categoria,Pro Pyme art. 14 letra D; tramo hasta 1.000 UTM,0.5,0.5,0.1,0.45,0.55
+e2020_perdida_cota,2020,primera_categoria,"Ley 19.885 texto 2020; empresa con pérdida tributaria, solo gasto",0.0,1.0,0.27,0.73,0.27
+e2023_pro_pyme,2023,primera_categoria,Pro Pyme art. 14 letra D; tramo hasta 1.000 UTM,0.5,0.5,0.1,0.45,0.55
+e2023_pro_pyme_texto_original_21256,2023,primera_categoria,Pro Pyme art. 14 letra D con la tasa permanente; tramo hasta 1.000 UTM,0.5,0.5,0.25,0.375,0.625
+e2023_14A_hasta_1000,2023,primera_categoria,"art. 14 letra A; Ley 19.885, tramo hasta 1.000 UTM",0.5,0.5,0.27,0.365,0.635
+e2023_14A_sobre_limite_art10,2023,primera_categoria,"art. 14 letra A; Ley 19.885, donación sobre el 5 % de la RLI",0.0,0.0,,1.0,0.0
+e2023_14A_ley21440,2023,primera_categoria,art. 14 letra A; Ley 21.440 (deducción de la base),0.0,1.0,0.27,0.73,0.27
+e2023_14A_ley21440_sobre_limite_art10,2023,primera_categoria,art. 14 letra A; Ley 21.440 con donaciones sobre el 5 % de la RLI,0.0,1.0,0.27,0.73,0.27
+e2023_14A_ley21440_sobre_su_limite,2023,primera_categoria,art. 14 letra A; Ley 21.440 sobre sus propios límites,0.0,0.0,,1.0,0.0
+e2023_pro_pyme_ley21440,2023,primera_categoria,Pro Pyme art. 14 letra D; Ley 21.440,0.0,1.0,0.1,0.9,0.09999999999999998
+e2024_pro_pyme,2024,primera_categoria,Pro Pyme art. 14 letra D; tramo hasta 1.000 UTM,0.5,0.5,0.125,0.4375,0.5625
+e2024_pro_pyme_tasa_permanente,2024,primera_categoria,Pro Pyme art. 14 letra D con la tasa permanente; tramo hasta 1.000 UTM,0.5,0.5,0.25,0.375,0.625
+e2025_14A_hasta_1000,2025,primera_categoria,art. 14 letra A; tramo hasta 1.000 UTM,0.5,0.5,0.27,0.365,0.635
+e2025_14A_sobre_tope_credito,2025,primera_categoria,art. 14 letra A; donación marginal con el crédito anual ya en 14.000 UTM,0.0,1.0,0.27,0.73,0.27
+e2025_14A_credito_mayor_que_impuesto,2025,primera_categoria,art. 14 letra A; crédito mayor que el impuesto de primera categoría,0.0,1.0,0.27,0.73,0.27
+e2025_14A_sobre_limite_art10,2025,primera_categoria,art. 14 letra A; donación sobre el 5 % de la RLI,0.0,0.0,,1.0,0.0
+e2025_pro_pyme,2025,primera_categoria,Pro Pyme art. 14 letra D; tramo hasta 1.000 UTM,0.5,0.5,0.125,0.4375,0.5625
+e2025_pro_pyme_tasa_permanente,2025,primera_categoria,Pro Pyme art. 14 letra D con la tasa permanente; tramo hasta 1.000 UTM,0.5,0.5,0.25,0.375,0.625
+e2025_14A_ley21015,2025,primera_categoria,art. 14 letra A; Ley 21.015 (gasto necesario),0.0,1.0,0.27,0.73,0.27
+p2009,2009,global_complementario,Ley 19.885 texto 2003; persona,0.0,0.0,,1.0,0.0
+p2011_solo_credito,2011,global_complementario,art. 1 bis; persona sin gasto efectivo; menos de 1.000 UTM,0.5,0.0,,0.5,0.5
+p2011_gasto_efectivo_primer_tramo,2011,global_complementario,art. 1 bis; persona con gasto efectivo; primer tramo de la escala,0.5,0.5,0.05,0.475,0.525
+p2011_gasto_efectivo_tramo_superior,2011,global_complementario,art. 1 bis; persona con gasto efectivo; tramo superior,0.5,0.5,0.4,0.3,0.7
+p2012_solo_credito,2012,global_complementario,art. 1 bis; persona sin gasto efectivo; tramo hasta 1.000 UTM,0.5,0.0,,0.5,0.5
+p2013_gasto_efectivo_primer_tramo,2013,global_complementario,art. 1 bis; persona con gasto efectivo; primer tramo de la escala,0.5,0.5,0.04,0.48,0.52
+p2013_gasto_efectivo_tramo_superior,2013,global_complementario,art. 1 bis; persona con gasto efectivo; tramo superior,0.5,0.5,0.4,0.3,0.7
+p2015_gasto_efectivo_tramo_superior,2015,global_complementario,art. 1 bis; persona con gasto efectivo; tramo superior,0.5,0.5,0.4,0.3,0.7
+p2016_gasto_efectivo_tramo_superior,2016,global_complementario,art. 1 bis; persona con gasto efectivo; tramo superior,0.5,0.5,0.4,0.3,0.7
+p2016_gasto_efectivo_tramo_superior_alt,2016,global_complementario,art. 1 bis; persona con gasto efectivo; tramo superior; tasa alternativa,0.5,0.5,0.35,0.325,0.675
+p2017_gasto_efectivo_tramo_superior,2017,global_complementario,art. 1 bis; persona con gasto efectivo; tramo superior,0.5,0.5,0.35,0.325,0.675
+p2019_gasto_efectivo_tramo_superior,2019,global_complementario,art. 1 bis; persona con gasto efectivo; tramo superior,0.5,0.5,0.35,0.325,0.675
+p2019_sobre_limite,2019,global_complementario,art. 1 bis; persona fuera del límite del art. 10 anterior a 2020,0.0,0.0,,1.0,0.0
+p2020_solo_credito,2020,global_complementario,art. 1 bis; persona sin gasto efectivo; tramo hasta 1.000 UTM,0.5,0.0,,0.5,0.5
+p2020_gasto_efectivo_tramo_superior,2020,global_complementario,art. 1 bis; persona con gasto efectivo; tramo superior,0.5,0.5,0.4,0.3,0.7
+p2023_ley21440_tramo_superior,2023,global_complementario,Ley 21.440; persona en el tramo superior,0.0,1.0,0.4,0.6,0.4
+p2023_ley21440_sobre_su_limite,2023,global_complementario,Ley 21.440; persona sobre sus propios límites,0.0,0.0,,1.0,0.0
+t2025_credito_mayor_que_impuesto,2025,trabajador_art43_N1,art. 1 bis inc. 2; trabajador con crédito mayor que el impuesto retenido,0.5,0.0,,0.5,0.5

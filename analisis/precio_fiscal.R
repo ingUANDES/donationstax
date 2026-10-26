@@ -5,12 +5,15 @@
 # Contraparte en Python: precio_fiscal.py (ver contraste.py).
 #
 # Uso: Rscript precio_fiscal.R entrada.csv salida.csv
+# Con source() solo define precio_fiscal (lo usa precio_por_regimen.R).
 
 precio_fiscal <- function(c, g, tau) 1 - c - tau * g
 
-args <- commandArgs(trailingOnly = TRUE)
-d <- read.csv(args[1], stringsAsFactors = FALSE)
-p <- precio_fiscal(d$c, d$g, d$tau)
-out <- data.frame(caso = d$caso, precio = p, subsidio = 1 - p)
-# write.csv escribe hasta 15 cifras significativas; contraste.py compara con tolerancia
-write.csv(out, args[2], row.names = FALSE, quote = FALSE)
+if (sys.nframe() == 0L) {
+  args <- commandArgs(trailingOnly = TRUE)
+  d <- read.csv(args[1], stringsAsFactors = FALSE)
+  p <- precio_fiscal(d$c, d$g, d$tau)
+  out <- data.frame(caso = d$caso, precio = p, subsidio = 1 - p)
+  # write.csv escribe hasta 15 cifras significativas; contraste.py compara con tolerancia
+  write.csv(out, args[2], row.names = FALSE, quote = FALSE)
+}
