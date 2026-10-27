@@ -152,7 +152,7 @@ Aclaraciones, a partir de las cuatro preguntas que dejó el [PR 25](https://gith
 1. Las 35 filas en que `AÑO` coincide con el año de la fecha y no con el del archivo toman el año del archivo, como dice la regla.
 2. Las 8 filas con la fecha en el año del archivo y `AÑO` distinto toman el año del archivo y el mes de la fecha. No se marcan por fila: basta el conteo `n_anio_columna_distinto_archivo`.
 3. `fecha_donacion` conserva la fecha completa aunque el mes de la donación quede desconocido. Su mes no es el de la donación: para eso está `mes_donacion`.
-4. [armonizacion_anios_donacion.csv](datos/armonizacion_anios_donacion.csv) se retira, porque los dos años coinciden por construcción. Lo pide el [issue 26](https://github.com/ingUANDES/donationstax/issues/26).
+4. [armonizacion_anios_donacion.csv](https://github.com/ingUANDES/donationstax/blob/90bb98c2cce8a90afb240f74daee3d657c61dcfa/datos/armonizacion_anios_donacion.csv) se retira, porque los dos años coinciden por construcción. Lo pide el [issue 26](https://github.com/ingUANDES/donationstax/issues/26).
 
 Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-26 (no verificable desde el repo): «aceptar propuesta si complementar que la regla 4 del d-10 solo vale si hay info de fecha sino se usa la info del archivo de origen». La plantea el investigador a partir de lo que dijo el usuario al aprobar [D-13 · Casos que el criterio para completar o excluir no cubre](#d-13). Cómo la leo (inferencia): la propuesta rige tal cual, y el complemento fija lo que pasa sin fecha, que es usar el archivo. Si se quiso que la fecha siga mandando cuando cae en otro año, basta cambiar la columna del año, y por eso el año de la fecha se conserva. [armonizar.py](analisis/armonizar.py) y [armonizar.R](analisis/armonizar.R) la aplican desde el [issue 20](https://github.com/ingUANDES/donationstax/issues/20): el año de la fecha queda en la columna `anio_fecha` y la marca, en `fecha_otro_anio`. Las cuatro aclaraciones: usuario, conversación de Claude Code del 2026-10-26 (no verificable desde el repo): «Apruebo tus 4 recomendaciones».
 
@@ -280,3 +280,61 @@ Alternativas: volver a bajar el XML, que el 2026-10-26 trajo completas 4 de las 
 Evidencia débil: lo que sigue al corte depende solo del visor. `make verificar` comprueba que el visor coincide con el XML hasta el corte, no después. La dirección del JSON sale del código del visor (`main.*.bundle.js` de www.bcn.cl/leychile, consulta del 2026-10-26); si BCN la documenta como servicio está sin verificar.
 
 Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-27 (no verificable desde el repo): «Acepto propuestas en las decisiones D-15 a D-18, D-20 y D-21». La planteó el investigador en el [issue 28](https://github.com/ingUANDES/donationstax/issues/28).
+
+### D-23
+
+**Precio fiscal a nivel del contribuyente que dona.** El precio de [P-04 · Precio fiscal por régimen](BLUEPRINT.md#p-04) se calcula para quien hace la donación y usa el beneficio. Para una empresa, en primera categoría; para una persona, en el global complementario o en el impuesto único de segunda categoría (art. 1 bis de la Ley 19.885). No se calcula cómo el crédito por donaciones y el menor impuesto de primera categoría pasan a los impuestos finales del dueño de la empresa (global complementario o adicional) en los regímenes del art. 14 de la LIR: letras A y B de 2017 a 2019, y letras A y D desde 2020.
+
+Límites que quedan explícitos:
+
+1. Para una empresa, P es el costo de donar para la empresa, no para su dueño. Con integración total o parcial, el impuesto de primera categoría es crédito contra los impuestos finales del dueño, y una donación que lo cambia puede cambiar también lo que paga el dueño. El costo para el dueño puede entonces ser distinto de P, en un sentido y una magnitud que no se calcularon (inferencia; las reglas del art. 14 no se leyeron).
+2. No tienen caso los regímenes en que la empresa no paga impuesto de primera categoría: el Pro Pyme transparente (art. 14 letra D N° 8 de la LIR, desde 2020) y el art. 14 ter (hasta 2019). Su precio depende de los impuestos finales del dueño, que quedan fuera.
+3. Un diseño que use estos precios mide la respuesta al precio de la empresa. Si quien decide la donación es el dueño y su costo difiere, el precio tiene error de medición (inferencia).
+4. Con esta regla, el paso a los impuestos del dueño es un límite del alcance y no una lectura pendiente de los casos de empresa, para efectos de la aclaración de [D-05 · Niveles de resultado](#d-05) sobre los cálculos deterministas.
+5. Se revisa si un diseño de [P-05 · Simulaciones de efecto conocido](BLUEPRINT.md#p-05) necesita el precio del dueño, por ejemplo para comparar empresas con personas.
+
+Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-27 (no verificable desde el repo): «aprueba D-23, D-26 y D-14 numeral 4», después de leer el texto de esta decisión. La planteó el investigador en el [issue 29](https://github.com/ingUANDES/donationstax/issues/29), punto 5, a partir de una indicación previa del usuario en la misma conversación: «ok con precio a nivel empresa» (escribió «39» y confirmó que quería decir 29). El código lo reservó el usuario en esa conversación.
+
+### D-26
+
+**UTM que se aplica a cada donación.** Los diseños de [P-05 · Simulaciones de efecto conocido](BLUEPRINT.md#p-05) miden el monto en UTM: el quiebre de 1.000 UTM del bunching ([D-16 · Tolerancias de la simulación de bunching en el quiebre de 1.000 UTM](#d-16)) y el logaritmo del monto en UTM de los estudios de eventos y de las variables instrumentales ([D-17 · Tolerancias de la simulación de estudio de eventos y diferencias en diferencias](#d-17), [D-18 · Tolerancias de la simulación de variables instrumentales](#d-18)). Las planillas traen pesos nominales ([D-12 · Variable de resultado](#d-12)). La serie mensual de la UTM de 2008 a 2025, del SII, está descrita en [Serie de la UTM, en P-05 · Simulaciones de efecto conocido](BLUEPRINT.md#serie-de-la-utm) ([issue 33](https://github.com/ingUANDES/donationstax/issues/33)).
+
+Norma e interpretación administrativa (citas comprobadas por [verifica_citas.py](analisis/verifica_citas.py)):
+
+- La Ley 19.885 fija el umbral en 1.000 UTM por donante, institución y año desde 2012-02-08 ([cambios.csv, L19](normativa/cambios.csv#L19), [L22](normativa/cambios.csv#L22)), y no dice con qué valor de la UTM se convierte cada donación (inferencia: no lo dice el texto de [ley19885_v2012-02-08.txt](normativa/textos/ley19885_v2012-02-08.txt); el reglamento no se leyó).
+- La Circular N° 71 del SII (interpretación administrativa, no ley), N° II letra D-1 a-1, sobre el texto de la Ley 20.316: «Para medir dicho límite, el monto de cada donación debe expresarse en UTM, dividiendo el monto de la donación por el valor de dicha Unidad vigente en el mes en que ésta se realice.» ([cambios.csv, L84](normativa/cambios.csv#L84)). La Circular N° 49, del 2012-11-05, reemplaza esa letra D-1 ([circular_sii_49_2012.txt, L137-L139](normativa/textos/circular_sii_49_2012.txt#L137-L139)), y su texto nuevo no repite la regla ni da otra (búsqueda en el texto del repo; [issue 42](https://github.com/ingUANDES/donationstax/issues/42)).
+- Para el tope de 14.000 UTM del crédito, la misma Circular 71 usa «el valor de la UTM vigente a la fecha del balance» ([cambios.csv, L85](normativa/cambios.csv#L85)). La Ley 21.440 fija sus topes «considerando el valor de la unidad tributaria mensual del mes de cierre del ejercicio respectivo» ([cambios.csv, L37](normativa/cambios.csv#L37), [L38](normativa/cambios.csv#L38)).
+- El art. 1 N° 13 reajusta la parte de la donación con crédito «en la forma establecida para los pagos provisionales obligatorios», desde el desembolso ([cambios.csv, L83](normativa/cambios.csv#L83)); la Circular 49 lo lee como la variación del IPC entre el mes anterior al desembolso y el mes anterior al del balance ([cambios.csv, L86](normativa/cambios.csv#L86)). Es un reajuste del crédito, no una regla para medir el umbral (inferencia).
+
+Regla:
+
+1. El monto en UTM de una donación es su monto en pesos dividido por la UTM del mes de la donación (`mes_donacion` de la armonización, según [D-14 · Año de la donación cuando la fecha cae en otro año](#d-14)) en el año de la donación, que es el del archivo.
+2. Si el mes es desconocido, se usa la UTM de diciembre del año del archivo.
+3. Las sumas por donante, institución y año (la unidad del umbral desde 2012) suman donaciones ya convertidas, como pide la Circular 71 para el límite: «La suma de todas las donaciones efectuadas en el ejercicio, convertidas a dicha unidad» ([cambios.csv, L84](normativa/cambios.csv#L84)).
+4. Sensibilidad: todo resultado en UTM se informa también con la UTM de diciembre del año del archivo para todas las filas. Cambiar de criterio es cambiar de columna.
+5. Los montos no se reajustan por IPC antes de convertirlos.
+6. En la nómina de la Ley 21.440 vale la misma regla; su fecha es siempre una fecha de Excel del año del archivo ([P-07 · Datos del régimen de la Ley 21.440](BLUEPRINT.md#p-07)), así que el mes siempre se conoce.
+
+Magnitud de la sensibilidad ([datos/utm_por_anio.csv](datos/utm_por_anio.csv), nivel contrastado). Para una donación de mes $m$ conocido, pasar de la regla al criterio de diciembre multiplica su monto en UTM por $\text{UTM}_m/\text{UTM}_{dic}$. Salvo en 2009, la UTM de diciembre es la máxima del año (columna `razon_dic_sobre_max` igual a 1), así que el logaritmo del monto baja, y a lo más en `log_dic_sobre_min`:
+
+- En la ventana de 2012 a 2025, $\text{UTM}_{dic}/\min_m \text{UTM}_m$ va de 1,0181 en 2017 ([L11](datos/utm_por_anio.csv#L11)) a 1,1233 en 2022 ([L16](datos/utm_por_anio.csv#L16)), con un logaritmo de 0,0179 a 0,1163; el segundo valor más alto es 1,0626, en 2021 ([L15](datos/utm_por_anio.csv#L15)).
+- La ventana excluida de la especificación principal del bunching mide 0,08 en logaritmo ([D-16 · Tolerancias de la simulación de bunching en el quiebre de 1.000 UTM](#d-16)). En 2022, el criterio de diciembre correría parte de la masa agolpada fuera de esa ventana (inferencia).
+- Con efectos fijos de año, en los estudios de eventos y en las variables instrumentales solo cuenta cómo se reparten las donaciones entre los meses de cada año (inferencia).
+- Filas con el mes desconocido, a las que se aplica el punto 2 ([armonizacion_por_anio.csv](datos/armonizacion_por_anio.csv), columna `n_mes_desconocido`): 4.558 de 486.537 en 2018 ([L12](datos/armonizacion_por_anio.csv#L12)) y 1.104 de 551.640 en 2015 ([L9](datos/armonizacion_por_anio.csv#L9)); en los demás años de 2012 a 2025, 502 o menos (2019, [L13](datos/armonizacion_por_anio.csv#L13)).
+
+Razones (inferencia del investigador):
+
+- La regla coincide con la única instrucción del SII que el repo tiene sobre cómo medir el límite de 1.000 UTM, la de la Circular 71.
+- Diciembre es el mes de cierre del ejercicio de quienes cierran el año calendario, y es la UTM que la Circular 71 usa para el tope de 14.000 UTM y la que la Ley 21.440 usa para sus topes. Que todos los donantes cierren en diciembre está sin verificar.
+- Las dos convenciones se acercan a un mismo valor: según la serie, la UTM se reajusta con el IPC del segundo mes anterior ([Serie de la UTM](BLUEPRINT.md#serie-de-la-utm)), así que $\text{UTM}_{dic}/\text{UTM}_m$ es la variación del IPC de $m-2$ a octubre; el reajuste del N° 13 es la variación de $m-1$ a noviembre. El monto reajustado dividido por la UTM de diciembre se parece al monto nominal dividido por la UTM de su mes, salvo por ese desfase de un mes.
+
+Alternativas: la UTM de diciembre para todas las filas (es la sensibilidad del punto 4); la UTM promedio del año para el mes desconocido; reajustar cada monto por IPC hasta noviembre y dividir por la UTM de diciembre, que se acerca al crédito como lo calcula el SII (inferencia) y requiere un índice de IPC armado con la variación mensual de [datos/utm_mensual.csv](datos/utm_mensual.csv).
+
+Evidencia débil:
+
+- La instrucción de la Circular 71 interpreta el texto de 2010 a 2012, y la Circular 49 la reemplazó sin repetirla. Para las donaciones desde la Ley 20.565, que son las de la ventana empírica, no hay en el repo fuente administrativa sobre qué UTM mide el umbral (sin verificar; [issue 42](https://github.com/ingUANDES/donationstax/issues/42)).
+- El mes es el de la fecha de la planilla. Algunas fechas podrían ser del certificado y no de la donación ([D-14 · Año de la donación cuando la fecha cae en otro año](#d-14), inferencia sin verificar).
+- Que la UTM se reajuste con el IPC del segundo mes anterior sale de la serie, no de una norma leída: el Código Tributario no está en `normativa/textos/` (sin verificar).
+
+Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-27 (no verificable desde el repo): «aprueba D-23, D-26 y D-14 numeral 4», después de leer el texto de esta decisión. La regla es la sugerencia por defecto que dio el usuario al encargar el issue 33 (misma conversación): «la UTM del mes de la donación si se conoce y la de diciembre del año del archivo si no, con sensibilidad entre ambas». El código lo reservó el usuario en esa conversación. Las citas, la magnitud y las razones son del investigador.
+

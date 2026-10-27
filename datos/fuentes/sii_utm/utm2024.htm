@@ -1,0 +1,243 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Sii | Servicio de Impuestos Internos</title>
+<script src="/responsive/js/sidebar_pie.js"></script>
+<script src="/js/responsive_barranav.js"></script>
+<style type="text/css">
+table.table-bordered thead th,
+table.table-bordered tbody th { vertical-align:middle !important;}
+table.table-bordered thead th { text-align:center !important;}
+p.texto_info { font-size:13px; text-align:justify;}
+p.texto_info b { color:#000000;}
+</style>
+</head>
+<body>
+<div id="my-wrapper">
+  <!-- CABECERA -->
+  <script>mostrar("../index_valores_y_fechas.html|Valores y fechas||UTM - UTA - IPC");</script>
+  <!-- FIN CABECERAS-->
+  <!-- CUERPO -->
+  <div class="web-sii cuerpo">
+    <div class="container">
+      <div class="pagina-completa">
+        <div class="row columna-lateral">
+          <div class="col-sm-3 hidden-xs">
+            <!-- MENU -->
+            <script>mostrarMenuIzqPie('utm');</script>
+            <!-- FIN MENU -->
+          </div>
+          <div class="col-sm-9 contenido">
+            <script>imprimir_compartir(false, true)</script>
+            <h2 class="title">UTM - UTA - IPC 2024</h2>
+            <div class="filtro">
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-group">
+<select class="form-control selectpicker" data-style="select" id="sel_anyo" onChange="ir_anyo();">
+<script>writeOptionsYears(12)</script>
+   <option value='ANTERIORES'>A&ntilde;os Anteriores</option>
+</select>
+                  </div>
+                </div>
+				<div class="col-sm-9">
+				   <a href="#" class="exportar_tabla" onClick="javascript:$('#table_export').tableExport({type:'csv',fileName:'UTM-UTA-IPC 2024'});">Exportar a Excel</a>
+				</div>
+              </div>
+            </div>
+            <p style="text-align:justify;">En la siguiente tabla se presenta para los meses del 2024, los respectivos valores de la UTM y la UTA, expresados en pesos (en la primera y segunda columna, respectivamente). En las columnas restantes se presenta el IPC de cada mes de dicho a&ntilde;o y la variaci&oacute;n porcentual mensual, acumulada a la fecha y anual.</p>
+            <br>
+<div class='table-responsive'>
+<table class='table table-hover table-bordered' id='table_export'>
+   <thead>
+     <tr>
+       <th rowspan='2'>2024</th>
+       <th rowspan='2' width='80'>UTM (1)</th>
+       <th rowspan='2' width='80'>UTA (2)</th>
+       <th>Indice de Precios al Consumidor (IPC)</th>
+       <th colspan='3'>Variaci&oacute;n Porcentual</th>
+     </tr>
+     <tr>
+       <th>Valor en puntos (6)</th>
+       <th>Mensual (3)</th>
+       <th>Acumulado 2024 (4)</th>
+       <th>Ultimos 12 meses (5)</th>
+     </tr>
+   </thead>
+   <tbody>
+     <tr>
+       <th>Enero</th>
+       <td>64.666</td>
+       <td>775.992</td>
+       <td align='center'>101,72</td>
+       <td align='center'>0,7</td>
+       <td align='center'>0,7</td>
+       <td align='center'>3,8</td>
+     </tr>
+     <tr>
+       <th>Febrero</th>
+       <td>64.343</td>
+       <td>772.116</td>
+       <td align='center'>102,32</td>
+       <td align='center'>0,6</td>
+       <td align='center'>1,3</td>
+       <td align='center'>4,5</td>
+     </tr>
+     <tr>
+       <th>Marzo</th>
+       <td>64.793</td>
+       <td>777.516</td>
+       <td align='center'>102,70</td>
+       <td align='center'>0,4</td>
+       <td align='center'>1,6</td>
+       <td align='center'>3,7</td>
+     </tr>
+     <tr>
+       <th>Abril</th>
+       <td>65.182</td>
+       <td>782.184</td>
+       <td align='center'>103,24</td>
+       <td align='center'>0,5</td>
+       <td align='center'>2,2</td>
+       <td align='center'>4,0</td>
+     </tr>
+     <tr>
+       <th>Mayo</th>
+       <td>65.443</td>
+       <td>785.316</td>
+       <td align='center'>103,52</td>
+       <td align='center'>0,3</td>
+       <td align='center'>2,4</td>
+       <td align='center'>4,1</td>
+     </tr>
+     <tr>
+       <th>Junio</th>
+       <td>65.770</td>
+       <td>789.240</td>
+       <td align='center'>103,42</td>
+       <td align='center'>-0,1</td>
+       <td align='center'>2,4</td>
+       <td align='center'>4,2</td>
+     </tr>
+     <tr>
+       <th>Julio</th>
+       <td>65.967</td>
+       <td>791.604</td>
+       <td align='center'>104,19</td>
+       <td align='center'>0,7</td>
+       <td align='center'>3,1</td>
+       <td align='center'>4,6</td>
+     </tr>
+     <tr>
+       <th>Agosto</th>
+       <td>65.901</td>
+       <td>790.812</td>
+       <td align='center'>104,45</td>
+       <td align='center'>0,3</td>
+       <td align='center'>3,4</td>
+       <td align='center'>4,7</td>
+     </tr>
+     <tr>
+       <th>Septiembre</th>
+       <td>66.362</td>
+       <td>796.344</td>
+       <td align='center'>104,54</td>
+       <td align='center'>0,1</td>
+       <td align='center'>3,5</td>
+       <td align='center'>4,1</td>
+     </tr>
+     <tr>
+       <th>Octubre</th>
+       <td>66.561</td>
+       <td>798.732</td>
+       <td align='center'>105,56</td>
+       <td align='center'>1,0</td>
+       <td align='center'>4,5</td>
+       <td align='center'>4,7</td>
+     </tr>
+     <tr>
+       <th>Noviembre</th>
+       <td>66.628</td>
+       <td>799.536</td>
+       <td align='center'>105,83</td>
+       <td align='center'>0,2</td>
+       <td align='center'>4,7</td>
+       <td align='center'>4,2</td>
+     </tr>
+     <tr>
+       <th>Diciembre</th>
+       <td>67.294</td>
+       <td>807.528</td>
+       <td align='center'>105,62</td>
+       <td align='center'>-0,2</td>
+       <td align='center'>4,5</td>
+       <td align='center'>4,5</td>
+     </tr>
+   </tbody>
+   </table>
+   </div>
+
+            <p class="texto_info"><b>(1) UTM</b> = Unidad Tributaria Mensual<br>
+              <b>(2) UTA</b> = Unidad Tributaria Anual (UTM x 12)<br>
+              <b>(3) Variaci&oacute;n mensual :</b> Corresponde a la publicada oficialmente por el INE en cada mes.<br>
+              <b>(4) Variaci&oacute;n acumulada 2024 :</b> Corresponde a la acumulada a la fecha respecto del mes de Diciembre del a&ntilde;o anterior.<br>
+              <b>(5) Variaci&oacute;n Ultimos 12 meses :</b> Corresponde a la variaci&oacute;n de los &uacute;ltimos doce meses.<br>
+              <b>(6) IPC Valor en Puntos :</b> A partir del mes de enero 2024, el INE ha procedido a recalcular los IPC, tomando como base anual 2023=100. La serie empalmada de IPC desde diciembre 2009 hasta la fecha, puede ser consultada en <a href="http://www.ine.cl" target="_blank">www.ine.cl</a>.</p>
+            <p>&nbsp;</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- FIN CUERPO -->
+  <!-- PIE -->
+  <script>mostrarPie("")</script>
+  <!-- FIN PIE -->
+  
+  <script>
+	function ir_anyo(){
+	var anyo = $('select#sel_anyo').val()
+	var archivo = 'utm***_ANYO_***.htm';
+	archivo = archivo.replace('***_ANYO_***', anyo);
+
+		if(anyo == 'ANTERIORES'){
+		window.open('https://www.sii.cl/pagina/valores/utm/utm2012.htm', '_newtab');
+		$('select#sel_anyo').val('2024');
+		}
+		else{
+		$(location).attr('href', archivo);
+		}
+	}
+
+	function stringMes(mm){
+		if(mm == '01'){ mes = 'Enero';}
+		if(mm == '02'){ mes = 'Febrero';}
+		if(mm == '03'){ mes = 'Marzo';}
+		if(mm == '04'){ mes = 'Abril';}
+		if(mm == '05'){ mes = 'Mayo';}
+		if(mm == '06'){ mes = 'Junio';}
+		if(mm == '07'){ mes = 'Julio';}
+		if(mm == '08'){ mes = 'Agosto';}
+		if(mm == '09'){ mes = 'Septiembre';}
+		if(mm == '10'){ mes = 'Octubre';}
+		if(mm == '11'){ mes = 'Noviembre';}
+		if(mm == '12'){ mes = 'Diciembre';}
+	    return mes;
+	}
+
+	$(document).ready(function(){
+		$('select#sel_anyo').val('2024');
+	});
+	</script>
+	
+    <script src='/valores_y_fechas/js/fileSaver.js'></script>
+    <script src='/valores_y_fechas/js/tableExport.js'></script>
+	
+</div>
+</body>
+</html>

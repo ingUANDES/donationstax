@@ -8,10 +8,15 @@ PY ?= python3
 # DECISIONES.md#d-15; las reglas incumplidas deben ser las registradas en $(SIM_H). Corre también
 # duplicados_ley21440.py y .R sobre una tabla ficticia (analisis/fixtures/duplicados_prueba.csv) y exige que
 # coincidan entre sí y con los valores calculados a mano; esa parte no necesita python-calamine ni readxl.
+# Lee la UTM mensual de las páginas del SII versionadas en $(UTM_HTML) (https://github.com/ingUANDES/donationstax/issues/33;
+# las baja analisis/descargar_utm.py, con red): Python y R deben dar la misma serie, byte a byte, y la misma
+# tabla por año, y las dos deben ser las versionadas en datos/.
 # Falla (código distinto de 0) si algo no se cumple.
 PRECIO_IN = normativa/cambios.csv normativa/precio_casos.csv normativa/precio_comparaciones.csv
 SIM_H = analisis/fixtures/sim_hallazgos.csv
 DUP_PRUEBA = analisis/fixtures/duplicados_prueba.csv
+UTM_HTML = datos/fuentes/sii_utm
+UTM_IGUALES = anio,utm_diciembre,utm_min,mes_utm_min,utm_max,mes_utm_max
 verificar:
 	mkdir -p salidas
 	$(PY) -I analisis/precio_fiscal.py analisis/fixtures/precio_fiscal_prueba.csv salidas/precio_fiscal_py.csv
@@ -39,6 +44,14 @@ verificar:
 	$(PY) -I analisis/contraste_datos.py salidas/dup_prueba_anio_py.csv salidas/dup_prueba_anio_R.csv analisis/fixtures/duplicados_esperado_por_anio.csv
 	$(PY) -I analisis/contraste_datos.py salidas/dup_prueba_mult_py.csv salidas/dup_prueba_mult_R.csv analisis/fixtures/duplicados_esperado_multiplicidad.csv
 	$(PY) -I analisis/contraste_datos.py salidas/dup_prueba_conc_py.csv salidas/dup_prueba_conc_R.csv analisis/fixtures/duplicados_esperado_concentracion.csv
+	$(PY) -I analisis/utm.py $(UTM_HTML) datos/descargas_utm.csv salidas/utm_mensual_py.csv salidas/utm_por_anio_py.csv
+	LC_ALL=C.UTF-8 Rscript analisis/utm.R $(UTM_HTML) datos/descargas_utm.csv salidas/utm_mensual_R.csv salidas/utm_por_anio_R.csv
+	cmp salidas/utm_mensual_py.csv salidas/utm_mensual_R.csv
+	cmp salidas/utm_mensual_py.csv datos/utm_mensual.csv
+	for c in razon_dic_sobre_min razon_dic_sobre_max log_dic_sobre_min; do \
+	  $(PY) -I analisis/contraste.py salidas/utm_por_anio_py.csv salidas/utm_por_anio_R.csv --clave anio --columna $$c --iguales $(UTM_IGUALES) || exit 1; \
+	done
+	cmp salidas/utm_por_anio_py.csv datos/utm_por_anio.csv
 
 .PHONY: verificar-datos verificar-datos-19885 verificar-datos-21440 verificar-duplicados-21440 verificar-cruce verificar-armonizado verificar-anio verificar-rut
 # Corre los siete bloques de abajo, en orden. Tarda varios minutos y necesita los archivos ya descargados en
@@ -94,14 +107,12 @@ verificar-cruce:
 # que Python y R coincidan en las tablas y celda por celda, y que las tablas sean las versionadas en datos/.
 verificar-armonizado:
 	mkdir -p salidas
-	$(PY) -I analisis/armonizar.py data_local/midesof data_local/armonizado/py salidas/armonizacion_py.csv salidas/armonizacion_anios_py.csv salidas/diccionario_py.csv
-	LC_ALL=C.UTF-8 Rscript analisis/armonizar.R data_local/midesof data_local/armonizado/r salidas/armonizacion_R.csv salidas/armonizacion_anios_R.csv salidas/diccionario_R.csv
+	$(PY) -I analisis/armonizar.py data_local/midesof data_local/armonizado/py salidas/armonizacion_py.csv salidas/diccionario_py.csv
+	LC_ALL=C.UTF-8 Rscript analisis/armonizar.R data_local/midesof data_local/armonizado/r salidas/armonizacion_R.csv salidas/diccionario_R.csv
 	$(PY) -I analisis/contraste_datos.py salidas/armonizacion_py.csv salidas/armonizacion_R.csv
-	$(PY) -I analisis/contraste_datos.py salidas/armonizacion_anios_py.csv salidas/armonizacion_anios_R.csv
 	$(PY) -I analisis/contraste_datos.py salidas/diccionario_py.csv salidas/diccionario_R.csv
 	$(PY) -I analisis/contraste_armonizado.py data_local/armonizado/py data_local/armonizado/r
 	cmp salidas/armonizacion_py.csv datos/armonizacion_por_anio.csv
-	cmp salidas/armonizacion_anios_py.csv datos/armonizacion_anios_donacion.csv
 	cmp salidas/diccionario_py.csv datos/diccionario_columnas.csv
 
 # Año de la donación (D-13, punto 1, y D-14): de dónde puede salir el año de cada fila y los conflictos
