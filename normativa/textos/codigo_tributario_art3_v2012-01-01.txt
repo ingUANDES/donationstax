@@ -1,0 +1,25 @@
+# Fuente: https://www.bcn.cl/leychile/consulta/obtxml?opt=7&idNorma=6374&idVersion=2012-01-01
+# Descargado: 2026-10-26 (BCN, LeyChile, XML obtxml opt=7)
+# fechaVersion del XML: 2011-01-27 | publicación: 1974-12-31 | promulgación: 1974-12-27 | vigente en idVersion: 2012-01-01
+# Huella (sha256 de las estructuras incluidas): dab25041713b9f0d0727de7ee9ae2b2be01997705447388ed84e3e93efc82ed8
+
+### Artículo idParte=8573321 fechaVersion=1974-12-31 derogado=no derogado
+Artículo 3.- En general, la ley que modifique una norma
+impositiva, establezca nuevos impuestos o suprima uno
+existente, regirá desde el día primero del mes siguiente
+al de su publicación. En consecuencia, sólo los hechos
+ocurridos a contar de dicha fecha estarán sujetos a la
+nueva disposición. Con todo, tratándose de normas sobre
+infracciones y sanciones, se aplicará la nueva ley a hechos
+ocurridos antes de su vigencia, cuando dicha ley exima tales
+hechos de toda pena o les aplique una menos rigurosa.
+ La ley que modifique la tasa de los impuestos anuales o
+los elementos que sirven para determinar la base de ellos,
+entrará en vigencia el día primero de Enero del año
+siguiente al de su publicación, y los impuestos que deban
+pagarse a contar de esa fecha quedarán afectos a la nueva
+ley.
+ La tasa del interés moratorio será la que rija al
+momento del pago de la deuda a que ellos accedan, cualquiera
+que fuere la fecha en que hubieren ocurrido los hechos
+gravados.

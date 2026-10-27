@@ -1,0 +1,53 @@
+fila_evaluada,caso_antes,caso_despues,nota
+Ley 19.885|art. 1 N° 7 inc. 1|2010-01-01,e2009_sin_fondo,e2010_hasta_1000,sin aporte al Fondo
+Ley 19.885|art. 1 N° 7 inc. 2|2010-01-01,e2009_con_fondo,e2010_una_institucion,donante que da a una sola institución
+Ley 19.885|art. 1 N° 8 inc. 1|2010-01-01,e2009_con_fondo,e2010_sobre_1000_con_fondo,
+Ley 19.885|art. 1 N° 8 inc. 2|2010-01-01,e2009_sin_fondo,e2010_sobre_1000_sin_fondo,
+Ley 19.885|art. 1 N° 10 inc. 1|2010-01-01,e2010_sobre_1000_sin_fondo,e2010_adicciones_hasta_2000,mismo año: fines generales frente a programas de adicciones
+Ley 19.885|art. 1 N° 10 inc. 3|2010-01-01,e2010_sobre_1000_sin_fondo,e2010_adicciones_sin_fondo,mismo año: fines generales frente a programas de adicciones
+Ley 19.885|art. 10 inc. 1|2010-01-01,e2009_sobre_limite_4_5_rli,e2010_entre_4_5_y_5_rli,
+Ley 19.885|art. 10 inc. 2|2010-01-01,e2009_sobre_limite_4_5_rli,e2010_largo_plazo_rli_baja,
+Ley 19.885|art. 10 inc. 2 (segunda oración)|2010-01-01,e2009_sobre_limite_4_5_rli,e2010_largo_plazo_rli_baja,
+Ley 19.885|art. 10 inc. 3|2010-01-01,p2009,p2011_solo_credito,
+Ley 19.885|art. 1 bis inc. 1|2011-01-01,p2009,p2011_gasto_efectivo_tramo_superior,
+Ley 19.885|art. 1 N° 7 inc. 1|2012-02-08,e2011_una_institucion,e2012_hasta_1000,donante que da a una sola institución
+Ley 19.885|art. 1 N° 7 inc. 1|2012-02-08,e2011_sobre_1000_sin_fondo,e2012_hasta_1000,tramo hasta 1.000 UTM de quien supera el umbral sin Fondo
+Ley 19.885|art. 1 N° 8 inc. 1|2012-02-08,e2011_sobre_1000_con_fondo,e2012_exceso_con_fondo,
+Ley 19.885|art. 1 N° 8 inc. 2|2012-02-08,e2011_sobre_1000_sin_fondo,e2012_exceso_sin_fondo,precio marginal sobre el umbral
+Ley 19.885|art. 1 N° 8 inc. 2|2012-02-08,e2011_sobre_1000_sin_fondo,e2012_hasta_1000,tramo hasta 1.000 UTM de quien supera el umbral sin Fondo
+Ley 19.885|art. 1 N° 9|2012-02-08,e2011_sobre_1000_sin_fondo,e2012_hasta_1000,menos de 1.000 UTM a cada institución y más de 1.000 UTM en total
+Ley 19.885|art. 1 N° 10 inc. 3|2012-02-08#c,e2011_adicciones_con_fondo,e2012_adicciones_exceso_con_fondo,
+Ley 19.885|art. 1 N° 10 inc. 3|2012-02-08#c_sin_fondo,e2011_adicciones_sin_fondo,e2012_adicciones_exceso_sin_fondo,precio marginal sobre el umbral
+Ley 19.885|art. 1 N° 10 inc. 3|2012-02-08#c_sin_fondo,e2011_adicciones_sin_fondo,e2012_hasta_1000,tramo hasta 1.000 UTM de quien supera el umbral sin Fondo
+Ley 19.885|art. 10 inc. 2|2020-03-01,e2019_perdida,e2020_perdida_cota,cota del cambio: depende de cuándo se use la pérdida
+Ley 21.210|art. quinto letra a)|2020-03-01,e2019_perdida,e2020_perdida_cota,cota del cambio: depende de cuándo se use la pérdida
+Ley 19.885|art. 10 inc. 4|2020-03-01,p2019_sobre_limite,p2020_solo_credito,solo para quien el límite nuevo deja dentro
+Ley 21.210|art. quinto letra b)|2020-03-01,p2019_sobre_limite,p2020_solo_credito,solo para quien el límite nuevo deja dentro
+Ley 21.440|art. 1; DL 3.063 art. 46 B letra C|2022-07-01,e2023_14A_hasta_1000,e2023_14A_ley21440,frente a la Ley 19.885 dentro de sus límites
+Ley 21.440|art. 1; DL 3.063 art. 46 B letra C|2022-07-01,e2023_14A_sobre_limite_art10,e2023_14A_ley21440_sobre_limite_art10,frente a la Ley 19.885 sobre el 5 % de la RLI
+Ley 21.440|art. 1; DL 3.063 art. 46 B letra C N° 1|2022-07-01,e2023_14A_sobre_limite_art10,e2023_14A_ley21440_sobre_limite_art10,
+Ley 21.015|art. 157 ter letra b) del Código del Trabajo; núm. 1|,e2025_14A_hasta_1000,e2025_14A_ley21015,frente a la Ley 19.885 dentro de sus límites
+"Ley sobre Impuesto a la Renta (DL 824), art. 20|art. 20 inc. 1|2013-01-01",e2010_hasta_1000,e2013_hasta_1000,sin los años transitorios 2011 y 2012
+"Ley sobre Impuesto a la Renta (DL 824), art. 20|art. 20 inc. 1|2014-10-01",e2013_hasta_1000,e2014_hasta_1000,
+Ley 20.780|art. cuarto transitorio inc. 1|2014-01-01,e2013_hasta_1000,e2014_hasta_1000,
+"Ley sobre Impuesto a la Renta (DL 824), art. 20|art. 20 inc. 1|2015-01-01",e2014_hasta_1000,e2015_hasta_1000,
+Ley 20.780|art. cuarto transitorio inc. 1|2014-01-01,e2014_hasta_1000,e2015_hasta_1000,
+"Ley sobre Impuesto a la Renta (DL 824), art. 20|art. 20 inc. 1|2016-01-01",e2015_hasta_1000,e2016_hasta_1000,
+Ley 20.780|art. cuarto transitorio inc. 1|2014-01-01,e2015_hasta_1000,e2016_hasta_1000,
+"Ley sobre Impuesto a la Renta (DL 824), art. 20|art. 20 inc. 1|2017-01-01",e2016_hasta_1000,e2017_14A_hasta_1000,
+"Ley sobre Impuesto a la Renta (DL 824), art. 20|art. 20 inc. 1|2017-01-01",e2016_hasta_1000,e2017_14B_hasta_1000,
+Ley 20.780|art. cuarto transitorio inc. 2|2017-01-01,e2016_hasta_1000,e2017_14B_hasta_1000,
+Ley 20.780|art. cuarto transitorio inc. 2|2017-01-01,e2017_14B_hasta_1000,e2018_14B_hasta_1000,
+"Ley sobre Impuesto a la Renta (DL 824), art. 20|art. 20 inc. 1|2020-01-01",e2019_14B_hasta_1000,e2020_14A_hasta_1000,
+"Ley sobre Impuesto a la Renta (DL 824), art. 20|art. 20 inc. 1|2020-01-01",e2019_14A_hasta_1000,e2020_pro_pyme_tasa_permanente,
+"Ley sobre Impuesto a la Renta (DL 824), art. 52|art. 52|2013-01-01",p2011_gasto_efectivo_primer_tramo,p2013_gasto_efectivo_primer_tramo,
+"Ley sobre Impuesto a la Renta (DL 824), art. 52|art. 52|2013-01-01",p2011_gasto_efectivo_tramo_superior,p2013_gasto_efectivo_tramo_superior,el tramo superior no cambia
+"Ley sobre Impuesto a la Renta (DL 824), art. 52|art. 52|2017-01-01",p2015_gasto_efectivo_tramo_superior,p2017_gasto_efectivo_tramo_superior,"sin el año 2016, que está sin verificar"
+"Ley sobre Impuesto a la Renta (DL 824), art. 52|art. 52|2020-01-01",p2019_gasto_efectivo_tramo_superior,p2020_gasto_efectivo_tramo_superior,
+Ley 20.455|art. 1 letra a)|2011-01-01,e2010_hasta_1000,e2011_hasta_1000,
+Ley 21.256|art. 1 inc. 1|2020-01-01,e2020_pro_pyme_tasa_permanente,e2020_pro_pyme,
+Ley 21.256|art. 1 inc. 1|2020-01-01,e2024_pro_pyme_tasa_permanente,e2024_pro_pyme,
+Ley 21.578|art. 26 N° 1 letra a)|2023-05-30,e2023_pro_pyme_texto_original_21256,e2023_pro_pyme,
+Ley 21.755|art. 25 inc. 1|2025-01-01,e2025_pro_pyme_tasa_permanente,e2025_pro_pyme,
+Ley 19.885|art. 1 bis inc. 1 (segunda parte)|2011-01-01,p2009,p2011_solo_credito,
+Ley 19.885|art. 1 bis inc. 1 (segunda parte)|2012-02-08,p2011_solo_credito,p2012_solo_credito,

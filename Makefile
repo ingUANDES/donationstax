@@ -1,14 +1,22 @@
 PY ?= python3
 
 .PHONY: verificar
-# Contrasta Python y R sobre un caso con valor esperado a mano y comprueba las
-# citas normativas. Falla (código distinto de 0) si algo no se cumple.
+# Contrasta Python y R sobre un caso con valor esperado a mano, comprueba las citas normativas y calcula el
+# precio fiscal por régimen y año (P-04): Python contra R contra los valores calculados a mano, y la salida
+# versionada en normativa/ contra la que sale hoy. Falla (código distinto de 0) si algo no se cumple.
+PRECIO_IN = normativa/cambios.csv normativa/precio_casos.csv normativa/precio_comparaciones.csv
 verificar:
 	mkdir -p salidas
 	$(PY) -I analisis/precio_fiscal.py analisis/fixtures/precio_fiscal_prueba.csv salidas/precio_fiscal_py.csv
 	Rscript analisis/precio_fiscal.R analisis/fixtures/precio_fiscal_prueba.csv salidas/precio_fiscal_R.csv
 	$(PY) -I analisis/contraste.py salidas/precio_fiscal_py.csv salidas/precio_fiscal_R.csv analisis/fixtures/precio_fiscal_esperado.csv
 	$(PY) -I analisis/verifica_citas.py
+	$(PY) -I analisis/precio_por_regimen.py $(PRECIO_IN) salidas/precio_casos_py.csv salidas/precio_cambios_py.csv
+	LC_ALL=C.UTF-8 Rscript analisis/precio_por_regimen.R $(PRECIO_IN) salidas/precio_casos_R.csv salidas/precio_cambios_R.csv
+	$(PY) -I analisis/contraste.py salidas/precio_casos_py.csv salidas/precio_casos_R.csv analisis/fixtures/precio_casos_esperado.csv --iguales caso,anio_comercial,contribuyente,regimen
+	$(PY) -I analisis/contraste.py salidas/precio_cambios_py.csv salidas/precio_cambios_R.csv --clave comparacion --columna delta --iguales fila,norma,articulo_inciso,vigencia_desde,efecto_declarado,comparacion,caso_antes,caso_despues,efecto_calculado,coincide,n_casos,nota
+	cmp salidas/precio_casos_py.csv normativa/precio_fiscal_por_caso.csv
+	cmp salidas/precio_cambios_py.csv normativa/precio_fiscal_por_cambio.csv
 
 .PHONY: verificar-datos verificar-datos-19885 verificar-datos-21440 verificar-cruce verificar-armonizado verificar-anio verificar-rut
 # Corre los seis bloques de abajo, en orden. Tarda varios minutos y necesita los archivos ya descargados en

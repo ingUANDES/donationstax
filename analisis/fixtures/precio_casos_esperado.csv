@@ -1,0 +1,73 @@
+caso,precio,calculo_a_mano
+e2009_con_fondo,0.415,1 - 0.5 - 0.17*0.5
+e2009_sin_fondo,1,sin beneficio
+e2009_sobre_limite_4_5_rli,1,sin beneficio
+e2010_hasta_1000,0.415,1 - 0.5 - 0.17*0.5
+e2010_una_institucion,1,sin beneficio
+e2010_sobre_1000_con_fondo,0.415,1 - 0.5 - 0.17*0.5
+e2010_sobre_1000_sin_fondo,0.5395,1 - 0.35 - 0.17*0.65
+e2010_adicciones_hasta_2000,0.415,1 - 0.5 - 0.17*0.5
+e2010_adicciones_sin_fondo,0.498,1 - 0.4 - 0.17*0.6
+e2010_entre_4_5_y_5_rli,0.415,1 - 0.5 - 0.17*0.5
+e2010_largo_plazo_rli_baja,0.83,1 - 0 - 0.17*1
+e2011_hasta_1000,0.4,1 - 0.5 - 0.20*0.5
+e2011_una_institucion,1,sin beneficio
+e2011_sobre_1000_con_fondo,0.4,1 - 0.5 - 0.20*0.5
+e2011_sobre_1000_sin_fondo,0.52,1 - 0.35 - 0.20*0.65
+e2011_adicciones_con_fondo,0.4,1 - 0.5 - 0.20*0.5
+e2011_adicciones_sin_fondo,0.48,1 - 0.4 - 0.20*0.6
+e2012_hasta_1000,0.4,1 - 0.5 - 0.20*0.5
+e2012_hasta_1000_tau_17,0.415,1 - 0.5 - 0.17*0.5
+e2012_exceso_con_fondo,0.4,1 - 0.5 - 0.20*0.5
+e2012_exceso_sin_fondo,0.52,1 - 0.35 - 0.20*0.65
+e2012_adicciones_exceso_con_fondo,0.4,1 - 0.5 - 0.20*0.5
+e2012_adicciones_exceso_sin_fondo,0.48,1 - 0.4 - 0.20*0.6
+e2013_hasta_1000,0.4,1 - 0.5 - 0.20*0.5
+e2014_hasta_1000,0.395,1 - 0.5 - 0.21*0.5
+e2015_hasta_1000,0.3875,1 - 0.5 - 0.225*0.5
+e2016_hasta_1000,0.38,1 - 0.5 - 0.24*0.5
+e2017_14A_hasta_1000,0.375,1 - 0.5 - 0.25*0.5
+e2017_14B_hasta_1000,0.3725,1 - 0.5 - 0.255*0.5
+e2018_14B_hasta_1000,0.365,1 - 0.5 - 0.27*0.5
+e2019_14A_hasta_1000,0.375,1 - 0.5 - 0.25*0.5
+e2019_14B_hasta_1000,0.365,1 - 0.5 - 0.27*0.5
+e2019_perdida,1,sin beneficio
+e2020_14A_hasta_1000,0.365,1 - 0.5 - 0.27*0.5
+e2020_pro_pyme_tasa_permanente,0.375,1 - 0.5 - 0.25*0.5
+e2020_pro_pyme,0.45,1 - 0.5 - 0.10*0.5
+e2020_perdida_cota,0.73,1 - 0 - 0.27*1
+e2023_pro_pyme,0.45,1 - 0.5 - 0.10*0.5
+e2023_pro_pyme_texto_original_21256,0.375,1 - 0.5 - 0.25*0.5
+e2023_14A_hasta_1000,0.365,1 - 0.5 - 0.27*0.5
+e2023_14A_sobre_limite_art10,1,sin beneficio
+e2023_14A_ley21440,0.73,1 - 0 - 0.27*1
+e2023_14A_ley21440_sobre_limite_art10,0.73,1 - 0 - 0.27*1
+e2023_14A_ley21440_sobre_su_limite,1,sin beneficio
+e2023_pro_pyme_ley21440,0.9,1 - 0 - 0.10*1
+e2024_pro_pyme,0.4375,1 - 0.5 - 0.125*0.5
+e2024_pro_pyme_tasa_permanente,0.375,1 - 0.5 - 0.25*0.5
+e2025_14A_hasta_1000,0.365,1 - 0.5 - 0.27*0.5
+e2025_14A_sobre_tope_credito,0.73,1 - 0 - 0.27*1
+e2025_14A_credito_mayor_que_impuesto,0.73,1 - 0 - 0.27*1
+e2025_14A_sobre_limite_art10,1,sin beneficio
+e2025_pro_pyme,0.4375,1 - 0.5 - 0.125*0.5
+e2025_pro_pyme_tasa_permanente,0.375,1 - 0.5 - 0.25*0.5
+e2025_14A_ley21015,0.73,1 - 0 - 0.27*1
+p2009,1,sin beneficio
+p2011_solo_credito,0.5,1 - 0.5
+p2011_gasto_efectivo_primer_tramo,0.475,1 - 0.5 - 0.05*0.5
+p2011_gasto_efectivo_tramo_superior,0.3,1 - 0.5 - 0.40*0.5
+p2012_solo_credito,0.5,1 - 0.5
+p2013_gasto_efectivo_primer_tramo,0.48,1 - 0.5 - 0.04*0.5
+p2013_gasto_efectivo_tramo_superior,0.3,1 - 0.5 - 0.40*0.5
+p2015_gasto_efectivo_tramo_superior,0.3,1 - 0.5 - 0.40*0.5
+p2016_gasto_efectivo_tramo_superior,0.3,1 - 0.5 - 0.40*0.5
+p2016_gasto_efectivo_tramo_superior_alt,0.325,1 - 0.5 - 0.35*0.5
+p2017_gasto_efectivo_tramo_superior,0.325,1 - 0.5 - 0.35*0.5
+p2019_gasto_efectivo_tramo_superior,0.325,1 - 0.5 - 0.35*0.5
+p2019_sobre_limite,1,sin beneficio
+p2020_solo_credito,0.5,1 - 0.5
+p2020_gasto_efectivo_tramo_superior,0.3,1 - 0.5 - 0.40*0.5
+p2023_ley21440_tramo_superior,0.6,1 - 0 - 0.40*1
+p2023_ley21440_sobre_su_limite,1,sin beneficio
+t2025_credito_mayor_que_impuesto,0.5,1 - 0.5; el exceso del crédito se devuelve
