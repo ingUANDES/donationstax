@@ -2,6 +2,7 @@
 # Descargado: 2026-10-26 (BCN, LeyChile, XML obtxml opt=7)
 # fechaVersion del XML: 2023-05-30 | publicación: 2020-09-02 | promulgación: 2020-08-27 | vigente en idVersion: 2026-10-26
 # Huella (sha256 de las estructuras incluidas): 0873995220a9e5d609335778c8f61d4269d9a9ff80a5495efff13cbc37226914
+# Estructuras cortadas (el texto termina en un carácter no ASCII; https://github.com/ingUANDES/donationstax/issues/28): 0
 
 ### Artículo idParte=10155594 fechaVersion=2023-05-30 derogado=no derogado
 Artículo 1.- Disminúyese transitoriamente la tasa

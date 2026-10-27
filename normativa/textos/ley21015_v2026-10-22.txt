@@ -2,6 +2,7 @@
 # Descargado: 2026-10-22 (BCN, LeyChile, XML obtxml opt=7)
 # fechaVersion del XML: 2024-08-24 | publicación: 2017-06-15 | promulgación: 2017-05-29 | vigente en idVersion: 2026-10-22
 # Huella (sha256 de las estructuras incluidas): 810f6e76981d807e97d3d1b3a3caac47e6a18277d4c7726ee44d607f2d712d63
+# Estructuras cortadas (el texto termina en un carácter no ASCII; https://github.com/ingUANDES/donationstax/issues/28): 0
 
 ### Artículo idParte=9805658 fechaVersion=2017-06-15 derogado=no derogado
 "Artículo 1.- Modifícase la ley N° 20.422, que

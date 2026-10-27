@@ -2,6 +2,7 @@
 # Descargado: 2026-10-22 (BCN, LeyChile, XML obtxml opt=7)
 # fechaVersion del XML: 2005-02-14 | publicación: 1974-12-31 | promulgación: 1974-12-27 | vigente en idVersion: 2005-02-14
 # Huella (sha256 de las estructuras incluidas): d5509877898e49785b723ad348d57421817a50ae6ca0de4bd8ee9b23de3ae638
+# Estructuras cortadas (el texto termina en un carácter no ASCII; https://github.com/ingUANDES/donationstax/issues/28): 0
 
 ### Artículo idParte=8656046 fechaVersion=2001-09-28 derogado=no derogado
 ARTICULO 20°.- Establécese un impuesto de 17% que

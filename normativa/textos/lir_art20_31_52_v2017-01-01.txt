@@ -2,6 +2,8 @@
 # Descargado: 2026-10-22 (BCN, LeyChile, XML obtxml opt=7)
 # fechaVersion del XML: 2017-01-01 | publicación: 1974-12-31 | promulgación: 1974-12-27 | vigente en idVersion: 2017-01-01
 # Huella (sha256 de las estructuras incluidas): 7a1b6be28ff94e2ac7cdb2bfb3bb5685931df49ca386cd6f16029b743dfe023f
+# Estructuras cortadas (el texto termina en un carácter no ASCII; https://github.com/ingUANDES/donationstax/issues/28): 1 | idParte=8656061 («…n motivo de la fusió»)
+# Texto completo de las estructuras cortadas: lir_art20_31_52_v2017-01-01_visor.txt (JSON del visor de LeyChile, BCN)
 
 ### Artículo idParte=8656046 fechaVersion=2017-01-01 derogado=no derogado
 ARTICULO 20°.- Establécese un impuesto de 25% que

@@ -2,6 +2,8 @@
 # Descargado: 2026-10-22 (BCN, LeyChile, XML obtxml opt=7)
 # fechaVersion del XML: 2008-02-08 | publicación: 1974-12-31 | promulgación: 1974-12-27 | vigente en idVersion: 2008-02-08
 # Huella (sha256 de las estructuras incluidas): 6b16e3846e852635d79be93bdba690624e9c57f4957d6343f95d44b671b3f12f
+# Estructuras cortadas (el texto termina en un carácter no ASCII; https://github.com/ingUANDES/donationstax/issues/28): 1 | idParte=8656046 («…eros 1°, 3°, 4° y 5°»)
+# Texto completo de las estructuras cortadas: lir_art20_31_52_v2008-02-08_visor.txt (JSON del visor de LeyChile, BCN)
 
 ### Artículo idParte=8656046 fechaVersion=2001-09-28 derogado=no derogado
 ARTICULO 20°.- Establécese un impuesto de 17% que
