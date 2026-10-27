@@ -1,0 +1,140 @@
+# Fuente: https://www.diariooficial.interior.gob.cl/publicaciones/2025/03/26/44109/01/2625883.pdf
+# Descargado: 2026-10-27 (Diario Oficial de la República de Chile, edición N° 44.109 del 2025-03-26, CVE 2625883; PDF con firma electrónica convertido con pdftotext; sin cambios de contenido)
+# Huella (sha256 del PDF): a87e155223a3b1ea290db9635fa194711dcf9a145aca24cdf701f286225ddf9f
+# Extracto: líneas 1 a 16 (encabezado de la publicación) y 4106 a 4220 (Párrafo 2° de las disposiciones transitorias, artículo cuarto, con los pies de página del Diario Oficial) del texto completo de 70 páginas; el resto no se versiona.
+# Por qué no BCN: el XML (obtxml, idNorma=1212060) respondió HTTP 500 el 2026-10-27 con idVersion 2025-12-31, 2026-10-20, 2026-10-26 y 2026-10-27, y el JSON del visor trae el html vacío. Es el texto publicado: si se modificó después, sin verificar.
+
+I
+
+SECCIÓN
+LEYES, REGLAMENTOS, DECRETOS Y RESOLUCIONES DE ORDEN GENERAL
+Núm. 44.109
+
+Miércoles 26 de Marzo de 2025
+
+Página 1 de 70
+
+Normas Generales
+CVE 2625883
+MINISTERIO DEL TRABAJO Y PREVISIÓN SOCIAL
+LEY NÚM. 21.735
+CREA UN NUEVO SISTEMA MIXTO DE PENSIONES Y UN SEGURO SOCIAL EN
+EL PILAR CONTRIBUTIVO, MEJORA LA PENSIÓN GARANTIZADA UNIVERSAL
+
+[...]
+
+Párrafo 2°
+Disposiciones transitorias sobre el Seguro Social Previsional y el Fondo Autónomo de Protección
+Previsional
+Artículo cuarto.- La tasa de la cotización establecida en el artículo 1, se aplicará gradualmente
+de acuerdo al siguiente cronograma:
+a) A partir del primer día del quinto mes siguiente a la publicación de esta ley, la tasa de cotización
+será de 1,0% de las remuneraciones imponibles de las y los trabajadores. Dicha cotización se abonará
+0,1% y 0,9% a aquellas establecidas en el literal a) del numeral 1 y en el numeral 2 del artículo 1,
+respectivamente.
+b) A partir del primer día del mes décimo séptimo siguiente al de la publicación de esta ley, la
+tasa de cotización será de 3,5% de las remuneraciones imponibles de las y los trabajadores. Dicha
+
+CVE 2625883
+
+Director: Felipe Andrés Peroti Díaz
+Sitio Web: www.diarioficial.cl
+
+Mesa Central: 600 712 0001 E-mail: consultas@diarioficial.cl
+Dirección: Dr. Torres Boonen N°511, Providencia, Santiago, Chile.
+
+Este documento ha sido firmado electrónicamente de acuerdo con la ley N°19.799 e incluye sellado de tiempo y firma electrónica
+avanzada. Para verificar la autenticidad de una representación impresa del mismo, ingrese este código en el sitio web www.diarioficial.cl
+
+Núm. 44.109
+
+DIARIO OFICIAL DE LA REPUBLICA DE CHILE
+Miércoles 26 de Marzo de 2025
+
+Página 59 de 70
+
+cotización se abonará de la siguiente forma: 0,1%, 0,9% y 2,5% a aquellas establecidas en los literales
+a) y b) del numeral 1 y en el numeral 2 del artículo 1, respectivamente.
+c) A partir del primer día del vigésimo noveno mes siguiente al de la publicación de esta ley, la
+tasa de cotización será de 4,25% de las remuneraciones imponibles de las y los trabajadores. Dicha
+cotización se abonará de la siguiente forma: 0,25%, 1,5% y 2,5% a aquellas establecidas en los literales
+a) y b) del numeral 1 y en el numeral 2 del artículo 1, respectivamente.
+d) A partir del primer día del cuadragésimo primero mes siguiente al de la publicación de esta ley,
+la tasa de cotización será de 5,0% de las remuneraciones imponibles de las y los trabajadores. Dicha
+cotización se abonará de la siguiente forma: 1,0%, 1,5% y 2,5% a aquellas establecidas en los literales
+a) y b) del numeral 1 y en el numeral 2) del artículo 1, respectivamente.
+e) A partir del primer día del quincuagésimo tercero mes siguiente al de la publicación de esta
+ley, la tasa de cotización será de 5,7% de las remuneraciones imponibles de las y los trabajadores.
+Dicha cotización se abonará de la siguiente forma: 1,7%, 1,5% y 2,5% a aquellas establecidas en los
+literales a) y b) del numeral 1 y en el numeral 2 del artículo 1, respectivamente.
+f) A partir del primer día del sexagésimo quinto mes siguiente al de la publicación de esta ley,
+la tasa de cotización será de 6,4% de las remuneraciones imponibles de las y los trabajadores. Dicha
+cotización se abonará de la siguiente forma: 2,4%, 1,5% y 2,5% a aquellas establecidas en los literales
+a) y b) del numeral 1 y en el numeral 2 del artículo 1, respectivamente.
+g) A partir del primer día del septuagésimo séptimo mes siguiente al de la publicación de esta ley,
+la tasa de cotización será de 7,1% de las remuneraciones imponibles de las y los trabajadores. Dicha
+cotización se abonará de la siguiente forma: 3,1%, 1,5% y 2,5% a aquellas establecidas en los literales
+a) y b) del numeral 1 y en el numeral 2 del artículo 1 de esta ley, respectivamente.
+h) A partir del primer día del octagésimo noveno mes siguiente al de la publicación de esta ley,
+la tasa de cotización será de 7,8% de las remuneraciones imponibles de las y los trabajadores. Dicha
+cotización se abonará de la siguiente forma: 3,8%, 1,5% y 2,5% a aquellas establecidas en los literales
+a) y b) del numeral 1 y en el numeral 2 del artículo 1, respectivamente.
+i) A partir del primer día del centésimo primero mes siguiente al de la publicación de esta ley,
+la tasa de cotización será de 8,5% de las remuneraciones imponibles de las y los trabajadores. Dicha
+cotización se abonará de la siguiente forma: 4,5%, 1,5% y 2,5% a aquellas establecidas en los literales
+a) y b) del numeral 1 y en el numeral 2 del artículo 1, respectivamente.
+Sin embargo, en caso de que la evaluación externa a que refiere el artículo final transitorio de
+la ley N° 21.713 dé cuenta de un menor efecto recaudatorio al esperado por dicha ley, que no sea
+compensado a través de otra fuente de ingresos tributarios, las tasas de cotización contempladas en
+las letras e), f), g), h) e i) se reemplazarán por las siguientes:
+“e) A partir del primer día del quincuagésimo tercero mes siguiente al de la publicación de esta
+ley, la tasa de cotización será de 5,5% de las remuneraciones imponibles de las y los trabajadores.
+Dicha cotización se abonará de la siguiente forma: 1,5%, 1,5% y 2,5% a aquellas establecidas en los
+literales a) y b) del numeral 1 y en el numeral 2 del artículo 1, respectivamente.
+f) A partir del primer día del sexagésimo quinto mes siguiente al de la publicación de esta ley,
+la tasa de cotización será de 6,0% de las remuneraciones imponibles de las y los trabajadores. Dicha
+cotización se abonará de la siguiente forma: 2,0%, 1,5% y 2,5% a aquellas establecidas en los literales
+a) y b) del numeral 1 y en el numeral 2 del artículo 1, respectivamente.
+g) A partir del primer día del septuagésimo séptimo mes siguiente al de la publicación de esta ley,
+la tasa de cotización será de 6,5% de las remuneraciones imponibles de las y los trabajadores. Dicha
+cotización se abonará de la siguiente forma: 2,5%, 1,5% y 2,5% a aquellas establecidas en los literales
+a) y b) del numeral 1 y en el numeral 2 del artículo 1, respectivamente.
+h) A partir del primer día del octogésimo noveno mes siguiente al de la publicación de esta ley,
+la tasa de cotización será de 7,0% de las remuneraciones imponibles de las y los trabajadores. Dicha
+cotización se abonará de la siguiente forma: 3,0%, 1,5% y 2,5% a aquellas establecidas en los literales
+a) y b) del numeral 1 y en el numeral 2 del artículo 1, respectivamente.
+i) A partir del primer día del centésimo primero mes siguiente al de la publicación de esta ley,
+la tasa de cotización será de 7,5% de las remuneraciones imponibles de las y los trabajadores. Dicha
+cotización se abonará de la siguiente forma: 3,5%, 1,5% y 2,5% a aquellas establecidas en los literales
+a) y b) del numeral 1 y en el numeral 2 del artículo 1 de esta ley, respectivamente.”.
+
+CVE 2625883
+
+Director: Felipe Andrés Peroti Díaz
+Sitio Web: www.diarioficial.cl
+
+Mesa Central: 600 712 0001 E-mail: consultas@diarioficial.cl
+Dirección: Dr. Torres Boonen N°511, Providencia, Santiago, Chile.
+
+Este documento ha sido firmado electrónicamente de acuerdo con la ley N°19.799 e incluye sellado de tiempo y firma electrónica
+avanzada. Para verificar la autenticidad de una representación impresa del mismo, ingrese este código en el sitio web www.diarioficial.cl
+
+Núm. 44.109
+
+DIARIO OFICIAL DE LA REPUBLICA DE CHILE
+Miércoles 26 de Marzo de 2025
+
+Página 60 de 70
+
+j) A partir del primer día del centésimo décimo tercero mes siguiente al de la publicación de esta
+ley, la tasa de cotización será de 8,0% de las remuneraciones imponibles de las y los trabajadores.
+Dicha cotización se abonará de la siguiente forma: 4,0%, 1,5% y 2,5% a aquellas establecidas en los
+literales a) y b) del numeral 1 y en el numeral 2 del artículo 1, respectivamente.
+k) A partir del primer día del centésimo vigésimo quinto mes siguiente al de la publicación de
+esta ley, la tasa de cotización será de 8,5% de las remuneraciones imponibles de las y los trabajadores.
+Dicha cotización se abonará de la siguiente forma: 4,5%, 1,5% y 2,5% a aquellas establecidas en los
+literales a) y b) del numeral 1 y en el numeral 2 del artículo 1, respectivamente.
+En caso de que se verifique la condición señalada en el inciso anterior, un decreto dictado por el
+Ministerio de Hacienda bajo la fórmula “Por orden del Presidente de la República”, así lo señalará.
+La tasa de la cotización establecida en los artículos 15 y 19, se aplicará gradualmente de acuerdo
+al cronograma establecido para los trabajadores dependientes en este artículo.
