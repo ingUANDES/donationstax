@@ -16,7 +16,7 @@ Serie **P-nn**: pendientes. Este es el único archivo donde se define el prefijo
 
 ## Verificación
 
-El único punto de entrada es `make verificar` ([Makefile](Makefile)). Hoy comprueba que Python y R calculan el mismo precio fiscal sobre casos ficticios con valor esperado calculado a mano, que ambos contrastes fallan cuando se altera una salida, que cada fila normativa marcada `verificada` cita el texto de la norma literalmente, que la cabecera de cada texto del XML de BCN lista sus estructuras cortadas y que el texto completo de cada una, tomado del visor de LeyChile, empieza con el del XML ([P-01 · Inventario normativo](#p-01)), que el precio fiscal por régimen y año de [P-04 · Precio fiscal por régimen](#p-04) da lo mismo en Python, en R y en el cálculo a mano y coincide con la salida versionada, y que las simulaciones de efecto conocido de [P-05 · Simulaciones de efecto conocido](#p-05) dan lo mismo en Python y en R, coinciden con su salida versionada y no tienen más reglas incumplidas que las registradas como hallazgo. También corre [duplicados_ley21440.py](analisis/duplicados_ley21440.py) y [duplicados_ley21440.R](analisis/duplicados_ley21440.R) sobre una tabla ficticia ([duplicados_prueba.csv](analisis/fixtures/duplicados_prueba.csv)) y exige que den los conteos, montos y concentraciones calculados a mano ([duplicados_esperado_por_anio.csv](analisis/fixtures/duplicados_esperado_por_anio.csv) y sus pares de multiplicidad y concentración); esa parte no necesita python-calamine ni readxl. Una fila ficticia no es evidencia sobre la norma ni sobre los datos: los casos de [analisis/fixtures/](analisis/fixtures/precio_fiscal_prueba.csv) solo prueban la implementación.
+El único punto de entrada es `make verificar` ([Makefile](Makefile)). Hoy comprueba que Python y R calculan el mismo precio fiscal sobre casos ficticios con valor esperado calculado a mano, que ambos contrastes fallan cuando se altera una salida, que cada fila normativa marcada `verificada` cita el texto de la norma literalmente, que la cabecera de cada texto del XML de BCN lista sus estructuras cortadas y que el texto completo de cada una, tomado del visor de LeyChile, empieza con el del XML ([P-01 · Inventario normativo](#p-01)), que el precio fiscal por régimen y año de [P-04 · Precio fiscal por régimen](#p-04) da lo mismo en Python, en R y en el cálculo a mano y coincide con la salida versionada, y que las simulaciones de efecto conocido de [P-05 · Simulaciones de efecto conocido](#p-05) dan lo mismo en Python y en R, coinciden con su salida versionada y no tienen más reglas incumplidas que las registradas como hallazgo, y que la serie de la UTM leída de las páginas del SII versionadas da lo mismo en Python y en R y coincide con la versionada ([Serie de la UTM](#serie-de-la-utm)). También corre [duplicados_ley21440.py](analisis/duplicados_ley21440.py) y [duplicados_ley21440.R](analisis/duplicados_ley21440.R) sobre una tabla ficticia ([duplicados_prueba.csv](analisis/fixtures/duplicados_prueba.csv)) y exige que den los conteos, montos y concentraciones calculados a mano ([duplicados_esperado_por_anio.csv](analisis/fixtures/duplicados_esperado_por_anio.csv) y sus pares de multiplicidad y concentración); esa parte no necesita python-calamine ni readxl. Una fila ficticia no es evidencia sobre la norma ni sobre los datos: los casos de [analisis/fixtures/](analisis/fixtures/precio_fiscal_prueba.csv) solo prueban la implementación.
 
 Reglas: niveles de resultado en [D-05 · Niveles de resultado](DECISIONES.md#d-05); semilla fija en toda simulación; antes de usar datos reales, el diseño se prueba con datos simulados de efecto conocido; ningún dato confidencial en el repositorio (los crudos van en `data_local/`, ignorado por git).
 
@@ -99,6 +99,7 @@ Falta en este pendiente:
 - El impuesto del art. 21 de la LIR sobre la parte de las donaciones que excede el límite global del art. 10 ([issue 44](https://github.com/ingUANDES/donationstax/issues/44)).
 - Los regímenes que el [artículo 10 de la Ley 19.885](normativa/textos/ley19885_v2024-08-24.txt) enumera y que [D-02 · Alcance](DECISIONES.md#d-02) deja fuera por ahora.
 - Las versiones de la LIR que solo marcan un corte del XML y los tres U+FFFD del XML ([issue 37](https://github.com/ingUANDES/donationstax/issues/37)).
+- La Circular N° 49 reemplaza la letra D-1 de la Circular N° 71: la vigencia de la fila L43, el numeral de la L45 y qué UTM mide el límite de 1.000 UTM desde 2012 ([issue 42](https://github.com/ingUANDES/donationstax/issues/42)).
 
 ### P-02
 
@@ -177,7 +178,7 @@ Evidencia débil y alcance:
 
 ### P-05
 
-**Simulaciones de efecto conocido (E4).** Estado: hecho el 2026-10-27 ([issue 22](https://github.com/ingUANDES/donationstax/issues/22)), a nivel *contrastado* ([D-05 · Niveles de resultado](DECISIONES.md#d-05)). Python y R coinciden en las tres simulaciones con la tolerancia de [D-15 · Tolerancia entre Python y R para las simulaciones](DECISIONES.md#d-15); la diferencia relativa máxima es $9{,}9 \cdot 10^{-14}$. Las tolerancias de recuperación están en [D-16 · Tolerancias de la simulación de bunching en el quiebre de 1.000 UTM](DECISIONES.md#d-16), [D-17 · Tolerancias de la simulación de estudio de eventos y diferencias en diferencias](DECISIONES.md#d-17) y [D-18 · Tolerancias de la simulación de variables instrumentales](DECISIONES.md#d-18). Se fijaron antes de correr (commit `faef689`) y el usuario las aprobó el 2026-10-27 sin cambios. Variables instrumentales cumple todas sus reglas; subirla a «verificada» se evalúa aparte, según [D-05 · Niveles de resultado](DECISIONES.md#d-05), y no se hace aquí. Bunching y estudio de eventos dejan siete reglas incumplidas, que son hallazgos ([issue 34](https://github.com/ingUANDES/donationstax/issues/34)). Ninguna estimación sobre datos reales: para aplicarlas falta la serie de la UTM ([issue 33](https://github.com/ingUANDES/donationstax/issues/33)).
+**Simulaciones de efecto conocido (E4).** Estado: hecho el 2026-10-27 ([issue 22](https://github.com/ingUANDES/donationstax/issues/22)), a nivel *contrastado* ([D-05 · Niveles de resultado](DECISIONES.md#d-05)). Python y R coinciden en las tres simulaciones con la tolerancia de [D-15 · Tolerancia entre Python y R para las simulaciones](DECISIONES.md#d-15); la diferencia relativa máxima es $9{,}9 \cdot 10^{-14}$. Las tolerancias de recuperación están en [D-16 · Tolerancias de la simulación de bunching en el quiebre de 1.000 UTM](DECISIONES.md#d-16), [D-17 · Tolerancias de la simulación de estudio de eventos y diferencias en diferencias](DECISIONES.md#d-17) y [D-18 · Tolerancias de la simulación de variables instrumentales](DECISIONES.md#d-18). Se fijaron antes de correr (commit `faef689`) y el usuario las aprobó el 2026-10-27 sin cambios. Variables instrumentales cumple todas sus reglas; subirla a «verificada» se evalúa aparte, según [D-05 · Niveles de resultado](DECISIONES.md#d-05), y no se hace aquí. Bunching y estudio de eventos dejan siete reglas incumplidas, que son hallazgos ([issue 34](https://github.com/ingUANDES/donationstax/issues/34)). Ninguna estimación sobre datos reales. La serie de la UTM con que se aplicarían está en [Serie de la UTM](#serie-de-la-utm), y la regla para convertir cada donación es [D-26 · UTM que se aplica a cada donación](DECISIONES.md#d-26) ([issue 33](https://github.com/ingUANDES/donationstax/issues/33)).
 
 Método común:
 
@@ -210,6 +211,30 @@ Evidencia débil:
 - El mecanismo del error por RUT es inferencia del investigador: marcas al azar, una fila por donante-año y sin homónimos. Si la falta de RUT depende del tamaño o del tipo de donante, podría sesgar, y eso no se simuló.
 - Los parámetros de los casos los eligió el investigador; solo los precios y la proporción sin RUT vienen del repo. Tres de los precios que usan (`e2012_hasta_1000` y `e2012_exceso_sin_fondo` en bunching, `e2025_pro_pyme` en variables instrumentales) dependían de lecturas del [issue 29](https://github.com/ingUANDES/donationstax/issues/29). Esas lecturas se hicieron el 2026-10-27 y confirmaron los valores usados, así que las simulaciones no cambian.
 - Solo el bunching tiene error estándar; los otros diseños se juzgan por la estimación puntual.
+
+#### Serie de la UTM
+
+Dato que pide el [issue 33](https://github.com/ingUANDES/donationstax/issues/33) para aplicar estos diseños a datos reales. La regla con que se convierte cada donación es [D-26 · UTM que se aplica a cada donación](DECISIONES.md#d-26).
+
+Producto:
+
+- [descargar_utm.py](analisis/descargar_utm.py) baja del SII una página por año: de 2008 a 2012, de `www.sii.cl/pagina/valores/utm/`, y de 2013 a 2025, de `www.sii.cl/valores_y_fechas/utm/`. Las guarda tal como llegan en [datos/fuentes/sii_utm/](datos/fuentes/sii_utm/), con el manifiesto [datos/descargas_utm.csv](datos/descargas_utm.csv) (URL, bytes, sha256, `Last-Modified` y fecha de descarga, 2026-10-27). Usa la red y no está en `make verificar`.
+- [utm.py](analisis/utm.py) y [utm.R](analisis/utm.R) leen esas páginas con las reglas de la cabecera de utm.py. Escriben [datos/utm_mensual.csv](datos/utm_mensual.csv), con 216 meses (año, mes, UTM, UTA y la variación mensual del IPC publicada), y [datos/utm_por_anio.csv](datos/utm_por_anio.csv), con la UTM de diciembre, la mínima y la máxima de cada año y sus razones.
+- `make verificar` exige que la serie de Python y la de R sean idénticas byte a byte, que la tabla por año coincida con tolerancia 1e-12 y que las dos sean las versionadas. Nivel: contrastado ([D-05 · Niveles de resultado](DECISIONES.md#d-05)).
+
+Comprobaciones, con `AssertionError`: la huella de cada página es la del manifiesto; UTA = 12 × UTM en los 216 meses; y, desde marzo de 2008, cada UTM es la del mes anterior reajustada por la variación del IPC publicada para el segundo mes anterior, con un margen de 0,05 % más 1 peso por el redondeo. Las tres se cumplen. Que esa sea la regla legal del reajuste es inferencia de la serie: el Código Tributario no está en `normativa/textos/` (sin verificar).
+
+Lo que muestra la serie:
+
+- La UTM baja en algunos meses. En 2009, la de diciembre (36.863) es menor que la de enero (37.614) ([utm_por_anio.csv, L3](datos/utm_por_anio.csv#L3)); en 2025, la de febrero (67.294) es menor que la de enero (67.429).
+- En los años de la ventana empírica, la UTM de diciembre supera a la mínima del año entre un 1,8 % (2017) y un 12,3 % (2022). Su efecto sobre la regla está en [D-26 · UTM que se aplica a cada donación](DECISIONES.md#d-26).
+- Dos variaciones no siguen el formato del resto: «0» en enero de 2008 y «0.6», con punto, en diciembre de 2011. La cabecera de utm.py las admite.
+- El `Last-Modified` cambia entre pedidos con la misma huella (2015: 11:45:10 en una descarga exploratoria del mismo día y 11:22:43 en el manifiesto; comparación sin script). Los cambios de página se detectan por sha256.
+
+Evidencia débil:
+
+- La fuente son páginas HTML del SII, no una norma ni el Diario Oficial. Que sean el valor oficial para efectos tributarios está sin verificar fuera del SII.
+- El IPC en puntos no se leyó, porque cambia de base entre años (nota (6) de las páginas).
 
 ### P-06
 
