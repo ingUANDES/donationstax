@@ -189,7 +189,7 @@ Producto:
 
 - Scripts: [sim_bunching.py](analisis/sim_bunching.py), [sim_eventos.py](analisis/sim_eventos.py) y [sim_vi.py](analisis/sim_vi.py), con sus contrapartes `.R` y las utilidades de [sim_comun.py](analisis/sim_comun.py) y [sim_comun.R](analisis/sim_comun.R).
 - Salidas versionadas: [simulacion_bunching.csv](datos/simulacion_bunching.csv), [simulacion_eventos.csv](datos/simulacion_eventos.csv) y [simulacion_vi.csv](datos/simulacion_vi.csv). Traen una línea por cifra (clave, valor, objetivo, regla, cumple).
-- Hallazgos: las reglas incumplidas quedan en [sim_hallazgos.csv](analisis/fixtures/sim_hallazgos.csv). Cada script falla con `AssertionError` si aparece otra o si una registrada deja de fallar. Registrar los hallazgos en vez de detener `make verificar` es elección del investigador y espera la revisión de una persona.
+- Hallazgos: las reglas incumplidas quedan en [sim_hallazgos.csv](analisis/fixtures/sim_hallazgos.csv). Cada script falla con `AssertionError` si aparece otra o si una registrada deja de fallar. Registrar los hallazgos en vez de detener `make verificar` fue elección del investigador; el usuario la aceptó el 2026-10-27 (conversación de Claude Code, no verificable desde el repo): «Si acepto el registro de fallas esperadas de las simulaciones».
 
 Riesgos de [Riesgos de identificación a testear](#riesgos-de-identificación-a-testear) y caso que cubre cada uno:
 
