@@ -71,3 +71,9 @@ p2020_gasto_efectivo_tramo_superior,2020,global_complementario,art. 1 bis; perso
 p2023_ley21440_tramo_superior,2023,global_complementario,Ley 21.440; persona en el tramo superior,0.0,1.0,0.4,0.6,0.4
 p2023_ley21440_sobre_su_limite,2023,global_complementario,Ley 21.440; persona sobre sus propios límites,0.0,0.0,,1.0,0.0
 t2025_credito_mayor_que_impuesto,2025,trabajador_art43_N1,art. 1 bis inc. 2; trabajador con crédito mayor que el impuesto retenido,0.5,0.0,,0.5,0.5
+e2026_14A_hasta_1000,2026,primera_categoria,art. 14 letra A; tramo hasta 1.000 UTM,0.5,0.5,0.27,0.365,0.635
+e2027_14A_hasta_1000,2027,primera_categoria,art. 14 letra A; tramo hasta 1.000 UTM,0.5,0.5,0.255,0.3725,0.6275
+e2028_14A_hasta_1000,2028,primera_categoria,art. 14 letra A; tramo hasta 1.000 UTM,0.5,0.5,0.24,0.38,0.62
+e2029_14A_hasta_1000,2029,primera_categoria,art. 14 letra A; tramo hasta 1.000 UTM,0.5,0.5,0.23,0.385,0.615
+e2030_14A_hasta_1000,2030,primera_categoria,art. 14 letra A; tramo hasta 1.000 UTM,0.5,0.5,0.23,0.385,0.615
+e2030_pro_pyme,2030,primera_categoria,Pro Pyme art. 14 letra D; tramo hasta 1.000 UTM,0.5,0.5,0.23,0.385,0.615
