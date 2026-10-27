@@ -265,3 +265,18 @@ Evidencia débil:
 - Los valores con más copias son 30.000 pesos en 2022, 120.000 en 2023 y 5.000 en 2024 y 2025 ([duplicados_ley21440_concentracion.csv](datos/duplicados_ley21440_concentracion.csv), líneas 5, 9, 13 y 17, columna `categoria_top1_copias`). 120.000 es doce veces 10.000: si algunas donatarias informan totales anuales por donante (inferencia, sin verificar), una fila es un donante-año y no una donación. Eso también es compatible con conservar las copias, pero entonces las cotas del punto 4 no valen para el número de donaciones.
 
 Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-27 (no verificable desde el repo): «Acepto propuestas en las decisiones D-15 a D-18, D-20 y D-21». La planteó el investigador en el [issue 16](https://github.com/ingUANDES/donationstax/issues/16); no excluye nada de los datos. El código lo reservó el usuario en la conversación del 2026-10-27 (no verificable desde el repo).
+
+### D-21
+
+**Texto completo de las estructuras que el XML de BCN corta.** El XML de BCN (`obtxml?opt=7`) trae incompleto el texto de algunas estructuras; la evidencia y la regla con que se detecta están en [Textos cortados del XML de BCN, en P-01 · Inventario normativo](BLUEPRINT.md#textos-cortados-del-xml-de-bcn). Se propone:
+
+1. Una estructura está cortada si su texto en el XML termina en un carácter no ASCII (regla `cortada` de [bcn_versiones.py](analisis/bcn_versiones.py)). La cabecera de cada texto las lista y [verifica_citas.py](analisis/verifica_citas.py) las cuenta.
+2. Su texto completo es el del JSON del visor de LeyChile (`servicios-leychile.bcn.cl`, `get_norma_json`) para la misma `idVersion`, sin las notas de BCN, y solo si el texto del XML es su prefijo. Va en `<texto>_visor.txt`, aparte del texto del XML, y verifica_citas.py comprueba el prefijo.
+3. Una fila de [cambios.csv](normativa/cambios.csv) puede quedar «verificada» con una cita de un `_visor.txt`: su `texto_archivo` es ese archivo y su `fuente_url`, la del JSON.
+4. Un límite de versión de bcn_versiones.py que solo marca la aparición o la desaparición de un corte no es un cambio de texto y no da una fecha de vigencia ([issue 37](https://github.com/ingUANDES/donationstax/issues/37)).
+
+Alternativas: volver a bajar el XML, que el 2026-10-26 trajo completas 4 de las 15 estructuras cortadas, pero no las otras 11; o el Diario Oficial, cuya edición electrónica no trae la del 2012-09-27 ([Textos cortados del XML de BCN, en P-01 · Inventario normativo](BLUEPRINT.md#textos-cortados-del-xml-de-bcn)) y que para leyes más recientes podría servir de contraste independiente (sin verificar).
+
+Evidencia débil: lo que sigue al corte depende solo del visor. `make verificar` comprueba que el visor coincide con el XML hasta el corte, no después. La dirección del JSON sale del código del visor (`main.*.bundle.js` de www.bcn.cl/leychile, consulta del 2026-10-26); si BCN la documenta como servicio está sin verificar.
+
+Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-27 (no verificable desde el repo): «Acepto propuestas en las decisiones D-15 a D-18, D-20 y D-21». La planteó el investigador en el [issue 28](https://github.com/ingUANDES/donationstax/issues/28).
