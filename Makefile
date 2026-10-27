@@ -3,8 +3,12 @@ PY ?= python3
 .PHONY: verificar
 # Contrasta Python y R sobre un caso con valor esperado a mano, comprueba las citas normativas y calcula el
 # precio fiscal por régimen y año (P-04): Python contra R contra los valores calculados a mano, y la salida
-# versionada en normativa/ contra la que sale hoy. Falla (código distinto de 0) si algo no se cumple.
+# versionada en datos/ contra la que sale hoy. Corre además las simulaciones de efecto conocido
+# (BLUEPRINT.md#p-05): Python contra R y contra la copia versionada en datos/, con la tolerancia relativa de
+# DECISIONES.md#d-15; las reglas incumplidas deben ser las registradas en $(SIM_H). Falla (código distinto
+# de 0) si algo no se cumple.
 PRECIO_IN = normativa/cambios.csv normativa/precio_casos.csv normativa/precio_comparaciones.csv
+SIM_H = analisis/fixtures/sim_hallazgos.csv
 verificar:
 	mkdir -p salidas
 	$(PY) -I analisis/precio_fiscal.py analisis/fixtures/precio_fiscal_prueba.csv salidas/precio_fiscal_py.csv
@@ -17,6 +21,16 @@ verificar:
 	$(PY) -I analisis/contraste.py salidas/precio_cambios_py.csv salidas/precio_cambios_R.csv --clave comparacion --columna delta --iguales fila,norma,articulo_inciso,vigencia_desde,efecto_declarado,comparacion,caso_antes,caso_despues,efecto_calculado,coincide,n_casos,nota
 	cmp salidas/precio_casos_py.csv datos/precio_fiscal_por_caso.csv
 	cmp salidas/precio_cambios_py.csv datos/precio_fiscal_por_cambio.csv
+	$(PY) -I analisis/sim_bunching.py datos/precio_fiscal_por_caso.csv $(SIM_H) salidas/sim_bunching_py.csv
+	LC_ALL=C.UTF-8 Rscript analisis/sim_bunching.R datos/precio_fiscal_por_caso.csv $(SIM_H) salidas/sim_bunching_R.csv
+	$(PY) -I analisis/sim_eventos.py datos/rut_completado_por_anio.csv $(SIM_H) salidas/sim_eventos_py.csv
+	LC_ALL=C.UTF-8 Rscript analisis/sim_eventos.R datos/rut_completado_por_anio.csv $(SIM_H) salidas/sim_eventos_R.csv
+	$(PY) -I analisis/sim_vi.py datos/precio_fiscal_por_caso.csv datos/rut_completado_por_anio.csv $(SIM_H) salidas/sim_vi_py.csv
+	LC_ALL=C.UTF-8 Rscript analisis/sim_vi.R datos/precio_fiscal_por_caso.csv datos/rut_completado_por_anio.csv $(SIM_H) salidas/sim_vi_R.csv
+	for s in bunching eventos vi; do for c in valor objetivo; do \
+	  $(PY) -I analisis/contraste.py salidas/sim_$${s}_py.csv salidas/sim_$${s}_R.csv --clave clave --columna $$c --tol-rel 1e-8 --iguales clave,regla,cumple || exit 1; \
+	  $(PY) -I analisis/contraste.py salidas/sim_$${s}_py.csv datos/simulacion_$${s}.csv --clave clave --columna $$c --tol-rel 1e-8 --iguales clave,regla,cumple || exit 1; \
+	done; done
 
 .PHONY: verificar-datos verificar-datos-19885 verificar-datos-21440 verificar-cruce verificar-armonizado verificar-anio verificar-rut
 # Corre los seis bloques de abajo, en orden. Tarda varios minutos y necesita los archivos ya descargados en
