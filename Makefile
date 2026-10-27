@@ -3,8 +3,15 @@ PY ?= python3
 .PHONY: verificar
 # Contrasta Python y R sobre un caso con valor esperado a mano, comprueba las citas normativas y calcula el
 # precio fiscal por régimen y año (P-04): Python contra R contra los valores calculados a mano, y la salida
-# versionada en normativa/ contra la que sale hoy. Falla (código distinto de 0) si algo no se cumple.
+# versionada en datos/ contra la que sale hoy. Corre además las simulaciones de efecto conocido
+# (BLUEPRINT.md#p-05): Python contra R y contra la copia versionada en datos/, con la tolerancia relativa de
+# DECISIONES.md#d-15; las reglas incumplidas deben ser las registradas en $(SIM_H). Corre también
+# duplicados_ley21440.py y .R sobre una tabla ficticia (analisis/fixtures/duplicados_prueba.csv) y exige que
+# coincidan entre sí y con los valores calculados a mano; esa parte no necesita python-calamine ni readxl.
+# Falla (código distinto de 0) si algo no se cumple.
 PRECIO_IN = normativa/cambios.csv normativa/precio_casos.csv normativa/precio_comparaciones.csv
+SIM_H = analisis/fixtures/sim_hallazgos.csv
+DUP_PRUEBA = analisis/fixtures/duplicados_prueba.csv
 verificar:
 	mkdir -p salidas
 	$(PY) -I analisis/precio_fiscal.py analisis/fixtures/precio_fiscal_prueba.csv salidas/precio_fiscal_py.csv
@@ -17,12 +24,27 @@ verificar:
 	$(PY) -I analisis/contraste.py salidas/precio_cambios_py.csv salidas/precio_cambios_R.csv --clave comparacion --columna delta --iguales fila,norma,articulo_inciso,vigencia_desde,efecto_declarado,comparacion,caso_antes,caso_despues,efecto_calculado,coincide,n_casos,nota
 	cmp salidas/precio_casos_py.csv datos/precio_fiscal_por_caso.csv
 	cmp salidas/precio_cambios_py.csv datos/precio_fiscal_por_cambio.csv
+	$(PY) -I analisis/sim_bunching.py datos/precio_fiscal_por_caso.csv $(SIM_H) salidas/sim_bunching_py.csv
+	LC_ALL=C.UTF-8 Rscript analisis/sim_bunching.R datos/precio_fiscal_por_caso.csv $(SIM_H) salidas/sim_bunching_R.csv
+	$(PY) -I analisis/sim_eventos.py datos/rut_completado_por_anio.csv $(SIM_H) salidas/sim_eventos_py.csv
+	LC_ALL=C.UTF-8 Rscript analisis/sim_eventos.R datos/rut_completado_por_anio.csv $(SIM_H) salidas/sim_eventos_R.csv
+	$(PY) -I analisis/sim_vi.py datos/precio_fiscal_por_caso.csv datos/rut_completado_por_anio.csv $(SIM_H) salidas/sim_vi_py.csv
+	LC_ALL=C.UTF-8 Rscript analisis/sim_vi.R datos/precio_fiscal_por_caso.csv datos/rut_completado_por_anio.csv $(SIM_H) salidas/sim_vi_R.csv
+	for s in bunching eventos vi; do for c in valor objetivo; do \
+	  $(PY) -I analisis/contraste.py salidas/sim_$${s}_py.csv salidas/sim_$${s}_R.csv --clave clave --columna $$c --tol-rel 1e-8 --iguales clave,regla,cumple || exit 1; \
+	  $(PY) -I analisis/contraste.py salidas/sim_$${s}_py.csv datos/simulacion_$${s}.csv --clave clave --columna $$c --tol-rel 1e-8 --iguales clave,regla,cumple || exit 1; \
+	done; done
+	$(PY) -I analisis/duplicados_ley21440.py --csv $(DUP_PRUEBA) salidas/dup_prueba_anio_py.csv salidas/dup_prueba_mult_py.csv salidas/dup_prueba_conc_py.csv
+	LC_ALL=C.UTF-8 Rscript analisis/duplicados_ley21440.R --csv $(DUP_PRUEBA) salidas/dup_prueba_anio_R.csv salidas/dup_prueba_mult_R.csv salidas/dup_prueba_conc_R.csv
+	$(PY) -I analisis/contraste_datos.py salidas/dup_prueba_anio_py.csv salidas/dup_prueba_anio_R.csv analisis/fixtures/duplicados_esperado_por_anio.csv
+	$(PY) -I analisis/contraste_datos.py salidas/dup_prueba_mult_py.csv salidas/dup_prueba_mult_R.csv analisis/fixtures/duplicados_esperado_multiplicidad.csv
+	$(PY) -I analisis/contraste_datos.py salidas/dup_prueba_conc_py.csv salidas/dup_prueba_conc_R.csv analisis/fixtures/duplicados_esperado_concentracion.csv
 
-.PHONY: verificar-datos verificar-datos-19885 verificar-datos-21440 verificar-cruce verificar-armonizado verificar-anio verificar-rut
-# Corre los seis bloques de abajo, en orden. Tarda varios minutos y necesita los archivos ya descargados en
+.PHONY: verificar-datos verificar-datos-19885 verificar-datos-21440 verificar-duplicados-21440 verificar-cruce verificar-armonizado verificar-anio verificar-rut
+# Corre los siete bloques de abajo, en orden. Tarda varios minutos y necesita los archivos ya descargados en
 # data_local/ (ignorado por git), los paquetes de analisis/requirements.txt y los paquetes readxl y
 # stringdist de R.
-verificar-datos: verificar-datos-19885 verificar-datos-21440 verificar-cruce verificar-armonizado verificar-anio verificar-rut
+verificar-datos: verificar-datos-19885 verificar-datos-21440 verificar-duplicados-21440 verificar-cruce verificar-armonizado verificar-anio verificar-rut
 
 # Planillas de la Ley 19.885 en data_local/midesof/ (python3 analisis/descargar_midesof.py data_local/midesof
 # datos/descargas_midesof.csv). Perfila el esquema de los 18 años en Python y en R, exige que coincidan y que el
@@ -43,6 +65,20 @@ verificar-datos-21440:
 	LC_ALL=C.UTF-8 Rscript analisis/esquema_ley21440.R data_local/ley21440 salidas/esquema_ley21440_R.csv
 	$(PY) -I analisis/contraste_datos.py salidas/esquema_ley21440_py.csv salidas/esquema_ley21440_R.csv
 	cmp salidas/esquema_ley21440_py.csv datos/esquema_ley21440_por_anio.csv
+
+# Duplicados exactos de la nómina de la Ley 21.440 (https://github.com/ingUANDES/donationstax/issues/16): copias extra, multiplicidades y
+# concentración por año, en Python y en R, contra las tablas versionadas en datos/. El de Python exige además que filas, copias y
+# suma de Valor sean las del perfil versionado. No excluye ninguna fila.
+verificar-duplicados-21440:
+	mkdir -p salidas
+	$(PY) -I analisis/duplicados_ley21440.py data_local/ley21440 salidas/duplicados_anio_py.csv salidas/duplicados_mult_py.csv salidas/duplicados_conc_py.csv --perfil datos/esquema_ley21440_por_anio.csv
+	LC_ALL=C.UTF-8 Rscript analisis/duplicados_ley21440.R data_local/ley21440 salidas/duplicados_anio_R.csv salidas/duplicados_mult_R.csv salidas/duplicados_conc_R.csv
+	$(PY) -I analisis/contraste_datos.py salidas/duplicados_anio_py.csv salidas/duplicados_anio_R.csv
+	$(PY) -I analisis/contraste_datos.py salidas/duplicados_mult_py.csv salidas/duplicados_mult_R.csv
+	$(PY) -I analisis/contraste_datos.py salidas/duplicados_conc_py.csv salidas/duplicados_conc_R.csv
+	cmp salidas/duplicados_anio_py.csv datos/duplicados_ley21440_por_anio.csv
+	cmp salidas/duplicados_mult_py.csv datos/duplicados_ley21440_multiplicidad.csv
+	cmp salidas/duplicados_conc_py.csv datos/duplicados_ley21440_concentracion.csv
 
 # Cruce por RUT de las donatarias de la Ley 21.440 con las instituciones de la Ley 19.885 en los años que
 # están en las dos carpetas, contra datos/cruce_donatarias_por_anio.csv.
