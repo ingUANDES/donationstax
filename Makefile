@@ -15,8 +15,8 @@ verificar:
 	LC_ALL=C.UTF-8 Rscript analisis/precio_por_regimen.R $(PRECIO_IN) salidas/precio_casos_R.csv salidas/precio_cambios_R.csv
 	$(PY) -I analisis/contraste.py salidas/precio_casos_py.csv salidas/precio_casos_R.csv analisis/fixtures/precio_casos_esperado.csv --iguales caso,anio_comercial,contribuyente,regimen
 	$(PY) -I analisis/contraste.py salidas/precio_cambios_py.csv salidas/precio_cambios_R.csv --clave comparacion --columna delta --iguales fila,norma,articulo_inciso,vigencia_desde,efecto_declarado,comparacion,caso_antes,caso_despues,efecto_calculado,coincide,n_casos,nota
-	cmp salidas/precio_casos_py.csv normativa/precio_fiscal_por_caso.csv
-	cmp salidas/precio_cambios_py.csv normativa/precio_fiscal_por_cambio.csv
+	cmp salidas/precio_casos_py.csv datos/precio_fiscal_por_caso.csv
+	cmp salidas/precio_cambios_py.csv datos/precio_fiscal_por_cambio.csv
 
 .PHONY: verificar-datos verificar-datos-19885 verificar-datos-21440 verificar-cruce verificar-armonizado verificar-anio verificar-rut
 # Corre los seis bloques de abajo, en orden. Tarda varios minutos y necesita los archivos ya descargados en

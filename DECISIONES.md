@@ -35,7 +35,9 @@ Estado: Aprobada. Usuario, sesión de Claude Code del 2026-10-22 (no verificable
 
 **Niveles de resultado.** *Borrador*: lo produce un script, sin contraste. *Contrastado*: Python y R coinciden dentro de la tolerancia. *Verificada*: contrastado, además el diseño recupera un efecto conocido en datos simulados con semilla fija y, si depende de una norma, la cita textual está comprobada por [verifica_citas.py](analisis/verifica_citas.py). Ningún resultado se llama «verificada» sin un script en `analisis/` que falle con `AssertionError` si no se cumple. Tolerancia para cálculos deterministas: 1e-12 (la usa [contraste.py](analisis/contraste.py)); para estimadores, se fija por estimador antes de correrlo y se registra aquí.
 
-Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-23 (no verificable desde el repo): «propuesta D-05 debe quedar aprobada». La tolerancia de 1e-12 y la división en tres niveles las planteó el investigador (inferencia); la regla del `AssertionError` viene de la instrucción inicial del usuario.
+Aclaración del 2026-10-27 para los cálculos deterministas, sin estimador: «verificada» es contrastado (Python = R con 1e-12), con los valores esperados calculados a mano coincidiendo, y con cada parámetro con su cita comprobada por [verifica_citas.py](analisis/verifica_citas.py) y sin lectura pendiente. Se evalúa caso por caso: los casos que dependen de una lectura pendiente quedan «contrastado». Hace falta, además, el script con `AssertionError` que ya pide la regla general. El [issue 31](https://github.com/ingUANDES/donationstax/issues/31) pide aplicarlo al precio fiscal de [P-04 · Precio fiscal por régimen](BLUEPRINT.md#p-04).
+
+Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-23 (no verificable desde el repo): «propuesta D-05 debe quedar aprobada». La tolerancia de 1e-12 y la división en tres niveles las planteó el investigador (inferencia); la regla del `AssertionError` viene de la instrucción inicial del usuario. La aclaración de los cálculos deterministas: usuario, conversación de Claude Code del 2026-10-27 (no verificable desde el repo): «estoy de acuerdo con tus recomendaciones».
 
 ### D-06
 
@@ -88,7 +90,7 @@ Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-23 (no verif
 2. Semilla fija en toda simulación, escrita en el script ([BLUEPRINT.md, Verificación](BLUEPRINT.md#verificación)).
 3. En el README: software y versiones usadas, hardware y tiempo de ejecución de `make verificar` y de `make verificar-datos`.
 4. Dependencias con versión fija en `analisis/requirements.txt`; la versión de R y de `readxl`, en el README.
-5. Carpeta de resultados: abierta. `salidas/` no se versiona porque se regenera; qué cifras se guardan y dónde se decide cuando exista el primer resultado de estimación.
+5. Carpeta de resultados: `salidas/` no se versiona porque se regenera. Las tablas derivadas que sí se versionan van en `datos/`; las entradas de la normativa (`cambios.csv`, `precio_casos.csv` y `precio_comparaciones.csv`) van en `normativa/`. Decidido el 2026-10-27, a propuesta del investigador, con la aprobación del usuario («estoy de acuerdo con tus recomendaciones», conversación de Claude Code del 2026-10-27, no verificable desde el repo); las dos salidas de [P-04 · Precio fiscal por régimen](BLUEPRINT.md#p-04) se movieron de `normativa/` a `datos/`. Qué cifras de una estimación se guardan y dónde se decide cuando exista el primer resultado de estimación.
 
 No se adopta la versión mínima de Python (3.12 o superior) del handoff: viene de un issue de otro repositorio que no pude leer. La versión se fija con la que corra `make verificar`.
 
