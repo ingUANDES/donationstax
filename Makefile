@@ -52,8 +52,8 @@ verificar-datos-21440:
 	$(PY) -I analisis/contraste_datos.py salidas/esquema_ley21440_py.csv salidas/esquema_ley21440_R.csv
 	cmp salidas/esquema_ley21440_py.csv datos/esquema_ley21440_por_anio.csv
 
-# Duplicados exactos de la nómina de la Ley 21.440 (issue 16): copias extra, multiplicidades y concentración por
-# año, en Python y en R, contra las tablas versionadas en datos/. El de Python exige además que filas, copias y
+# Duplicados exactos de la nómina de la Ley 21.440 (https://github.com/ingUANDES/donationstax/issues/16): copias extra, multiplicidades y
+# concentración por año, en Python y en R, contra las tablas versionadas en datos/. El de Python exige además que filas, copias y
 # suma de Valor sean las del perfil versionado. No excluye ninguna fila.
 verificar-duplicados-21440:
 	mkdir -p salidas

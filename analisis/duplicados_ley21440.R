@@ -1,7 +1,7 @@
-# Duplicados exactos de la nómina de donaciones de la Ley 21.440 (issue 16). Contraparte en R de
-# duplicados_ley21440.py: mismas reglas (descritas en su cabecera), lector distinto (readxl en vez de
-# calamine). contraste_datos.py exige que las tres salidas coincidan. La comprobación contra el perfil
-# versionado (--perfil) solo está en Python. Nada se excluye.
+# Duplicados exactos de la nómina de donaciones de la Ley 21.440 (https://github.com/ingUANDES/donationstax/issues/16).
+# Contraparte en R de duplicados_ley21440.py: mismas reglas (descritas en su cabecera), lector distinto
+# (readxl en vez de calamine). contraste_datos.py exige que las tres salidas coincidan. La comprobación
+# contra el perfil versionado (--perfil) solo está en Python. Nada se excluye.
 #
 # Uso: Rscript duplicados_ley21440.R <carpeta_xlsx> <por_anio.csv> <multiplicidad.csv> <concentracion.csv>
 #      Rscript duplicados_ley21440.R --csv <prueba.csv> <por_anio.csv> <multiplicidad.csv> <concentracion.csv>

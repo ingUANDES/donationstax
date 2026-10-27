@@ -1,4 +1,4 @@
-"""Duplicados exactos de la nómina de donaciones de la Ley 21.440 (issue 16).
+"""Duplicados exactos de la nómina de donaciones de la Ley 21.440 (https://github.com/ingUANDES/donationstax/issues/16).
 
 Escribe tres tablas; la contraparte en R es duplicados_ley21440.R y contraste_datos.py exige que
 coincidan. Nada se excluye: las tablas describen todas las filas de datos.
