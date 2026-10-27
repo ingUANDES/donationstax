@@ -81,3 +81,4 @@ fila,norma,articulo_inciso,vigencia_desde,efecto_declarado,comparacion,caso_ante
 70,Ley 19.885,art. 1 bis inc. 1 (segunda parte),2012-02-08,neutro,70:p2011_solo_credito>p2012_solo_credito,p2011_solo_credito,p2012_solo_credito,0.5,0.5,0.0,neutro,sí,3,
 71,Ley 19.885,art. 1 bis inc. 2,2012-02-08,neutro,,,,,,,sin comparación,,1,
 72,Ley 19.885,art. 10 inc. 2 (segunda oración),2010-01-01,abarata,72:e2009_sobre_limite_4_5_rli>e2010_largo_plazo_rli_baja,e2009_sobre_limite_4_5_rli,e2010_largo_plazo_rli_baja,1.0,0.83,-0.17000000000000004,abarata,sí,1,
+73,Ley 21.440,art. 1; DL 3.063 art. 46 G N° 2,2022-05-01,neutro,,,,,,,sin comparación,,0,

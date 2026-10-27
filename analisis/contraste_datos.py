@@ -6,9 +6,11 @@ de la armonización (armonizar.py y .R). Las filas se emparejan por la primera c
 sumas de montos (columnas cuyo nombre empieza por «suma_»), que se comparan con tolerancia relativa
 TOL_REL. Falla con AssertionError. Incluye una autoprueba: una alteración de un conteo o de una
 suma por encima de la tolerancia debe hacer fallar el contraste (si la tabla no tiene
-conteos, se altera su última columna).
+conteos, se altera su última columna). Con un tercer archivo (valores calculados a mano sobre una
+tabla de prueba, como en analisis/fixtures/duplicados_esperado_*.csv), exige además que la salida de
+Python coincida con él con las mismas reglas.
 
-Uso: python contraste_datos.py perfil_py.csv perfil_R.csv
+Uso: python contraste_datos.py perfil_py.csv perfil_R.csv [esperado.csv]
 """
 import csv
 import sys
@@ -56,4 +58,10 @@ if __name__ == "__main__":
     py, r = leer(sys.argv[1]), leer(sys.argv[2])
     comparar(py, r)
     autoprueba(py, r)
-    print(f"contraste OK: {len(py)} filas (una por año o período), Python = R (sumas con tolerancia relativa {TOL_REL})")
+    quien = "Python = R"
+    if len(sys.argv) > 3:
+        esperado = leer(sys.argv[3])
+        comparar(py, esperado)
+        autoprueba(py, esperado)
+        quien = "Python = R = esperado a mano"
+    print(f"contraste OK: {len(py)} filas (una por año o período), {quien} (sumas con tolerancia relativa {TOL_REL})")

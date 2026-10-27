@@ -224,3 +224,44 @@ Estimadores, todos con efectos fijos de identificador (desviaciones de su media)
 4. El instrumento por año del punto 3, sin dummies de año: $|\hat\varepsilon - \varepsilon| \ge 0{,}15$. El sesgo viene de $\lambda_t$, que se mueve con la tasa.
 
 Estado: Propuesta. La plantea el investigador el 2026-10-27, antes de correr las simulaciones ([issue 22](https://github.com/ingUANDES/donationstax/issues/22)). Los parámetros del caso son elección del investigador, no cifras de los datos, salvo los precios y $e_t$.
+
+### D-20
+
+**Duplicados exactos de la nómina de la Ley 21.440.** La regla 5 de [D-10 · Criterio para completar o excluir](#d-10) trata los duplicados exactos solo en las planillas de la Ley 19.885. En la nómina de la Ley 21.440 cada fila trae la donataria (RUT y nombre), `Valor`, `Fecha` y, desde 2024, `Nac/Ext.`, y ningún dato del donante ([P-07 · Datos del régimen de la Ley 21.440](BLUEPRINT.md#p-07)). Dos filas del mismo archivo son duplicados exactos si coinciden en todas sus columnas; copia extra es cada fila igual a una anterior del mismo archivo. Las multiplicidades y la concentración por donataria, fecha y valor están descritas en [P-07 · Datos del régimen de la Ley 21.440](BLUEPRINT.md#p-07), a partir de [duplicados_ley21440.py](analisis/duplicados_ley21440.py) y [duplicados_ley21440.R](analisis/duplicados_ley21440.R) (nivel contrastado).
+
+Norma. El portal de la Secretaría Técnica mantiene «La nómina histórica de las donaciones recibidas por las entidades inscritas en el registro, con indicación de su fecha, monto y si provienen desde el exterior.» (DL 3.063, art. 46 G N° 2, incorporado por el art. 1 de la Ley 21.440; texto de BCN vigente al 2026-10-22, cuya fechaVersion es la de publicación, 2022-04-12: [ley21440_v2026-10-22.txt, L109](normativa/textos/ley21440_v2026-10-22.txt#L109); fila [L73 de cambios.csv](normativa/cambios.csv#L73), cita comprobada por [verifica_citas.py](analisis/verifica_citas.py)). La ley rige desde el primer día del mes siguiente a su publicación (art. primero transitorio inc. 1, [L151](normativa/textos/ley21440_v2026-10-22.txt#L151)), es decir, desde el 2022-05-01, y el portal debía funcionar a más tardar tres meses después de la publicación (art. tercero transitorio, [L158](normativa/textos/ley21440_v2026-10-22.txt#L158)). El artículo nombra la fecha, el monto y la procedencia de cada donación, no al donante; en la Ley 19.885, en cambio, el donatario informa al SII la identidad del donante ([cambios.csv, L25](normativa/cambios.csv#L25)).
+
+Sensibilidad del monto total, en pesos nominales ([datos/duplicados_ley21440_por_anio.csv, L2-L6](datos/duplicados_ley21440_por_anio.csv#L2-L6), columnas `n_filas_datos`, `n_duplicados_exactos`, `prop_filas_copias_extra`, `suma_valor`, `suma_valor_sin_duplicados` y `prop_valor_copias_extra`). «Sin duplicados» cuenta una vez cada fila distinta:
+
+| Año | Filas | Copias extra | Monto con duplicados | Monto sin duplicados | Diferencia |
+|---|---:|---:|---:|---:|---:|
+| 2022 | 414 | 25 (6,0 %) | 8.073.239.854 | 8.067.574.854 | 0,07 % |
+| 2023 | 14.291 | 10.302 (72,1 %) | 44.245.732.763 | 42.834.504.779 | 3,19 % |
+| 2024 | 428.151 | 417.446 (97,5 %) | 66.629.506.401 | 63.722.164.149 | 4,36 % |
+| 2025 | 533.650 | 510.089 (95,6 %) | 91.560.892.461 | 82.735.639.540 | 9,64 % |
+| 2022-2025 | 976.506 | 937.862 (96,0 %) | 210.509.371.479 | 197.359.883.322 | 6,25 % |
+
+El total que trae la fila superior de cada archivo es el monto con duplicados en los cuatro años ([esquema_ley21440_por_anio.csv, L2-L5](datos/esquema_ley21440_por_anio.csv#L2-L5), columna `total_cabecera`; lo exige `duplicados_ley21440.py --perfil` en `make verificar-duplicados-21440`).
+
+Regla propuesta:
+
+1. No se excluye ninguna fila. El monto de la Ley 21.440 de [D-12 · Variable de resultado](#d-12) es la suma de `Valor` de todas las filas, con duplicados, igual al total que publica cada archivo.
+2. Todo resultado que use ese monto informa al lado el mismo resultado sin duplicados (una fila por grupo de filas idénticas del mismo archivo), con la misma agregación y el mismo período.
+3. Si un diseño arma una tabla por fila, cada fila lleva su multiplicidad y la marca de copia extra, con las definiciones de la cabecera de [duplicados_ley21440.py](analisis/duplicados_ley21440.py).
+4. El número de filas no se usa como número de donaciones ni de donantes. Si un diseño necesita el número de donaciones, informa las filas distintas y el total de filas como cotas inferior y superior (inferencia: valen si el único error posible es repetir una donación completa).
+5. La regla se revisa si el portal publica un identificador de la donación o del donante, o si el reglamento del art. 46 A del DL 3.063 fija cómo se informa cada donación (no lo leí: sin verificar).
+
+Razones (inferencia del investigador):
+
+- La norma describe una nómina de donaciones con fecha, monto y procedencia, sin donante: dos donaciones distintas pueden dar la misma fila.
+- Quien publica cuenta las copias: el total de cada archivo es el monto con duplicados.
+- Es la regla 5 de [D-10 · Criterio para completar o excluir](#d-10) llevada a la Ley 21.440, con dos diferencias: desde 2023 las copias son la mayoría de las filas, y la norma describe la nómina como una lista de donaciones sin donante.
+- Las copias pesan mucho en filas y poco en monto: excluirlas baja el monto entre 0,07 % y 4,36 % de 2022 a 2024, y 9,64 % en 2025. Se concentran en una o dos donatarias por año ([P-07 · Datos del régimen de la Ley 21.440](BLUEPRINT.md#p-07)); no se calculó cuánto monto de copias tiene cada donataria. Si ese monto se reparte como el número de copias, la sensibilidad cambia sobre todo el monto de esas donatarias, y la donataria es la unidad de la comparación entre regímenes.
+
+Evidencia débil:
+
+- Que cada fila sea una donación es inferencia: el art. 46 G N° 2 dice qué se indica de las donaciones, no que cada una ocupe una fila, y el reglamento no se leyó.
+- En 2025, el 20,5 % de las copias extra tiene fecha 2025-12-31 y un solo par donataria-fecha reúne el 18,4 % ([duplicados_ley21440_concentracion.csv, L15-L16](datos/duplicados_ley21440_concentracion.csv#L15-L16)). Si son filas que una donataria fecha al cierre del año (inferencia, sin verificar), esa fecha no es la de la donación. La regla no lo resuelve: afecta a los análisis por fecha, no al monto anual.
+- Los valores con más copias son 30.000 pesos en 2022, 120.000 en 2023 y 5.000 en 2024 y 2025 ([duplicados_ley21440_concentracion.csv](datos/duplicados_ley21440_concentracion.csv), líneas 5, 9, 13 y 17, columna `categoria_top1_copias`). 120.000 es doce veces 10.000: si algunas donatarias informan totales anuales por donante (inferencia, sin verificar), una fila es un donante-año y no una donación. Eso también es compatible con conservar las copias, pero entonces las cotas del punto 4 no valen para el número de donaciones.
+
+Estado: Propuesta. La plantea el investigador en el [issue 16](https://github.com/ingUANDES/donationstax/issues/16); no rige hasta que una persona la apruebe, y mientras tanto no se excluye nada de los datos. El código lo reservó el usuario en la conversación del 2026-10-27 (no verificable desde el repo).
