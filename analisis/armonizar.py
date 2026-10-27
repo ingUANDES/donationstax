@@ -4,7 +4,6 @@ Lee cada planilla anual con las reglas de esquema_datos.py y escribe, por año:
 - <salida_filas>/<año>.csv: una fila por fila no vacía bajo el encabezado, con las columnas armonizadas
   (CAMPOS_FILA). Trae nombres de personas: va en data_local/, nunca al repositorio.
 - una fila en <conteos.csv> (CAMPOS_CONTEO) con cuántas filas toca cada regla;
-- sus filas en <anios_donacion.csv> (filas y monto por año del archivo y año de la donación);
 - sus columnas en <diccionario.csv> (encabezado original, normalizado, rol, variante de esquema).
 La contraparte en R es armonizar.R; contraste_datos.py compara las tablas y contraste_armonizado.py
 las filas. La regla 7 (completar RUT) no está aquí: solo se normaliza el RUT observado.
@@ -46,7 +45,7 @@ Reglas (D-10; lo que D-10 no dice y se fija aquí es inferencia del investigador
   sin_dv, mal_formado, vacio y sin_columna. El cuerpo se guarda sin ceros a la izquierda.
 - Regla 8: no se imputan años ni filas.
 
-Uso: python armonizar.py <carpeta_xlsx> <salida_filas> <conteos.csv> <anios_donacion.csv> <diccionario.csv>
+Uso: python armonizar.py <carpeta_xlsx> <salida_filas> <conteos.csv> <diccionario.csv>
 """
 import csv
 import datetime as dt
@@ -98,7 +97,6 @@ CAMPOS_CONTEO = [
     "n_rut_sin_dv", "n_rut_mal_formado", "n_rut_sin_columna", "suma_monto_total",
     "suma_monto_total_sin_duplicados",
 ]
-CAMPOS_ANIOS = ["par_anios", "anio_archivo", "anio_donacion", "n_filas", "suma_monto_total"]
 CAMPOS_DICC = ["anio_posicion", "anio", "variante", "posicion", "encabezado", "normalizado", "rol", "tipo"]
 
 
@@ -277,29 +275,21 @@ def armonizar(anio, ruta):
         "suma_monto_total": g17(math.fsum(float(s["monto_total"]) for s in incl)),
         "suma_monto_total_sin_duplicados": g17(math.fsum(float(s["monto_total"]) for s in incl if not s["duplicado_exacto"])),
     }
-    por_anio = Counter()
-    montos = {}
-    for s in incl:
-        por_anio[s["anio_donacion"]] += 1
-        montos.setdefault(s["anio_donacion"], []).append(float(s["monto_total"]))
-    anios = [{"par_anios": f"{anio}-{a}", "anio_archivo": anio, "anio_donacion": a, "n_filas": n,
-              "suma_monto_total": g17(math.fsum(montos[a]))} for a, n in sorted(por_anio.items())]
-    return salida, conteo, anios, dicc
+    return salida, conteo, dicc
 
 
-def main(carpeta, salida_filas, conteos, anios_donacion, diccionario):
+def main(carpeta, salida_filas, conteos, diccionario):
     carpeta, salida_filas = Path(carpeta), Path(salida_filas)
     salida_filas.mkdir(parents=True, exist_ok=True)
     anios = sorted(int(p.stem) for p in carpeta.glob("[0-9][0-9][0-9][0-9].xlsx"))
-    tablas = {conteos: (CAMPOS_CONTEO, []), anios_donacion: (CAMPOS_ANIOS, []), diccionario: (CAMPOS_DICC, [])}
+    tablas = {conteos: (CAMPOS_CONTEO, []), diccionario: (CAMPOS_DICC, [])}
     for a in anios:
-        filas, conteo, por_anio, dicc = armonizar(a, carpeta / f"{a}.xlsx")
+        filas, conteo, dicc = armonizar(a, carpeta / f"{a}.xlsx")
         with open(salida_filas / f"{a}.csv", "w", newline="", encoding="utf-8") as f:
             w = csv.DictWriter(f, fieldnames=CAMPOS_FILA)
             w.writeheader()
             w.writerows(filas)
         tablas[conteos][1].append(conteo)
-        tablas[anios_donacion][1].extend(por_anio)
         tablas[diccionario][1].extend(dicc)
         print("armonizado", a, flush=True)
     for ruta, (campos, filas) in tablas.items():
@@ -310,4 +300,4 @@ def main(carpeta, salida_filas, conteos, anios_donacion, diccionario):
 
 
 if __name__ == "__main__":
-    main(*sys.argv[1:6])
+    main(*sys.argv[1:5])

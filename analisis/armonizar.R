@@ -2,7 +2,7 @@
 # Contraparte en R de armonizar.py: mismas reglas (descritas en su cabecera), lector distinto
 # (readxl). contraste_datos.py compara las tablas y contraste_armonizado.py las filas.
 #
-# Uso: Rscript armonizar.R <carpeta_xlsx> <salida_filas> <conteos.csv> <anios_donacion.csv> <diccionario.csv>
+# Uso: Rscript armonizar.R <carpeta_xlsx> <salida_filas> <conteos.csv> <diccionario.csv>
 # Conviene correrlo con LC_ALL=C.UTF-8.
 
 aqui_arm <- dirname(normalizePath(sub("^--file=", "", grep("^--file=", commandArgs(FALSE), value = TRUE)[1])))
@@ -208,26 +208,20 @@ armonizar <- function(anio, ruta) {
     suma_monto_total = g17(sum(total[inc])), suma_monto_total_sin_duplicados = g17(sum(total[inc & !dup])),
     stringsAsFactors = FALSE
   )[, CAMPOS_CONTEO]
-  ad <- anio_don[inc]
-  au <- sort(unique(ad))
-  anios <- data.frame(par_anios = sprintf("%d-%d", anio, au), anio_archivo = rep(anio, length(au)), anio_donacion = au,
-                      n_filas = vapply(au, function(a) sum(ad == a), integer(1)),
-                      suma_monto_total = vapply(au, function(a) g17(sum(total[inc][ad == a])), ""), stringsAsFactors = FALSE)
-  list(filas = filas, conteo = conteo, anios = anios, dicc = dicc)
+  list(filas = filas, conteo = conteo, dicc = dicc)
 }
 
 args <- commandArgs(trailingOnly = TRUE)
 carpeta <- args[1]; salida_filas <- args[2]
 dir.create(salida_filas, recursive = TRUE, showWarnings = FALSE)
 anios <- sort(as.integer(sub("\\.xlsx$", "", list.files(carpeta, pattern = "^[0-9]{4}\\.xlsx$"))))
-conteos <- list(); por_anio <- list(); diccs <- list()
+conteos <- list(); diccs <- list()
 for (a in anios) {
   r <- armonizar(a, file.path(carpeta, paste0(a, ".xlsx")))
   write.csv(r$filas, file.path(salida_filas, paste0(a, ".csv")), row.names = FALSE, quote = TRUE, fileEncoding = "UTF-8")
-  conteos[[length(conteos) + 1]] <- r$conteo; por_anio[[length(por_anio) + 1]] <- r$anios; diccs[[length(diccs) + 1]] <- r$dicc
+  conteos[[length(conteos) + 1]] <- r$conteo; diccs[[length(diccs) + 1]] <- r$dicc
   rm(r); invisible(gc())
   message("armonizado ", a)
 }
 write.csv(do.call(rbind, conteos), args[3], row.names = FALSE, quote = TRUE, fileEncoding = "UTF-8")
-write.csv(do.call(rbind, por_anio), args[4], row.names = FALSE, quote = TRUE, fileEncoding = "UTF-8")
-write.csv(do.call(rbind, diccs), args[5], row.names = FALSE, quote = TRUE, fileEncoding = "UTF-8")
+write.csv(do.call(rbind, diccs), args[4], row.names = FALSE, quote = TRUE, fileEncoding = "UTF-8")
