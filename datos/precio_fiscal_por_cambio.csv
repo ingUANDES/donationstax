@@ -11,13 +11,13 @@ fila,norma,articulo_inciso,vigencia_desde,efecto_declarado,comparacion,caso_ante
 11,Ley 19.885,art. 1 N° 10 inc. 1,2010-01-01,abarata,11:e2010_sobre_1000_sin_fondo>e2010_adicciones_hasta_2000,e2010_sobre_1000_sin_fondo,e2010_adicciones_hasta_2000,0.5395,0.415,-0.1245,abarata,sí,2,mismo año: fines generales frente a programas de adicciones
 12,Ley 19.885,art. 1 N° 10 inc. 3,2010-01-01,abarata,12:e2010_sobre_1000_sin_fondo>e2010_adicciones_sin_fondo,e2010_sobre_1000_sin_fondo,e2010_adicciones_sin_fondo,0.5395,0.498,-0.04149999999999998,abarata,sí,3,mismo año: fines generales frente a programas de adicciones
 13,Ley 19.885,art. 1 N° 12,2010-01-01,neutro,,,,,,,sin comparación,,1,
-14,Ley 19.885,art. 1 N° 14,2010-01-01,neutro,,,,,,,sin comparación,,49,
+14,Ley 19.885,art. 1 N° 14,2010-01-01,neutro,,,,,,,sin comparación,,55,
 15,Ley 19.885,art. 10 inc. 1,2010-01-01,abarata,15:e2009_sobre_limite_4_5_rli>e2010_entre_4_5_y_5_rli,e2009_sobre_limite_4_5_rli,e2010_entre_4_5_y_5_rli,1.0,0.415,-0.585,abarata,sí,4,
 16,Ley 19.885,art. 10 inc. 2,2010-01-01,abarata,16:e2009_sobre_limite_4_5_rli>e2010_largo_plazo_rli_baja,e2009_sobre_limite_4_5_rli,e2010_largo_plazo_rli_baja,1.0,0.83,-0.17000000000000004,abarata,sí,1,
 17,Ley 19.885,art. 10 inc. 3,2010-01-01,abarata,17:p2009>p2011_solo_credito,p2009,p2011_solo_credito,1.0,0.5,-0.5,abarata,sí,2,
 18,Ley 19.885,art. 1 bis inc. 1,2011-01-01,abarata,18:p2009>p2011_gasto_efectivo_tramo_superior,p2009,p2011_gasto_efectivo_tramo_superior,1.0,0.3,-0.7,abarata,sí,10,
-19,Ley 19.885,art. 1 N° 7 inc. 1,2012-02-08,abarata,19:e2011_una_institucion>e2012_hasta_1000,e2011_una_institucion,e2012_hasta_1000,1.0,0.4,-0.6,abarata,sí,32,donante que da a una sola institución
-19,Ley 19.885,art. 1 N° 7 inc. 1,2012-02-08,abarata,19:e2011_sobre_1000_sin_fondo>e2012_hasta_1000,e2011_sobre_1000_sin_fondo,e2012_hasta_1000,0.52,0.4,-0.12,abarata,sí,32,tramo hasta 1.000 UTM de quien supera el umbral sin Fondo
+19,Ley 19.885,art. 1 N° 7 inc. 1,2012-02-08,abarata,19:e2011_una_institucion>e2012_hasta_1000,e2011_una_institucion,e2012_hasta_1000,1.0,0.4,-0.6,abarata,sí,38,donante que da a una sola institución
+19,Ley 19.885,art. 1 N° 7 inc. 1,2012-02-08,abarata,19:e2011_sobre_1000_sin_fondo>e2012_hasta_1000,e2011_sobre_1000_sin_fondo,e2012_hasta_1000,0.52,0.4,-0.12,abarata,sí,38,tramo hasta 1.000 UTM de quien supera el umbral sin Fondo
 20,Ley 19.885,art. 1 N° 8 inc. 1,2012-02-08,neutro,20:e2011_sobre_1000_con_fondo>e2012_exceso_con_fondo,e2011_sobre_1000_con_fondo,e2012_exceso_con_fondo,0.4,0.4,0.0,neutro,sí,1,
 21,Ley 19.885,art. 1 N° 8 inc. 2,2012-02-08,abarata,21:e2011_sobre_1000_sin_fondo>e2012_exceso_sin_fondo,e2011_sobre_1000_sin_fondo,e2012_exceso_sin_fondo,0.52,0.52,0.0,neutro,no,1,precio marginal sobre el umbral
 21,Ley 19.885,art. 1 N° 8 inc. 2,2012-02-08,abarata,21:e2011_sobre_1000_sin_fondo>e2012_hasta_1000,e2011_sobre_1000_sin_fondo,e2012_hasta_1000,0.52,0.4,-0.12,abarata,sí,1,tramo hasta 1.000 UTM de quien supera el umbral sin Fondo
@@ -95,3 +95,15 @@ fila,norma,articulo_inciso,vigencia_desde,efecto_declarado,comparacion,caso_ante
 84,Circular SII N° 71,N° II letra D-1 a) a-1,2010-11-12,neutro,,,,,,,sin comparación,,0,
 85,Circular SII N° 71,"N° II letra F (límite del crédito, art. 1 N° 12)",2010-11-12,neutro,,,,,,,sin comparación,,0,
 86,Circular SII N° 49,N° II.2 letra D-1 a) a-5) (reemplaza la letra D-1 de la Circular 71),2012-11-05,neutro,,,,,,,sin comparación,,0,
+87,Ley 21.850,art. 8 N° 3 letra a); LIR art. 20 inc. 1,2026-11-01,encarece,87:e2025_pro_pyme_tasa_permanente>e2030_pro_pyme,e2025_pro_pyme_tasa_permanente,e2030_pro_pyme,0.375,0.385,0.010000000000000009,encarece,sí,1,"tasa general de 25 %, la del Pro Pyme sin la Ley 21.755"
+88,Ley 21.850,art. 8 N° 3 letra b); LIR art. 20 inc. 1,2026-11-01,encarece,88:e2025_pro_pyme_tasa_permanente>e2030_pro_pyme,e2025_pro_pyme_tasa_permanente,e2030_pro_pyme,0.375,0.385,0.010000000000000009,encarece,sí,1,
+89,Ley 21.850,art. 8 N° 3 letra c); LIR art. 20 inc. 1,2026-11-01,encarece,89:e2025_14A_hasta_1000>e2030_14A_hasta_1000,e2025_14A_hasta_1000,e2030_14A_hasta_1000,0.365,0.385,0.020000000000000018,encarece,sí,1,
+90,"Ley sobre Impuesto a la Renta (DL 824), art. 20",art. 20 inc. 1,2026-11-01,encarece,90:e2025_14A_hasta_1000>e2030_14A_hasta_1000,e2025_14A_hasta_1000,e2030_14A_hasta_1000,0.365,0.385,0.020000000000000018,encarece,sí,2,
+91,Ley 21.850,art. sexto transitorio letra a),2026-01-01,neutro,91:e2025_14A_hasta_1000>e2026_14A_hasta_1000,e2025_14A_hasta_1000,e2026_14A_hasta_1000,0.365,0.365,0.0,neutro,sí,1,
+92,Ley 21.850,art. sexto transitorio letra b),2027-01-01,encarece,92:e2026_14A_hasta_1000>e2027_14A_hasta_1000,e2026_14A_hasta_1000,e2027_14A_hasta_1000,0.365,0.3725,0.007500000000000007,encarece,sí,1,
+93,Ley 21.850,art. sexto transitorio letra c),2028-01-01,encarece,93:e2027_14A_hasta_1000>e2028_14A_hasta_1000,e2027_14A_hasta_1000,e2028_14A_hasta_1000,0.3725,0.38,0.007500000000000007,encarece,sí,1,
+94,Ley 21.850,art. sexto transitorio letra d),2029-01-01,encarece,94:e2028_14A_hasta_1000>e2029_14A_hasta_1000,e2028_14A_hasta_1000,e2029_14A_hasta_1000,0.38,0.385,0.0050000000000000044,encarece,sí,3,
+95,Ley 21.850,art. sexto transitorio inc. final,2026-01-01,neutro,,,,,,,sin comparación,,0,
+96,Ley 21.850,art. noveno transitorio inc. 1,2026-11-01,neutro,,,,,,,sin comparación,,0,
+97,Ley 21.850,art. primero transitorio inc. 1 y 2,2026-12-01,neutro,,,,,,,sin comparación,,0,
+98,Ley 21.850,art. 26 (estatuto de invariabilidad tributaria),2027-01-01,neutro,,,,,,,sin comparación,,0,

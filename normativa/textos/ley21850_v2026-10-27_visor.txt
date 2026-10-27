@@ -1,0 +1,42 @@
+# Fuente: https://servicios-leychile.bcn.cl/Navegar/get_norma_json?idNorma=1229250&idVersion=2026-10-27&idLey=&tipoVersion=&cve=&agrupa_partes=1&r=
+# Descargado: 2026-10-27 (BCN, LeyChile, JSON del visor; HTML pasado a texto sin las notas de BCN)
+# Vigencia de la versión según el JSON: 2026-10-17 a sin fin | idVersion: 2026-10-27
+# Huella (sha256 del HTML de las estructuras incluidas): e069d45a22ca9837bc993a6bf97095b7986ea59e941ac97f7a30dfdeab79d4d2
+# Completa las estructuras cortadas de ley21850_v2026-10-27.txt: en cada una, el texto del XML es prefijo de este (caracteres_xml y caracteres_visor cuentan el texto con los espacios normalizados)
+
+### Artículo idParte=10613927 caracteres_xml=371 caracteres_visor=3086
+Artículo 8.- Introdúcense las siguientes modificaciones en la Ley sobre Impuesto a la Renta, contenida en el artículo 1° del decreto ley N° 824, de 1974, del Ministerio de Hacienda:
+
+1. Modifícase el literal (k), contenido en el artículo 14°, letra D), número 3, del siguiente modo:
+
+a) En el número (i) reemplázase el guarismo 0,25% por 0,23%.
+
+b) En el número (ii) reemplázase el guarismo 0,25% por 0,23%.
+
+2. Reemplázase en el artículo 17°, número 6°, párrafo segundo, la expresión "con la tributación contemplada" por "del ingreso no renta contemplado", y la dicción "la tributación contemplada" por el texto "el beneficio del ingreso no renta contemplado".
+
+3. En el encabezado del artículo 20°:
+
+a) Reemplázase el guarismo 25%, la primera vez que aparece mencionado, por 23%.
+
+b) Elimínase la oración "Conforme a lo anterior, para los contribuyentes que se acojan al Régimen Pro Pyme contenido en la letra D) del artículo 14, la tasa será de 25%.".
+
+c) Elimínase la oración "En el caso de los contribuyentes sujetos al régimen del artículo 14 letra A, el impuesto será de 27%.".
+
+4. En el artículo 107°:
+
+a) En el primer párrafo del número 1):
+
+i. Reemplázase la frase "se afectará con un impuesto con tasa de 10%, que tendrá el carácter de impuesto único a la renta," por la siguiente "no constituirá renta".
+
+ii. Sustitúyese en la letra c) la frase "afecto al impuesto único" por el texto "no constitutivo de renta".
+
+b) Reemplázase, en el primer párrafo del numeral 3.1), contenido en el número 3), la frase "Se afectará con un impuesto con tasa de 10%, que tendrá el carácter de impuesto único a la renta," por "No constituirá renta".
+
+c) Reemplázase en el primer párrafo del numeral 3.2), contenido en el número 3), la frase "Se afectará con un impuesto con tasa de 10%, que tendrá el carácter de impuesto único a la renta," por "No constituirá renta".
+
+d) Sustitúyese en el número 4) la frase "se afectará con el impuesto único de tasa 10%" por los vocablos "no constituirá renta".
+
+e) Reemplázase en el número 5) el texto "derivados de la enajenación de valores afectos a la tributación establecida en este artículo, obtenidas por el contribuyente en el mismo ejercicio o en los ejercicios siguientes, en el evento que el contribuyente no registre tales ingresos o éstos sean inferiores a dichas pérdidas. Para estos efectos, las pérdidas se reajustarán de acuerdo con el porcentaje de variación del índice de precios al consumidor en el período comprendido entre el mes anterior al de la enajenación que produjo esas pérdidas y el mes anterior al del cierre del ejercicio que corresponda. En caso de que la pérdida hubiere sido deducida de la base imponible afecta al impuesto de primera categoría, ésta deberá ser agregada en la determinación de la renta líquida imponible, de conformidad con lo dispuesto en la letra e) del número 1 del artículo 33. Con todo, para que proceda esta deducción, las pérdidas deberán acreditarse fehacientemente ante el Servicio de Impuestos Internos" por la frase "no constitutivos de renta del contribuyente".
+
+f) Suprímense los numerales 6), 7), 8) y 9).

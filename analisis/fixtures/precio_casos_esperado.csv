@@ -71,3 +71,9 @@ p2020_gasto_efectivo_tramo_superior,0.3,1 - 0.5 - 0.40*0.5
 p2023_ley21440_tramo_superior,0.6,1 - 0 - 0.40*1
 p2023_ley21440_sobre_su_limite,1,sin beneficio
 t2025_credito_mayor_que_impuesto,0.5,1 - 0.5; el exceso del crédito se devuelve
+e2026_14A_hasta_1000,0.365,1 - 0.5 - 0.27*0.5
+e2027_14A_hasta_1000,0.3725,1 - 0.5 - 0.255*0.5
+e2028_14A_hasta_1000,0.38,1 - 0.5 - 0.24*0.5
+e2029_14A_hasta_1000,0.385,1 - 0.5 - 0.23*0.5
+e2030_14A_hasta_1000,0.385,1 - 0.5 - 0.23*0.5
+e2030_pro_pyme,0.385,1 - 0.5 - 0.23*0.5
