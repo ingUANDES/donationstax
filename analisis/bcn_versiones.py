@@ -10,11 +10,11 @@ con un encabezado (URL, fecha de descarga, fechaVersion del XML, huella y estruc
 --partes guarda la norma completa; con --partes solo las estructuras cuyo texto empieza con alguno de
 los patrones (expresiones regulares), útil para normas muy largas como la Ley sobre Impuesto a la Renta.
 
-Estructuras cortadas (issue 28). El XML trae incompleto el texto de algunas estructuras, y el corte cae
+Estructuras cortadas (https://github.com/ingUANDES/donationstax/issues/28). El XML trae incompleto el texto de algunas estructuras, y el corte cae
 justo después de un carácter no ASCII, que el XML escribe como referencia numérica («disminuy&#233;»
 seguido de «</Texto>»). `cortada` marca las estructuras cuyo texto termina así, y la cabecera de cada
-texto las lista. La regla, su contraste con el visor y lo que mostró están en BLUEPRINT.md, sección
-«Textos cortados del XML de BCN» de P-01 · Inventario normativo.
+texto las lista. La regla, su contraste con el visor y lo que mostró están en
+BLUEPRINT.md#textos-cortados-del-xml-de-bcn («Textos cortados del XML de BCN», en P-01 · Inventario normativo).
 
 Texto completo. El visor de LeyChile pide la norma a servicios-leychile.bcn.cl (get_norma_json), que trae
 el HTML de cada estructura. `completar` escribe <texto>_visor.txt con las estructuras cortadas de
@@ -48,7 +48,7 @@ URL = "https://www.bcn.cl/leychile/consulta/obtxml?opt=7&idNorma={}&idVersion={}
 URL_VISOR = ("https://servicios-leychile.bcn.cl/Navegar/get_norma_json?idNorma={}&idVersion={}"
              "&idLey=&tipoVersion=&cve=&agrupa_partes=1&r=")
 SUFIJO_VISOR = "_visor"
-CABECERA_CORTES = "# Estructuras cortadas (el texto termina en un carácter no ASCII, issue 28): "
+CABECERA_CORTES = "# Estructuras cortadas (el texto termina en un carácter no ASCII; https://github.com/ingUANDES/donationstax/issues/28): "
 CABECERA_VISOR = "# Texto completo de las estructuras cortadas: "
 _cache = {}
 _cache_visor = {}
@@ -142,7 +142,7 @@ def cambios(id_norma, d0, d1, partes=(), paso=365):
 
 def cortada(texto):
     """True si el texto de una estructura termina en un carácter no ASCII (sin contar los espacios
-    finales): la firma del corte del XML de BCN (issue 28)."""
+    finales): la firma del corte del XML de BCN (https://github.com/ingUANDES/donationstax/issues/28)."""
     t = texto.rstrip()
     return bool(t) and ord(t[-1]) > 127
 

@@ -7,7 +7,7 @@ no se validan. Falla con AssertionError. La autoprueba comprueba que una cita
 inexistente sí hace fallar la comprobación.
 
 Informa además cuántas estructuras de los textos del XML de BCN están cortadas
-(issue 28; regla `cortada` de bcn_versiones.py). Exige que la cabecera de cada
+(https://github.com/ingUANDES/donationstax/issues/28; regla `cortada` de bcn_versiones.py). Exige que la cabecera de cada
 texto las liste como lo hace hoy la regla, que nombre <texto>_visor.txt si ese
 archivo existe, y que en <texto>_visor.txt cada estructura esté cortada en
 <texto>.txt y su texto del XML sea prefijo propio del del visor. La autoprueba

@@ -3,6 +3,7 @@
 # fechaVersion del XML: 2016-10-26 | publicación: 1974-12-31 | promulgación: 1974-12-27 | vigente en idVersion: 2016-01-01
 # Huella (sha256 de las estructuras incluidas): b5cec4fe5fc34716f9ddf2d5eaf5eeac33f376bb5bb619b2d4c682eab1bd8752
 # Estructuras cortadas (el texto termina en un carácter no ASCII, issue 28): 0
+# Estructuras cortadas (el texto termina en un carácter no ASCII; https://github.com/ingUANDES/donationstax/issues/28): 0
 
 ### Artículo idParte=8656046 fechaVersion=2016-02-08 derogado=no derogado
 ARTICULO 20°.- Establécese un impuesto de 24% que

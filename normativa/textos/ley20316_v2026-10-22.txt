@@ -3,6 +3,7 @@
 # fechaVersion del XML: 2010-04-30 | publicación: 2009-01-09 | promulgación: 2008-12-31 | vigente en idVersion: 2026-10-22
 # Huella (sha256 de las estructuras incluidas): 00c65a1ff02598da85477f621af7868793d6dcfca83cefa8e24d10c0aa1321eb
 # Estructuras cortadas (el texto termina en un carácter no ASCII, issue 28): 0
+# Estructuras cortadas (el texto termina en un carácter no ASCII; https://github.com/ingUANDES/donationstax/issues/28): 0
 
 ### Artículo idParte=7383621 fechaVersion=2009-01-09 derogado=no derogado
 "Artículo 1º.- Introdúcense en la ley Nº 19.885,

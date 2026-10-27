@@ -3,6 +3,7 @@
 # fechaVersion del XML: 2012-09-27 | publicación: 1974-12-31 | promulgación: 1974-12-27 | vigente en idVersion: 2012-09-27
 # Huella (sha256 de las estructuras incluidas): ddcf77bf3070162f1c8475acec9e4a5f73dba38d0e6f8e36a86361f141d6feb2
 # Estructuras cortadas (el texto termina en un carácter no ASCII, issue 28): 1 | idParte=8656061 («… u otra causa. Tratá»)
+# Estructuras cortadas (el texto termina en un carácter no ASCII; https://github.com/ingUANDES/donationstax/issues/28): 1 | idParte=8656061 («… u otra causa. Tratá»)
 # Texto completo de las estructuras cortadas: lir_art20_31_52_v2012-09-27_visor.txt (JSON del visor de LeyChile, BCN)
 
 ### Artículo idParte=8656046 fechaVersion=2010-07-31 derogado=no derogado

@@ -3,6 +3,7 @@
 # fechaVersion del XML: 2010-07-31 | publicación: 2010-07-31 | promulgación: 2010-07-29 | vigente en idVersion: 2010-08-01
 # Huella (sha256 de las estructuras incluidas): ea8bedae049946f146f7076ac84f34c64bab5483ea4a9a8635fc86d605793a1d
 # Estructuras cortadas (el texto termina en un carácter no ASCII, issue 28): 0
+# Estructuras cortadas (el texto termina en un carácter no ASCII; https://github.com/ingUANDES/donationstax/issues/28): 0
 
 ### Artículo idParte=8955046 fechaVersion=2010-07-31 derogado=no derogado
 "Artículo 1°.- Auméntase transitoriamente la tasa establecida en el artículo 20 de la Ley sobre Impuesto a la Renta, contenida en el artículo 1° del decreto ley Nº824, de 1974, de la siguiente manera:
