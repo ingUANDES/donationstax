@@ -6,7 +6,8 @@
 # Uso: Rscript esquema_datos.R <carpeta_xlsx> <salida.csv> [años separados por coma]
 # Conviene correrlo con LC_ALL=C.UTF-8 para que chartr maneje los acentos.
 
-suppressPackageStartupMessages(library(readxl))
+# readxl solo hace falta para leer .xlsx (leer_tabla); `make verificar` carga este archivo sin leer ninguno.
+if (requireNamespace("readxl", quietly = TRUE)) suppressPackageStartupMessages(library(readxl))
 
 NUM <- "^-?[0-9]+(\\.[0-9]+)?([eE][-+]?[0-9]+)?$"
 SERIAL <- "^[0-9]{5}(\\.[0-9]+)?$"
@@ -80,6 +81,7 @@ leer_hoja <- function(ruta, h) {
 # Hoja, fila de encabezado (desde 1), filas recortadas y encabezado normalizado. También la usan
 # esquema_ley21440.R y cruce_donatarias.R.
 leer_tabla <- function(ruta, encabezado = "ANO") {
+  if (!requireNamespace("readxl", quietly = TRUE)) stop("leer un .xlsx necesita el paquete readxl de R")
   ruta <- reparar(ruta)
   for (h in excel_sheets(ruta)) {
     m <- leer_hoja(ruta, h)

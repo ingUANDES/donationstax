@@ -36,7 +36,10 @@ import sys
 from collections import Counter
 from pathlib import Path
 
-from python_calamine import CalamineWorkbook
+try:
+    from python_calamine import CalamineWorkbook
+except ImportError:  # solo lo usa tabla(); `make verificar` importa este módulo sin leer ningún .xlsx
+    CalamineWorkbook = None
 
 ORIGEN = dt.datetime(1899, 12, 30)
 FUERA_PLANO = re.compile("[\U00010000-\U0010FFFF]")
@@ -110,6 +113,7 @@ def serial_a_fecha(s):
 def tabla(ruta, encabezado="ANO"):
     """Hoja, fila de encabezado (desde 0), filas recortadas, encabezado normalizado. También la usan
     esquema_ley21440.py y cruce_donatarias.py."""
+    assert CalamineWorkbook is not None, "leer un .xlsx necesita python-calamine (analisis/requirements.txt)"
     wb = CalamineWorkbook.from_path(str(ruta))
     for nombre in wb.sheet_names:
         filas = recortar(wb.get_sheet_by_name(nombre).to_python(skip_empty_area=False))

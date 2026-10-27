@@ -1,0 +1,35 @@
+anio,RUT Donataria,Donataria,Nac/Ext.,Valor,Fecha
+2091,R01,Donataria ficticia A,,128,69764
+2092,R11,Donataria ficticia H,,64,70129
+2091,R02,Donataria ficticia B,,64,69764
+2091,R03,Donataria ficticia C,Extranjero,64,69764
+2091,R01,Donataria ficticia A,,32,69764
+2092,R12,Donataria ficticia I,,32,70129
+2091,R01,Donataria ficticia A,,128,69764
+2091,R03,Donataria ficticia C,,64,69764
+2092,R13,Donataria ficticia J,,32,70129
+2092,R11,Donataria ficticia H,,64,70129
+2091,R04,Donataria ficticia D,,32,69765
+2091,R01,Donataria ficticia A,,128,69766
+2092,R14,Donataria ficticia K,,32,70130
+2092,R15,Donataria ficticia L,,16,70130
+2091,R02,Donataria ficticia B,,64,69764
+2091,R04,Donataria ficticia D,,32,69766
+2092,R16,Donataria ficticia M,,16,70131
+2092,R17,Donataria ficticia N,Extranjero,8,70131
+2091,R05,Donataria ficticia E,,16,69766
+2092,R12,Donataria ficticia I,,32,70129
+2092,R13,Donataria ficticia J,,32,70129
+2091,R01,Donataria ficticia A,,32,69764
+2091,,Donataria ficticia A,,128,69764
+2091,R06,Donataria ficticia F,,16,69767
+2092,R14,Donataria ficticia K,,32,70130
+2092,R12,Donataria ficticia I,,560,70132
+2091,R02,Donataria ficticia B,,64,69765
+2092,R15,Donataria ficticia L,,16,70130
+2092,R11,Donataria ficticia H,,64,70129
+2092,R11,Donataria ficticia H,,sin monto,70129
+2091,R01,Donataria ficticia A,,128,69764
+2092,R16,Donataria ficticia M,,16,70131
+2091,R07,Donataria ficticia G,,32,69767
+2092,R17,Donataria ficticia N,Extranjero,8,70131

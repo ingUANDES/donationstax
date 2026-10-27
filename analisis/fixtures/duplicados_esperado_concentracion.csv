@@ -1,0 +1,9 @@
+clave,anio,dimension,n_categorias,n_categorias_con_copias,n_copias_extra,prop_copias_top1,prop_copias_top5,prop_copias_top10,n_categorias_mitad_copias,n_categorias_90_copias,categoria_top1_copias,prop_filas_top1,prop_filas_top5,prop_filas_top10,n_categorias_mitad_filas,n_categorias_90_filas
+2091|donataria,2091,donataria,7,2,4,0.75,1,1,1,2,,0.375,0.875,1,2,6
+2091|fecha,2091,fecha,4,1,4,1,1,1,1,1,2091-01-01,0.5625,1,1,1,4
+2091|donataria_fecha,2091,donataria_fecha,10,2,4,0.75,1,1,1,2,,0.3125,0.6875,1,3,9
+2091|valor,2091,valor,4,3,4,0.5,1,1,1,3,128,0.3125,1,1,2,4
+2092|donataria,2092,donataria,7,7,8,0.25,0.75,1,3,7,,0.1875,0.75,1,3,7
+2092|fecha,2092,fecha,4,3,8,0.5,1,1,1,3,2092-01-01,0.4375,1,1,2,3
+2092|donataria_fecha,2092,donataria_fecha,8,7,8,0.25,0.75,1,3,7,,0.1875,0.6875,1,4,7
+2092|valor,2092,valor,5,4,8,0.375,1,1,2,4,32,0.375,1,1,2,4
