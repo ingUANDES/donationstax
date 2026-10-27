@@ -2,6 +2,7 @@
 # Descargado: 2026-10-26 (BCN, LeyChile, XML obtxml opt=7)
 # fechaVersion del XML: 2011-01-27 | publicación: 1974-12-31 | promulgación: 1974-12-27 | vigente en idVersion: 2012-01-01
 # Huella (sha256 de las estructuras incluidas): dab25041713b9f0d0727de7ee9ae2b2be01997705447388ed84e3e93efc82ed8
+# Estructuras cortadas (el texto termina en un carácter no ASCII, issue 28): 0
 
 ### Artículo idParte=8573321 fechaVersion=1974-12-31 derogado=no derogado
 Artículo 3.- En general, la ley que modifique una norma

@@ -2,6 +2,7 @@
 # Descargado: 2026-10-22 (BCN, LeyChile, XML obtxml opt=7)
 # fechaVersion del XML: 2003-08-06 | publicación: 2003-08-06 | promulgación: 2003-07-07 | vigente en idVersion: 2003-08-06
 # Huella (sha256 de estructuras): 568d8baa2128455a65adde839d05b962a0338d8a694e54ccf0176b40c75b14b8
+# Estructuras cortadas (el texto termina en un carácter no ASCII, issue 28): 0
 
 ### Título idParte=8649290 fechaVersion=2003-08-06 derogado=no derogado
 "TITULO I

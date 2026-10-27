@@ -2,6 +2,8 @@
 # Descargado: 2026-10-26 (BCN, LeyChile, XML obtxml opt=7)
 # fechaVersion del XML: 2012-09-27 | publicación: 2012-09-27 | promulgación: 2012-09-24 | vigente en idVersion: 2026-10-26
 # Huella (sha256 de las estructuras incluidas): d2a9d42371555baf8d9c0572f238609e57665b04bc2cc33d3499cdae40d02398
+# Estructuras cortadas (el texto termina en un carácter no ASCII, issue 28): 1 | idParte=9298664 («… de ellos, disminuyé»)
+# Texto completo de las estructuras cortadas: ley20630_v2026-10-26_visor.txt (JSON del visor de LeyChile, BCN)
 
 ### Artículo idParte=9298664 fechaVersion=2012-09-27 derogado=no derogado
 "Artículo 1°.- Introdúcense en la Ley sobre Impuesto a la Renta, contenida en el artículo 1° del decreto ley N° 824, de 1974, las siguientes modificaciones:

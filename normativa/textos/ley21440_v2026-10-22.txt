@@ -2,6 +2,7 @@
 # Descargado: 2026-10-22 (BCN, LeyChile, XML obtxml opt=7)
 # fechaVersion del XML: 2022-04-12 | publicación: 2022-04-12 | promulgación: 2022-04-01 | vigente en idVersion: 2026-10-22
 # Huella (sha256 de las estructuras incluidas): 0e7a10ea19e4a66716add987b0a9f71df9226031c05098fb0f8ce9b91aba7ec5
+# Estructuras cortadas (el texto termina en un carácter no ASCII, issue 28): 0
 
 ### Artículo idParte=10323841 fechaVersion=2022-04-12 derogado=no derogado
 "Artículo 1.- Incorpórase en el decreto ley N° 3.063, de 1979, sobre Rentas Municipales, cuyo texto refundido y sistematizado fue fijado por el decreto N° 2.385, de 1996, del Ministerio del Interior, a continuación del artículo 46, el siguiente Título VIII bis:

@@ -2,6 +2,7 @@
 # Descargado: 2026-10-22 (BCN, LeyChile, XML obtxml opt=7)
 # fechaVersion del XML: 2025-07-11 | publicación: 1974-12-31 | promulgación: 1974-12-27 | vigente en idVersion: 2025-07-11
 # Huella (sha256 de las estructuras incluidas): aa5e9ea90979b6d4893d4e24b28e1b7087afb7b61e0e079993c7132cbd2675dc
+# Estructuras cortadas (el texto termina en un carácter no ASCII, issue 28): 0
 
 ### Artículo idParte=8656046 fechaVersion=2025-07-11 derogado=no derogado
 ARTICULO 20°.- Establécese un impuesto de 25% que

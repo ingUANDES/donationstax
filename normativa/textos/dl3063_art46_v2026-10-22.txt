@@ -2,6 +2,7 @@
 # Descargado: 2026-10-22 (BCN, LeyChile, XML obtxml opt=7)
 # fechaVersion del XML: 1996-11-21 | publicación: 1979-12-29 | promulgación: 1979-12-24 | vigente en idVersion: 2026-10-22
 # Huella (sha256 de las estructuras incluidas): fc89e638aa757ebddb72869dfe558976f8aafc740d3d49d2ead90ebd7eb3225d
+# Estructuras cortadas (el texto termina en un carácter no ASCII, issue 28): 0
 
 ### Artículo idParte=8739682 fechaVersion=1996-11-21 derogado=no derogado
 Artículo 46.- Las Municipalidades en cuyo territorio

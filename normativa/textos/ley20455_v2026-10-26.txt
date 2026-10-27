@@ -2,6 +2,7 @@
 # Descargado: 2026-10-26 (BCN, LeyChile, XML obtxml opt=7)
 # fechaVersion del XML: 2022-02-04 | publicación: 2010-07-31 | promulgación: 2010-07-29 | vigente en idVersion: 2026-10-26
 # Huella (sha256 de las estructuras incluidas): 01e0d457b30a870ad7f5a72a151f029c8ea8058ac5c8e75d54646c8db328fcae
+# Estructuras cortadas (el texto termina en un carácter no ASCII, issue 28): 0
 
 ### Artículo idParte=8955046 fechaVersion=2012-09-27 derogado=no derogado
 "Artículo 1°.- Auméntase transitoriamente la tasa

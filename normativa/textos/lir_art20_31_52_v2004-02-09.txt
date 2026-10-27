@@ -2,6 +2,8 @@
 # Descargado: 2026-10-22 (BCN, LeyChile, XML obtxml opt=7)
 # fechaVersion del XML: 2004-02-09 | publicación: 1974-12-31 | promulgación: 1974-12-27 | vigente en idVersion: 2004-02-09
 # Huella (sha256 de las estructuras incluidas): 7e1cad643d3476d7c5e669d44be9b9613ee36d183775070620ad7e86b48212d8
+# Estructuras cortadas (el texto termina en un carácter no ASCII, issue 28): 1 | idParte=8656061 («…uicio de la Direcció»)
+# Texto completo de las estructuras cortadas: lir_art20_31_52_v2004-02-09_visor.txt (JSON del visor de LeyChile, BCN)
 
 ### Artículo idParte=8656046 fechaVersion=2001-09-28 derogado=no derogado
 ARTICULO 20°.- Establécese un impuesto de 17% que

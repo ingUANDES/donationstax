@@ -2,6 +2,7 @@
 # Descargado: 2026-10-26 (BCN, LeyChile, XML obtxml opt=7)
 # fechaVersion del XML: 2025-07-11 | publicación: 2025-07-11 | promulgación: 2025-07-08 | vigente en idVersion: 2026-10-26
 # Huella (sha256 de las estructuras incluidas): be498433f01db3dffec5af0384ebeab17fae3f1328e1f1f4c9ae28a956984d20
+# Estructuras cortadas (el texto termina en un carácter no ASCII, issue 28): 0
 
 ### Artículo idParte=10554639 fechaVersion=2025-07-11 derogado=no derogado
 "Artículo 1.- Introdúcense las siguientes modificaciones en el decreto con fuerza de ley Nº 30, de 2005, del Ministerio de Hacienda que Aprueba el texto refundido, coordinado y sistematizado del decreto con fuerza de ley de Hacienda Nº 213, de 1953, sobre Ordenanza de Aduanas:

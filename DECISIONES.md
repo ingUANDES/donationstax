@@ -155,3 +155,18 @@ Aclaraciones, a partir de las cuatro preguntas que dejó el [PR 25](https://gith
 4. [armonizacion_anios_donacion.csv](datos/armonizacion_anios_donacion.csv) se retira, porque los dos años coinciden por construcción. Lo pide el [issue 26](https://github.com/ingUANDES/donationstax/issues/26).
 
 Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-26 (no verificable desde el repo): «aceptar propuesta si complementar que la regla 4 del d-10 solo vale si hay info de fecha sino se usa la info del archivo de origen». La plantea el investigador a partir de lo que dijo el usuario al aprobar [D-13 · Casos que el criterio para completar o excluir no cubre](#d-13). Cómo la leo (inferencia): la propuesta rige tal cual, y el complemento fija lo que pasa sin fecha, que es usar el archivo. Si se quiso que la fecha siga mandando cuando cae en otro año, basta cambiar la columna del año, y por eso el año de la fecha se conserva. [armonizar.py](analisis/armonizar.py) y [armonizar.R](analisis/armonizar.R) la aplican desde el [issue 20](https://github.com/ingUANDES/donationstax/issues/20): el año de la fecha queda en la columna `anio_fecha` y la marca, en `fecha_otro_anio`. Las cuatro aclaraciones: usuario, conversación de Claude Code del 2026-10-26 (no verificable desde el repo): «Apruebo tus 4 recomendaciones».
+
+### D-21
+
+**Texto completo de las estructuras que el XML de BCN corta.** El XML de BCN (`obtxml?opt=7`) trae incompleto el texto de algunas estructuras; la evidencia y la regla con que se detecta están en [Textos cortados del XML de BCN, en P-01 · Inventario normativo](BLUEPRINT.md#textos-cortados-del-xml-de-bcn). Se propone:
+
+1. Una estructura está cortada si su texto en el XML termina en un carácter no ASCII (regla `cortada` de [bcn_versiones.py](analisis/bcn_versiones.py)). La cabecera de cada texto las lista y [verifica_citas.py](analisis/verifica_citas.py) las cuenta.
+2. Su texto completo es el del JSON del visor de LeyChile (`servicios-leychile.bcn.cl`, `get_norma_json`) para la misma `idVersion`, sin las notas de BCN, y solo si el texto del XML es su prefijo. Va en `<texto>_visor.txt`, aparte del texto del XML, y verifica_citas.py comprueba el prefijo.
+3. Una fila de [cambios.csv](normativa/cambios.csv) puede quedar «verificada» con una cita de un `_visor.txt`: su `texto_archivo` es ese archivo y su `fuente_url`, la del JSON.
+4. Un límite de versión de bcn_versiones.py que solo marca la aparición o la desaparición de un corte no es un cambio de texto y no da una fecha de vigencia ([issue 37](https://github.com/ingUANDES/donationstax/issues/37)).
+
+Alternativas: volver a bajar el XML, que el 2026-10-26 trajo completas 4 de las 15 estructuras cortadas, pero no las otras 11; o el Diario Oficial, cuya edición electrónica no trae la del 2012-09-27 ([Textos cortados del XML de BCN, en P-01 · Inventario normativo](BLUEPRINT.md#textos-cortados-del-xml-de-bcn)) y que para leyes más recientes podría servir de contraste independiente (sin verificar).
+
+Evidencia débil: lo que sigue al corte depende solo del visor. `make verificar` comprueba que el visor coincide con el XML hasta el corte, no después. La dirección del JSON sale del código del visor (`main.*.bundle.js` de www.bcn.cl/leychile, consulta del 2026-10-26); si BCN la documenta como servicio está sin verificar.
+
+Estado: Propuesta. La plantea el investigador en el [issue 28](https://github.com/ingUANDES/donationstax/issues/28) y no rige hasta que una persona la apruebe.
