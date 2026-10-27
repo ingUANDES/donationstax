@@ -280,3 +280,17 @@ Alternativas: volver a bajar el XML, que el 2026-10-26 trajo completas 4 de las 
 Evidencia débil: lo que sigue al corte depende solo del visor. `make verificar` comprueba que el visor coincide con el XML hasta el corte, no después. La dirección del JSON sale del código del visor (`main.*.bundle.js` de www.bcn.cl/leychile, consulta del 2026-10-26); si BCN la documenta como servicio está sin verificar.
 
 Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-27 (no verificable desde el repo): «Acepto propuestas en las decisiones D-15 a D-18, D-20 y D-21». La planteó el investigador en el [issue 28](https://github.com/ingUANDES/donationstax/issues/28).
+
+### D-23
+
+**Precio fiscal a nivel del contribuyente que dona.** El precio de [P-04 · Precio fiscal por régimen](BLUEPRINT.md#p-04) se calcula para quien hace la donación y usa el beneficio. Para una empresa, en primera categoría; para una persona, en el global complementario o en el impuesto único de segunda categoría (art. 1 bis de la Ley 19.885). No se calcula cómo el crédito por donaciones y el menor impuesto de primera categoría pasan a los impuestos finales del dueño de la empresa (global complementario o adicional) en los regímenes del art. 14 de la LIR: letras A y B de 2017 a 2019, y letras A y D desde 2020.
+
+Límites que quedan explícitos:
+
+1. Para una empresa, P es el costo de donar para la empresa, no para su dueño. Con integración total o parcial, el impuesto de primera categoría es crédito contra los impuestos finales del dueño, y una donación que lo cambia puede cambiar también lo que paga el dueño. El costo para el dueño puede entonces ser distinto de P, en un sentido y una magnitud que no se calcularon (inferencia; las reglas del art. 14 no se leyeron).
+2. No tienen caso los regímenes en que la empresa no paga impuesto de primera categoría: el Pro Pyme transparente (art. 14 letra D N° 8 de la LIR, desde 2020) y el art. 14 ter (hasta 2019). Su precio depende de los impuestos finales del dueño, que quedan fuera.
+3. Un diseño que use estos precios mide la respuesta al precio de la empresa. Si quien decide la donación es el dueño y su costo difiere, el precio tiene error de medición (inferencia).
+4. Con esta regla, el paso a los impuestos del dueño es un límite del alcance y no una lectura pendiente de los casos de empresa, para efectos de la aclaración de [D-05 · Niveles de resultado](#d-05) sobre los cálculos deterministas.
+5. Se revisa si un diseño de [P-05 · Simulaciones de efecto conocido](BLUEPRINT.md#p-05) necesita el precio del dueño, por ejemplo para comparar empresas con personas.
+
+Estado: Propuesta. La plantea el investigador en el [issue 29](https://github.com/ingUANDES/donationstax/issues/29), punto 5, a partir de una indicación del usuario en la conversación de Claude Code del 2026-10-27 (no verificable desde el repo): «ok con precio a nivel empresa». El código lo reservó el usuario en esa conversación. Registrar la aprobación le corresponde a una persona del equipo, según los estados del encabezado de este archivo.
