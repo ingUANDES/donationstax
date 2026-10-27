@@ -219,7 +219,6 @@ Producto: [armonizar.py](analisis/armonizar.py) y [armonizar.R](analisis/armoniz
 
 - `data_local/armonizado/py/` y `data_local/armonizado/r/`: una fila por fila de cada planilla. Traen nombres, así que no se versionan.
 - [datos/armonizacion_por_anio.csv](datos/armonizacion_por_anio.csv): cuántas filas toca cada regla, por año del archivo (líneas 2 a 19: 2008 a 2025).
-- [datos/armonizacion_anios_donacion.csv](datos/armonizacion_anios_donacion.csv): filas y monto por año del archivo y año de la donación. Desde [D-14 · Año de la donación cuando la fecha cae en otro año](DECISIONES.md#d-14) los dos años coinciden en todas las filas.
 - [datos/anio_evaluacion_por_anio.csv](datos/anio_evaluacion_por_anio.csv) y [datos/anio_conflictos.csv](datos/anio_conflictos.csv), de [evalua_anio.py](analisis/evalua_anio.py) y [evalua_anio.R](analisis/evalua_anio.R) (`make verificar-anio`). La primera dice de dónde puede salir el año (fecha, `AÑO` o archivo) y cuántas filas y qué monto le tocan a cada año con el año del archivo o con el de la fecha. La segunda trae las filas con fecha en otro año, por año del archivo, diferencia de años y mes.
 - [datos/diccionario_columnas.csv](datos/diccionario_columnas.csv): encabezado original y normalizado, rol, tipo y variante de esquema de cada columna de cada año.
 
