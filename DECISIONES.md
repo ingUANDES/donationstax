@@ -152,7 +152,7 @@ Aclaraciones, a partir de las cuatro preguntas que dejó el [PR 25](https://gith
 1. Las 35 filas en que `AÑO` coincide con el año de la fecha y no con el del archivo toman el año del archivo, como dice la regla.
 2. Las 8 filas con la fecha en el año del archivo y `AÑO` distinto toman el año del archivo y el mes de la fecha. No se marcan por fila: basta el conteo `n_anio_columna_distinto_archivo`.
 3. `fecha_donacion` conserva la fecha completa aunque el mes de la donación quede desconocido. Su mes no es el de la donación: para eso está `mes_donacion`.
-4. [armonizacion_anios_donacion.csv](datos/armonizacion_anios_donacion.csv) se retira, porque los dos años coinciden por construcción. Lo pide el [issue 26](https://github.com/ingUANDES/donationstax/issues/26).
+4. [armonizacion_anios_donacion.csv](https://github.com/ingUANDES/donationstax/blob/90bb98c2cce8a90afb240f74daee3d657c61dcfa/datos/armonizacion_anios_donacion.csv) se retira, porque los dos años coinciden por construcción. Lo pide el [issue 26](https://github.com/ingUANDES/donationstax/issues/26).
 
 Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-26 (no verificable desde el repo): «aceptar propuesta si complementar que la regla 4 del d-10 solo vale si hay info de fecha sino se usa la info del archivo de origen». La plantea el investigador a partir de lo que dijo el usuario al aprobar [D-13 · Casos que el criterio para completar o excluir no cubre](#d-13). Cómo la leo (inferencia): la propuesta rige tal cual, y el complemento fija lo que pasa sin fecha, que es usar el archivo. Si se quiso que la fecha siga mandando cuando cae en otro año, basta cambiar la columna del año, y por eso el año de la fecha se conserva. [armonizar.py](analisis/armonizar.py) y [armonizar.R](analisis/armonizar.R) la aplican desde el [issue 20](https://github.com/ingUANDES/donationstax/issues/20): el año de la fecha queda en la columna `anio_fecha` y la marca, en `fecha_otro_anio`. Las cuatro aclaraciones: usuario, conversación de Claude Code del 2026-10-26 (no verificable desde el repo): «Apruebo tus 4 recomendaciones».
 
@@ -292,7 +292,7 @@ Norma e interpretación administrativa (citas comprobadas por [verifica_citas.py
 - Para el tope de 14.000 UTM del crédito, la misma Circular 71 usa «el valor de la UTM vigente a la fecha del balance» ([cambios.csv, L76](normativa/cambios.csv#L76)). La Ley 21.440 fija sus topes «considerando el valor de la unidad tributaria mensual del mes de cierre del ejercicio respectivo» ([cambios.csv, L37](normativa/cambios.csv#L37), [L38](normativa/cambios.csv#L38)).
 - El art. 1 N° 13 reajusta la parte de la donación con crédito «en la forma establecida para los pagos provisionales obligatorios», desde el desembolso ([cambios.csv, L74](normativa/cambios.csv#L74)); la Circular 49 lo lee como la variación del IPC entre el mes anterior al desembolso y el mes anterior al del balance ([cambios.csv, L77](normativa/cambios.csv#L77)). Es un reajuste del crédito, no una regla para medir el umbral (inferencia).
 
-Regla propuesta:
+Regla:
 
 1. El monto en UTM de una donación es su monto en pesos dividido por la UTM del mes de la donación (`mes_donacion` de la armonización, según [D-14 · Año de la donación cuando la fecha cae en otro año](#d-14)) en el año de la donación, que es el del archivo.
 2. Si el mes es desconocido, se usa la UTM de diciembre del año del archivo.
@@ -322,4 +322,4 @@ Evidencia débil:
 - El mes es el de la fecha de la planilla. Algunas fechas podrían ser del certificado y no de la donación ([D-14 · Año de la donación cuando la fecha cae en otro año](#d-14), inferencia sin verificar).
 - Que la UTM se reajuste con el IPC del segundo mes anterior sale de la serie, no de una norma leída: el Código Tributario no está en `normativa/textos/` (sin verificar).
 
-Estado: Propuesta. La regla es la sugerencia por defecto que dio el usuario al encargar el issue 33 (conversación del 2026-10-27, no verificable desde el repo): «la UTM del mes de la donación si se conoce y la de diciembre del año del archivo si no, con sensibilidad entre ambas». El código lo reservó el usuario en la misma conversación. Las citas, la magnitud y las razones son del investigador.
+Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-27 (no verificable desde el repo): «aprueba D-23, D-26 y D-14 numeral 4», después de leer el texto de esta decisión. La regla es la sugerencia por defecto que dio el usuario al encargar el issue 33 (misma conversación): «la UTM del mes de la donación si se conoce y la de diciembre del año del archivo si no, con sensibilidad entre ambas». El código lo reservó el usuario en esa conversación. Las citas, la magnitud y las razones son del investigador.

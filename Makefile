@@ -107,14 +107,12 @@ verificar-cruce:
 # que Python y R coincidan en las tablas y celda por celda, y que las tablas sean las versionadas en datos/.
 verificar-armonizado:
 	mkdir -p salidas
-	$(PY) -I analisis/armonizar.py data_local/midesof data_local/armonizado/py salidas/armonizacion_py.csv salidas/armonizacion_anios_py.csv salidas/diccionario_py.csv
-	LC_ALL=C.UTF-8 Rscript analisis/armonizar.R data_local/midesof data_local/armonizado/r salidas/armonizacion_R.csv salidas/armonizacion_anios_R.csv salidas/diccionario_R.csv
+	$(PY) -I analisis/armonizar.py data_local/midesof data_local/armonizado/py salidas/armonizacion_py.csv salidas/diccionario_py.csv
+	LC_ALL=C.UTF-8 Rscript analisis/armonizar.R data_local/midesof data_local/armonizado/r salidas/armonizacion_R.csv salidas/diccionario_R.csv
 	$(PY) -I analisis/contraste_datos.py salidas/armonizacion_py.csv salidas/armonizacion_R.csv
-	$(PY) -I analisis/contraste_datos.py salidas/armonizacion_anios_py.csv salidas/armonizacion_anios_R.csv
 	$(PY) -I analisis/contraste_datos.py salidas/diccionario_py.csv salidas/diccionario_R.csv
 	$(PY) -I analisis/contraste_armonizado.py data_local/armonizado/py data_local/armonizado/r
 	cmp salidas/armonizacion_py.csv datos/armonizacion_por_anio.csv
-	cmp salidas/armonizacion_anios_py.csv datos/armonizacion_anios_donacion.csv
 	cmp salidas/diccionario_py.csv datos/diccionario_columnas.csv
 
 # Año de la donación (D-13, punto 1, y D-14): de dónde puede salir el año de cada fila y los conflictos

@@ -178,7 +178,7 @@ Evidencia débil y alcance:
 
 ### P-05
 
-**Simulaciones de efecto conocido (E4).** Estado: hecho el 2026-10-27 ([issue 22](https://github.com/ingUANDES/donationstax/issues/22)), a nivel *contrastado* ([D-05 · Niveles de resultado](DECISIONES.md#d-05)). Python y R coinciden en las tres simulaciones con la tolerancia de [D-15 · Tolerancia entre Python y R para las simulaciones](DECISIONES.md#d-15); la diferencia relativa máxima es $9{,}9 \cdot 10^{-14}$. Las tolerancias de recuperación están en [D-16 · Tolerancias de la simulación de bunching en el quiebre de 1.000 UTM](DECISIONES.md#d-16), [D-17 · Tolerancias de la simulación de estudio de eventos y diferencias en diferencias](DECISIONES.md#d-17) y [D-18 · Tolerancias de la simulación de variables instrumentales](DECISIONES.md#d-18). Se fijaron antes de correr (commit `faef689`) y el usuario las aprobó el 2026-10-27 sin cambios. Variables instrumentales cumple todas sus reglas; subirla a «verificada» se evalúa aparte, según [D-05 · Niveles de resultado](DECISIONES.md#d-05), y no se hace aquí. Bunching y estudio de eventos dejan siete reglas incumplidas, que son hallazgos ([issue 34](https://github.com/ingUANDES/donationstax/issues/34)). Ninguna estimación sobre datos reales. La serie de la UTM con que se aplicarían está en [Serie de la UTM](#serie-de-la-utm), y la regla para convertir cada donación es [D-26 · UTM que se aplica a cada donación](DECISIONES.md#d-26), en estado Propuesta ([issue 33](https://github.com/ingUANDES/donationstax/issues/33)).
+**Simulaciones de efecto conocido (E4).** Estado: hecho el 2026-10-27 ([issue 22](https://github.com/ingUANDES/donationstax/issues/22)), a nivel *contrastado* ([D-05 · Niveles de resultado](DECISIONES.md#d-05)). Python y R coinciden en las tres simulaciones con la tolerancia de [D-15 · Tolerancia entre Python y R para las simulaciones](DECISIONES.md#d-15); la diferencia relativa máxima es $9{,}9 \cdot 10^{-14}$. Las tolerancias de recuperación están en [D-16 · Tolerancias de la simulación de bunching en el quiebre de 1.000 UTM](DECISIONES.md#d-16), [D-17 · Tolerancias de la simulación de estudio de eventos y diferencias en diferencias](DECISIONES.md#d-17) y [D-18 · Tolerancias de la simulación de variables instrumentales](DECISIONES.md#d-18). Se fijaron antes de correr (commit `faef689`) y el usuario las aprobó el 2026-10-27 sin cambios. Variables instrumentales cumple todas sus reglas; subirla a «verificada» se evalúa aparte, según [D-05 · Niveles de resultado](DECISIONES.md#d-05), y no se hace aquí. Bunching y estudio de eventos dejan siete reglas incumplidas, que son hallazgos ([issue 34](https://github.com/ingUANDES/donationstax/issues/34)). Ninguna estimación sobre datos reales. La serie de la UTM con que se aplicarían está en [Serie de la UTM](#serie-de-la-utm), y la regla para convertir cada donación es [D-26 · UTM que se aplica a cada donación](DECISIONES.md#d-26) ([issue 33](https://github.com/ingUANDES/donationstax/issues/33)).
 
 Método común:
 
@@ -214,7 +214,7 @@ Evidencia débil:
 
 #### Serie de la UTM
 
-Dato que pide el [issue 33](https://github.com/ingUANDES/donationstax/issues/33) para aplicar estos diseños a datos reales. La regla con que se convierte cada donación es [D-26 · UTM que se aplica a cada donación](DECISIONES.md#d-26) (Propuesta).
+Dato que pide el [issue 33](https://github.com/ingUANDES/donationstax/issues/33) para aplicar estos diseños a datos reales. La regla con que se convierte cada donación es [D-26 · UTM que se aplica a cada donación](DECISIONES.md#d-26).
 
 Producto:
 
@@ -244,7 +244,6 @@ Producto: [armonizar.py](analisis/armonizar.py) y [armonizar.R](analisis/armoniz
 
 - `data_local/armonizado/py/` y `data_local/armonizado/r/`: una fila por fila de cada planilla. Traen nombres, así que no se versionan.
 - [datos/armonizacion_por_anio.csv](datos/armonizacion_por_anio.csv): cuántas filas toca cada regla, por año del archivo (líneas 2 a 19: 2008 a 2025).
-- [datos/armonizacion_anios_donacion.csv](datos/armonizacion_anios_donacion.csv): filas y monto por año del archivo y año de la donación. Desde [D-14 · Año de la donación cuando la fecha cae en otro año](DECISIONES.md#d-14) los dos años coinciden en todas las filas.
 - [datos/anio_evaluacion_por_anio.csv](datos/anio_evaluacion_por_anio.csv) y [datos/anio_conflictos.csv](datos/anio_conflictos.csv), de [evalua_anio.py](analisis/evalua_anio.py) y [evalua_anio.R](analisis/evalua_anio.R) (`make verificar-anio`). La primera dice de dónde puede salir el año (fecha, `AÑO` o archivo) y cuántas filas y qué monto le tocan a cada año con el año del archivo o con el de la fecha. La segunda trae las filas con fecha en otro año, por año del archivo, diferencia de años y mes.
 - [datos/diccionario_columnas.csv](datos/diccionario_columnas.csv): encabezado original y normalizado, rol, tipo y variante de esquema de cada columna de cada año.
 
