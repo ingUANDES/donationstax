@@ -1,0 +1,8 @@
+simulacion,clave,decision
+bunching,sensibilidad:q4:inf-0.10:sup+0.00:epsilon,d-16
+bunching,sensibilidad:q5:inf-0.10:sup+0.00:epsilon,d-16
+bunching,sensibilidad:q5:inf-0.10:sup+0.02:epsilon,d-16
+bunching,sensibilidad:q6:inf-0.10:sup+0.00:epsilon,d-16
+bunching,sensibilidad:q6:inf-0.10:sup+0.02:epsilon,d-16
+eventos,nivel_previo:gamma_2012,d-17
+eventos,nivel_previo_error_rut:gamma_2012,d-17

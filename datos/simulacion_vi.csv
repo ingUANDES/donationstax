@@ -1,0 +1,15 @@
+clave,valor,objetivo,regla,cumple
+datos:proporcion_perdida,0.09706666666666666,,,
+datos:filas_marcadas,4472.0,,,
+sin_error_rut:mco_sesgo,0.6000852095966476,0.15,>=objetivo,sí
+sin_error_rut:mc2e:epsilon,0.9335394877896949,1.0,abs<=0.15,sí
+sin_error_rut:mc2e:F,1018.4166122578707,10.0,>=objetivo,sí
+sin_error_rut:tasa_por_anio:residuo,4.0939474033052647e-16,1e-10,<=objetivo,sí
+sin_error_rut:tasa_27:residuo,0.0,1e-10,<=objetivo,sí
+sin_error_rut:tasa_por_anio_sin_ef_anio:sesgo,48.279642368302156,0.15,>=objetivo,sí
+error_rut:mco_sesgo,0.6011459000742774,0.15,>=objetivo,sí
+error_rut:mc2e:epsilon,0.94613065018997,1.0,abs<=0.15,sí
+error_rut:mc2e:F,991.9502181123923,10.0,>=objetivo,sí
+error_rut:tasa_por_anio:residuo,2.8449465006019636e-16,1e-10,<=objetivo,sí
+error_rut:tasa_27:residuo,0.0,1e-10,<=objetivo,sí
+error_rut:tasa_por_anio_sin_ef_anio:sesgo,15.577586933828789,0.15,>=objetivo,sí
