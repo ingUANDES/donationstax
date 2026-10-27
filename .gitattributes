@@ -1,0 +1,2 @@
+# Páginas del SII tal como se descargaron: utm.py comprueba su sha256 (datos/descargas_utm.csv), así que git no debe cambiar sus fines de línea.
+datos/fuentes/sii_utm/*.htm -text
