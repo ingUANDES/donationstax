@@ -95,7 +95,7 @@ Hallazgo del [issue 28](https://github.com/ingUANDES/donationstax/issues/28). El
 Falta en este pendiente:
 
 - El texto de la Ley 20.565 en sí (se conoce por la versión consolidada de BCN y la Circular N° 49; no se encontró su `idNorma`), el reglamento (Decreto Supremo 77 de 2009) y las circulares del SII sobre la Ley 21.440.
-- La fecha de publicación de los reglamentos de la Ley 21.015. Cómo pasa el crédito a los impuestos finales del dueño desde 2017 (regímenes semi integrado y atribuido) queda fuera del precio según [D-23 · Precio fiscal a nivel del contribuyente que dona](DECISIONES.md#d-23), en estado Propuesta.
+- La fecha de publicación de los reglamentos de la Ley 21.015. Cómo pasa el crédito a los impuestos finales del dueño desde 2017 (regímenes semi integrado y atribuido) queda fuera del precio según [D-23 · Precio fiscal a nivel del contribuyente que dona](DECISIONES.md#d-23).
 - El impuesto del art. 21 de la LIR sobre la parte de las donaciones que excede el límite global del art. 10 ([issue 44](https://github.com/ingUANDES/donationstax/issues/44)).
 - Los regímenes que el [artículo 10 de la Ley 19.885](normativa/textos/ley19885_v2024-08-24.txt) enumera y que [D-02 · Alcance](DECISIONES.md#d-02) deja fuera por ahora.
 - Las versiones de la LIR que solo marcan un corte del XML y los tres U+FFFD del XML ([issue 37](https://github.com/ingUANDES/donationstax/issues/37)).
@@ -134,7 +134,7 @@ Nota del 2026-10-22: las planillas actuales de 2010 a 2013 traen el mismo númer
 
 ### P-04
 
-**Precio fiscal por régimen (E3).** Estado: hecho el 2026-10-26 ([issue 21](https://github.com/ingUANDES/donationstax/issues/21)), a nivel *contrastado* ([D-05 · Niveles de resultado](DECISIONES.md#d-05)). Python, R y los valores calculados a mano coinciden en los 72 casos, y Python y R en las 52 comparaciones, con tolerancia 1e-12 (`make verificar`). Las cinco lecturas del [issue 29](https://github.com/ingUANDES/donationstax/issues/29) se hicieron el 2026-10-27 y ningún precio cambió. Queda sin calcular el impuesto del art. 21 sobre el exceso del límite global ([issue 44](https://github.com/ingUANDES/donationstax/issues/44)). El alcance (precio a nivel del contribuyente que dona) lo propone [D-23 · Precio fiscal a nivel del contribuyente que dona](DECISIONES.md#d-23).
+**Precio fiscal por régimen (E3).** Estado: hecho el 2026-10-26 ([issue 21](https://github.com/ingUANDES/donationstax/issues/21)), a nivel *contrastado* ([D-05 · Niveles de resultado](DECISIONES.md#d-05)). Python, R y los valores calculados a mano coinciden en los 72 casos, y Python y R en las 52 comparaciones, con tolerancia 1e-12 (`make verificar`). Las cinco lecturas del [issue 29](https://github.com/ingUANDES/donationstax/issues/29) se hicieron el 2026-10-27 y ningún precio cambió. Queda sin calcular el impuesto del art. 21 sobre el exceso del límite global ([issue 44](https://github.com/ingUANDES/donationstax/issues/44)). El alcance (precio a nivel del contribuyente que dona) lo fija [D-23 · Precio fiscal a nivel del contribuyente que dona](DECISIONES.md#d-23).
 
 Método. P = 1 − c − τg por peso donado: c es la fracción que se imputa como crédito, g la que se deduce de la base como gasto y τ la tasa marginal del impuesto que esa deducción reduce. Un caso es un régimen (ley, tramo, aporte al Fondo, límite) en un año comercial y para un tipo de contribuyente. El precio es por régimen y año, no por donante, porque las planillas no traen régimen ni tramo ([P-02](#p-02)). Cada c, g y τ sale de una fila verificada de [cambios.csv](normativa/cambios.csv), referida por norma, artículo y vigencia; los scripts no fijan parámetros. Que un caso no tenga beneficio (P = 1) es inferencia, y lo dice la nota del caso.
 
@@ -169,7 +169,7 @@ El tope de crédito y el límite global son entonces quiebres que suben el preci
 
 Evidencia débil y alcance:
 
-- El precio es el de la empresa. No incluye cómo el crédito y el menor impuesto de primera categoría pasan a los impuestos finales del dueño, que desde 2017 dependen del régimen del art. 14. Tampoco cubre el Pro Pyme transparente (art. 14 letra D N° 8) ni el art. 14 ter. Es un límite del alcance, no una lectura pendiente, según [D-23 · Precio fiscal a nivel del contribuyente que dona](DECISIONES.md#d-23) (Propuesta), que lista sus consecuencias. El costo para el dueño no se calculó y puede ser distinto.
+- El precio es el de la empresa. No incluye cómo el crédito y el menor impuesto de primera categoría pasan a los impuestos finales del dueño, que desde 2017 dependen del régimen del art. 14. Tampoco cubre el Pro Pyme transparente (art. 14 letra D N° 8) ni el art. 14 ter. Es un límite del alcance, no una lectura pendiente, según [D-23 · Precio fiscal a nivel del contribuyente que dona](DECISIONES.md#d-23), que lista sus consecuencias. El costo para el dueño no se calculó y puede ser distinto.
 - El caso con pérdida tributaria de 2020 es una cota: supone que la pérdida se usa después, a la misma tasa y sin descontar.
 - La vigencia de la Ley 21.015 sigue sin verificar ([L41](normativa/cambios.csv#L41)); su caso solo usa la tasa de 2025.
 - Las personas se calculan en el primer tramo y en el superior. A qué contribuyentes del global complementario se aplicaba el límite del art. 10 antes de 2020 está sin verificar ([L17](normativa/cambios.csv#L17), [L28](normativa/cambios.csv#L28)).
@@ -219,7 +219,6 @@ Producto: [armonizar.py](analisis/armonizar.py) y [armonizar.R](analisis/armoniz
 
 - `data_local/armonizado/py/` y `data_local/armonizado/r/`: una fila por fila de cada planilla. Traen nombres, así que no se versionan.
 - [datos/armonizacion_por_anio.csv](datos/armonizacion_por_anio.csv): cuántas filas toca cada regla, por año del archivo (líneas 2 a 19: 2008 a 2025).
-- [datos/armonizacion_anios_donacion.csv](datos/armonizacion_anios_donacion.csv): filas y monto por año del archivo y año de la donación. Desde [D-14 · Año de la donación cuando la fecha cae en otro año](DECISIONES.md#d-14) los dos años coinciden en todas las filas.
 - [datos/anio_evaluacion_por_anio.csv](datos/anio_evaluacion_por_anio.csv) y [datos/anio_conflictos.csv](datos/anio_conflictos.csv), de [evalua_anio.py](analisis/evalua_anio.py) y [evalua_anio.R](analisis/evalua_anio.R) (`make verificar-anio`). La primera dice de dónde puede salir el año (fecha, `AÑO` o archivo) y cuántas filas y qué monto le tocan a cada año con el año del archivo o con el de la fecha. La segunda trae las filas con fecha en otro año, por año del archivo, diferencia de años y mes.
 - [datos/diccionario_columnas.csv](datos/diccionario_columnas.csv): encabezado original y normalizado, rol, tipo y variante de esquema de cada columna de cada año.
 
