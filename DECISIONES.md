@@ -160,7 +160,7 @@ Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-26 (no verif
 
 **Tolerancia entre Python y R para las simulaciones.** Los scripts de [P-05 · Simulaciones de efecto conocido](BLUEPRINT.md#p-05) generan en los dos lenguajes las mismas extracciones. Usan MT19937 iniciado con `init_genrand(semilla)` y uniformes $y/2^{32}$ de la salida de 32 bits; en R, `runif` con ese estado cargado en `.Random.seed`. Las normales salen por Box–Muller, $\sqrt{-2\ln u_1}\cos(2\pi u_2)$, con $u_1$ y $u_2$ de dos bloques consecutivos. Sobre los mismos datos, las diferencias solo pueden venir del álgebra lineal y del redondeo de `log` y `cos`. La tolerancia, para cada cifra de salida, es $|x_{py} - x_R| \le 10^{-8}\max(1, |x_{py}|)$. La copia versionada de cada salida se compara con la misma tolerancia, y no con `cmp`, porque `log` y `cos` pueden diferir en el último bit entre plataformas.
 
-Estado: Propuesta. La plantea el investigador el 2026-10-27, antes de correr las simulaciones ([issue 22](https://github.com/ingUANDES/donationstax/issues/22)). La fija el commit que la agrega, anterior al de los resultados. Inferencia: $10^{-8}$ relativo deja varios órdenes de margen sobre el redondeo de mínimos cuadrados con matrices de este tamaño, y detecta cualquier diferencia de implementación.
+Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-27 (no verificable desde el repo): «Acepto propuestas en las decisiones D-15 a D-18, D-20 y D-21». La planteó el investigador el 2026-10-27, antes de correr las simulaciones ([issue 22](https://github.com/ingUANDES/donationstax/issues/22)). La fija el commit que la agrega, anterior al de los resultados. Inferencia: $10^{-8}$ relativo deja varios órdenes de margen sobre el redondeo de mínimos cuadrados con matrices de este tamaño, y detecta cualquier diferencia de implementación.
 
 ### D-16
 
@@ -187,7 +187,7 @@ Tolerancias, con $B$ el número simulado de donantes que se agolpan:
 3. Con todos los donantes, la fórmula del quiebre simple, especificación principal: $|\hat B - B| \le 0{,}10\,B$; $\hat\varepsilon \le 0{,}9\,\varepsilon$, de modo que el sesgo se detecta; y $|\hat\varepsilon - 0{,}8\,\varepsilon| \le 0{,}15 \cdot 0{,}8\,\varepsilon$. El valor $0{,}8\,\varepsilon$ es el esperado si el 20 % que no se agolpa entra en la densidad del denominador (inferencia).
 4. El error estándar de la especificación principal es finito y positivo.
 
-Estado: Propuesta. La plantea el investigador el 2026-10-27, antes de correr las simulaciones ([issue 22](https://github.com/ingUANDES/donationstax/issues/22)). Los parámetros del caso son elección del investigador, no cifras de los datos, salvo los precios.
+Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-27 (no verificable desde el repo): «Acepto propuestas en las decisiones D-15 a D-18, D-20 y D-21». La planteó el investigador el 2026-10-27, antes de correr las simulaciones ([issue 22](https://github.com/ingUANDES/donationstax/issues/22)). Los parámetros del caso son elección del investigador, no cifras de los datos, salvo los precios. Aprobarla no cambia el resultado de la simulación: las cinco reglas de sensibilidad que incumple están registradas en [sim_hallazgos.csv](analisis/fixtures/sim_hallazgos.csv) y la discusión del rediseño está en el [issue 34](https://github.com/ingUANDES/donationstax/issues/34); cambiar esta tolerancia sería una decisión nueva.
 
 ### D-17
 
@@ -204,7 +204,7 @@ Casos y tolerancias:
 3. Grupo de control por nivel permanente: tratados si $e^{\alpha_i} > 1000$; control si $200 \le e^{\alpha_i} \le 900$. Los del control con $e^{\alpha_i} > 700$ reciben $\beta_c = 0{,}5$ desde 2015, como los que dejó fuera la regla de dos instituciones y 700 UTM ([cambios.csv, L7](normativa/cambios.csv#L7)). Con una sola dummy $T_i 1[t \ge 2015]$: $|\hat\delta - (\beta - \pi_c\beta_c)| \le 0{,}03$, con $\pi_c$ la proporción simulada del control sobre 700 UTM, y $\pi_c\beta_c \ge 0{,}06$.
 4. Error por RUT faltante. Cada donante-año se marca con probabilidad $e_t$ = `n_error_medicion`/`n_filas` de [rut_completado_por_anio.csv](datos/rut_completado_por_anio.csv): 32,4 % en 2012, 29,2 % en 2013 y 56,4 % en 2014, y lo que dé el archivo en 2015 a 2019. Un donante-año marcado queda con el identificador de nombre del donante, distinto del de RUT: sus años marcados se unen entre sí y no con los que tienen RUT. Inferencia sobre el mecanismo: el RUT se completó por nombre idéntico ([D-10 · Criterio para completar o excluir](#d-10), regla 7), así que lo que quedó sin RUT es un nombre que no aparece igual en los años con RUT. Los casos 1 y 2 se estiman otra vez con esos identificadores; en el 2, $T$ sale de la observación de 2014 de cada identificador, y los que no la tienen se excluyen. Valen las tolerancias de los casos 1 y 2. Además, la proporción de donantes con el mismo identificador en 2014 y en 2015 queda a $\pm 0{,}02$ de $(1 - e_{2014})(1 - e_{2015})$.
 
-Estado: Propuesta. La plantea el investigador el 2026-10-27, antes de correr las simulaciones ([issue 22](https://github.com/ingUANDES/donationstax/issues/22)). Los parámetros del caso son elección del investigador, no cifras de los datos, salvo $e_t$. Una fila por donante-año es una simplificación (inferencia): con varias filas por año, el error también partiría el monto anual.
+Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-27 (no verificable desde el repo): «Acepto propuestas en las decisiones D-15 a D-18, D-20 y D-21». La planteó el investigador el 2026-10-27, antes de correr las simulaciones ([issue 22](https://github.com/ingUANDES/donationstax/issues/22)). Los parámetros del caso son elección del investigador, no cifras de los datos, salvo $e_t$. Una fila por donante-año es una simplificación (inferencia): con varias filas por año, el error también partiría el monto anual. Aprobarla no cambia el resultado de la simulación: las dos reglas del coeficiente de 2012 que incumple están registradas en [sim_hallazgos.csv](analisis/fixtures/sim_hallazgos.csv) y la discusión del rediseño está en el [issue 34](https://github.com/ingUANDES/donationstax/issues/34); cambiar esta tolerancia sería una decisión nueva.
 
 ### D-18
 
@@ -223,7 +223,7 @@ Estimadores, todos con efectos fijos de identificador (desviaciones de su media)
 3. Instrumento sin variación entre donantes: $\ln P^{leg}$ del tipo A en cada año, con dummies de año. El residuo del instrumento tras los efectos fijos debe ser $\le 10^{-10}$ en valor absoluto, es decir, no identificado. Lo mismo con el precio de una tasa constante de 27 % para todos (caso `e2025_14A_hasta_1000`).
 4. El instrumento por año del punto 3, sin dummies de año: $|\hat\varepsilon - \varepsilon| \ge 0{,}15$. El sesgo viene de $\lambda_t$, que se mueve con la tasa.
 
-Estado: Propuesta. La plantea el investigador el 2026-10-27, antes de correr las simulaciones ([issue 22](https://github.com/ingUANDES/donationstax/issues/22)). Los parámetros del caso son elección del investigador, no cifras de los datos, salvo los precios y $e_t$.
+Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-27 (no verificable desde el repo): «Acepto propuestas en las decisiones D-15 a D-18, D-20 y D-21». La planteó el investigador el 2026-10-27, antes de correr las simulaciones ([issue 22](https://github.com/ingUANDES/donationstax/issues/22)). Los parámetros del caso son elección del investigador, no cifras de los datos, salvo los precios y $e_t$.
 
 ### D-20
 
@@ -243,7 +243,7 @@ Sensibilidad del monto total, en pesos nominales ([datos/duplicados_ley21440_por
 
 El total que trae la fila superior de cada archivo es el monto con duplicados en los cuatro años ([esquema_ley21440_por_anio.csv, L2-L5](datos/esquema_ley21440_por_anio.csv#L2-L5), columna `total_cabecera`; lo exige `duplicados_ley21440.py --perfil` en `make verificar-duplicados-21440`).
 
-Regla propuesta:
+Regla:
 
 1. No se excluye ninguna fila. El monto de la Ley 21.440 de [D-12 · Variable de resultado](#d-12) es la suma de `Valor` de todas las filas, con duplicados, igual al total que publica cada archivo.
 2. Todo resultado que use ese monto informa al lado el mismo resultado sin duplicados (una fila por grupo de filas idénticas del mismo archivo), con la misma agregación y el mismo período.
@@ -264,4 +264,4 @@ Evidencia débil:
 - En 2025, el 20,5 % de las copias extra tiene fecha 2025-12-31 y un solo par donataria-fecha reúne el 18,4 % ([duplicados_ley21440_concentracion.csv, L15-L16](datos/duplicados_ley21440_concentracion.csv#L15-L16)). Si son filas que una donataria fecha al cierre del año (inferencia, sin verificar), esa fecha no es la de la donación. La regla no lo resuelve: afecta a los análisis por fecha, no al monto anual.
 - Los valores con más copias son 30.000 pesos en 2022, 120.000 en 2023 y 5.000 en 2024 y 2025 ([duplicados_ley21440_concentracion.csv](datos/duplicados_ley21440_concentracion.csv), líneas 5, 9, 13 y 17, columna `categoria_top1_copias`). 120.000 es doce veces 10.000: si algunas donatarias informan totales anuales por donante (inferencia, sin verificar), una fila es un donante-año y no una donación. Eso también es compatible con conservar las copias, pero entonces las cotas del punto 4 no valen para el número de donaciones.
 
-Estado: Propuesta. La plantea el investigador en el [issue 16](https://github.com/ingUANDES/donationstax/issues/16); no rige hasta que una persona la apruebe, y mientras tanto no se excluye nada de los datos. El código lo reservó el usuario en la conversación del 2026-10-27 (no verificable desde el repo).
+Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-27 (no verificable desde el repo): «Acepto propuestas en las decisiones D-15 a D-18, D-20 y D-21». La planteó el investigador en el [issue 16](https://github.com/ingUANDES/donationstax/issues/16); no excluye nada de los datos. El código lo reservó el usuario en la conversación del 2026-10-27 (no verificable desde el repo).
