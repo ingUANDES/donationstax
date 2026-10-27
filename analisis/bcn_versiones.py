@@ -48,8 +48,9 @@ URL = "https://www.bcn.cl/leychile/consulta/obtxml?opt=7&idNorma={}&idVersion={}
 URL_VISOR = ("https://servicios-leychile.bcn.cl/Navegar/get_norma_json?idNorma={}&idVersion={}"
              "&idLey=&tipoVersion=&cve=&agrupa_partes=1&r=")
 SUFIJO_VISOR = "_visor"
-CABECERA_CORTES = "# Estructuras cortadas (el texto termina en un carácter no ASCII; https://github.com/ingUANDES/donationstax/issues/28): "
-CABECERA_VISOR = "# Texto completo de las estructuras cortadas: "
+MARCA_CORTES = "# Estructuras cortadas"  # prefijos con que `marcar` reconoce sus líneas, aunque cambie el resto
+MARCA_VISOR = "# Texto completo de las estructuras cortadas"
+CABECERA_CORTES = MARCA_CORTES + " (el texto termina en un carácter no ASCII; https://github.com/ingUANDES/donationstax/issues/28): "
 _cache = {}
 _cache_visor = {}
 
@@ -195,6 +196,12 @@ def ruta_visor(ruta):
     return ruta.with_name(ruta.stem + SUFIJO_VISOR + ruta.suffix)
 
 
+def linea_visor(ruta):
+    """La línea de la cabecera que nombra <texto>_visor.txt, en una lista; vacía si ese archivo no existe."""
+    v = ruta_visor(ruta)
+    return [MARCA_VISOR + f": {v.name} (JSON del visor de LeyChile, BCN)"] if v.is_file() else []
+
+
 def marcar(ruta):
     """Rehace, sin red, la línea de cortes de la cabecera de un texto del XML ya descargado y, si existe
     <texto>_visor.txt, la que lo nombra. Devuelve el número de estructuras cortadas."""
@@ -202,10 +209,8 @@ def marcar(ruta):
     if ruta.stem.endswith(SUFIJO_VISOR):
         raise ValueError(f"{ruta.name}: es un texto del visor, no del XML")
     cabecera, estr = leer_texto(ruta)
-    base = [c for c in cabecera if not c.startswith((CABECERA_CORTES, CABECERA_VISOR))]
-    nuevas = [linea_cortes([(e["idParte"], e["texto"]) for e in estr])]
-    if ruta_visor(ruta).is_file():
-        nuevas.append(CABECERA_VISOR + f"{ruta_visor(ruta).name} (JSON del visor de LeyChile, BCN)")
+    base = [c for c in cabecera if not c.startswith((MARCA_CORTES, MARCA_VISOR))]
+    nuevas = [linea_cortes([(e["idParte"], e["texto"]) for e in estr])] + linea_visor(ruta)
     cuerpo = ruta.read_text(encoding="utf-8").split("\n")[len(cabecera):]
     ruta.write_text("\n".join(base + nuevas + cuerpo), encoding="utf-8")
     return sum(cortada(e["texto"]) for e in estr)

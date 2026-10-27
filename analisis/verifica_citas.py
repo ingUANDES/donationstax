@@ -73,12 +73,11 @@ def cortes(textos):
         cabecera, estr = bcn.leer_texto(ruta)
         n_estructuras += len(estr)
         esperada = bcn.linea_cortes([(e["idParte"], e["texto"]) for e in estr])
-        assert [c for c in cabecera if c.startswith(bcn.CABECERA_CORTES)] == [esperada], (
+        assert [c for c in cabecera if c.startswith(bcn.MARCA_CORTES)] == [esperada], (
             f"{nombre}: la cabecera no lista sus estructuras cortadas como la regla de hoy "
             "(rehacer con «python analisis/bcn_versiones.py marcar»)"
         )
-        nombra_visor = any(c.startswith(bcn.CABECERA_VISOR + bcn.ruta_visor(ruta).name + " ") for c in cabecera)
-        assert nombra_visor == (bcn.ruta_visor(ruta).name in visor), (
+        assert [c for c in cabecera if c.startswith(bcn.MARCA_VISOR)] == bcn.linea_visor(ruta), (
             f"{nombre}: la cabecera y la carpeta no coinciden en {bcn.ruta_visor(ruta).name} (rehacer con «marcar»)"
         )
         cortadas[nombre] = {e["idParte"]: e["texto"] for e in estr if bcn.cortada(e["texto"])}
@@ -124,13 +123,15 @@ def autoprueba():
            "### Artículo idParte=2 fechaVersion=2000-01-01 derogado=no derogado", "Segundo, completo.", ""]
     visor = ["# Fuente: " + bcn.URL_VISOR.format(1, "2000-01-01"), "",
              "### Artículo idParte=1 caracteres_xml=34 caracteres_visor=47", "Primero, que se corta en\ndisminuyéndose en el visor.", ""]
-    casos = [  # (texto del visor o None, ¿se marca la cabecera?, ¿debe pasar?, cortadas, completadas)
-        (visor, True, True, 1, 1),
-        (None, True, True, 1, 0),
-        (visor, False, False, None, None),
-        (visor[:-2] + ["Otro texto que no continúa al del XML.", ""], True, False, None, None),
+    vieja = bcn.MARCA_CORTES + " (marca de una versión anterior): 1"
+    casos = [  # (texto del visor o None, ¿se marca la cabecera?, línea extra, ¿debe pasar?, cortadas, completadas)
+        (visor, True, None, True, 1, 1),
+        (None, True, None, True, 1, 0),
+        (visor, False, None, False, None, None),
+        (visor[:-2] + ["Otro texto que no continúa al del XML.", ""], True, None, False, None, None),
+        (visor, True, vieja, False, None, None),
     ]
-    for texto_visor, marcar, debe_pasar, n_cortadas, n_completadas in casos:
+    for texto_visor, marcar, extra, debe_pasar, n_cortadas, n_completadas in casos:
         with tempfile.TemporaryDirectory() as d:
             d = Path(d)
             (d / "n_v2000-01-01.txt").write_text("\n".join(xml), encoding="utf-8")
@@ -138,6 +139,9 @@ def autoprueba():
                 (d / "n_v2000-01-01_visor.txt").write_text("\n".join(texto_visor), encoding="utf-8")
             if marcar:
                 bcn.marcar(d / "n_v2000-01-01.txt")
+            if extra:
+                lineas = (d / "n_v2000-01-01.txt").read_text(encoding="utf-8").split("\n")
+                (d / "n_v2000-01-01.txt").write_text("\n".join(lineas[:1] + [extra] + lineas[1:]), encoding="utf-8")
             try:
                 r = cortes(d)
                 pasó = True

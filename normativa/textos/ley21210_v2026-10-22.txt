@@ -2,7 +2,6 @@
 # Descargado: 2026-10-22 (BCN, LeyChile, XML obtxml opt=7)
 # fechaVersion del XML: 2024-10-24 | publicación: 2020-02-24 | promulgación: 2020-02-13 | vigente en idVersion: 2026-10-22
 # Huella (sha256 de las estructuras incluidas): e6d2bd9f40e717296f300024d910cded76fee2247b22db5ee4c2594f1b25e77f
-# Estructuras cortadas (el texto termina en un carácter no ASCII, issue 28): 5 | idParte=10103107 («…izada y a disposició»), idParte=10103108 («…ente a la empresa má»), idParte=10103195 («…de acuerdo se deberá»), idParte=10103266 («…o separado se deberá»), idParte=10103269 («…l artículo 69 del Có»)
 # Estructuras cortadas (el texto termina en un carácter no ASCII; https://github.com/ingUANDES/donationstax/issues/28): 5 | idParte=10103107 («…izada y a disposició»), idParte=10103108 («…ente a la empresa má»), idParte=10103195 («…de acuerdo se deberá»), idParte=10103266 («…o separado se deberá»), idParte=10103269 («…l artículo 69 del Có»)
 # Texto completo de las estructuras cortadas: ley21210_v2026-10-22_visor.txt (JSON del visor de LeyChile, BCN)
 

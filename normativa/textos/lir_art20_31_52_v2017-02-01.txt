@@ -2,7 +2,6 @@
 # Descargado: 2026-10-22 (BCN, LeyChile, XML obtxml opt=7)
 # fechaVersion del XML: 2017-02-01 | publicación: 1974-12-31 | promulgación: 1974-12-27 | vigente en idVersion: 2017-02-01
 # Huella (sha256 de las estructuras incluidas): 6696051dea2bfb3e4d1a4185fa69d632ce27e32f98b4b7ad4015c2cdf6a6742e
-# Estructuras cortadas (el texto termina en un carácter no ASCII, issue 28): 0
 # Estructuras cortadas (el texto termina en un carácter no ASCII; https://github.com/ingUANDES/donationstax/issues/28): 0
 
 ### Artículo idParte=8656046 fechaVersion=2017-02-01 derogado=no derogado

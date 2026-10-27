@@ -2,7 +2,6 @@
 # Descargado: 2026-10-22 (BCN, LeyChile, XML obtxml opt=7)
 # fechaVersion del XML: 2015-01-01 | publicación: 1974-12-31 | promulgación: 1974-12-27 | vigente en idVersion: 2015-01-01
 # Huella (sha256 de las estructuras incluidas): 3929844834f1659ca7686e613dab4cc671d28db3078fb33211bc309a2d1caade
-# Estructuras cortadas (el texto termina en un carácter no ASCII, issue 28): 1 | idParte=8656061 («…res, cuando no sea é»)
 # Estructuras cortadas (el texto termina en un carácter no ASCII; https://github.com/ingUANDES/donationstax/issues/28): 1 | idParte=8656061 («…res, cuando no sea é»)
 # Texto completo de las estructuras cortadas: lir_art20_31_52_v2015-01-01_visor.txt (JSON del visor de LeyChile, BCN)
 

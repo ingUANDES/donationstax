@@ -2,7 +2,6 @@
 # Descargado: 2026-10-26 (BCN, LeyChile, XML obtxml opt=7)
 # fechaVersion del XML: 2026-02-05 | publicación: 2014-09-29 | promulgación: 2014-09-26 | vigente en idVersion: 2026-10-26
 # Huella (sha256 de las estructuras incluidas): 26291375b31723ad987be4360eda87184de253843a9f0cfdf440ae04f314b8cc
-# Estructuras cortadas (el texto termina en un carácter no ASCII, issue 28): 2 | idParte=9509244 («…onstituida en el paí»), idParte=9509253 («…icas, bodegas o depó»)
 # Estructuras cortadas (el texto termina en un carácter no ASCII; https://github.com/ingUANDES/donationstax/issues/28): 2 | idParte=9509244 («…onstituida en el paí»), idParte=9509253 («…icas, bodegas o depó»)
 # Texto completo de las estructuras cortadas: ley20780_v2026-10-26_visor.txt (JSON del visor de LeyChile, BCN)
 
