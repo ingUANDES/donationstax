@@ -11,12 +11,29 @@ PY ?= python3
 # Lee la UTM mensual de las páginas del SII versionadas en $(UTM_HTML) (https://github.com/ingUANDES/donationstax/issues/33;
 # las baja analisis/descargar_utm.py, con red): Python y R deben dar la misma serie, byte a byte, y la misma
 # tabla por año, y las dos deben ser las versionadas en datos/.
+# Corre también la lista corta (10 semillas) de los Monte Carlo de bunching y de estudio de eventos
+# (DECISIONES.md#d-19, d-24 y d-25; https://github.com/ingUANDES/donationstax/issues/34): Python contra R y contra
+# la copia versionada, con la tolerancia de DECISIONES.md#d-15; las reglas incumplidas deben ser las registradas
+# en $(SIM_H). La lista larga (200 semillas) va en verificar-mc.
 # Falla (código distinto de 0) si algo no se cumple.
 PRECIO_IN = normativa/cambios.csv normativa/precio_casos.csv normativa/precio_comparaciones.csv
 SIM_H = analisis/fixtures/sim_hallazgos.csv
 DUP_PRUEBA = analisis/fixtures/duplicados_prueba.csv
 UTM_HTML = datos/fuentes/sii_utm
 UTM_IGUALES = anio,utm_diciembre,utm_min,mes_utm_min,utm_max,mes_utm_max
+SIM_MC_B = datos/precio_fiscal_por_caso.csv datos/utm_mensual.csv $(SIM_H)
+SIM_MC_E = datos/rut_completado_por_anio.csv $(SIM_H)
+# $(call sim_mc,<lista>): corre los dos Monte Carlo con la lista corta o larga y contrasta Python, R y datos/.
+define sim_mc
+	$(PY) -I analisis/sim_bunching_mc.py $(SIM_MC_B) $(1) salidas/sim_bunching_mc_$(1)_py.csv
+	LC_ALL=C.UTF-8 Rscript analisis/sim_bunching_mc.R $(SIM_MC_B) $(1) salidas/sim_bunching_mc_$(1)_R.csv
+	$(PY) -I analisis/sim_eventos_mc.py $(SIM_MC_E) $(1) salidas/sim_eventos_mc_$(1)_py.csv
+	LC_ALL=C.UTF-8 Rscript analisis/sim_eventos_mc.R $(SIM_MC_E) $(1) salidas/sim_eventos_mc_$(1)_R.csv
+	for s in bunching_mc_$(1) eventos_mc_$(1); do for c in valor objetivo; do \
+	  $(PY) -I analisis/contraste.py salidas/sim_$${s}_py.csv salidas/sim_$${s}_R.csv --clave clave --columna $$c --tol-rel 1e-8 --iguales clave,regla,cumple || exit 1; \
+	  $(PY) -I analisis/contraste.py salidas/sim_$${s}_py.csv datos/simulacion_$${s}.csv --clave clave --columna $$c --tol-rel 1e-8 --iguales clave,regla,cumple || exit 1; \
+	done; done
+endef
 verificar:
 	mkdir -p salidas
 	$(PY) -I analisis/precio_fiscal.py analisis/fixtures/precio_fiscal_prueba.csv salidas/precio_fiscal_py.csv
@@ -52,6 +69,14 @@ verificar:
 	  $(PY) -I analisis/contraste.py salidas/utm_por_anio_py.csv salidas/utm_por_anio_R.csv --clave anio --columna $$c --iguales $(UTM_IGUALES) || exit 1; \
 	done
 	cmp salidas/utm_por_anio_py.csv datos/utm_por_anio.csv
+	$(call sim_mc,corta)
+
+.PHONY: verificar-mc
+# Lista larga (200 semillas) de los Monte Carlo de bunching y de estudio de eventos (DECISIONES.md#d-19): es la
+# que decide el nivel de esas simulaciones. Tarda varios minutos y no necesita data_local/.
+verificar-mc:
+	mkdir -p salidas
+	$(call sim_mc,larga)
 
 .PHONY: verificar-datos verificar-datos-19885 verificar-datos-21440 verificar-duplicados-21440 verificar-cruce verificar-armonizado verificar-anio verificar-rut
 # Corre los siete bloques de abajo, en orden. Tarda varios minutos y necesita los archivos ya descargados en
