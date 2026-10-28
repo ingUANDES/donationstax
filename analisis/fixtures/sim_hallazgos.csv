@@ -6,3 +6,14 @@ bunching,sensibilidad:q6:inf-0.10:sup+0.00:epsilon,d-16
 bunching,sensibilidad:q6:inf-0.10:sup+0.02:epsilon,d-16
 eventos,nivel_previo:gamma_2012,d-17
 eventos,nivel_previo_error_rut:gamma_2012,d-17
+bunching_mc_corta,base:epsilon:cobertura,d-24
+bunching_mc_corta,curvatura:epsilon:cobertura,d-24
+bunching_mc_corta,ruido:epsilon:cobertura,d-24
+bunching_mc_corta,redondos:epsilon:sesgo,d-24
+bunching_mc_larga,base:epsilon:cobertura,d-24
+bunching_mc_larga,curvatura:epsilon:sesgo,d-24
+bunching_mc_larga,curvatura:B:sesgo,d-24
+bunching_mc_larga,curvatura:epsilon:cobertura,d-24
+bunching_mc_larga,ruido:epsilon:cobertura,d-24
+bunching_mc_larga,redondos:epsilon:sesgo,d-24
+bunching_mc_larga,redondos:epsilon:cobertura,d-24
