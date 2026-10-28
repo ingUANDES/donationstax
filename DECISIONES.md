@@ -418,3 +418,54 @@ Evidencia débil:
 
 Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-27 (no verificable desde el repo): «aprueba D-23, D-26 y D-14 numeral 4», después de leer el texto de esta decisión. La regla es la sugerencia por defecto que dio el usuario al encargar el issue 33 (misma conversación): «la UTM del mes de la donación si se conoce y la de diciembre del año del archivo si no, con sensibilidad entre ambas». El código lo reservó el usuario en esa conversación. Las citas, la magnitud y las razones son del investigador.
 
+### D-27
+
+**Texto que rige en las estructuras en que el XML de BCN trae U+FFFD.** En cuatro estructuras de los textos del repo, el XML de BCN (`obtxml?opt=7`) trae el carácter de reemplazo U+FFFD y el JSON del visor de LeyChile de la misma `idVersion` trae una letra. Los dos textos tienen el mismo largo y solo difieren en esa posición (clase `fffd` de `bcn_versiones.py contrastar`; corrida en [Textos cortados del XML de BCN, en P-01 · Inventario normativo](BLUEPRINT.md#textos-cortados-del-xml-de-bcn)). El [issue 37](https://github.com/ingUANDES/donationstax/issues/37) listó tres; la cuarta llegó con el texto de la Ley 21.850, bajado después. Bajado otra vez el 2026-10-28, el XML trae el U+FFFD en las cuatro (comprobación sin script en `analisis/`). Ninguna cita de [cambios.csv](normativa/cambios.csv) cae en ellas.
+
+| Estructura | XML | Visor | Diario Oficial |
+|---|---|---|---|
+| Ley 20.431, art. 6 N° 4, que agrega el art. 4° bis al DFL 7 de 1980 ([ley20431_v2026-10-22.txt, L174](normativa/textos/ley20431_v2026-10-22.txt#L174)) | «Art�culo 4º bis» | «Articulo 4º bis» | sin verificar: la edición electrónica del 2010-04-30 dice «No existen publicaciones» |
+| Ley 21.210, epígrafe del Párrafo VI, con el texto que le dio la Ley 21.713 ([ley21210_v2026-10-22.txt, L3548](normativa/textos/ley21210_v2026-10-22.txt#L3548)) | «Reuni�nes» | «Reuniones» | «Reuniones»: Ley 21.713, p. 58 del PDF, numeral 15; el epígrafe original, en la Ley 21.210, p. 90 |
+| Ley 21.210, art. trigésimo segundo transitorio, letra e) ([L5995](normativa/textos/ley21210_v2026-10-22.txt#L5995)) | «Instrucci�nes» | «Instrucciones» | «Instrucciones»: Ley 21.210, p. 113 |
+| Ley 21.850, art. décimo cuarto transitorio ([ley21850_v2026-10-27.txt, L931](normativa/textos/ley21850_v2026-10-27.txt#L931)) | «Resoluci�nes» | «Resoluciones» | «Resoluciones»: Ley 21.850, p. 42 |
+
+Fuentes del Diario Oficial: PDF firmados, pasados a texto con `pdftotext` y consultados el 2026-10-28; no se versionan (no verificables desde el repo).
+
+- Ley 21.210: edición N° 42.587 del 2020-02-24, CVE 1730320, https://www.diariooficial.interior.gob.cl/publicaciones/2020/02/24/42587/01/1730320.pdf, sha256 `6ee7cf86beb9530ab3968b1fbf02005dfa10d77b0f90454ed15f70b305e7bf78`.
+- Ley 21.713: edición N° 43.982-B del 2024-10-24, CVE 2561825, https://www.diariooficial.interior.gob.cl/publicaciones/2024/10/24/43982-B/01/2561825.pdf, sha256 `1b649dcc4af15cec525ffacfe5824d1dec158a266a0b466e89ffd9b709d243a8`. El numeral 15 dice «Reemplázase el epígrafe del Párrafo VI por “Reuniones con el Servicio de Impuestos Internos, el Servicio de Tesorerías y el Servicio Nacional de Aduanas”».
+- Ley 21.850: edición N° 44.576-B del 2026-10-17, CVE 2888352, https://www.diariooficial.interior.gob.cl/publicaciones/2026/10/17/44576-B/01/2888352.pdf, sha256 `46ae2b8104768c9fd2417f1103d14deca602f27ef9be4cbe5ebf8ad57e6c9c7b`.
+
+Se propone:
+
+1. Un U+FFFD del XML no es texto de la norma: marca un carácter que el XML no escribió. Para el repo, rige el texto publicado en el Diario Oficial.
+2. El visor no reemplaza al Diario Oficial en esas posiciones. Coincide con él en las tres estructuras contrastadas, pero en la de la Ley 20.431 trae «Articulo», sin tilde, y es la única vez que el visor lo escribe así en esa ley: «Artículo» aparece 15 veces con tilde y una sin ella (comprobación sin script en `analisis/`). Inferencia, sin verificar: en las cuatro el visor trae la letra sin tilde, y en los tres plurales esa es la grafía del Diario Oficial.
+3. Una fila de [cambios.csv](normativa/cambios.csv) cuya cita incluya la posición de un U+FFFD solo queda «verificada» contra un extracto del Diario Oficial versionado en `normativa/textos/`, como [ley21735_do_2025-03-26.txt](normativa/textos/ley21735_do_2025-03-26.txt), con ese extracto en `texto_archivo` y la dirección del PDF en `fuente_url`. No sirve el XML, porque el U+FFFD no es texto, ni el visor, por el punto 2. Sin el extracto, la fila queda «sin verificar». Una cita que no incluya esa posición se comprueba contra el XML, como hasta ahora.
+4. Si se aprueba, [verifica_citas.py](analisis/verifica_citas.py) pasa a fallar cuando la cita de una fila verificada trae U+FFFD ([issue 51](https://github.com/ingUANDES/donationstax/issues/51)). `contrastar` ya cuenta estas estructuras aparte, con la clase `fffd`.
+
+Alternativas: el texto del visor, como hace [D-21 · Texto completo de las estructuras que el XML de BCN corta](#d-21) con las cortadas, que en la Ley 20.431 daría «Articulo»; volver a bajar el XML, que el 2026-10-28 trae el mismo U+FFFD; o dejar el texto del XML y no citar esos pasajes.
+
+Evidencia débil: el Diario Oficial se leyó en el texto que `pdftotext` saca del PDF, y los PDF no están en el repo. La causa del U+FFFD está sin verificar. De la Ley 20.431 no hay texto publicado en la edición electrónica, así que el texto que rige en esa estructura sigue sin verificar.
+
+Estado: Propuesta. La planteó el investigador el 2026-10-28 ([issue 37](https://github.com/ingUANDES/donationstax/issues/37), punto 3). El código lo reservó el usuario en la conversación del 2026-10-28 (no verificable desde el repo).
+
+### D-28
+
+**Qué cuenta como cambio de texto en la bisección de bcn_versiones.py.** Según [D-21 · Texto completo de las estructuras que el XML de BCN corta](#d-21), punto 4, un límite de versión que solo marca un corte no es un cambio de texto. Para aplicarlo, la bisección compara las estructuras cortadas con su texto completo, del JSON del visor, y esa comparación solo puede hacerse con los espacios normalizados, porque el visor no conserva los espacios del XML. Si en las estructuras sin corte contaran los espacios del XML, el resultado dependería de la descarga. El XML del 2010-07-30 bajado el 2026-10-28 trae cortado el art. 20 de la LIR (comprobación sin script en `analisis/`), y con esa descarga no se ve el espacio que el XML agrega el 2010-07-31 ([lir_art20_31_52_v2010-07-31.txt, L12](normativa/textos/lir_art20_31_52_v2010-07-31.txt#L12)). La bisección del 2026-10-22 sí lo vio.
+
+Se propone:
+
+1. Dos fechas tienen el mismo texto si traen las mismas estructuras (idParte y derogado) y, en cada una, el mismo texto completo con los espacios normalizados, como compara [verifica_citas.py](analisis/verifica_citas.py). El texto completo es el del XML, o el del visor si el XML corta la estructura. Una diferencia solo de espacios o de atributos del XML (`fechaVersion`) no es un cambio de texto ni da fecha de vigencia.
+2. En la serie de la LIR, eso deja fuera dos versiones (clases de [limites_bcn.py](analisis/limites_bcn.py)):
+   - 2010-07-31, «solo espacios»: el art. 20 agrega un espacio antes de un salto de línea (L12 citada arriba).
+   - 2025-07-11, «sin cambio de texto»: el texto guardado es el de 2024-01-01, y solo cambia la `fechaVersion` del art. 20. El XML del día anterior trae saltos de línea al final del art. 20 que el de este día no trae y que el texto guardado no conserva (descargas del 2026-10-28, comprobación sin script en `analisis/`). La bisección corregida informa ese tramo como «solo en espacios».
+
+   En las dos fechas cambia la `fechaVersion` del art. 20, y son las de publicación de las Leyes 20.455 y 21.755 ([ley20455_v2010-08-01.txt, L3](normativa/textos/ley20455_v2010-08-01.txt#L3), [ley21755_v2026-10-26.txt, L3](normativa/textos/ley21755_v2026-10-26.txt#L3)), que fijan tasas de primera categoría en artículos propios ([cambios.csv, L57-L58](normativa/cambios.csv#L57-L58) y [L68](normativa/cambios.csv#L68)). Inferencia: BCN marca el art. 20 al publicarse esas leyes, sin cambiar su texto.
+3. Si se aprueba, esas dos versiones pasan a `normativa/textos/retiradas/`, y limites_bcn.py agrega «solo espacios» y «sin cambio de texto» a las clases que no pueden quedar en una serie (`RETIRABLES`; [issue 51](https://github.com/ingUANDES/donationstax/issues/51)). Mientras tanto siguen en la serie, y `limites_bcn.py comparar` las acepta de más.
+4. [bcn_versiones.py](analisis/bcn_versiones.py) ya compara así desde el issue 37, porque es la forma de comparar con el visor sin depender de la descarga. Si esta decisión no se aprueba, falta decidir cómo tratar los espacios cuando una de las dos fechas trae la estructura cortada.
+
+Alternativas: contar los espacios del XML en las estructuras sin corte y normalizarlos solo en las cortadas, con lo que el resultado depende de la descarga, como en 2010-07-30; o comparar el texto del visor de todas las estructuras, que también normaliza los espacios y pide el JSON del visor en cada fecha de la bisección.
+
+Evidencia débil: que el corte oculte el espacio de 2010-07-31 se vio en una sola descarga. Si las del 2026-10-22 de los días anteriores traían el art. 20 completo está sin verificar; la de 2009-04-28 sí lo traía ([lir_art20_31_52_v2009-04-28.txt](normativa/textos/lir_art20_31_52_v2009-04-28.txt)).
+
+Estado: Propuesta. La planteó el investigador el 2026-10-28 ([issue 37](https://github.com/ingUANDES/donationstax/issues/37), puntos 1 y 2). El código lo reservó el usuario en la conversación del 2026-10-28 (no verificable desde el repo).
+
