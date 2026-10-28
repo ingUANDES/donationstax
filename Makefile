@@ -2,7 +2,7 @@ PY ?= python3
 
 .PHONY: verificar
 # Contrasta Python y R sobre un caso con valor esperado a mano, comprueba las citas normativas y calcula el
-# precio fiscal por régimen y año (P-04): Python contra R contra los valores calculados a mano, y la salida
+# precio fiscal por régimen y año (BLUEPRINT.md#p-04): Python contra R contra los valores calculados a mano, y la salida
 # versionada en datos/ contra la que sale hoy. Clasifica, sin red, los límites de versión de las series de
 # textos de BCN (analisis/limites_bcn.py, https://github.com/ingUANDES/donationstax/issues/37): falla si uno de la
 # serie solo marca un corte del XML (DECISIONES.md#d-21, punto 4) o si una versión de normativa/textos/retiradas/

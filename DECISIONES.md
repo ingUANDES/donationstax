@@ -426,7 +426,7 @@ Estado: Aprobada. Usuario, conversación de Claude Code del 2026-10-27 (no verif
 |---|---|---|---|
 | Ley 20.431, art. 6 N° 4, que agrega el art. 4° bis al DFL 7 de 1980 ([ley20431_v2026-10-22.txt, L174](normativa/textos/ley20431_v2026-10-22.txt#L174)) | «Art�culo 4º bis» | «Articulo 4º bis» | sin verificar: la edición electrónica del 2010-04-30 dice «No existen publicaciones» |
 | Ley 21.210, epígrafe del Párrafo VI, con el texto que le dio la Ley 21.713 ([ley21210_v2026-10-22.txt, L3548](normativa/textos/ley21210_v2026-10-22.txt#L3548)) | «Reuni�nes» | «Reuniones» | «Reuniones»: Ley 21.713, p. 58 del PDF, numeral 15; el epígrafe original, en la Ley 21.210, p. 90 |
-| Ley 21.210, art. trigésimo segundo transitorio, letra e) ([L5995](normativa/textos/ley21210_v2026-10-22.txt#L5995)) | «Instrucci�nes» | «Instrucciones» | «Instrucciones»: Ley 21.210, p. 113 |
+| Ley 21.210, art. trigésimo segundo transitorio, letra e) ([ley21210_v2026-10-22.txt, L5995](normativa/textos/ley21210_v2026-10-22.txt#L5995)) | «Instrucci�nes» | «Instrucciones» | «Instrucciones»: Ley 21.210, p. 113 |
 | Ley 21.850, art. décimo cuarto transitorio ([ley21850_v2026-10-27.txt, L931](normativa/textos/ley21850_v2026-10-27.txt#L931)) | «Resoluci�nes» | «Resoluciones» | «Resoluciones»: Ley 21.850, p. 42 |
 
 Fuentes del Diario Oficial: PDF firmados, pasados a texto con `pdftotext` y consultados el 2026-10-28; no se versionan (no verificables desde el repo).
@@ -456,10 +456,10 @@ Se propone:
 
 1. Dos fechas tienen el mismo texto si traen las mismas estructuras (idParte y derogado) y, en cada una, el mismo texto completo con los espacios normalizados, como compara [verifica_citas.py](analisis/verifica_citas.py). El texto completo es el del XML, o el del visor si el XML corta la estructura. Una diferencia solo de espacios o de atributos del XML (`fechaVersion`) no es un cambio de texto ni da fecha de vigencia.
 2. En la serie de la LIR, eso deja fuera dos versiones (clases de [limites_bcn.py](analisis/limites_bcn.py)):
-   - 2010-07-31, «solo espacios»: el art. 20 agrega un espacio antes de un salto de línea (L12 citada arriba).
+   - 2010-07-31, «solo espacios»: el art. 20 agrega un espacio antes de un salto de línea ([lir_art20_31_52_v2010-07-31.txt, L12](normativa/textos/lir_art20_31_52_v2010-07-31.txt#L12)).
    - 2025-07-11, «sin cambio de texto»: el texto guardado es el de 2024-01-01, y solo cambia la `fechaVersion` del art. 20. El XML del día anterior trae saltos de línea al final del art. 20 que el de este día no trae y que el texto guardado no conserva (descargas del 2026-10-28, comprobación sin script en `analisis/`). La bisección corregida informa ese tramo como «solo en espacios».
 
-   En las dos fechas cambia la `fechaVersion` del art. 20, y son las de publicación de las Leyes 20.455 y 21.755 ([ley20455_v2010-08-01.txt, L3](normativa/textos/ley20455_v2010-08-01.txt#L3), [ley21755_v2026-10-26.txt, L3](normativa/textos/ley21755_v2026-10-26.txt#L3)), que fijan tasas de primera categoría en artículos propios ([cambios.csv, L57-L58](normativa/cambios.csv#L57-L58) y [L68](normativa/cambios.csv#L68)). Inferencia: BCN marca el art. 20 al publicarse esas leyes, sin cambiar su texto.
+   En las dos fechas cambia la `fechaVersion` del art. 20, y son las de publicación de las Leyes 20.455 y 21.755 ([ley20455_v2010-08-01.txt, L3](normativa/textos/ley20455_v2010-08-01.txt#L3), [ley21755_v2026-10-26.txt, L3](normativa/textos/ley21755_v2026-10-26.txt#L3)), que fijan tasas de primera categoría en artículos propios ([cambios.csv, L57-L58](normativa/cambios.csv#L57-L58) y [cambios.csv, L68](normativa/cambios.csv#L68)). Inferencia: BCN marca el art. 20 al publicarse esas leyes, sin cambiar su texto.
 3. Si se aprueba, esas dos versiones pasan a `normativa/textos/retiradas/`, y limites_bcn.py agrega «solo espacios» y «sin cambio de texto» a las clases que no pueden quedar en una serie (`RETIRABLES`; [issue 51](https://github.com/ingUANDES/donationstax/issues/51)). Mientras tanto siguen en la serie, y `limites_bcn.py comparar` las acepta de más.
 4. [bcn_versiones.py](analisis/bcn_versiones.py) ya compara así desde el issue 37, porque es la forma de comparar con el visor sin depender de la descarga. Si esta decisión no se aprueba, falta decidir cómo tratar los espacios cuando una de las dos fechas trae la estructura cortada.
 
