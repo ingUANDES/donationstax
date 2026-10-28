@@ -3,7 +3,11 @@ PY ?= python3
 .PHONY: verificar
 # Contrasta Python y R sobre un caso con valor esperado a mano, comprueba las citas normativas y calcula el
 # precio fiscal por régimen y año (P-04): Python contra R contra los valores calculados a mano, y la salida
-# versionada en datos/ contra la que sale hoy. Corre además las simulaciones de efecto conocido
+# versionada en datos/ contra la que sale hoy. Clasifica, sin red, los límites de versión de las series de
+# textos de BCN (analisis/limites_bcn.py, https://github.com/ingUANDES/donationstax/issues/37): falla si uno de la
+# serie solo marca un corte del XML (DECISIONES.md#d-21, punto 4) o si una versión de normativa/textos/retiradas/
+# no es de esa clase; antes prueba la bisección de bcn_versiones.py con XML y JSON del visor ficticios.
+# Corre además las simulaciones de efecto conocido
 # (BLUEPRINT.md#p-05): Python contra R y contra la copia versionada en datos/, con la tolerancia relativa de
 # DECISIONES.md#d-15; las reglas incumplidas deben ser las registradas en $(SIM_H). Corre también
 # duplicados_ley21440.py y .R sobre una tabla ficticia (analisis/fixtures/duplicados_prueba.csv) y exige que
@@ -40,6 +44,7 @@ verificar:
 	Rscript analisis/precio_fiscal.R analisis/fixtures/precio_fiscal_prueba.csv salidas/precio_fiscal_R.csv
 	$(PY) -I analisis/contraste.py salidas/precio_fiscal_py.csv salidas/precio_fiscal_R.csv analisis/fixtures/precio_fiscal_esperado.csv
 	$(PY) -I analisis/verifica_citas.py
+	$(PY) -I analisis/limites_bcn.py
 	$(PY) -I analisis/precio_por_regimen.py $(PRECIO_IN) salidas/precio_casos_py.csv salidas/precio_cambios_py.csv
 	LC_ALL=C.UTF-8 Rscript analisis/precio_por_regimen.R $(PRECIO_IN) salidas/precio_casos_R.csv salidas/precio_cambios_R.csv
 	$(PY) -I analisis/contraste.py salidas/precio_casos_py.csv salidas/precio_casos_R.csv analisis/fixtures/precio_casos_esperado.csv --iguales caso,anio_comercial,contribuyente,regimen
