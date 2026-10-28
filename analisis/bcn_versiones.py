@@ -20,8 +20,16 @@ Texto completo. El visor de LeyChile pide la norma a servicios-leychile.bcn.cl (
 el HTML de cada estructura. `completar` escribe <texto>_visor.txt con las estructuras cortadas de
 <texto>.txt, tomadas del JSON de la misma idVersion y pasadas a texto sin las notas de BCN, solo si el
 texto del XML es prefijo propio del del visor (con los espacios normalizados). `contrastar` compara con
-el JSON todas las estructuras de los textos dados, sin escribir nada. `marcar` rehace, sin red, las
-líneas de la cabecera sobre los cortes en textos ya descargados.
+el JSON todas las estructuras de los textos dados, sin escribir nada; cuenta aparte («fffd») las que solo
+difieren del visor donde el XML trae U+FFFD (https://github.com/ingUANDES/donationstax/issues/37). `marcar`
+rehace, sin red, las líneas de la cabecera sobre los cortes en textos ya descargados.
+
+Qué cuenta como cambio de texto (DECISIONES.md#d-21, punto 4, y DECISIONES.md#d-28, en estado Propuesta;
+https://github.com/ingUANDES/donationstax/issues/37). La bisección compara dos fechas estructura por estructura
+(`mismo_texto`): el texto completo de cada una, con los espacios normalizados. El texto completo es el del XML
+o, si el XML la corta, el del JSON del visor de la misma idVersion. Así, un corte que aparece o desaparece no
+da un límite de versión, aunque cambie la huella, y tampoco una diferencia solo de espacios. Una estructura
+cortada que el visor no completa cuenta como cambio, y la descarga lo avisa al terminar.
 
 Uso:
     python bcn_versiones.py <idNorma> <nombre> <desde> <hasta> <carpeta_salida> [--partes REGEX ...]
@@ -45,6 +53,7 @@ from pathlib import Path
 NS = "{http://www.leychile.cl/esquemas}"
 UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/120 Safari/537.36"
 URL = "https://www.bcn.cl/leychile/consulta/obtxml?opt=7&idNorma={}&idVersion={}"
+URL_MAYUSCULA = URL.replace("/consulta/", "/Consulta/")  # misma consulta, fuera del caché que guarda HTML
 URL_VISOR = ("https://servicios-leychile.bcn.cl/Navegar/get_norma_json?idNorma={}&idVersion={}"
              "&idLey=&tipoVersion=&cve=&agrupa_partes=1&r=")
 SUFIJO_VISOR = "_visor"
@@ -53,32 +62,44 @@ MARCA_VISOR = "# Texto completo de las estructuras cortadas"
 CABECERA_CORTES = MARCA_CORTES + " (el texto termina en un carácter no ASCII; https://github.com/ingUANDES/donationstax/issues/28): "
 _cache = {}
 _cache_visor = {}
+_vigencias_visor = {}  # (idNorma, inicio, fin) -> JSON del visor de esa versión de la norma
+_solo_corte = []  # (fecha, fecha) en que el XML cambia por un corte y el texto completo no (D-21, punto 4)
+_solo_espacios = []  # (fecha, fecha) en que el XML cambia solo en espacios (D-28, en estado Propuesta)
+_sin_completar = set()  # (fecha, idParte) de estructuras cortadas que el visor no completa
+_otro_dia = set()  # (fecha pedida, fecha usada) cuando BCN no dio XML para la fecha pedida
 
 
 PAUSA = 1.0  # segundos entre consultas: BCN responde 429 si se le pide más rápido
 
 
 def descargar(id_norma, fecha):
-    """XML de la versión vigente en `fecha`. BCN devuelve la página de la aplicación en lugar del XML
-    para algunas fechas sueltas (p. ej. 2006-03-20 en la Ley sobre Impuesto a la Renta); en ese caso
-    se usa el día siguiente, hasta tres días."""
+    """XML de la versión vigente en `fecha`. Para algunas fechas sueltas, la ruta consulta/obtxml responde la
+    página de la aplicación en lugar del XML: el 2006-03-20 de la Ley sobre Impuesto a la Renta cuando se escribió
+    este script y, en la consulta del 2026-10-28, el 2009-04-27 y el 2017-01-31 de esa ley, desde el caché de BCN
+    (CloudFront; https://github.com/ingUANDES/donationstax/issues/37). En ese caso se pide la misma fecha por
+    Consulta/obtxml, que responde XML. Si tampoco, se usa el día siguiente, hasta tres días, y se avisa al
+    terminar la descarga: en una bisección, eso corre el límite un día."""
     for dias in range(4):
         f = (dt.date.fromisoformat(fecha) + dt.timedelta(days=dias)).isoformat()
-        try:
-            return _descargar(id_norma, f)
-        except ValueError:
-            continue
+        for url in (URL, URL_MAYUSCULA):
+            try:
+                datos = _descargar(id_norma, f, url)
+            except ValueError:
+                continue
+            if dias:
+                _otro_dia.add((fecha, f))
+            return datos
     raise RuntimeError(f"{fecha}: BCN no devolvió XML ni en los tres días siguientes")
 
 
-def _descargar(id_norma, fecha):
+def _descargar(id_norma, fecha, url=URL):
     clave = (id_norma, fecha)
     if clave in _cache:
         return _cache[clave]
     for intento in range(8):
         try:
             time.sleep(PAUSA)
-            req = urllib.request.Request(URL.format(id_norma, fecha), headers={"User-Agent": UA})
+            req = urllib.request.Request(url.format(id_norma, fecha), headers={"User-Agent": UA})
             with urllib.request.urlopen(req, timeout=120) as r:
                 datos = r.read()
             if not datos.lstrip().startswith(b"<?xml"):
@@ -104,40 +125,83 @@ def seleccionada(texto, partes):
     return not partes or any(re.match(p, re.sub(r"[ \t]+", " ", texto).strip()) for p in partes)
 
 
+def seleccion(datos, partes=()):
+    """(idParte, derogado, texto) de las estructuras seleccionadas, en orden de documento."""
+    return [(a.get("idParte", ""), a.get("derogado", ""), t) for a, t in estructuras(ET.fromstring(datos))
+            if seleccionada(t, partes)]
+
+
 def huella(datos, partes=()):
-    raiz = ET.fromstring(datos)
     h = hashlib.sha256()
-    for a, t in estructuras(raiz):
-        if not seleccionada(t, partes):
-            continue
-        h.update((a.get("idParte", "") + "|" + a.get("derogado", "") + "|" + t).encode("utf-8"))
+    for i, derogado, t in seleccion(datos, partes):
+        h.update((i + "|" + derogado + "|" + t).encode("utf-8"))
     return h.hexdigest()
 
 
+def completa(id_norma, fecha, id_parte, texto):
+    """Texto completo de una estructura del XML vigente en `fecha`: el mismo si no está cortada; si lo está, el
+    del JSON del visor vigente en esa fecha, cuando el del XML es su prefijo (DECISIONES.md#d-21). None si el
+    visor no lo trae o no lo continúa."""
+    if not cortada(texto):
+        return texto
+    html = bloques_visor(descargar_visor(id_norma, fecha))
+    v = html_a_texto(html[id_parte]) if id_parte in html else ""
+    if es_prefijo(texto, v) or (v and normalizar(v) == normalizar(texto)):
+        return v
+    _sin_completar.add((fecha, id_parte))
+    return None
+
+
+def mismo_texto(id_norma, fa, fb, partes=()):
+    """True si las versiones vigentes en fa y fb traen el mismo texto en las estructuras seleccionadas: las
+    mismas estructuras (idParte y derogado) y, en cada una, el mismo texto completo (`completa`), con los
+    espacios normalizados. Una diferencia que solo se explica por un corte del XML no es un cambio
+    (DECISIONES.md#d-21, punto 4), y tampoco una solo de espacios (DECISIONES.md#d-28, en estado Propuesta):
+    el visor no conserva los espacios del XML, y si contaran en las estructuras sin corte, el resultado
+    dependería de si la descarga trae cortada la estructura. Una cortada que el visor no completa cuenta como
+    cambio."""
+    ea, eb = seleccion(descargar(id_norma, fa), partes), seleccion(descargar(id_norma, fb), partes)
+    if [e[:2] for e in ea] != [e[:2] for e in eb]:
+        return False
+    por_corte = por_espacios = False
+    for (i, _, ta), (_, _, tb) in zip(ea, eb):
+        if ta == tb and not cortada(ta):
+            continue
+        ca, cb = completa(id_norma, fa, i, ta), completa(id_norma, fb, i, tb)
+        if ca is None or cb is None or normalizar(ca) != normalizar(cb):
+            return False
+        if ta != tb and (cortada(ta) or cortada(tb)):
+            por_corte = True
+        elif ta != tb:
+            por_espacios = True
+    if por_corte:
+        _solo_corte.append((fa, fb))
+    if por_espacios:
+        _solo_espacios.append((fa, fb))
+    return True
+
+
 def cambios(id_norma, d0, d1, partes=(), paso=365):
-    """Primeros días de cada cambio de texto entre d0 y d1 (d0 se cuenta como inicio)."""
+    """Primeros días de cada cambio de texto entre d0 y d1 (d0 se cuenta como inicio). Recorre una grilla de
+    `paso` días y busca por bisección entre dos puntos cuyo texto no es el mismo según `mismo_texto`."""
     fechas = []
     d = d0
     while d < d1:
         fechas.append(d)
         d += dt.timedelta(days=paso)
     fechas.append(d1)
-    hs = [huella(descargar(id_norma, f.isoformat()), partes) for f in fechas]
-    puntos = dict(zip(fechas, hs))
 
-    def buscar(a, ha, b, hb):
-        if ha == hb:
+    def buscar(a, b):
+        if mismo_texto(id_norma, a.isoformat(), b.isoformat(), partes):
             return []
         if (b - a).days == 1:
             return [b]
         m = a + (b - a) // 2
-        if m not in puntos:
-            puntos[m] = huella(descargar(id_norma, m.isoformat()), partes)
-        return buscar(a, ha, m, puntos[m]) + buscar(m, puntos[m], b, hb)
+        return buscar(a, m) + buscar(m, b)
 
     salida = [d0]
     for a, b in zip(fechas, fechas[1:]):
-        salida += buscar(a, puntos[a], b, puntos[b])
+        salida += buscar(a, b)
     return salida
 
 
@@ -217,10 +281,15 @@ def marcar(ruta):
 
 
 def descargar_visor(id_norma, fecha):
-    """JSON del visor de LeyChile con la versión vigente en `fecha`."""
+    """JSON del visor de LeyChile con la versión vigente en `fecha`. Un JSON ya bajado sirve para cualquier
+    fecha dentro de la vigencia que declara (metadatos.vigencia): el visor da el mismo HTML en toda ella."""
     clave = (id_norma, fecha)
     if clave in _cache_visor:
         return _cache_visor[clave]
+    for (n, inicio, fin), datos in _vigencias_visor.items():
+        if n == id_norma and inicio <= fecha and (not fin or fecha <= fin):
+            _cache_visor[clave] = datos
+            return datos
     url = URL_VISOR.format(id_norma, fecha)
     for intento in range(8):
         try:
@@ -230,6 +299,9 @@ def descargar_visor(id_norma, fecha):
             if not isinstance(datos, dict) or not datos.get("html"):
                 raise ValueError(f"{url}: la respuesta no trae el html de la norma")
             _cache_visor[clave] = datos
+            vig = (datos.get("metadatos") or {}).get("vigencia") or {}
+            if vig.get("inicio_vigencia"):
+                _vigencias_visor[id_norma, vig["inicio_vigencia"], vig.get("fin_vigencia") or ""] = datos
             return datos
         except ValueError:
             raise
@@ -356,10 +428,17 @@ def completar(ruta):
     return len(cuerpo) // 3
 
 
+def solo_fffd(a, b):
+    """True si `a` (texto del XML) trae U+FFFD y solo difiere de `b` (el del visor), del mismo largo, en esas
+    posiciones (https://github.com/ingUANDES/donationstax/issues/37)."""
+    return "\ufffd" in a and len(a) == len(b) and all(x == y or x == "\ufffd" for x, y in zip(a, b))
+
+
 def contrastar(rutas):
     """Compara con el JSON del visor (misma idVersion) cada estructura de los textos del XML dados:
-    igual, cortada (el texto del XML es prefijo propio del del visor), distinta o sin_visor. Imprime una
-    línea por estructura que no es igual y un resumen frente a la regla de `cortada`; no escribe nada."""
+    igual, cortada (el texto del XML es prefijo propio del del visor), fffd (solo difieren donde el XML trae
+    U+FFFD), distinta o sin_visor. Imprime una línea por estructura que no es igual y un resumen frente a la
+    regla de `cortada`; no escribe nada."""
     total, n_textos = Counter(), 0
     for ruta in map(Path, rutas):
         cabecera, estr = leer_texto(ruta)
@@ -372,8 +451,10 @@ def contrastar(rutas):
                 clase = "sin_visor"
             elif a == b:
                 clase = "igual"
+            elif es_prefijo(a, b):
+                clase = "cortada"
             else:
-                clase = "cortada" if es_prefijo(a, b) else "distinta"
+                clase = "fffd" if solo_fffd(a, b) else "distinta"
             regla = cortada(e["texto"])
             total[clase, regla] += 1
             if clase != "igual":
@@ -386,7 +467,7 @@ def contrastar(rutas):
         clases[c] += n
     no_cortadas = sum(n for (c, r), n in total.items() if c != "cortada")
     print(f"estructuras: {sum(clases.values())} en {n_textos} textos | " +
-          " | ".join(f"{c}: {clases[c]}" for c in ("igual", "cortada", "distinta", "sin_visor")) +
+          " | ".join(f"{c}: {clases[c]}" for c in ("igual", "cortada", "fffd", "distinta", "sin_visor")) +
           f" | la regla marca {total['cortada', True]} de {clases['cortada']} cortadas y "
           f"{sum(n for (c, r), n in total.items() if c != 'cortada' and r)} de {no_cortadas} no cortadas")
     return total
@@ -448,6 +529,14 @@ def main():
         raiz = ET.fromstring(datos)
         con_cortes += [ruta] * bool(n)
         print(f"{f.isoformat()}  fechaVersion={raiz.get('fechaVersion')}  {ruta.name}" + (f"  cortadas: {n}" if n else ""))
+    for fa, fb in sorted(set(_solo_corte)):
+        print(f"{fa} a {fb}: el XML cambia solo por un corte; no es un cambio de texto (DECISIONES.md#d-21, punto 4)")
+    for fa, fb in sorted(set(_solo_espacios)):
+        print(f"{fa} a {fb}: el XML cambia solo en espacios; no se cuenta como cambio (DECISIONES.md#d-28, en estado Propuesta)")
+    for f, i in sorted(_sin_completar):
+        print(f"{f}: idParte={i} está cortada y el visor no la completa; la bisección la contó como cambio")
+    for f, g in sorted(_otro_dia):
+        print(f"{f}: BCN no devolvió XML por ninguna de las dos rutas; se usó el del {g} (un límite puede quedar corrido)")
     if con_cortes:
         print("Hay estructuras cortadas; su texto completo: python bcn_versiones.py completar "
               + " ".join(str(r) for r in con_cortes))
